@@ -13,7 +13,8 @@
         <com.example.chaofanteaching.RoundImageView
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:src="@drawable/a"/>
+            android:src="@drawable/a"
+            android:id="@+id/image"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

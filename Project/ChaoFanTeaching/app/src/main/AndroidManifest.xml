@@ -31,6 +31,7 @@
         <activity android:name=".myself.MyData" />
         <activity android:name=".myself.NameDetail" />
         <activity android:name=".myself.PhoneDetail" />
+        <activity android:name=".sign.LoginActivity"/>
         <activity android:name=".myself.AddressDetail"></activity>
     </application>
 
