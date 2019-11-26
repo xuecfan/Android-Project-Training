@@ -1,7 +1,5 @@
 package com.example.chaofanteaching;
 
-
-
 import android.support.v4.app.FragmentTabHost;
 
 import android.os.Bundle;
@@ -11,7 +9,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
-
 
 import com.example.chaofanteaching.fragment.List;
 import com.example.chaofanteaching.fragment.Message;

@@ -1,16 +1,13 @@
 package com.example.chaofanteaching;
 
 import android.os.Bundle;
-import android.app.Activity;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 
-public class Main2Activity extends Activity {
+public class AddInfoActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
-        Log.i("1", "onCreate:123 ");
+        setContentView(R.layout.add_info);
     }
-
 }
