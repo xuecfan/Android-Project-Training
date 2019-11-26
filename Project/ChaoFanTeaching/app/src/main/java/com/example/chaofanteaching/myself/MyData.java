@@ -5,12 +5,15 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.location.Address;
 import android.net.Uri;
+import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import com.example.chaofanteaching.R;
 import java.io.File;
@@ -22,6 +25,8 @@ public class MyData extends AppCompatActivity {
     private LinearLayout name;
     private LinearLayout phone;
     private LinearLayout address;
+    private TextView show;
+    private RadioGroup rg;
     private static final int PHOTO_REQUEST_GALLERY = 2;// 从相册中选择
     private static final int PHOTO_REQUEST_CUT = 3;// 结果
     private ImageView photo,photo2;
@@ -42,6 +47,16 @@ public class MyData extends AppCompatActivity {
         name=findViewById(R.id.name);
         phone=findViewById(R.id.phone);
         address=findViewById(R.id.address);
+        show=findViewById(R.id.show);
+        rg = findViewById(R.id.rg);
+        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+                String tip = checkedId == R.id.male ? "男" : "女";
+                show.setVisibility(View.VISIBLE);
+                show.setText(tip);
+            }
+        });
         name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
