@@ -135,14 +135,14 @@
     <!-- border_outside_color 外部圆圈的颜色 -->
     <!-- border_inside_color 内部部圆圈的颜色 -->
     <!-- border_thickness 外圆和内圆的宽度 -->
-    <com.example.chaofanteaching.RoundImageView
-        android:id="@+id/img2"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        imagecontrol:border_inside_color="#bc0978"
-        imagecontrol:border_outside_color="#ba3456"
-        imagecontrol:border_thickness="1dp" />
+    <!--<com.example.chaofanteaching.RoundImageView-->
+        <!--android:id="@+id/img2"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_weight="1"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--imagecontrol:border_inside_color="#bc0978"-->
+        <!--imagecontrol:border_outside_color="#ba3456"-->
+        <!--imagecontrol:border_thickness="1dp" />-->
     </LinearLayout>
 
 

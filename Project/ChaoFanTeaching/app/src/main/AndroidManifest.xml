@@ -43,6 +43,7 @@
         <activity android:name=".myself.MyData" />
         <activity android:name=".myself.NameDetail" />
         <activity android:name=".myself.PhoneDetail" />
+        <activity android:name=".sign.LoginActivity"/>
         <activity android:name=".myself.AddressDetail"></activity>
 >>>>>>> c1fc5d1f048ecfc897fdb95c09db2a90380230e8
     </application>

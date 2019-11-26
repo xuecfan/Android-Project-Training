@@ -29,7 +29,7 @@ public class MyData extends AppCompatActivity {
     private RadioGroup rg;
     private static final int PHOTO_REQUEST_GALLERY = 2;// 从相册中选择
     private static final int PHOTO_REQUEST_CUT = 3;// 结果
-    private ImageView photo,photo2;
+    private ImageView photo;
     private File tempFile;
 
 
@@ -38,9 +38,9 @@ public class MyData extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_data);
-        
+
         photo= findViewById(R.id.image);
-        photo2=  findViewById(R.id.img2);
+        //photo2=  findViewById(R.id.img2);
         bt = findViewById(R.id.aaa);
         name=findViewById(R.id.name);
         phone=findViewById(R.id.phone);
@@ -129,7 +129,7 @@ public class MyData extends AppCompatActivity {
             if (data != null) {
                 Bitmap bitmap = data.getParcelableExtra("data");
                 photo.setImageBitmap(bitmap);
-                photo2.setImageBitmap(bitmap);
+                //photo2.setImageBitmap(bitmap);
             }
             try {
                 // 将临时文件删除
