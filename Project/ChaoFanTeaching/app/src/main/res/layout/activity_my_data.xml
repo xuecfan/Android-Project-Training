@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:imagecontrol="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".myself.MyData">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/name">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text="姓名:"
+            android:textSize="20dp"/>
+        <TextView
+            android:layout_width="260dp"
+            android:layout_height="50dp"
+            android:text="球球"
+            android:textSize="20dp"
+            android:layout_marginLeft="20dp"
+            android:id="@+id/name_content"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="25dp"
+            android:text="＞"
+            android:gravity="right"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text="性别:"
+            android:textSize="20dp"/>
+        <TextView
+            android:layout_width="260dp"
+            android:layout_height="52dp"
+            android:text=""
+            android:textSize="20dp"
+            android:layout_marginLeft="20dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="25dp"
+            android:text="＞"
+            android:gravity="right"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/phone">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text="电话:"
+            android:textSize="20dp"/>
+        <TextView
+            android:layout_width="260dp"
+            android:layout_height="50dp"
+            android:text="111111111111"
+            android:textSize="20dp"
+            android:layout_marginLeft="20dp"
+            android:id="@+id/phone_content"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="25dp"
+            android:text="＞"
+            android:gravity="right"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/address">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text="地址:"
+            android:textSize="20dp"/>
+        <TextView
+            android:layout_width="260dp"
+            android:layout_height="50dp"
+            android:text="河北省石家庄市"
+            android:textSize="20dp"
+            android:layout_marginLeft="20dp"
+            android:id="@+id/address_content"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="25dp"
+            android:text="＞"
+            android:gravity="right"/>
+    </LinearLayout>
+    <Button
+        android:id="@+id/aaa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="点击设置头像" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    <com.example.chaofanteaching.RoundImageView
+        android:id="@+id/image"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content" />
+    <!-- border_outside_color 外部圆圈的颜色 -->
+    <!-- border_inside_color 内部部圆圈的颜色 -->
+    <!-- border_thickness 外圆和内圆的宽度 -->
+    <com.example.chaofanteaching.RoundImageView
+        android:id="@+id/img2"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        imagecontrol:border_inside_color="#bc0978"
+        imagecontrol:border_outside_color="#ba3456"
+        imagecontrol:border_thickness="1dp" />
+    </LinearLayout>
+
+
+</LinearLayout>
