@@ -1,4 +1,4 @@
-package com.example.chaofanteaching;
+package com.example.chaofanteaching.InfoList;
 
 public class Info {
     private String name;

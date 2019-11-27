@@ -16,7 +16,7 @@
         android:label="超凡家教"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme.NoActionBar">
         <activity android:name=".All" />
         <activity android:name=".MainActivity" />
         <activity android:name=".WelcomeActivity">
@@ -27,13 +27,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".InfoListActivity"
+            android:name=".InfoList.InfoListActivity"
             android:label="@string/title_activity_info_list" />
         <activity
-            android:name=".InfoDetailActivity"
+            android:name=".InfoList.InfoDetailActivity"
             android:label="@string/title_activity_info_detail" />
         <activity
-            android:name=".AddInfoActivity"
+            android:name=".InfoList.AddInfoActivity"
             android:label="@string/title_activity_add_info"></activity>
 
         <activity android:name=".myself.MyData" />
@@ -42,6 +42,15 @@
         <activity android:name=".sign.LoginActivity"/>
         <activity android:name=".sign.LogonActivity"/>
         <activity android:name=".myself.AddressDetail"></activity>
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths"/>
+        </provider>
     </application>
 
 </manifest>
