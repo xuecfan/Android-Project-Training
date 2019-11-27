@@ -1,8 +1,9 @@
-package com.example.chaofanteaching;
+package com.example.chaofanteaching.InfoList;
 
 import android.os.Bundle;
 import android.app.Activity;
-import android.widget.ListView;
+
+import com.example.chaofanteaching.R;
 
 import java.util.ArrayList;
 import java.util.List;
