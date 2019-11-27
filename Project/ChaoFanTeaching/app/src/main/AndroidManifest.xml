@@ -20,13 +20,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-<<<<<<< HEAD
+
         <activity android:name=".All"
             android:windowSoftInputMode="adjustPan"/>
-=======
+
         <activity android:name=".sign.RePWActivity"></activity>
-        <activity android:name=".All" />
->>>>>>> 86b5c656cf1d758b3b72cb989a7206d42b706a57
+
+
         <activity android:name=".MainActivity" />
         <activity android:name=".WelcomeActivity">
             <intent-filter>
