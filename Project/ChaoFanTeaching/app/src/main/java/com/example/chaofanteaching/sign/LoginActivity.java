@@ -18,7 +18,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        getSupportActionBar().hide();//隐藏标题栏
+//        getSupportActionBar().hide();//隐藏标题栏
         setStatusBar();//设置状态栏
 
         setContentView(R.layout.activity_login);
