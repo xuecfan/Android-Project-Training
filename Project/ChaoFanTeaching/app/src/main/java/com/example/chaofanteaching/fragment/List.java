@@ -12,10 +12,10 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.example.chaofanteaching.AddInfoActivity;
-import com.example.chaofanteaching.Info;
-import com.example.chaofanteaching.InfoAdapter;
-import com.example.chaofanteaching.InfoDetailActivity;
+import com.example.chaofanteaching.InfoList.AddInfoActivity;
+import com.example.chaofanteaching.InfoList.Info;
+import com.example.chaofanteaching.InfoList.InfoAdapter;
+import com.example.chaofanteaching.InfoList.InfoDetailActivity;
 import com.example.chaofanteaching.R;
 
 import java.util.ArrayList;

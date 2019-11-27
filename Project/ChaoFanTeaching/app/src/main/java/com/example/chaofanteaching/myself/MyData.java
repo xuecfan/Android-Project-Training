@@ -1,11 +1,15 @@
 package com.example.chaofanteaching.myself;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.location.Address;
 import android.net.Uri;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.annotation.IdRes;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,12 +18,30 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.chaofanteaching.R;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 
 public class MyData extends AppCompatActivity {
+
+    /* 头像文件 */
+    private static final String IMAGE_FILE_NAME = "temp_head_image.jpg";
+
+    /* 请求识别码 */
+    private static final int CODE_GALLERY_REQUEST = 0xa0;//本地
+    private static final int CODE_CAMERA_REQUEST = 0xa1;//拍照
+    private static final int CODE_RESULT_REQUEST = 0xa2;//最终裁剪后的结果
+
+    // 裁剪后图片的宽(X)和高(Y),480 X 480的正方形。
+    private static int output_X = 600;
+    private static int output_Y = 600;
+    private ImageView headImage = null;
+    private Context context;
 
     private Button bt;
     private LinearLayout name;
@@ -33,19 +55,18 @@ public class MyData extends AppCompatActivity {
     private File tempFile;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_data);
 
-        photo= findViewById(R.id.image);
+        photo = findViewById(R.id.image);
         //photo2=  findViewById(R.id.img2);
-        bt = findViewById(R.id.aaa);
-        name=findViewById(R.id.name);
-        phone=findViewById(R.id.phone);
-        address=findViewById(R.id.address);
-        show=findViewById(R.id.show);
+       // bt = findViewById(R.id.aaa);
+        name = findViewById(R.id.name);
+        phone = findViewById(R.id.phone);
+        address = findViewById(R.id.address);
+        show = findViewById(R.id.show);
         rg = findViewById(R.id.rg);
         rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -58,23 +79,23 @@ public class MyData extends AppCompatActivity {
         name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent();
-                i.setClass(getApplicationContext(),NameDetail.class);
+                Intent i = new Intent();
+                i.setClass(getApplicationContext(), NameDetail.class);
                 startActivity(i);
             }
         });
         phone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent();
-                i.setClass(getApplicationContext(),PhoneDetail.class);
+                Intent i = new Intent();
+                i.setClass(getApplicationContext(), PhoneDetail.class);
                 startActivity(i);
             }
         });
         address.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent();
+                Intent i = new Intent();
                 i.setClass(getApplicationContext(), AddressDetail.class);
                 startActivity(i);
             }
@@ -141,6 +162,8 @@ public class MyData extends AppCompatActivity {
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
+
+
 
 
 }

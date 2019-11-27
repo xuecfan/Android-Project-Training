@@ -3,15 +3,13 @@ package com.example.chaofanteaching;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 
 public class WelcomeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().hide();//隐藏标题栏
+        //getSupportActionBar().hide();//隐藏标题栏
         setContentView(R.layout.welcome);
         Thread myThread=new Thread(){//创建子线程
             @Override
