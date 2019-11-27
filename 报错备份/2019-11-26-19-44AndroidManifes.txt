@@ -27,6 +27,7 @@
             </intent-filter>
         </activity>
         <activity
+<<<<<<< HEAD
             android:name=".InfoListActivity"
             android:label="@string/title_activity_info_list" />
         <activity
@@ -35,13 +36,16 @@
         <activity
             android:name=".AddInfoActivity"
             android:label="@string/title_activity_add_info"></activity>
-
+=======
+            android:name=".Main2Activity"
+            android:label="@string/title_activity_main2" />
+        <activity android:name=".MainActivity" />
         <activity android:name=".myself.MyData" />
         <activity android:name=".myself.NameDetail" />
         <activity android:name=".myself.PhoneDetail" />
         <activity android:name=".sign.LoginActivity"/>
-        <activity android:name=".sign.LogonActivity"/>
         <activity android:name=".myself.AddressDetail"></activity>
+>>>>>>> c1fc5d1f048ecfc897fdb95c09db2a90380230e8
     </application>
 
 </manifest>

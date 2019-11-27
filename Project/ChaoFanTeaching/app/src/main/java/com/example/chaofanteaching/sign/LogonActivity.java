@@ -2,6 +2,7 @@ package com.example.chaofanteaching.sign;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -17,7 +18,10 @@ public class LogonActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();//隐藏标题栏
+        setStatusBar();//设置状态栏
         setContentView(R.layout.activity_logon);
+
         //获取id
         ImageView backToLogin = findViewById(R.id.backToLogin);
         final TextView imParent = findViewById(R.id.imParent);
@@ -41,16 +45,30 @@ public class LogonActivity extends AppCompatActivity {
         imParent.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                imParent.setBackgroundColor(Color.parseColor("#D8900A"));
-                imTeacher.setBackgroundColor(Color.parseColor("#F2F3F6"));
+                //更改背景
+                imParent.setBackground(getResources().getDrawable(R.drawable.leftround2));
+                imTeacher.setBackground(getResources().getDrawable(R.drawable.rightround));
+                //更改字的颜色
+                imParent.setTextColor(Color.parseColor("#ffffff"));
+                imTeacher.setTextColor(Color.parseColor("#888888"));
+
+//                imParent.setBackgroundColor(Color.parseColor("#D8900A"));
+//                imTeacher.setBackgroundColor(Color.parseColor("#F2F3F6"));
                 status = 0;
             }
         });
         imTeacher.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                imTeacher.setBackgroundColor(Color.parseColor("#D8900A"));
-                imParent.setBackgroundColor(Color.parseColor("#F2F3F6"));
+                //更改背景
+                imParent.setBackground(getResources().getDrawable(R.drawable.leftround));
+                imTeacher.setBackground(getResources().getDrawable(R.drawable.rightround2));
+                //更改字的颜色
+                imParent.setTextColor(Color.parseColor("#888888"));
+                imTeacher.setTextColor(Color.parseColor("#ffffff"));
+
+//                imTeacher.setBackgroundColor(Color.parseColor("#D8900A"));
+//                imParent.setBackgroundColor(Color.parseColor("#F2F3F6"));
                 status = 1;
             }
         });
@@ -64,5 +82,13 @@ public class LogonActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    //设置状态栏为白色，图标和字体为暗色
+    protected void setStatusBar() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            getWindow().setStatusBarColor(getResources().getColor(R.color.white));//设置状态栏颜色
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);//实现状态栏图标和文字颜色为暗色
+        }
     }
 }
