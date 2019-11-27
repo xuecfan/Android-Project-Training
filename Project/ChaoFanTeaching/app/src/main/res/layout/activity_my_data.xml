@@ -118,37 +118,17 @@
             android:text="＞"
             android:gravity="right"/>
     </LinearLayout>
-    <!--<Button-->
-        <!--android:id="@+id/aaa"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="点击设置头像" />-->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <com.example.chaofanteaching.RoundImageView
-            android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
 
-        <Button
-            android:id="@+id/buttonLocal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="本地相册选取头像" />
-
-        <Button
-            android:id="@+id/buttonCamera"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="手机拍照选取头像" />
-    <!--<com.example.chaofanteaching.RoundImageView-->
-        <!--android:id="@+id/image"-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_weight="1"-->
-        <!--android:layout_height="wrap_content" />-->
+    <com.example.chaofanteaching.RoundImageView
+        android:id="@+id/image"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content" />
     <!-- border_outside_color 外部圆圈的颜色 -->
     <!-- border_inside_color 内部部圆圈的颜色 -->
     <!-- border_thickness 外圆和内圆的宽度 -->

@@ -16,6 +16,8 @@ import android.widget.LinearLayout;
 
 import com.example.chaofanteaching.R;
 import com.example.chaofanteaching.RoundImageView;
+import com.example.chaofanteaching.about.About;
+import com.example.chaofanteaching.about.Student_Authentication;
 import com.example.chaofanteaching.myself.MyData;
 import com.example.chaofanteaching.sign.LoginActivity;
 
@@ -60,7 +62,7 @@ public class My extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent i=new Intent();
-               // i.setClass(getContext(), .class);
+                i.setClass(getContext(), Student_Authentication.class);
                 startActivity(i);
             }
         });
@@ -68,7 +70,7 @@ public class My extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent i=new Intent();
-              //  i.setClass(getContext(), .class);
+                i.setClass(getContext(),About.class);
                 startActivity(i);
             }
         });
