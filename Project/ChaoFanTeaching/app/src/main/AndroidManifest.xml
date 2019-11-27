@@ -20,7 +20,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".sign.TestCodeActivity"></activity>
+        <activity android:name=".sign.RePWActivity"></activity>
         <activity android:name=".All" />
         <activity android:name=".MainActivity" />
         <activity android:name=".WelcomeActivity">

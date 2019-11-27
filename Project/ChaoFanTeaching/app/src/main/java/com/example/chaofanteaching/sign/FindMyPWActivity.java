@@ -1,5 +1,6 @@
 package com.example.chaofanteaching.sign;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -19,6 +20,7 @@ public class FindMyPWActivity extends AppCompatActivity {
         EditText myId = findViewById(R.id.myId);
         EditText myCode = findViewById(R.id.myCode);
         Button sendCode = findViewById(R.id.sendCode);
+        Button toTestCode = findViewById(R.id.toTestCode);
         //返回登录页
         backToLogin.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -27,6 +29,14 @@ public class FindMyPWActivity extends AppCompatActivity {
             }
         });
 
-        //
+        //进入验证验证码界面
+        toTestCode.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(FindMyPWActivity.this, RePWActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

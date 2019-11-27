@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import com.example.chaofanteaching.R;
 
-public class TestCodeActivity extends AppCompatActivity {
+public class RePWActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
