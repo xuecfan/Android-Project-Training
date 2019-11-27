@@ -9,32 +9,31 @@ import android.widget.EditText;
 
 import com.example.chaofanteaching.R;
 
-public class FindMyPWActivity extends AppCompatActivity {
+public class RePWActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_find_my_pw);
+        setContentView(R.layout.activity_repw);
         //获取id
-        Button backToLogin = findViewById(R.id.backToLogin);
-        EditText myId = findViewById(R.id.myId);
-        EditText myCode = findViewById(R.id.myCode);
-        Button sendCode = findViewById(R.id.sendCode);
-        Button toTestCode = findViewById(R.id.toTestCode);
-        //返回登录页
-        backToLogin.setOnClickListener(new View.OnClickListener(){
+        Button backToFindMyPW = findViewById(R.id.backToFindMyPW);
+        EditText myNewPW = findViewById(R.id.myNewPW);
+        Button rePW = findViewById(R.id.rePW);
+
+        //返回找回密码页
+        backToFindMyPW.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
 
-        //进入验证验证码界面
-        toTestCode.setOnClickListener(new View.OnClickListener(){
+        //修改密码完成，返回登陆页
+        rePW.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(FindMyPWActivity.this, RePWActivity.class);
+                intent.setClass(RePWActivity.this,LoginActivity.class);
                 startActivity(intent);
             }
         });

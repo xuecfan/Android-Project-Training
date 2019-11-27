@@ -40,6 +40,16 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        //忘记密码
+        findMyPW.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(LoginActivity.this,FindMyPWActivity.class);
+                startActivity(intent);
+            }
+        });
         //用户注册
         toLogonBtn.setOnClickListener(new View.OnClickListener() {
             @Override
