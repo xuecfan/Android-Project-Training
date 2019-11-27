@@ -65,11 +65,11 @@
                 android:background="@drawable/round"
                 android:layout_width="250dp"
                 android:layout_height="70dp"
-                android:inputType="text"
+                android:inputType="textEmailAddress"
                 android:textSize="30dp"
                 android:textStyle="bold"
                 android:textColor="#888888"
-                android:hint="请输入账号"
+                android:hint="请输入邮箱"
                 android:gravity="center"/>
             <EditText
                 android:id="@+id/myPW"
