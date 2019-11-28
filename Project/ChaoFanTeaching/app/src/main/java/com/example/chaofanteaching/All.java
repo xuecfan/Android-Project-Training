@@ -1,5 +1,6 @@
 package com.example.chaofanteaching;
 
+import android.os.Build;
 import android.support.v4.app.FragmentTabHost;
 
 import android.os.Bundle;
@@ -109,4 +110,5 @@ public class All extends AppCompatActivity {
 
         return view;
     }
+
 }

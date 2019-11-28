@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:imagecontrol="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".myself.MyData">
 
@@ -11,8 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:id="@+id/name">
+        android:orientation="horizontal">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="50dp"
@@ -24,13 +22,15 @@
             android:text="球球"
             android:textSize="20dp"
             android:layout_marginLeft="20dp"
+            android:paddingTop="8dp"
             android:id="@+id/name_content"/>
-        <TextView
-            android:layout_width="match_parent"
+        <ImageButton
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="25dp"
-            android:text="＞"
-            android:gravity="right"/>
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginRight="3.0dip"
+            android:background="@drawable/right"
+            android:id="@+id/name"/>
     </LinearLayout>
     <TableLayout
         android:id="@+id/tab"
@@ -73,8 +73,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:id="@+id/phone">
+        android:orientation="horizontal">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="50dp"
@@ -86,19 +85,20 @@
             android:text="111111111111"
             android:textSize="20dp"
             android:layout_marginLeft="20dp"
+            android:paddingTop="8dp"
             android:id="@+id/phone_content"/>
-        <TextView
-            android:layout_width="match_parent"
+        <ImageButton
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="25dp"
-            android:text="＞"
-            android:gravity="right"/>
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginRight="3.0dip"
+            android:background="@drawable/right"
+            android:id="@+id/phone" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:id="@+id/address">
+        android:orientation="horizontal">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="50dp"
@@ -110,13 +110,15 @@
             android:text="河北省石家庄市"
             android:textSize="20dp"
             android:layout_marginLeft="20dp"
-            android:id="@+id/address_content"/>
-        <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/address_content"
+            android:paddingTop="8dp"/>
+        <ImageButton
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="25dp"
-            android:text="＞"
-            android:gravity="right"/>
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginRight="3.0dip"
+            android:background="@drawable/right"
+            android:id="@+id/address"/>
     </LinearLayout>
 
     <LinearLayout

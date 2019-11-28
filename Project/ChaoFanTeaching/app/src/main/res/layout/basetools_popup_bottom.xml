@@ -41,7 +41,7 @@
             android:layout_height="132.5px"
             android:background="@drawable/pop_white_btn_select"
             android:text="取消"
-            android:textColor="@color/list_divider_line"
+
             android:textSize="18sp" />
 
     </LinearLayout>

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.location.Address;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.IdRes;
@@ -14,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
@@ -29,23 +31,18 @@ import java.io.IOException;
 
 public class MyData extends AppCompatActivity {
 
-    private LinearLayout name;
-    private LinearLayout phone;
-    private LinearLayout address;
+    private ImageButton name;
+    private ImageButton phone;
+    private ImageButton address;
     private TextView show;
     private RadioGroup rg;
-    private static final int PHOTO_REQUEST_GALLERY = 2;// 从相册中选择
-    private static final int PHOTO_REQUEST_CUT = 3;// 结果
-    private ImageView photo;
-    private File tempFile;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //setStatusBar();
         setContentView(R.layout.activity_my_data);
-
-        photo = findViewById(R.id.image);
         name = findViewById(R.id.name);
         phone = findViewById(R.id.phone);
         address = findViewById(R.id.address);
@@ -84,57 +81,14 @@ public class MyData extends AppCompatActivity {
             }
         });
     }
-
-    /*
-     * 剪切图片
-     */
-    private void crop(Uri uri) {
-        // 裁剪图片意图
-        Intent intent = new Intent("com.android.camera.action.CROP");
-        intent.setDataAndType(uri, "image/*");
-        intent.putExtra("crop", "true");
-        // 裁剪框的比例，1：1
-        intent.putExtra("aspectX", 1);
-        intent.putExtra("aspectY", 1);
-        // 裁剪后输出图片的尺寸大小
-        intent.putExtra("outputX", 250);
-        intent.putExtra("outputY", 250);
-       // intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);//输出路径
-        intent.putExtra("outputFormat", "JPEG");// 图片格式
-        intent.putExtra("noFaceDetection", true);// 取消人脸识别
-        intent.putExtra("return-data", true);
-
-        // 开启一个带有返回值的Activity，请求码为PHOTO_REQUEST_CUT
-        startActivityForResult(intent, PHOTO_REQUEST_CUT);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == PHOTO_REQUEST_GALLERY) {
-            // 从相册返回的数据
-            if (data != null) {
-                // 得到图片的全路径
-                Uri uri = data.getData();
-                crop(uri);
-            }
-        } else if (requestCode == PHOTO_REQUEST_CUT) {
-            // 从剪切图片返回的数据
-            if (data != null) {
-                Bitmap bitmap = data.getParcelableExtra("data");
-                photo.setImageBitmap(bitmap);
-                //photo2.setImageBitmap(bitmap);
-            }
-            try {
-                // 将临时文件删除
-                tempFile.delete();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
+    //设置状态栏为白色，图标和字体为暗色
+    protected void setStatusBar() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            getWindow().setStatusBarColor(getResources().getColor(R.color.white));//设置状态栏颜色
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);//实现状态栏图标和文字颜色为暗色
         }
-        super.onActivityResult(requestCode, resultCode, data);
     }
+
 
 
 
