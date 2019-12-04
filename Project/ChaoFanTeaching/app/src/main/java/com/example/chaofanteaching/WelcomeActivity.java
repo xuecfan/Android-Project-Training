@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.example.chaofanteaching.sign.ChooseIdentityActivity;
+
 public class WelcomeActivity extends AppCompatActivity {
 
     @Override
@@ -16,7 +18,7 @@ public class WelcomeActivity extends AppCompatActivity {
             public void run() {
                 try{
                     sleep(2000);//使程序休眠2秒
-                    Intent it=new Intent(getApplicationContext(),All.class);//启动MainActivity
+                    Intent it=new Intent(getApplicationContext(), ChooseIdentityActivity.class);//启动MainActivity
                     startActivity(it);
                     finish();//关闭当前活动
                 }catch (Exception e){

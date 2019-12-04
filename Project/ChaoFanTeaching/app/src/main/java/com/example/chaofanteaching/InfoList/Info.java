@@ -2,13 +2,13 @@ package com.example.chaofanteaching.InfoList;
 
 public class Info {
     private String name;
-    private String from;
+    private String college;
     private String subject;
     private String price;
 
-    public Info(String _name,String _from,String _subject,String _price){
+    public Info(String _name,String _college,String _subject,String _price){
         this.name=_name;
-        this.from=_from;
+        this.college=_college;
         this.subject=_subject;
         this.price=_price;
     }
@@ -22,11 +22,11 @@ public class Info {
     }
 
     public String getFrom() {
-        return from;
+        return college;
     }
 
-    public void setFrom(String from) {
-        this.from = from;
+    public void setFrom(String college) {
+        this.college = college;
     }
 
     public String getSubject() {

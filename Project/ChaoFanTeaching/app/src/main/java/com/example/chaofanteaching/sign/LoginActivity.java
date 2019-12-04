@@ -8,11 +8,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.chaofanteaching.All;
 import com.example.chaofanteaching.R;
 
 public class LoginActivity extends AppCompatActivity {
+    private EditText myId;
+    private EditText myPW;
 
 
     @Override
@@ -24,8 +27,8 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         //获取id
-        EditText myId = findViewById(R.id.myId);
-        EditText myPW = findViewById(R.id.myPW);
+        myId = findViewById(R.id.myId);
+        myPW = findViewById(R.id.myPW);
         ImageView loginBtn = findViewById(R.id.myLoginBtn);
         Button toLogonBtn=findViewById(R.id.toLogonBtn);
         Button findMyPW = findViewById(R.id.findMyPW);
@@ -35,9 +38,15 @@ public class LoginActivity extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(LoginActivity.this, All.class);
-                startActivity(intent);
+                if (myId.getText().toString().isEmpty() || myPW.getText().toString().isEmpty()){
+                    Toast.makeText(getApplication(),"邮箱和密码不能为空",Toast.LENGTH_LONG).show();
+                } else{
+                    Intent intent = new Intent();
+                    intent.setClass(LoginActivity.this, All.class);
+                    startActivity(intent);
+                    finish();
+                }
+
             }
         });
 
