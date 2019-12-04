@@ -2,6 +2,8 @@ package com.example.chaofanteaching.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,26 +13,30 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
-
+import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.InfoList.AddInfoActivity;
 import com.example.chaofanteaching.InfoList.Info;
 import com.example.chaofanteaching.InfoList.InfoAdapter;
 import com.example.chaofanteaching.InfoList.InfoDetailActivity;
 import com.example.chaofanteaching.R;
-
+import com.example.chaofanteaching.StreamChangeStrUtils;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.util.ArrayList;
 
 public class List extends Fragment {
-    private java.util.List<Info> infoList=new ArrayList<>();
+    private java.util.List<Info> infoList = new ArrayList<>();
     private View view;
+    private Handler handler;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        if(view==null){
-            view=inflater.inflate(R.layout.list,container,false);
+        if (view == null) {
+            view = inflater.inflate(R.layout.list, container, false);
             initView();
 
-        }else{
+        } else {
             ViewGroup parent = (ViewGroup) view.getParent();
             if (null != parent) {
                 parent.removeView(view);
@@ -38,34 +44,81 @@ public class List extends Fragment {
         }
         return view;
     }
-    public void initView(){
-        final ListView infolist=view.findViewById(R.id.infolist);
-        InfoAdapter infoAdapter=new InfoAdapter(this.getContext(),infoList,R.layout.info_item);
+
+    public void initView() {
+        final ListView infolist = view.findViewById(R.id.infolist);
+        InfoAdapter infoAdapter = new InfoAdapter(this.getContext(), infoList, R.layout.info_item);
         infolist.setAdapter(infoAdapter);
-        Info info=new Info("张三","化学学院","语文、数学","50");
-        Info info1=new Info("李四","物理学院","语文、数学","60");
-        Info info2=new Info("王五","软件学院","语文、数学","70");
-        infoList.add(info);
-        infoList.add(info1);
-        infoList.add(info2);
+        dbInfo();
         infoAdapter.notifyDataSetChanged();
         infolist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent();
-                intent.putExtra("name",infoList.get(position).getName());
-                intent.setClass(getActivity(),InfoDetailActivity.class);
+                intent.putExtra("name", infoList.get(position).getName());
+                intent.setClass(getActivity(), InfoDetailActivity.class);
                 startActivity(intent);
             }
         });
-        Button btnadd=view.findViewById(R.id.add);
+        Button btnadd = view.findViewById(R.id.add);
         btnadd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent();
+                Intent intent = new Intent();
                 intent.setClass(getActivity(), AddInfoActivity.class);
                 startActivity(intent);
             }
         });
+        Button btnserach=view.findViewById(R.id.search);
+        btnserach.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dbInfo();
+            }
+        });
+    }
+
+    private void dbInfo() {
+        infoList.clear();
+        handler = new Handler() {
+            @Override
+            public void handleMessage(android.os.Message msg) {
+                switch (msg.what) {
+                    case 1:
+                        Info scanInfo;
+                        String str = msg.obj.toString();
+                        String[] s = str.split(";");
+                        for (int i = 0; i < s.length; i++) {
+                            String[] r = s[i].split(",");
+                            scanInfo = new Info(r[0], r[1], r[2], r[3]);
+                            infoList.add(scanInfo);
+                            //InfoAdapter.notifyDataSetChanged();
+                        }
+                        break;
+                }
+            }
+        };
+        new Thread() {
+            HttpURLConnection connection = null;
+
+            @Override
+            public void run() {
+                try {
+                    connection = HttpConnectionUtils.getConnection("ListInfoServlet?");
+                    int code = connection.getResponseCode();
+                    if (code == 200) {
+                        InputStream inputStream = connection.getInputStream();
+                        String str = StreamChangeStrUtils.toChange(inputStream);
+                        android.os.Message message = Message.obtain();
+                        message.obj = str;
+                        message.what = 1;
+                        handler.sendMessage(message);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+
     }
 }

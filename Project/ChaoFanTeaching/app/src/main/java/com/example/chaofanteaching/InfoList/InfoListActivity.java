@@ -17,7 +17,7 @@ public class InfoListActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.info_list);
 //        ListView infolist=findViewById(R.id.infolist);
-//        InfoAdapter infoAdapter=new InfoAdapter(this,infoList,R.layout.info_item);
+//        InfoAdapter infoAdapter=new InfoAdapter(this,infoList,R.layout.info_item);55555
 //        infolist.setAdapter(infoAdapter);
 //        Info info=new Info("张三","化学学院","语文、数学","50");
 //        Info info1=new Info("李四","物理学院","语文、数学","60");
