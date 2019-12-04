@@ -35,8 +35,10 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <uses-permission
@@ -51,10 +53,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
+<<<<<<< HEAD
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="wfOwZE9cY28U6c3q0P7y08fTNFBmQ412" />
         <activity android:name=".sign.ChooseIdentityActivity"></activity>
+=======
+        <activity android:name=".sign.ChooseIdentityActivity" />
+>>>>>>> 176c6ce1b932bd90d4af9dd062e24bcf4f980822
         <activity
             android:name=".All"
             android:windowSoftInputMode="adjustPan" />
@@ -93,6 +99,8 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
+
+        <activity android:name=".myself.Setting"></activity>
     </application>
 
 </manifest>

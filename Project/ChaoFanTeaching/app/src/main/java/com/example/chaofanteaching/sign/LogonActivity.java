@@ -84,6 +84,7 @@ public class LogonActivity extends AppCompatActivity {
         logonBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+
                 String user=myId.getText().toString();
                 String pasd=myPW.getText().toString();
                 addUser(user,pasd,status);
@@ -102,6 +103,8 @@ public class LogonActivity extends AppCompatActivity {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);//实现状态栏图标和文字颜色为暗色
         }
     }
+
+    //在数据库里添加用户
     private void addUser(final String a, final String b, final int c){
         new Thread(){
             HttpURLConnection connection = null;
