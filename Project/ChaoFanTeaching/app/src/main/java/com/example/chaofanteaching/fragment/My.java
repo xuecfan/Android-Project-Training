@@ -54,7 +54,7 @@ public class My extends Fragment {
         myself=view.findViewById(R.id.myself);
         student=view.findViewById(R.id.student);
         about=view.findViewById(R.id.about);
-        btn=view.findViewById(R.id.btn);
+        //btn=view.findViewById(R.id.btn);
         image=view.findViewById(R.id.image);
         initView();
         image.setOnClickListener(new View.OnClickListener() {
@@ -116,14 +116,14 @@ public class My extends Fragment {
                 startActivity(i);
             }
         });
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i=new Intent();
-                i.setClass(getContext(), LoginActivity.class);
-                startActivity(i);
-            }
-        });
+//        btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent i=new Intent();
+//                i.setClass(getContext(), LoginActivity.class);
+//                startActivity(i);
+//            }
+//        });
         return view;
     }
 
