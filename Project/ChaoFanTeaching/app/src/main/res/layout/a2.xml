@@ -1,6 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="问题场景："
+            />
+        <EditText
+            android:id="@+id/Problem_cj"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="描述问题所出现的场景"
+            />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/Problem_ms"
+        android:gravity="top"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edittext_biankuang"
+        android:hint="说说你的问题" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1">
+            <ImageButton
+                android:id="@+id/TP"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:background="#00000000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/tupian"/>
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1">
+            <Button
+                android:id="@+id/Btn_tj"
+                android:background="@color/colorPrimary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginRight="3.0dip"
+                android:text="提交"
+                android:textSize="15dp"
+                android:textColor="#ffffff"/>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="您的账号："
+            />
+        <EditText
+            android:id="@+id/zhanghao1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="问题账号："
+            />
+        <EditText
+            android:id="@+id/zhanghao2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="(选填)"
+            />
+    </LinearLayout>
+</LinearLayout>

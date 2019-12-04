@@ -171,7 +171,15 @@
                 android:text="(性别、学院等)"/>
         </LinearLayout>
 
+        <com.baidu.mapapi.map.MapView
+            android:layout_marginTop="15dp"
+            android:id="@+id/bmapView"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:clickable="true" />
     </LinearLayout>
+
+
 
     <LinearLayout
         android:layout_marginBottom="20dp"
@@ -183,13 +191,11 @@
         <Button
             android:id="@+id/add_finish"
             android:gravity="center"
-            android:layout_gravity="left"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:background="#FF9800"
             android:textColor="#ffffff"
             android:text="完成"/>
-
     </LinearLayout>
 
 </LinearLayout>

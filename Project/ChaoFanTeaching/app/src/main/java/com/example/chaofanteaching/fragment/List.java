@@ -28,26 +28,16 @@ public class List extends Fragment {
     private java.util.List<Info> infoList = new ArrayList<>();
     private View view;
     private Handler handler;
+    private ListView infolist;
+    private InfoAdapter infoAdapter;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        if (view == null) {
-            view = inflater.inflate(R.layout.list, container, false);
-            initView();
-
-        } else {
-            ViewGroup parent = (ViewGroup) view.getParent();
-            if (null != parent) {
-                parent.removeView(view);
-            }
-        }
-        return view;
-    }
-
-    public void initView() {
-        final ListView infolist = view.findViewById(R.id.infolist);
-        InfoAdapter infoAdapter = new InfoAdapter(this.getContext(), infoList, R.layout.info_item);
+        view = inflater.inflate(R.layout.list, container, false);
+        infoList.clear();
+        infolist = view.findViewById(R.id.infolist);
+        infoAdapter = new InfoAdapter(this.getContext(), infoList, R.layout.info_item);
         infolist.setAdapter(infoAdapter);
         dbInfo();
         infoAdapter.notifyDataSetChanged();
@@ -76,10 +66,10 @@ public class List extends Fragment {
                 dbInfo();
             }
         });
+        return view;
     }
 
     private void dbInfo() {
-        infoList.clear();
         handler = new Handler() {
             @Override
             public void handleMessage(android.os.Message msg) {
@@ -92,7 +82,7 @@ public class List extends Fragment {
                             String[] r = s[i].split(",");
                             scanInfo = new Info(r[0], r[1], r[2], r[3]);
                             infoList.add(scanInfo);
-                            //InfoAdapter.notifyDataSetChanged();
+                            infoAdapter.notifyDataSetChanged();
                         }
                         break;
                 }
@@ -119,6 +109,5 @@ public class List extends Fragment {
                 }
             }
         }.start();
-
     }
 }
