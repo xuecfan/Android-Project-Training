@@ -1,5 +1,6 @@
 package com.example.chaofanteaching;
 
+import android.content.Intent;
 import android.os.Build;
 import android.support.v4.app.FragmentTabHost;
 
@@ -55,10 +56,17 @@ public class All extends AppCompatActivity {
         fragmentTabHost.addTab(tabSpec3,
                 My.class,
                 null);
-
-        fragmentTabHost.setCurrentTab(0);
-        imageViewMap.get("tag1").setImageResource(R.drawable.list1);
-        textViewMap.get("tag1").setTextColor(getResources().getColor(R.color.colorPrimary));
+        Intent i=getIntent();
+        String action=i.getAction();
+        if(action.equals("3")){
+            fragmentTabHost.setCurrentTab(2);
+            imageViewMap.get("tag3").setImageResource(R.drawable.my1);
+            textViewMap.get("tag3").setTextColor(getResources().getColor(R.color.colorPrimary));
+        }else{
+            fragmentTabHost.setCurrentTab(0);
+            imageViewMap.get("tag1").setImageResource(R.drawable.list1);
+            textViewMap.get("tag1").setTextColor(getResources().getColor(R.color.colorPrimary));
+        }
 
         fragmentTabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
             @Override
