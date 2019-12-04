@@ -53,14 +53,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-<<<<<<< HEAD
+
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="wfOwZE9cY28U6c3q0P7y08fTNFBmQ412" />
         <activity android:name=".sign.ChooseIdentityActivity"></activity>
-=======
-        <activity android:name=".sign.ChooseIdentityActivity" />
->>>>>>> 176c6ce1b932bd90d4af9dd062e24bcf4f980822
         <activity
             android:name=".All"
             android:windowSoftInputMode="adjustPan" />
