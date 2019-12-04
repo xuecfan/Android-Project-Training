@@ -27,8 +27,7 @@ public class About extends AppCompatActivity {
         about_fanhui.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(About.this, My.class);
-                startActivity(i);
+                finish();
             }
         });
         a1.setOnClickListener(new View.OnClickListener(){

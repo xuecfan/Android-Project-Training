@@ -56,9 +56,8 @@ public class All extends AppCompatActivity {
         fragmentTabHost.addTab(tabSpec3,
                 My.class,
                 null);
-        Intent i=getIntent();
-        String action=i.getAction();
-//        if(action.equals("3")){
+
+//        if(getIntent().getStringExtra("value").equals("3")){
 //            fragmentTabHost.setCurrentTab(2);
 //            imageViewMap.get("tag3").setImageResource(R.drawable.my1);
 //            textViewMap.get("tag3").setTextColor(getResources().getColor(R.color.colorPrimary));

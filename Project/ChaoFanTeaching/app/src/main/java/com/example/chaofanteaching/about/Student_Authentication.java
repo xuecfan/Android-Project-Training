@@ -33,8 +33,7 @@ public class Student_Authentication extends AppCompatActivity {
         au_fanhui.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Student_Authentication.this, My.class);
-                startActivity(i);
+                finish();
             }
         });
         student1.setOnClickListener(new View.OnClickListener(){

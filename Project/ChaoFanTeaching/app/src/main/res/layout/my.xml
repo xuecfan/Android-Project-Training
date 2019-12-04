@@ -7,9 +7,9 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="190dp"
         android:orientation="horizontal"
-        android:layout_marginTop="20dp">
+       android:paddingTop="20dp">
 
         <com.example.chaofanteaching.RoundImageView
             android:layout_width="150dp"
@@ -40,6 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
+        android:layout_marginTop="20dp"
         android:orientation="horizontal"
         android:id="@+id/myself">
 
@@ -123,35 +124,6 @@
             android:layout_marginLeft="50dp"/>
 
     </LinearLayout>
-
-    <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginLeft="30dp"-->
-        <!--android:orientation="horizontal"-->
-        <!--android:id="@+id/about">-->
-
-        <!--<ImageView-->
-            <!--android:layout_width="30dp"-->
-            <!--android:layout_height="30dp"-->
-            <!--android:layout_marginRight="10dp"-->
-            <!--android:layout_marginTop="8dp"-->
-            <!--android:src="@drawable/about" />-->
-
-        <!--<TextView-->
-            <!--android:layout_width="200dp"-->
-            <!--android:layout_height="50dp"-->
-            <!--android:text="关于软件"-->
-            <!--android:textSize="30dp" />-->
-
-        <!--<ImageView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:src="@drawable/right"-->
-            <!--android:layout_marginTop="7dp"-->
-            <!--android:layout_marginLeft="50dp"/>-->
-
-    <!--</LinearLayout>-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -210,13 +182,5 @@
             android:layout_marginLeft="50dp"/>
 
     </LinearLayout>
-    <!--<Button-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:background="@drawable/shape"-->
-        <!--android:layout_marginTop="90dp"-->
-        <!--android:text="切换账号"-->
-        <!--android:textSize="30dp"-->
-        <!--android:textColor="@color/white"-->
-        <!--android:id="@+id/btn"/>-->
+
 </LinearLayout>

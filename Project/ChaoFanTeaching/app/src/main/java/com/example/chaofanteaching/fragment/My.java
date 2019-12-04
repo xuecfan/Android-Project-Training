@@ -20,11 +20,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+
 import com.example.chaofanteaching.BottomPopupOption;
 import com.example.chaofanteaching.R;
 import com.example.chaofanteaching.about.About;
 import com.example.chaofanteaching.about.Student_Authentication;
 import com.example.chaofanteaching.myself.MyData;
+import com.example.chaofanteaching.myself.Setting;
 import com.example.chaofanteaching.sign.LoginActivity;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -38,60 +41,28 @@ public class My extends Fragment {
     private static String path = "/storage/emulated/0/";// sd路径
     protected static Uri uritempFile;
     private BottomPopupOption bottomPopupOption;
-    private ImageButton myself;
-    private ImageButton student;
-    private ImageButton about;
-    private Button btn;
+    private LinearLayout myself;
+    private LinearLayout student;
+    private LinearLayout setting;
+    private LinearLayout customer_service;
+    private LinearLayout send;
     private ImageView image;
     private Bitmap bitmap;
-    private Bitmap head;
+
     private static final int PHOTO_REQUEST_GALLERY = 2;// 从相册中选择
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view=inflater.inflate(R.layout.my,container,false);
 
+        customer_service=view.findViewById(R.id.customer_service);
+        send=view.findViewById(R.id.send);
         myself=view.findViewById(R.id.myself);
         student=view.findViewById(R.id.student);
-        about=view.findViewById(R.id.about);
-        //btn=view.findViewById(R.id.btn);
+        setting=view.findViewById(R.id.setting);
         image=view.findViewById(R.id.image);
         initView();
-        image.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                bottomPopupOption = new BottomPopupOption(getActivity());
-                bottomPopupOption.setItemText("拍照","相册");
-                bottomPopupOption.showPopupWindow();
-                bottomPopupOption.setItemClickListener(new BottomPopupOption.onPopupWindowItemClickListener() {
-                    @Override
-                    public void onItemClick(int position) {
-                        bottomPopupOption.dismiss();
-                        switch (position){
-                            case 0:
-                                Intent cameraIntent =
-                                        new Intent(
-                                                MediaStore.ACTION_IMAGE_CAPTURE);
-//                                tempUri = FileProvider.getUriForFile(getContext(), getContext().getPackageName() + ".provider", new File(Environment
-//                                        .getExternalStorageDirectory(), "image.jpg"));
-//                                // 指定照片保存路径（SD卡），image.jpg为一个临时文件，每次拍照后这个图片都会被替换
-//                                cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, tempUri);
-                                startActivityForResult(cameraIntent, 8888);
 
-
-                                break;
-                            case 1:
-                                Intent intent = new Intent(Intent.ACTION_PICK);
-                                intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
-                                 //开启一个带有返回值的Activity，请求码为PHOTO_REQUEST_GALLERY
-                                startActivityForResult(intent, PHOTO_REQUEST_GALLERY);
-                                break;
-                        }
-                    }
-                });
-
-            }
-        });
         myself.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,22 +79,47 @@ public class My extends Fragment {
                 startActivity(i);
             }
         });
-        about.setOnClickListener(new View.OnClickListener() {
+        setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i=new Intent();
-                i.setClass(getContext(),About.class);
+                i.setClass(getContext(),Setting.class);
                 startActivity(i);
             }
         });
-//        btn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent i=new Intent();
-//                i.setClass(getContext(), LoginActivity.class);
-//                startActivity(i);
-//            }
-//        });
+
+
+        image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bottomPopupOption = new BottomPopupOption(getActivity());
+                bottomPopupOption.setItemText("拍照","相册");
+                bottomPopupOption.showPopupWindow();
+                bottomPopupOption.setItemClickListener(new BottomPopupOption.onPopupWindowItemClickListener() {
+                    @Override
+                    public void onItemClick(int position) {
+                        bottomPopupOption.dismiss();
+                        switch (position){
+                            case 0:
+                                Intent cameraIntent =
+                                        new Intent(
+                                                MediaStore.ACTION_IMAGE_CAPTURE);
+                                startActivityForResult(cameraIntent, 8888);
+
+
+                                break;
+                            case 1:
+                                Intent intent = new Intent(Intent.ACTION_PICK);
+                                intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
+                                //开启一个带有返回值的Activity，请求码为PHOTO_REQUEST_GALLERY
+                                startActivityForResult(intent, PHOTO_REQUEST_GALLERY);
+                                break;
+                        }
+                    }
+                });
+
+            }
+        });
         return view;
     }
 
