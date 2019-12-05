@@ -1,6 +1,8 @@
 package com.example.chaofanteaching.sign;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Handler;
@@ -34,6 +36,8 @@ public class LogonActivity extends AppCompatActivity {
 //        getSupportActionBar().hide();//隐藏标题栏
         setStatusBar();//设置状态栏
         setContentView(R.layout.activity_logon);
+
+
 
         //获取id
         ImageView backToLogin = findViewById(R.id.backToLogin);
@@ -91,6 +95,10 @@ public class LogonActivity extends AppCompatActivity {
         logonBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                SharedPreferences sharedPreferences = getSharedPreferences("login", Context.MODE_PRIVATE);
+                String loginOrNot = sharedPreferences.getString("loginOrNot", null);//(key,若无数据需要赋的值)
+                Log.e("xcf",loginOrNot);
+
                 String user=myId.getText().toString();
                 String pasd=myPW.getText().toString();
                 String pasdAgain = myPWAgain.getText().toString();

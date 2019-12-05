@@ -1,6 +1,8 @@
 package com.example.chaofanteaching.sign;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -99,6 +101,11 @@ public class LoginActivity extends AppCompatActivity {
                         String para = String.valueOf(1);
                         System.out.println("从服务器传来的servlet页面数字："+string);
                         if (string.equals(para)){
+                            SharedPreferences sharedPreferences = getSharedPreferences("login", Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putString("loginOrNot", string);
+                            editor.apply();
+
                             Toast.makeText(getApplication(),"登陆成功",Toast.LENGTH_LONG).show();
                             Intent intent = new Intent();
                             intent.setClass(LoginActivity.this, All.class);
