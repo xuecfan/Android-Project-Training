@@ -115,13 +115,13 @@ public class AddInfoActivity extends AppCompatActivity {
 
     private void showLocOnMap(double lat, double lng) {
         //获取定位图标
-//        BitmapDescriptor icon = BitmapDescriptorFactory
-//                .fromResource(R.mipmap.loc);
+        BitmapDescriptor icon = BitmapDescriptorFactory
+                .fromResource(R.mipmap.loc1);
         //设置显示方式
         MyLocationConfiguration config=new MyLocationConfiguration(
-                MyLocationConfiguration.LocationMode.COMPASS,
+                MyLocationConfiguration.LocationMode.NORMAL,
                 false,
-                null);
+                icon);
         baiduMap.setMyLocationConfiguration(config);
         //显示
         MyLocationData locData=new MyLocationData.Builder().latitude(lat).longitude(lng).build();

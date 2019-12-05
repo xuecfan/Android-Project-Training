@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.InfoList.AddInfoActivity;
@@ -30,6 +31,7 @@ public class List extends Fragment {
     private Handler handler;
     private ListView infolist;
     private InfoAdapter infoAdapter;
+    private EditText editText;
 
     @Nullable
     @Override
@@ -39,7 +41,7 @@ public class List extends Fragment {
         infolist = view.findViewById(R.id.infolist);
         infoAdapter = new InfoAdapter(this.getContext(), infoList, R.layout.info_item);
         infolist.setAdapter(infoAdapter);
-        dbInfo();
+        dbKey("");
         infoAdapter.notifyDataSetChanged();
         infolist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -60,16 +62,19 @@ public class List extends Fragment {
             }
         });
         Button btnserach=view.findViewById(R.id.search);
+        editText=view.findViewById(R.id.input);
         btnserach.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dbInfo();
+                infoList.clear();
+                String key=editText.getText().toString();
+                dbKey(key);
             }
         });
         return view;
     }
 
-    private void dbInfo() {
+    private void dbKey(final String key) {
         handler = new Handler() {
             @Override
             public void handleMessage(android.os.Message msg) {
@@ -94,7 +99,7 @@ public class List extends Fragment {
             @Override
             public void run() {
                 try {
-                    connection = HttpConnectionUtils.getConnection("ListInfoServlet?");
+                    connection = HttpConnectionUtils.getConnection("ListInfoServlet?op=serach&key="+key);
                     int code = connection.getResponseCode();
                     if (code == 200) {
                         InputStream inputStream = connection.getInputStream();
