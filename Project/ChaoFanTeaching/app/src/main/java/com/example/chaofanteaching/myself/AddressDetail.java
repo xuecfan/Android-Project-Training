@@ -1,5 +1,7 @@
 package com.example.chaofanteaching.myself;
 
+import android.content.Intent;
+import android.location.Address;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,7 +19,6 @@ public class AddressDetail extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setStatusBar();
         setContentView(R.layout.activity_address_detail);
         address=findViewById(R.id.address);
         btn1=findViewById(R.id.btn1);
@@ -25,7 +26,9 @@ public class AddressDetail extends AppCompatActivity {
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent i=new Intent(AddressDetail.this,MyData.class);
+                i.putExtra("address",address.getText().toString());
+                startActivity(i);
             }
         });
         btn2.setOnClickListener(new View.OnClickListener() {
@@ -34,12 +37,5 @@ public class AddressDetail extends AppCompatActivity {
                 finish();
             }
         });
-    }
-    //设置状态栏为白色，图标和字体为暗色
-    protected void setStatusBar() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            getWindow().setStatusBarColor(getResources().getColor(R.color.white));//设置状态栏颜色
-            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);//实现状态栏图标和文字颜色为暗色
-        }
     }
 }

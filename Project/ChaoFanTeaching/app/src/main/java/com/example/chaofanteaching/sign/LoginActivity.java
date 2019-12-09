@@ -108,7 +108,7 @@ public class LoginActivity extends AppCompatActivity {
 
                             Toast.makeText(getApplication(),"登陆成功",Toast.LENGTH_LONG).show();
                             Intent intent = new Intent();
-                            intent.setClass(LoginActivity.this, All.class);
+                            intent.setClass( LoginActivity.this, All.class);
                             startActivity(intent);
                             finish();
                         }else {

@@ -10,7 +10,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:id="@+id/name">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="50dp"
@@ -19,18 +20,17 @@
         <TextView
             android:layout_width="260dp"
             android:layout_height="50dp"
-            android:text="球球"
+            android:text=""
             android:textSize="20dp"
             android:layout_marginLeft="20dp"
             android:paddingTop="8dp"
             android:id="@+id/name_content"/>
-        <ImageButton
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right|center_vertical"
             android:layout_marginRight="3.0dip"
-            android:background="@drawable/right"
-            android:id="@+id/name"/>
+            android:background="@drawable/right"/>
     </LinearLayout>
     <TableLayout
         android:id="@+id/tab"
@@ -73,7 +73,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:id="@+id/phone">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="50dp"
@@ -82,23 +83,23 @@
         <TextView
             android:layout_width="260dp"
             android:layout_height="50dp"
-            android:text="111111111111"
+            android:text=""
             android:textSize="20dp"
             android:layout_marginLeft="20dp"
             android:paddingTop="8dp"
             android:id="@+id/phone_content"/>
-        <ImageButton
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right|center_vertical"
             android:layout_marginRight="3.0dip"
-            android:background="@drawable/right"
-            android:id="@+id/phone" />
+            android:background="@drawable/right"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:id="@+id/address">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="50dp"
@@ -107,42 +108,16 @@
         <TextView
             android:layout_width="260dp"
             android:layout_height="50dp"
-            android:text="河北省石家庄市"
+            android:text=""
             android:textSize="20dp"
             android:layout_marginLeft="20dp"
             android:id="@+id/address_content"
             android:paddingTop="8dp"/>
-        <ImageButton
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right|center_vertical"
             android:layout_marginRight="3.0dip"
-            android:background="@drawable/right"
-            android:id="@+id/address"/>
+            android:background="@drawable/right"/>
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-    <com.example.chaofanteaching.RoundImageView
-        android:id="@+id/image"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content" />
-    <!-- border_outside_color 外部圆圈的颜色 -->
-    <!-- border_inside_color 内部部圆圈的颜色 -->
-    <!-- border_thickness 外圆和内圆的宽度 -->
-    <!--<com.example.chaofanteaching.RoundImageView-->
-        <!--android:id="@+id/img2"-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_weight="1"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--imagecontrol:border_inside_color="#bc0978"-->
-        <!--imagecontrol:border_outside_color="#ba3456"-->
-        <!--imagecontrol:border_thickness="1dp" />-->
-    </LinearLayout>
-
-
 </LinearLayout>

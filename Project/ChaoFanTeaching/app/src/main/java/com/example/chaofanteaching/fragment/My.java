@@ -1,7 +1,9 @@
 package com.example.chaofanteaching.fragment;
 
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -21,6 +23,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.chaofanteaching.BottomPopupOption;
 import com.example.chaofanteaching.R;
@@ -54,6 +57,8 @@ public class My extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view=inflater.inflate(R.layout.my,container,false);
+        SharedPreferences pre = getContext().getSharedPreferences("login", Context.MODE_PRIVATE);
+        final String a = pre.getString("loginOrNot", "");
 
         customer_service=view.findViewById(R.id.customer_service);
         send=view.findViewById(R.id.send);
@@ -61,7 +66,11 @@ public class My extends Fragment {
         student=view.findViewById(R.id.student);
         setting=view.findViewById(R.id.setting);
         image=view.findViewById(R.id.image);
-        initView();
+        if(a.equals("")){
+            image.setImageDrawable(getContext().getResources().getDrawable(R.drawable.a));
+        }else
+            {
+        initView();}
 
         myself.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,32 +101,38 @@ public class My extends Fragment {
         image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                bottomPopupOption = new BottomPopupOption(getActivity());
-                bottomPopupOption.setItemText("拍照","相册");
-                bottomPopupOption.showPopupWindow();
-                bottomPopupOption.setItemClickListener(new BottomPopupOption.onPopupWindowItemClickListener() {
-                    @Override
-                    public void onItemClick(int position) {
-                        bottomPopupOption.dismiss();
-                        switch (position){
-                            case 0:
-                                Intent cameraIntent =
-                                        new Intent(
-                                                MediaStore.ACTION_IMAGE_CAPTURE);
-                                startActivityForResult(cameraIntent, 8888);
+
+                Log.e("111",a);
+                if (a.equals("")) {
+                    Toast.makeText(getContext(), "请您先登录", Toast.LENGTH_SHORT).show();
+                } else {
+                    bottomPopupOption = new BottomPopupOption(getActivity());
+                    bottomPopupOption.setItemText("拍照", "相册");
+                    bottomPopupOption.showPopupWindow();
+                    bottomPopupOption.setItemClickListener(new BottomPopupOption.onPopupWindowItemClickListener() {
+                        @Override
+                        public void onItemClick(int position) {
+                            bottomPopupOption.dismiss();
+                            switch (position) {
+                                case 0:
+                                    Intent cameraIntent =
+                                            new Intent(
+                                                    MediaStore.ACTION_IMAGE_CAPTURE);
+                                    startActivityForResult(cameraIntent, 8888);
 
 
-                                break;
-                            case 1:
-                                Intent intent = new Intent(Intent.ACTION_PICK);
-                                intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
-                                //开启一个带有返回值的Activity，请求码为PHOTO_REQUEST_GALLERY
-                                startActivityForResult(intent, PHOTO_REQUEST_GALLERY);
-                                break;
+                                    break;
+                                case 1:
+                                    Intent intent = new Intent(Intent.ACTION_PICK);
+                                    intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
+                                    //开启一个带有返回值的Activity，请求码为PHOTO_REQUEST_GALLERY
+                                    startActivityForResult(intent, PHOTO_REQUEST_GALLERY);
+                                    break;
+                            }
                         }
-                    }
-                });
+                    });
 
+                }
             }
         });
         return view;
@@ -231,40 +246,40 @@ public class My extends Fragment {
 ////        }
 //        super.onActivityResult(requestCode, resultCode, data);
 //        }
-@Override
-public void onActivityResult(int requestCode, int resultCode, Intent data) {
-    super.onActivityResult(requestCode, resultCode, data);
-    if(requestCode == 8888 ) {
-        //获取系统摄像头拍照的结果
-        bitmap = data.getParcelableExtra("data");
-        image.setImageBitmap(bitmap);
-        uploadPic(bitmap);
-        setPicToView(bitmap);
-    }
-    if (requestCode == PHOTO_REQUEST_GALLERY) {
-    // 从相册返回的数据
-            if (data != null) {
-                // 得到图片的全路径
-                Uri uri = data.getData();
-                crop(uri);
-            }
-        } else if (requestCode == PHOTO_REQUEST_CUT) {
-            // 从剪切图片返回的数据
-            if (data != null) {
-                Bitmap bitmap = null;
-                try {
-                    bitmap = BitmapFactory.decodeStream(getActivity().getContentResolver().openInputStream(uritempFile));
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
-                //Bitmap bitmap = data.getParcelableExtra("data");
-                image.setImageBitmap(bitmap);
-                uploadPic(bitmap);
-                setPicToView(bitmap);
-            }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 8888 ) {
+            //获取系统摄像头拍照的结果
+            bitmap = data.getParcelableExtra("data");
+            image.setImageBitmap(bitmap);
+            uploadPic(bitmap);
+            setPicToView(bitmap);
         }
-    super.onActivityResult(requestCode, resultCode, data);
-}
+        if (requestCode == PHOTO_REQUEST_GALLERY) {
+        // 从相册返回的数据
+                if (data != null) {
+                    // 得到图片的全路径
+                    Uri uri = data.getData();
+                    crop(uri);
+                }
+            } else if (requestCode == PHOTO_REQUEST_CUT) {
+                // 从剪切图片返回的数据
+                if (data != null) {
+                    Bitmap bitmap = null;
+                    try {
+                        bitmap = BitmapFactory.decodeStream(getActivity().getContentResolver().openInputStream(uritempFile));
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    //Bitmap bitmap = data.getParcelableExtra("data");
+                    image.setImageBitmap(bitmap);
+                    uploadPic(bitmap);
+                    setPicToView(bitmap);
+                }
+            }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 
 
     private void setPicToView(Bitmap mBitmap) {

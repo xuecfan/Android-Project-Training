@@ -31,23 +31,36 @@ import java.io.IOException;
 
 public class MyData extends AppCompatActivity {
 
-    private ImageButton name;
-    private ImageButton phone;
-    private ImageButton address;
+    private LinearLayout name;
+    private LinearLayout phone;
+    private LinearLayout address;
     private TextView show;
+    private TextView name_content;
+    private TextView phone_content;
+    private TextView address_content;
     private RadioGroup rg;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setStatusBar();
         setContentView(R.layout.activity_my_data);
         name = findViewById(R.id.name);
         phone = findViewById(R.id.phone);
         address = findViewById(R.id.address);
         show = findViewById(R.id.show);
+        name_content=findViewById(R.id.name_content);
+        phone_content=findViewById(R.id.phone_content);
+        address_content=findViewById(R.id.address_content);
         rg = findViewById(R.id.rg);
+        Intent i=getIntent();
+        String name1=i.getStringExtra("name");
+        String phone1=i.getStringExtra("phone");
+        String address1=i.getStringExtra("address");
+        name_content.setText(name1);
+        phone_content.setText(phone1);
+        address_content.setText(address1);
+
         rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
@@ -81,16 +94,5 @@ public class MyData extends AppCompatActivity {
             }
         });
     }
-    //设置状态栏为白色，图标和字体为暗色
-    protected void setStatusBar() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            getWindow().setStatusBarColor(getResources().getColor(R.color.white));//设置状态栏颜色
-            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);//实现状态栏图标和文字颜色为暗色
-        }
-    }
-
-
-
-
 
 }
