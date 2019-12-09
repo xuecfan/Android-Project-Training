@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.chaofanteaching.All;
 import com.example.chaofanteaching.R;
@@ -20,20 +21,50 @@ public class Setting extends AppCompatActivity {
     private Button btn1;
     private Button btn2;
     private LinearLayout fanhui;
+    private LinearLayout privacy;
+    private LinearLayout cuurency;
+    private LinearLayout help;
+    private LinearLayout plug;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
+        final SharedPreferences pre = getSharedPreferences("login", Context.MODE_PRIVATE);
+        String a = pre.getString("loginOrNot", "");
         about=findViewById(R.id.about);
         btn1=findViewById(R.id.btn1);
         btn2=findViewById(R.id.btn2);
         fanhui=findViewById(R.id.fanhui);
-        final SharedPreferences pre = getSharedPreferences("login", Context.MODE_PRIVATE);
-        String a = pre.getString("loginOrNot", "");
-        if(a.equals("")){
-            btn1.setText("去登陆");
-        }
+        privacy=findViewById(R.id.privacy);
+        cuurency=findViewById(R.id.currency);
+        help=findViewById(R.id.help);
+        plug=findViewById(R.id.plug);
+        privacy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(),"暂未开放，敬请期待", Toast.LENGTH_SHORT).show();
+            }
+        });
+        cuurency.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(),"暂未开放，敬请期待", Toast.LENGTH_SHORT).show();
+            }
+        });
+        help.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(),"暂未开放，敬请期待", Toast.LENGTH_SHORT).show();
+            }
+        });
+        plug.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(),"暂未开放，敬请期待", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         about.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

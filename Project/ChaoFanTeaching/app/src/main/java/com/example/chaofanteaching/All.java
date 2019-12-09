@@ -13,6 +13,7 @@ import android.widget.TabHost;
 import android.widget.TextView;
 
 import com.example.chaofanteaching.fragment.List;
+import com.example.chaofanteaching.fragment.List1;
 import com.example.chaofanteaching.fragment.Message;
 import com.example.chaofanteaching.fragment.My;
 
@@ -36,12 +37,24 @@ public class All extends AppCompatActivity {
                 getSupportFragmentManager(),
                 android.R.id.tabcontent);
 
-        TabHost.TabSpec tabSpec1 = fragmentTabHost.newTabSpec("tag1")
-                .setIndicator(getTabSpecView("tag1",R.drawable.list,"列表"));
+        Intent i=getIntent();
+        int a=i.getIntExtra("status",0);
+        if(a==0){
+            TabHost.TabSpec tabSpec1 = fragmentTabHost.newTabSpec("tag1")
+                    .setIndicator(getTabSpecView("tag1",R.drawable.list,"列表"));
 
-        fragmentTabHost.addTab(tabSpec1,
-                List.class,
-                null);
+            fragmentTabHost.addTab(tabSpec1,
+                    List.class,
+                    null);
+        }else if(a==1){
+            TabHost.TabSpec tabSpec1 = fragmentTabHost.newTabSpec("tag1")
+                    .setIndicator(getTabSpecView("tag1",R.drawable.list,"列表"));
+
+            fragmentTabHost.addTab(tabSpec1,
+                    List1.class,
+                    null);
+        }
+
 
         TabHost.TabSpec tabSpec2 = fragmentTabHost.newTabSpec("tag2")
                 .setIndicator(getTabSpecView("tag2",R.drawable.message,"消息"));

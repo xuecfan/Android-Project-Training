@@ -19,27 +19,40 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.chaofanteaching.BottomPopupOption;
 import com.example.chaofanteaching.R;
-import com.example.chaofanteaching.about.About;
+import com.example.chaofanteaching.UpLoadFile;
 import com.example.chaofanteaching.about.Student_Authentication;
 import com.example.chaofanteaching.myself.MyData;
 import com.example.chaofanteaching.myself.Setting;
 import com.example.chaofanteaching.sign.LoginActivity;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
+import okhttp3.Call;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 
 public class My extends Fragment {
 
+    private OkHttpClient okHttpClient;
     private static final int PHOTO_REQUEST_CUT =3 ;
     private static String path = "/storage/emulated/0/";// sd路径
     protected static Uri uritempFile;
@@ -51,14 +64,17 @@ public class My extends Fragment {
     private LinearLayout send;
     private ImageView image;
     private Bitmap bitmap;
+    private SharedPreferences pre;
+    private String a="";
 
     private static final int PHOTO_REQUEST_GALLERY = 2;// 从相册中选择
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view=inflater.inflate(R.layout.my,container,false);
-        SharedPreferences pre = getContext().getSharedPreferences("login", Context.MODE_PRIVATE);
-        final String a = pre.getString("loginOrNot", "");
+
+         pre= getContext().getSharedPreferences("login", Context.MODE_PRIVATE);
+         a = pre.getString("loginOrNot", "");
 
         customer_service=view.findViewById(R.id.customer_service);
         send=view.findViewById(R.id.send);
@@ -67,33 +83,68 @@ public class My extends Fragment {
         setting=view.findViewById(R.id.setting);
         image=view.findViewById(R.id.image);
         if(a.equals("")){
-            image.setImageDrawable(getContext().getResources().getDrawable(R.drawable.a));
-        }else
-            {
-        initView();}
+            image.setImageDrawable(getContext().getResources().getDrawable(R.drawable.boy));
+        }else{initView();}
 
+        customer_service.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (a.equals("")) {
+                    Toast.makeText(getContext(),"请您先登录", Toast.LENGTH_SHORT).show();
+                    Intent i=new Intent(getContext(), LoginActivity.class);
+                    startActivity(i);
+                }else{
+                    Toast.makeText(getContext(),"暂未开放，敬请期待", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (a.equals("")) {
+                    Toast.makeText(getContext(),"请您先登录", Toast.LENGTH_SHORT).show();
+                    Intent i=new Intent(getContext(), LoginActivity.class);
+                    startActivity(i);
+                }else{}
+            }
+        });
         myself.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (a.equals("")) {
+                    Toast.makeText(getContext(),"请您先登录", Toast.LENGTH_SHORT).show();
+                    Intent i=new Intent(getContext(), LoginActivity.class);
+                    startActivity(i);
+                }else{
                 Intent i=new Intent();
                 i.setClass(getContext(), MyData.class);
-                startActivity(i);
+                startActivity(i);}
             }
         });
         student.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (a.equals("")) {
+                    Toast.makeText(getContext(), "请您先登录", Toast.LENGTH_SHORT).show();
+                    Intent i=new Intent(getContext(), LoginActivity.class);
+                    startActivity(i);
+                }else {
                 Intent i=new Intent();
                 i.setClass(getContext(), Student_Authentication.class);
-                startActivity(i);
+                startActivity(i);}
             }
         });
         setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (a.equals("")) {
+                    Toast.makeText(getContext(),"请您先登录", Toast.LENGTH_SHORT).show();
+                    Intent i=new Intent(getContext(), LoginActivity.class);
+                    startActivity(i);
+                }else{
                 Intent i=new Intent();
                 i.setClass(getContext(),Setting.class);
-                startActivity(i);
+                startActivity(i);}
             }
         });
 
@@ -101,10 +152,10 @@ public class My extends Fragment {
         image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Log.e("111",a);
                 if (a.equals("")) {
                     Toast.makeText(getContext(), "请您先登录", Toast.LENGTH_SHORT).show();
+                    Intent i=new Intent(getContext(), LoginActivity.class);
+                    startActivity(i);
                 } else {
                     bottomPopupOption = new BottomPopupOption(getActivity());
                     bottomPopupOption.setItemText("拍照", "相册");
@@ -141,7 +192,7 @@ public class My extends Fragment {
 
     private void initView() {
         //初始化控件
-        Bitmap bt = BitmapFactory.decodeFile(path + "head.png");//从Sd中找头像，转换成Bitmap
+        Bitmap bt = BitmapFactory.decodeFile(path + a+".png");//从Sd中找头像，转换成Bitmap
         if (bt != null) {
             @SuppressWarnings("deprecation")
             Drawable drawable = new BitmapDrawable(bt);//转换成drawable
@@ -249,12 +300,14 @@ public class My extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
         if(requestCode == 8888 ) {
             //获取系统摄像头拍照的结果
             bitmap = data.getParcelableExtra("data");
             image.setImageBitmap(bitmap);
-            uploadPic(bitmap);
+            //uploadPic(bitmap);
             setPicToView(bitmap);
+            //asyncupop();
         }
         if (requestCode == PHOTO_REQUEST_GALLERY) {
         // 从相册返回的数据
@@ -269,20 +322,25 @@ public class My extends Fragment {
                     Bitmap bitmap = null;
                     try {
                         bitmap = BitmapFactory.decodeStream(getActivity().getContentResolver().openInputStream(uritempFile));
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
+
                     //Bitmap bitmap = data.getParcelableExtra("data");
                     image.setImageBitmap(bitmap);
-                    uploadPic(bitmap);
+                    //uploadPic(bitmap);
                     setPicToView(bitmap);
+                    //asyncupop();
+                    //uploadImage();
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         super.onActivityResult(requestCode, resultCode, data);
     }
 
 
-    private void setPicToView(Bitmap mBitmap) {
+    private void setPicToView(Bitmap mBitmap){
         String sdStatus = Environment.getExternalStorageState();
         if (!sdStatus.equals(Environment.MEDIA_MOUNTED)) { // 检测sd是否可用
             return;
@@ -290,7 +348,8 @@ public class My extends Fragment {
         FileOutputStream b = null;
         File file = new File(path);
         file.mkdirs();// 创建文件夹
-        String fileName = path + "head.png";// 图片名字
+        String fileName = path + a+".png";// 图片名字
+        Log.e("11",fileName);
         try {
             b = new FileOutputStream(fileName);
             mBitmap.compress(Bitmap.CompressFormat.JPEG, 100, b);// 把数据写入文件
@@ -309,23 +368,71 @@ public class My extends Fragment {
 
 
 
-    private void uploadPic(Bitmap bitmap) {
-        // 上传至服务器
-        // ... 可以在这里把Bitmap转换成file，然后得到file的url，做文件上传操作
-        // 注意这里得到的图片已经是圆形图片了
-        // bitmap是没有做个圆形处理的，但已经被裁剪了
+//    private void uploadPic(Bitmap bitmap) {
+//        // 上传至服务器
+//        // ... 可以在这里把Bitmap转换成file，然后得到file的url，做文件上传操作
+//        // 注意这里得到的图片已经是圆形图片了
+//        // bitmap是没有做个圆形处理的，但已经被裁剪了
+//
+//
+//        String imagePath = savePhoto(bitmap, Environment
+//                .getExternalStorageDirectory().getAbsolutePath(), String
+//                .valueOf(System.currentTimeMillis()));
+//        Log.e("imagePath", imagePath+"");
+//        if(imagePath != null){
+//            // 拿着imagePath上传了
+//            // ...
+//        }
+//    }
+
+    public String uploadImage() throws IOException, JSONException {
+        String host="10.7.89.221";
+        String imagePath=path + a+".png";
+        OkHttpClient okHttpClient = new OkHttpClient();
+        Log.d("imagePath", imagePath);
+        File file = new File(imagePath);
+        RequestBody image = RequestBody.create(MediaType.parse("image/png"), file);
+        RequestBody requestBody = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("file", imagePath, image)
+                .build();
+        Request request = new Request.Builder()
+                .url("http://"+host+":8080/androidhttp/upfile")
+                .post(requestBody)
+                .build();
+        Response response = okHttpClient.newCall(request).execute();
+        JSONObject jsonObject = new JSONObject(response.body().string());
+        return jsonObject.optString("image");}
 
 
-        String imagePath = savePhoto(bitmap, Environment
-                .getExternalStorageDirectory().getAbsolutePath(), String
-                .valueOf(System.currentTimeMillis()));
-        Log.e("imagePath", imagePath+"");
-        if(imagePath != null){
-            // 拿着imagePath上传了
-            // ...
-        }
+
+    private void asyncupop() {
+        String host="10.7.89.221";
+        String filepath=path + a+".png";
+        //创建上传异步任务类的对象
+        UpLoadFile task=new UpLoadFile(getContext(),filepath);
+        //开始执行异步任务
+        task.execute("http://"+host+":8080/androidhttp/upfile");
     }
 
+    private void downimg() throws IOException {
+
+        String host="10.7.89.221";
+        Request request=new Request.Builder().url("http://"+host+":8080/androidhttp/downimg").build();
+        Call call=okHttpClient.newCall(request);
+        Response response=call.execute();
+        InputStream in=response.body().byteStream();
+        String fileName = path + a+".png";// 图片名字
+        OutputStream out=new FileOutputStream(fileName);
+        byte[] bytes=new byte[1024];
+        int n=-1;
+        while ((n=in.read(bytes))!=-1){
+            out.write(bytes,0,n);
+            out.flush();
+        }
+        in.close();
+        out.close();
+    }
 
     public static String savePhoto(Bitmap photoBitmap, String path,
                                    String photoName) {
