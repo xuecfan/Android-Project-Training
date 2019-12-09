@@ -66,9 +66,6 @@ public class ChooseIdentityActivity extends Activity implements View.OnTouchList
 
     @Override
     public void onClick(View v) {
-
-
-
     }
 
     //设置按钮大小、透明度变化
