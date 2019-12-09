@@ -75,7 +75,7 @@ public class ChooseIdentityActivity extends Activity implements View.OnTouchList
         button.setAlpha(alpha);
     }
     //将按钮放大变透明，并跳转
-    public void changeStatusAndIntent(Button button) {
+    public void changeStatusAndIntent(final Button button) {
         ObjectAnimator animator = ObjectAnimator
                 .ofFloat(button, "scaleX",
                         1f, 10f);
@@ -98,6 +98,11 @@ public class ChooseIdentityActivity extends Activity implements View.OnTouchList
             @Override
             public void run() {
                 Intent intent = new Intent(ChooseIdentityActivity.this, All.class);
+                if(button == mTestBtn){
+                    intent.putExtra("status",0);
+                }else if (button == mTestBtn2){
+                    intent.putExtra("status",1);
+                }
                 startActivity(intent);
                 overridePendingTransition(0, 0);
             }
