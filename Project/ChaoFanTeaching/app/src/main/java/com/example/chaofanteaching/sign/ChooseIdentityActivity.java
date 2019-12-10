@@ -34,13 +34,13 @@ public class ChooseIdentityActivity extends Activity implements View.OnTouchList
         mTestBtn2.setOnTouchListener(this);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        //设置恢复原大小
-        changeStatus(mTestBtn,1,1f);
-        changeStatus(mTestBtn2,1,1f);
-    }
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        //设置恢复原大小
+//        changeStatus(mTestBtn,1,1f);
+//        changeStatus(mTestBtn2,1,1f);
+//    }
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
@@ -48,16 +48,18 @@ public class ChooseIdentityActivity extends Activity implements View.OnTouchList
         switch (event.getAction()){
             case MotionEvent.ACTION_DOWN:
                 if (v.getId() == R.id.btn_test){
-                    changeStatus(mTestBtn,0.95,1f);
+                    changeStatus(mTestBtn,0.8,1f);
                 }else if (v.getId() == R.id.btn_test2){
-                    changeStatus(mTestBtn2,0.95,1f);
+                    changeStatus(mTestBtn2,0.8,1f);
                 }
                 break;
             case MotionEvent.ACTION_UP:
                 if(v.getId() == R.id.btn_test){
-                    changeStatusAndIntent(mTestBtn);
+                    changeStatus(mTestBtn,1,1f);
+                    BtnToIntent(mTestBtn);
                 }else if (v.getId() == R.id.btn_test2){
-                    changeStatusAndIntent(mTestBtn2);
+                    changeStatus(mTestBtn2,1,1f);
+                    BtnToIntent(mTestBtn2);
                 }
                 break;
         }
@@ -75,38 +77,46 @@ public class ChooseIdentityActivity extends Activity implements View.OnTouchList
         button.setAlpha(alpha);
     }
     //将按钮放大变透明，并跳转
-    public void changeStatusAndIntent(final Button button) {
-        ObjectAnimator animator = ObjectAnimator
-                .ofFloat(button, "scaleX",
-                        1f, 10f);
-        animator.setDuration(1000);
-        animator.start();
-        ObjectAnimator animator1 = ObjectAnimator
-                .ofFloat(button, "scaleY",
-                        1f, 10f);
-        animator1.setDuration(1000);
-        animator1.start();
-        ObjectAnimator animator2 = ObjectAnimator
-                .ofFloat(button, "alpha",
-                        1f, 0f);
-        animator2.setDuration(1000);
-        animator2.start();
+    public void BtnToIntent(final Button button) {
+        Intent intent = new Intent(ChooseIdentityActivity.this, All.class);
+        if(button == mTestBtn){
+            intent.putExtra("status",0);
+        }else if (button == mTestBtn2){
+            intent.putExtra("status",1);
+        }
+        startActivity(intent);
+//        ObjectAnimator animator = ObjectAnimator
+//                .ofFloat(button, "scaleX",
+//                        1f, 10f);
+//        animator.setDuration(1000);
+//        animator.start();
+//        ObjectAnimator animator1 = ObjectAnimator
+//                .ofFloat(button, "scaleY",
+//                        1f, 10f);
+//        animator1.setDuration(1000);
+//        animator1.start();
+//        ObjectAnimator animator2 = ObjectAnimator
+//                .ofFloat(button, "alpha",
+//                        1f, 0f);
+//        animator2.setDuration(1000);
+//        animator2.start();
 
 
-        Timer timer = new Timer();
-        TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-                Intent intent = new Intent(ChooseIdentityActivity.this, All.class);
-                if(button == mTestBtn){
-                    intent.putExtra("status",0);
-                }else if (button == mTestBtn2){
-                    intent.putExtra("status",1);
-                }
-                startActivity(intent);
-                overridePendingTransition(0, 0);
-            }
-        };
-        timer.schedule(task, 600);
+//        //延时执行任务
+//        Timer timer = new Timer();
+//        TimerTask task = new TimerTask() {
+//            @Override
+//            public void run() {
+//                Intent intent = new Intent(ChooseIdentityActivity.this, All.class);
+//                if(button == mTestBtn){
+//                    intent.putExtra("status",0);
+//                }else if (button == mTestBtn2){
+//                    intent.putExtra("status",1);
+//                }
+//                startActivity(intent);
+//                overridePendingTransition(0, 0);
+//            }
+//        };
+//        timer.schedule(task, 600);
     }
 }

@@ -1,6 +1,8 @@
 package com.example.chaofanteaching.fragment;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -14,6 +16,8 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
+
 import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.InfoList.AddInfoActivity;
 import com.example.chaofanteaching.InfoList.Info;
@@ -21,6 +25,8 @@ import com.example.chaofanteaching.InfoList.InfoAdapter;
 import com.example.chaofanteaching.InfoList.InfoDetailActivity;
 import com.example.chaofanteaching.R;
 import com.example.chaofanteaching.StreamChangeStrUtils;
+import com.example.chaofanteaching.sign.LoginActivity;
+
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
@@ -32,6 +38,8 @@ public class List extends Fragment {
     private ListView infolist;
     private InfoAdapter infoAdapter;
     private EditText editText;
+    private SharedPreferences pre;
+    private String a="";
 
     @Nullable
     @Override
@@ -43,22 +51,36 @@ public class List extends Fragment {
         infolist.setAdapter(infoAdapter);
         dbKey("");
         infoAdapter.notifyDataSetChanged();
+        pre= getContext().getSharedPreferences("login", Context.MODE_PRIVATE);
+        a = pre.getString("loginOrNot", "");
         infolist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent();
-                intent.putExtra("name", infoList.get(position).getName());
-                intent.setClass(getActivity(), InfoDetailActivity.class);
-                startActivity(intent);
+                if (a.equals("")) {
+                    Toast.makeText(getContext(),"请您先登录", Toast.LENGTH_SHORT).show();
+                    Intent i=new Intent(getContext(), LoginActivity.class);
+                    startActivity(i);
+                }else{
+                    Intent intent = new Intent();
+                    intent.putExtra("name", infoList.get(position).getName());
+                    intent.setClass(getActivity(), InfoDetailActivity.class);
+                    startActivity(intent);
+                }
             }
         });
         Button btnadd = view.findViewById(R.id.add);
         btnadd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(getActivity(), AddInfoActivity.class);
-                startActivity(intent);
+                if (a.equals("")) {
+                    Toast.makeText(getContext(),"请您先登录", Toast.LENGTH_SHORT).show();
+                    Intent i=new Intent(getContext(), LoginActivity.class);
+                    startActivity(i);
+                }else{
+                    Intent intent = new Intent();
+                    intent.setClass(getActivity(), AddInfoActivity.class);
+                    startActivity(intent);
+                }
             }
         });
         Button btnserach=view.findViewById(R.id.search);
@@ -75,6 +97,7 @@ public class List extends Fragment {
     }
 
     private void dbKey(final String key) {
+        infoList.clear();
         handler = new Handler() {
             @Override
             public void handleMessage(android.os.Message msg) {
