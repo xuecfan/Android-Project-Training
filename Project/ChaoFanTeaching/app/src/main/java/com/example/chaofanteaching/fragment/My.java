@@ -11,6 +11,8 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -54,6 +56,7 @@ import okhttp3.Response;
 
 public class My extends Fragment {
 
+    private OkHttpClient okHttpClient;
     private static final int PHOTO_REQUEST_CUT =3 ;
     private static String path = "/storage/emulated/0/";// sd路径
     protected static Uri uritempFile;
@@ -67,15 +70,24 @@ public class My extends Fragment {
     private Bitmap bitmap;
     private SharedPreferences pre;
     private String a="";
-
+    private final String host="192.168.137.1";
     private static final int PHOTO_REQUEST_GALLERY = 2;// 从相册中选择
+    private Handler handler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what){
+                case  1:
+                    Toast.makeText(getContext(),"文件下载成功",Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view=inflater.inflate(R.layout.my,container,false);
-
-         pre= getContext().getSharedPreferences("login", Context.MODE_PRIVATE);
-         a = pre.getString("loginOrNot", "");
+        okHttpClient=new OkHttpClient();
+        pre= getContext().getSharedPreferences("login", Context.MODE_PRIVATE);
+        a = pre.getString("loginOrNot", "");
 
         customer_service=view.findViewById(R.id.customer_service);
         send=view.findViewById(R.id.send);
@@ -171,8 +183,6 @@ public class My extends Fragment {
                                             new Intent(
                                                     MediaStore.ACTION_IMAGE_CAPTURE);
                                     startActivityForResult(cameraIntent, 8888);
-
-
                                     break;
                                 case 1:
                                     Intent intent = new Intent(Intent.ACTION_PICK);
@@ -190,6 +200,38 @@ public class My extends Fragment {
         return view;
     }
 
+    private void asyncdownop() {
+        new Thread(){
+            @Override
+            public void run() {
+                try {
+                    downimg();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                android.os.Message msg= Message.obtain();
+                msg.what=1;
+                handler.sendMessage(msg);
+            }
+        }.start();
+    }
+
+    private void downimg() throws IOException {
+        String fileName = path + a+".png";// 图片名字
+        Request request=new Request.Builder().url("http://"+host+":8080/androidhttp/downimg?name="+a).build();
+        Call call=okHttpClient.newCall(request);
+        Response response=call.execute();
+        InputStream in=response.body().byteStream();
+        FileOutputStream out=new FileOutputStream(fileName);
+        byte[] bytes=new byte[1024];
+        int n=-1;
+        while ((n=in.read(bytes))!=-1){
+            out.write(bytes,0,n);
+            out.flush();
+        }
+        in.close();
+        out.close();
+    }
 
     private void initView() {
         //初始化控件
@@ -203,6 +245,7 @@ public class My extends Fragment {
              *	如果SD里面没有则需要从服务器取头像，取回来的头像再保存在SD中
              *
              */
+            asyncdownop();
         }
     }
 
@@ -327,86 +370,4 @@ public class My extends Fragment {
         //开始执行异步任务
         task.execute("http://"+host+":8080/androidhttp/upfile?name="+a);
     }
-//    private void asynchttpform() {
-//        Log.e("yxt",a);
-//        OkHttpClient okHttpClient=new OkHttpClient();
-//        String host="192.168.137.1";
-//        FormBody formBody=new FormBody.Builder().add("name",a).build();
-//        Request request=new Request.Builder().url("http://"+host+":8080/androidhttp/upfile").post(formBody).build();
-//        Call call=okHttpClient.newCall(request);
-//        call.enqueue(new Callback() {
-//            @Override
-//            public void onFailure(Call call, IOException e) {
-//                Log.e("yxt","失败");
-//            }
-//
-//            @Override
-//            public void onResponse(Call call, Response response) throws IOException {
-//                Log.i("photo",response.body().string());
-//            }
-//        });
-//
-//    }
-
-//    private void downimg() throws IOException {
-//
-//        String host="10.7.89.221";
-//        Request request=new Request.Builder().url("http://"+host+":8080/androidhttp/downimg").build();
-//        Call call=okHttpClient.newCall(request);
-//        Response response=call.execute();
-//        InputStream in=response.body().byteStream();
-//        String fileName = path + a+".png";// 图片名字
-//        OutputStream out=new FileOutputStream(fileName);
-//        byte[] bytes=new byte[1024];
-//        int n=-1;
-//        while ((n=in.read(bytes))!=-1){
-//            out.write(bytes,0,n);
-//            out.flush();
-//        }
-//        in.close();
-//        out.close();
-//    }
-
-//    public static String savePhoto(Bitmap photoBitmap, String path,
-//                                   String photoName) {
-//        String localPath = null;
-//        if (android.os.Environment.getExternalStorageState().equals(
-//                android.os.Environment.MEDIA_MOUNTED)) {
-//            File dir = new File(path);
-//            if (!dir.exists()) {
-//                dir.mkdirs();
-//            }
-//
-//            File photoFile = new File(path, photoName + ".png");
-//            FileOutputStream fileOutputStream = null;
-//            try {
-//                fileOutputStream = new FileOutputStream(photoFile);
-//                if (photoBitmap != null) {
-//                    if (photoBitmap.compress(Bitmap.CompressFormat.PNG, 100,
-//                            fileOutputStream)) { // 转换完成
-//                        localPath = photoFile.getPath();
-//                        fileOutputStream.flush();
-//                    }
-//                }
-//            } catch (FileNotFoundException e) {
-//                photoFile.delete();
-//                localPath = null;
-//                e.printStackTrace();
-//            } catch (IOException e) {
-//                photoFile.delete();
-//                localPath = null;
-//                e.printStackTrace();
-//            } finally {
-//                try {
-//                    if (fileOutputStream != null) {
-//                        fileOutputStream.close();
-//                        fileOutputStream = null;
-//                    }
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }
-//        return localPath;
-//    }
 }
