@@ -97,7 +97,7 @@ public class LogonActivity extends AppCompatActivity {
             public void onClick(View v) {
                 SharedPreferences sharedPreferences = getSharedPreferences("login", Context.MODE_PRIVATE);
                 String loginOrNot = sharedPreferences.getString("loginOrNot", null);//(key,若无数据需要赋的值)
-                Log.e("xcf",loginOrNot);
+                //Log.e("xcf",loginOrNot);
 
                 String user=myId.getText().toString();
                 String pasd=myPW.getText().toString();
