@@ -42,6 +42,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
@@ -202,8 +204,6 @@ public class My extends Fragment {
              *
              */
         }
-
-
     }
 
     /*
@@ -232,70 +232,6 @@ public class My extends Fragment {
         startActivityForResult(intent, PHOTO_REQUEST_CUT);
     }
 
-
-
-
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if(requestCode == 8888 ) {
-//            //获取系统摄像头拍照的结果
-//            bitmap = data.getParcelableExtra("data");
-//            image.setImageBitmap(bitmap);
-//            uploadPic(bitmap);
-//            setPicToView(bitmap);
-//        }
-//        if (requestCode == PHOTO_REQUEST_GALLERY) {
-//            try {
-//                bitmap= MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData());
-//                //setPicToView(bitmap);
-//                image.setImageBitmap(bitmap);
-//    uploadPic(bitmap);
-//    setPicToView(bitmap);
-//} catch (IOException e) {
-//        e.printStackTrace();
-//        }
-////            if (data != null) {
-////
-////                Bundle extras = data.getExtras();
-////                head = extras.getParcelable("data");
-////                if (head != null) {
-////                    /**
-////                     * 上传服务器代码
-////                     */
-////
-////                    // head = toRoundBitmap1(head);//调用圆角处理方法
-////                    setPicToView(head);// 保存在SD卡中
-////                    image.setImageBitmap(head);// 用ImageView显示出来
-////                    if (head != null && head.isRecycled()) {
-////                        head.recycle();
-////                    }
-////
-////                }
-////            }
-//        }
-//        // 从相册返回的数据
-////            if (data != null) {
-////                // 得到图片的全路径
-////                Uri uri = data.getData();
-////                crop(uri);
-////            }
-////        } else if (requestCode == PHOTO_REQUEST_CUT) {
-////            // 从剪切图片返回的数据
-////            if (data != null) {
-////                Bitmap bitmap = data.getParcelableExtra("data");
-////                image.setImageBitmap(bitmap);
-////            }
-////            try {
-////                // 将临时文件删除
-////                tempFile.delete();
-////            } catch (Exception e) {
-////                e.printStackTrace();
-////            }
-////
-////        }
-//        super.onActivityResult(requestCode, resultCode, data);
-//        }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -321,13 +257,11 @@ public class My extends Fragment {
                     Bitmap bitmap = null;
                     try {
                         bitmap = BitmapFactory.decodeStream(getActivity().getContentResolver().openInputStream(uritempFile));
-
                     //Bitmap bitmap = data.getParcelableExtra("data");
                     image.setImageBitmap(bitmap);
                     //uploadPic(bitmap);
                     setPicToView(bitmap);
                     asyncupop();
-                    //uploadImage();
                     }  catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -364,42 +298,24 @@ public class My extends Fragment {
     }
 
 
-
-//    private void uploadPic(Bitmap bitmap) {
-//        // 上传至服务器
-//        // ... 可以在这里把Bitmap转换成file，然后得到file的url，做文件上传操作
-//        // 注意这里得到的图片已经是圆形图片了
-//        // bitmap是没有做个圆形处理的，但已经被裁剪了
-//
-//
-//        String imagePath = savePhoto(bitmap, Environment
-//                .getExternalStorageDirectory().getAbsolutePath(), String
-//                .valueOf(System.currentTimeMillis()));
-//        Log.e("imagePath", imagePath+"");
-//        if(imagePath != null){
-//            // 拿着imagePath上传了
-//            // ...
-//        }
-//    }
-
-    public String uploadImage() throws IOException, JSONException {
-        String host="10.7.89.221";
-        String imagePath=path + a+".png";
-        OkHttpClient okHttpClient = new OkHttpClient();
-        Log.d("imagePath", imagePath);
-        File file = new File(imagePath);
-        RequestBody image = RequestBody.create(MediaType.parse("image/png"), file);
-        RequestBody requestBody = new MultipartBody.Builder()
-                .setType(MultipartBody.FORM)
-                .addFormDataPart("file", imagePath, image)
-                .build();
-        Request request = new Request.Builder()
-                .url("http://"+host+":8080/androidhttp/upfile")
-                .post(requestBody)
-                .build();
-        Response response = okHttpClient.newCall(request).execute();
-        JSONObject jsonObject = new JSONObject(response.body().string());
-        return jsonObject.optString("image");}
+//    public String uploadImage() throws IOException, JSONException {
+//        String host="10.7.89.221";
+//        String imagePath=path + a+".png";
+//        OkHttpClient okHttpClient = new OkHttpClient();
+//        Log.d("imagePath", imagePath);
+//        File file = new File(imagePath);
+//        RequestBody image = RequestBody.create(MediaType.parse("image/png"), file);
+//        RequestBody requestBody = new MultipartBody.Builder()
+//                .setType(MultipartBody.FORM)
+//                .addFormDataPart("file", imagePath, image)
+//                .build();
+//        Request request = new Request.Builder()
+//                .url("http://"+host+":8080/androidhttp/upfile")
+//                .post(requestBody)
+//                .build();
+//        Response response = okHttpClient.newCall(request).execute();
+//        JSONObject jsonObject = new JSONObject(response.body().string());
+//        return jsonObject.optString("image");}
 
 
 
@@ -409,8 +325,28 @@ public class My extends Fragment {
         //创建上传异步任务类的对象
         UpLoadFile task=new UpLoadFile(getContext(),filepath);
         //开始执行异步任务
-        task.execute("http://"+host+":8080/androidhttp/upfile");
+        task.execute("http://"+host+":8080/androidhttp/upfile?name="+a);
     }
+//    private void asynchttpform() {
+//        Log.e("yxt",a);
+//        OkHttpClient okHttpClient=new OkHttpClient();
+//        String host="192.168.137.1";
+//        FormBody formBody=new FormBody.Builder().add("name",a).build();
+//        Request request=new Request.Builder().url("http://"+host+":8080/androidhttp/upfile").post(formBody).build();
+//        Call call=okHttpClient.newCall(request);
+//        call.enqueue(new Callback() {
+//            @Override
+//            public void onFailure(Call call, IOException e) {
+//                Log.e("yxt","失败");
+//            }
+//
+//            @Override
+//            public void onResponse(Call call, Response response) throws IOException {
+//                Log.i("photo",response.body().string());
+//            }
+//        });
+//
+//    }
 
 //    private void downimg() throws IOException {
 //
