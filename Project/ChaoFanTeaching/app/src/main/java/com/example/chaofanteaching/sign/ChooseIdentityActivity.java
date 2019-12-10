@@ -9,6 +9,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.chaofanteaching.ActivityCollector;
 import com.example.chaofanteaching.All;
 import com.example.chaofanteaching.R;
 
@@ -24,6 +25,9 @@ public class ChooseIdentityActivity extends Activity implements View.OnTouchList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_identity);
 
+        //将此页添加到Activity控制器列表中
+        ActivityCollector.addActivity(this);
+
         mTestBtn = findViewById(R.id.btn_test);
         mTestBtn2 = findViewById(R.id.btn_test2);
 
@@ -32,6 +36,12 @@ public class ChooseIdentityActivity extends Activity implements View.OnTouchList
 
         mTestBtn2.setOnClickListener(this);
         mTestBtn2.setOnTouchListener(this);
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        ActivityCollector.removeActivity(this);
     }
 
 //    @Override
@@ -85,7 +95,7 @@ public class ChooseIdentityActivity extends Activity implements View.OnTouchList
             intent.putExtra("status",1);
         }
         startActivity(intent);
-        finish();
+        ActivityCollector.finishAll();
 //        ObjectAnimator animator = ObjectAnimator
 //                .ofFloat(button, "scaleX",
 //                        1f, 10f);

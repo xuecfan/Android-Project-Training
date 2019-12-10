@@ -2,15 +2,18 @@ package com.example.chaofanteaching;
 
 import android.content.Intent;
 import android.os.Build;
+import android.os.Handler;
 import android.support.v4.app.FragmentTabHost;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.chaofanteaching.fragment.List;
 import com.example.chaofanteaching.fragment.List1;
@@ -22,6 +25,7 @@ import java.util.Map;
 
 public class All extends AppCompatActivity {
 
+    private static int isExit = 0;
     private Map<String, ImageView> imageViewMap = new HashMap<>();
     private Map<String, TextView> textViewMap = new HashMap<>();
 
@@ -131,4 +135,37 @@ public class All extends AppCompatActivity {
         return view;
     }
 
+
+    //实现按两次后退才退出
+    Handler handler=new Handler(){
+        @Override
+        public void handleMessage(android.os.Message msg){
+            super.handleMessage(msg);
+            isExit--;
+        }
+    };
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event){
+        if (keyCode == KeyEvent.KEYCODE_BACK){
+            isExit++;
+            exit();
+            return false;
+        }
+        return super.onKeyDown(keyCode,event);
+    }
+
+    private void exit(){
+        if (isExit < 2){
+            Toast.makeText(getApplicationContext(),R.string.Exit,Toast.LENGTH_SHORT).show();
+
+            //利用handler延迟发送更改状态信息
+            handler.sendEmptyMessageDelayed(0,2000);
+        }else{
+            //在程序退出之前重置isExit,使下次打开时isExit还为0
+            handler.sendEmptyMessage(0);
+
+            super.onBackPressed();
+        }
+    }
 }
