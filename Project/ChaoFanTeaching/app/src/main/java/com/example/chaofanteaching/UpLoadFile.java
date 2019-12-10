@@ -31,9 +31,6 @@ public class UpLoadFile extends AsyncTask<String,Void,String> {
         MediaType mediaType=MediaType.parse("image/png");
         //创建requbody对象
         File file=new File(filePath);
-//        if(file.exists()){
-//            Log.i("lww","文件不存在");
-//        }
         RequestBody requestBody=RequestBody.create(file,mediaType);
 
         //创建请求对象

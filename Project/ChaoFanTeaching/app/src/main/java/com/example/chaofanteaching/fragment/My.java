@@ -52,7 +52,6 @@ import okhttp3.Response;
 
 public class My extends Fragment {
 
-    private OkHttpClient okHttpClient;
     private static final int PHOTO_REQUEST_CUT =3 ;
     private static String path = "/storage/emulated/0/";// sd路径
     protected static Uri uritempFile;
@@ -329,9 +328,7 @@ public class My extends Fragment {
                     setPicToView(bitmap);
                     asyncupop();
                     //uploadImage();
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
+                    }  catch (IOException e) {
                         e.printStackTrace();
                     }
                 }
@@ -407,7 +404,7 @@ public class My extends Fragment {
 
 
     private void asyncupop() {
-        String host="10.7.89.221";
+        String host="192.168.137.1";
         String filepath=path + a+".png";
         //创建上传异步任务类的对象
         UpLoadFile task=new UpLoadFile(getContext(),filepath);
