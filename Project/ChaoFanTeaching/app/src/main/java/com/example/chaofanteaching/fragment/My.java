@@ -307,7 +307,7 @@ public class My extends Fragment {
             image.setImageBitmap(bitmap);
             //uploadPic(bitmap);
             setPicToView(bitmap);
-            //asyncupop();
+            asyncupop();
         }
         if (requestCode == PHOTO_REQUEST_GALLERY) {
         // 从相册返回的数据
@@ -327,7 +327,7 @@ public class My extends Fragment {
                     image.setImageBitmap(bitmap);
                     //uploadPic(bitmap);
                     setPicToView(bitmap);
-                    //asyncupop();
+                    asyncupop();
                     //uploadImage();
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
@@ -415,65 +415,65 @@ public class My extends Fragment {
         task.execute("http://"+host+":8080/androidhttp/upfile");
     }
 
-    private void downimg() throws IOException {
+//    private void downimg() throws IOException {
+//
+//        String host="10.7.89.221";
+//        Request request=new Request.Builder().url("http://"+host+":8080/androidhttp/downimg").build();
+//        Call call=okHttpClient.newCall(request);
+//        Response response=call.execute();
+//        InputStream in=response.body().byteStream();
+//        String fileName = path + a+".png";// 图片名字
+//        OutputStream out=new FileOutputStream(fileName);
+//        byte[] bytes=new byte[1024];
+//        int n=-1;
+//        while ((n=in.read(bytes))!=-1){
+//            out.write(bytes,0,n);
+//            out.flush();
+//        }
+//        in.close();
+//        out.close();
+//    }
 
-        String host="10.7.89.221";
-        Request request=new Request.Builder().url("http://"+host+":8080/androidhttp/downimg").build();
-        Call call=okHttpClient.newCall(request);
-        Response response=call.execute();
-        InputStream in=response.body().byteStream();
-        String fileName = path + a+".png";// 图片名字
-        OutputStream out=new FileOutputStream(fileName);
-        byte[] bytes=new byte[1024];
-        int n=-1;
-        while ((n=in.read(bytes))!=-1){
-            out.write(bytes,0,n);
-            out.flush();
-        }
-        in.close();
-        out.close();
-    }
-
-    public static String savePhoto(Bitmap photoBitmap, String path,
-                                   String photoName) {
-        String localPath = null;
-        if (android.os.Environment.getExternalStorageState().equals(
-                android.os.Environment.MEDIA_MOUNTED)) {
-            File dir = new File(path);
-            if (!dir.exists()) {
-                dir.mkdirs();
-            }
-
-            File photoFile = new File(path, photoName + ".png");
-            FileOutputStream fileOutputStream = null;
-            try {
-                fileOutputStream = new FileOutputStream(photoFile);
-                if (photoBitmap != null) {
-                    if (photoBitmap.compress(Bitmap.CompressFormat.PNG, 100,
-                            fileOutputStream)) { // 转换完成
-                        localPath = photoFile.getPath();
-                        fileOutputStream.flush();
-                    }
-                }
-            } catch (FileNotFoundException e) {
-                photoFile.delete();
-                localPath = null;
-                e.printStackTrace();
-            } catch (IOException e) {
-                photoFile.delete();
-                localPath = null;
-                e.printStackTrace();
-            } finally {
-                try {
-                    if (fileOutputStream != null) {
-                        fileOutputStream.close();
-                        fileOutputStream = null;
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return localPath;
-    }
+//    public static String savePhoto(Bitmap photoBitmap, String path,
+//                                   String photoName) {
+//        String localPath = null;
+//        if (android.os.Environment.getExternalStorageState().equals(
+//                android.os.Environment.MEDIA_MOUNTED)) {
+//            File dir = new File(path);
+//            if (!dir.exists()) {
+//                dir.mkdirs();
+//            }
+//
+//            File photoFile = new File(path, photoName + ".png");
+//            FileOutputStream fileOutputStream = null;
+//            try {
+//                fileOutputStream = new FileOutputStream(photoFile);
+//                if (photoBitmap != null) {
+//                    if (photoBitmap.compress(Bitmap.CompressFormat.PNG, 100,
+//                            fileOutputStream)) { // 转换完成
+//                        localPath = photoFile.getPath();
+//                        fileOutputStream.flush();
+//                    }
+//                }
+//            } catch (FileNotFoundException e) {
+//                photoFile.delete();
+//                localPath = null;
+//                e.printStackTrace();
+//            } catch (IOException e) {
+//                photoFile.delete();
+//                localPath = null;
+//                e.printStackTrace();
+//            } finally {
+//                try {
+//                    if (fileOutputStream != null) {
+//                        fileOutputStream.close();
+//                        fileOutputStream = null;
+//                    }
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }
+//        return localPath;
+//    }
 }
