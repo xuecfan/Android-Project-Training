@@ -17,8 +17,7 @@
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_gravity="right|center_vertical"
-            android:layout_marginRight="3.0dip"
+            android:layout_marginTop="4dp"
             android:src="@drawable/left" />
         <TextView
             android:layout_width="wrap_content"
@@ -41,23 +40,21 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="8dp"
             android:src="@drawable/privacy"/>
 
         <TextView
             android:layout_width="200dp"
             android:layout_height="50dp"
-            android:layout_marginTop="3dp"
             android:text="隐私"
             android:textSize="30dp" />
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:src="@drawable/right"
             android:layout_marginLeft="50dp"
-            android:layout_gravity="right|center_vertical"
-            android:layout_marginRight="3.0dip"/>
+            android:layout_marginTop="7dp"/>
 
     </LinearLayout>
     <LinearLayout
@@ -72,23 +69,21 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="8dp"
             android:src="@drawable/currency"/>
 
         <TextView
             android:layout_width="200dp"
             android:layout_height="50dp"
-            android:layout_marginTop="3dp"
             android:text="通用"
             android:textSize="30dp" />
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:src="@drawable/right"
             android:layout_marginLeft="50dp"
-            android:layout_gravity="right|center_vertical"
-            android:layout_marginRight="3.0dip"/>
+            android:layout_marginTop="7dp"/>
 
     </LinearLayout>
     <LinearLayout
@@ -103,22 +98,20 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="8dp"
             android:src="@drawable/about"/>
 
         <TextView
             android:layout_width="200dp"
             android:layout_height="50dp"
-            android:layout_marginTop="3dp"
             android:text="关于软件"
             android:textSize="30dp" />
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:src="@drawable/right"
-            android:layout_gravity="right|center_vertical"
-            android:layout_marginRight="3.0dip"
+            android:layout_marginTop="7dp"
             android:layout_marginLeft="50dp"/>
 
     </LinearLayout>
@@ -134,23 +127,20 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="8dp"
             android:src="@drawable/help"/>
 
         <TextView
             android:layout_width="200dp"
             android:layout_height="50dp"
-            android:layout_marginTop="3dp"
             android:text="帮助与反馈"
             android:textSize="30dp" />
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:src="@drawable/right"
             android:layout_marginTop="7dp"
-            android:layout_gravity="right|center_vertical"
-            android:layout_marginRight="3.0dip"
             android:layout_marginLeft="50dp"/>
 
     </LinearLayout>
@@ -166,22 +156,20 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="8dp"
             android:src="@drawable/plug"/>
 
         <TextView
             android:layout_width="200dp"
             android:layout_height="50dp"
-            android:layout_marginTop="3dp"
             android:text="插件"
             android:textSize="30dp" />
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:src="@drawable/right"
-            android:layout_gravity="right|center_vertical"
-            android:layout_marginRight="3.0dip"
+            android:layout_marginTop="7dp"
             android:layout_marginLeft="50dp"/>
 
     </LinearLayout>
