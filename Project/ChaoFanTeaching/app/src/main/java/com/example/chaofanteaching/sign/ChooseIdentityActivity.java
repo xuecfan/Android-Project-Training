@@ -85,6 +85,7 @@ public class ChooseIdentityActivity extends Activity implements View.OnTouchList
             intent.putExtra("status",1);
         }
         startActivity(intent);
+        finish();
 //        ObjectAnimator animator = ObjectAnimator
 //                .ofFloat(button, "scaleX",
 //                        1f, 10f);
