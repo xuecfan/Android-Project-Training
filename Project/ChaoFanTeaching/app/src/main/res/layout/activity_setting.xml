@@ -7,170 +7,176 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="80dp"
+        android:layout_height="35dp"
         android:layout_marginRight="30dp"
         android:layout_marginTop="20dp"
+        android:layout_marginLeft="15dp"
         android:orientation="horizontal"
         android:id="@+id/fanhui">
 
-        <ImageView
-            android:layout_width="30dp"
+        <TextView
+            android:layout_width="20dp"
             android:layout_height="30dp"
-            android:layout_marginTop="4dp"
-            android:src="@drawable/left" />
+            android:layout_marginTop="-3dp"
+            android:text="＜"
+            android:textSize="17dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textStyle="bold"
             android:text="设置"
-            android:textSize="30dp" />
-
-
+            android:textSize="20dp" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:orientation="horizontal"
         android:id="@+id/privacy">
 
         <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="15dp"
             android:src="@drawable/privacy"/>
 
         <TextView
             android:layout_width="200dp"
             android:layout_height="50dp"
             android:text="隐私"
-            android:textSize="30dp" />
+            android:textStyle="bold"
+            android:textSize="20dp" />
 
-        <ImageView
+        <TextView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/right"
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="7dp"/>
+            android:text=">"
+            android:textSize="30dp"
+            android:layout_marginLeft="90dp"/>
 
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:orientation="horizontal"
         android:id="@+id/currency">
 
         <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="15dp"
             android:src="@drawable/currency"/>
 
         <TextView
             android:layout_width="200dp"
             android:layout_height="50dp"
             android:text="通用"
-            android:textSize="30dp" />
+            android:textStyle="bold"
+            android:textSize="20dp" />
 
-        <ImageView
+        <TextView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/right"
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="7dp"/>
+            android:text=">"
+            android:textSize="30dp"
+            android:layout_marginLeft="90dp"/>
 
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:orientation="horizontal"
         android:id="@+id/about">
 
         <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="15dp"
             android:src="@drawable/about"/>
 
         <TextView
             android:layout_width="200dp"
             android:layout_height="50dp"
             android:text="关于软件"
-            android:textSize="30dp" />
+            android:textStyle="bold"
+            android:textSize="20dp" />
 
-        <ImageView
+        <TextView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/right"
-            android:layout_marginTop="7dp"
-            android:layout_marginLeft="50dp"/>
+            android:text=">"
+            android:textSize="30dp"
+            android:layout_marginLeft="90dp"/>
 
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:orientation="horizontal"
         android:id="@+id/help">
 
         <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="15dp"
             android:src="@drawable/help"/>
 
         <TextView
             android:layout_width="200dp"
             android:layout_height="50dp"
             android:text="帮助与反馈"
-            android:textSize="30dp" />
+            android:textStyle="bold"
+            android:textSize="20dp" />
 
-        <ImageView
+        <TextView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/right"
-            android:layout_marginTop="7dp"
-            android:layout_marginLeft="50dp"/>
+            android:text=">"
+            android:textSize="30dp"
+            android:layout_marginLeft="90dp"/>
 
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:orientation="horizontal"
         android:id="@+id/plug">
 
         <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="15dp"
             android:src="@drawable/plug"/>
 
         <TextView
             android:layout_width="200dp"
             android:layout_height="50dp"
             android:text="插件"
-            android:textSize="30dp" />
+            android:textStyle="bold"
+            android:textSize="20dp" />
 
-        <ImageView
+        <TextView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/right"
-            android:layout_marginTop="7dp"
-            android:layout_marginLeft="50dp"/>
+            android:text=">"
+            android:textSize="30dp"
+            android:layout_marginLeft="90dp"/>
 
     </LinearLayout>
     <Button
@@ -181,7 +187,7 @@
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:text="切换账号"
-        android:textSize="30dp"
+        android:textSize="20dp"
         android:textColor="@color/white"
         android:id="@+id/btn1"/>
     <Button
@@ -192,7 +198,7 @@
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:text="退出"
-        android:textSize="30dp"
+        android:textSize="20dp"
         android:textColor="@color/white"
         android:id="@+id/btn2"/>
 </LinearLayout>

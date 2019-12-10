@@ -10,43 +10,51 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:orientation="horizontal"
         android:id="@+id/name">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:text="姓名:"
+            android:textStyle="bold"
             android:textSize="20dp"/>
         <TextView
             android:layout_width="260dp"
             android:layout_height="50dp"
             android:text=""
+            android:textStyle="bold"
             android:textSize="20dp"
             android:layout_marginLeft="20dp"
             android:paddingTop="8dp"
             android:id="@+id/name_content"/>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right|center_vertical"
-            android:layout_marginRight="3.0dip"
-            android:background="@drawable/right"/>
+        <TextView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:text=">"
+            android:textSize="30dp"/>
     </LinearLayout>
     <TableLayout
         android:id="@+id/tab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:orientation="horizontal">
         <TableRow>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="性别:"
+                android:textStyle="bold"
                 android:textSize="20dp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
+                android:textStyle="bold"
                 android:layout_marginLeft="25dp"
                 android:id="@+id/show"/>
             <RadioGroup
@@ -74,50 +82,56 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:id="@+id/phone">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:text="电话:"
+            android:textStyle="bold"
             android:textSize="20dp"/>
         <TextView
             android:layout_width="260dp"
             android:layout_height="50dp"
             android:text=""
+            android:textStyle="bold"
             android:textSize="20dp"
             android:layout_marginLeft="20dp"
             android:paddingTop="8dp"
             android:id="@+id/phone_content"/>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right|center_vertical"
-            android:layout_marginRight="3.0dip"
-            android:background="@drawable/right"/>
+        <TextView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:text=">"
+            android:textSize="30dp"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:id="@+id/address">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:text="地址:"
+            android:textStyle="bold"
             android:textSize="20dp"/>
         <TextView
             android:layout_width="260dp"
             android:layout_height="50dp"
             android:text=""
+            android:textStyle="bold"
             android:textSize="20dp"
             android:layout_marginLeft="20dp"
             android:id="@+id/address_content"
             android:paddingTop="8dp"/>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right|center_vertical"
-            android:layout_marginRight="3.0dip"
-            android:background="@drawable/right"/>
+        <TextView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:text=">"
+            android:textSize="30dp"/>
     </LinearLayout>
 </LinearLayout>
