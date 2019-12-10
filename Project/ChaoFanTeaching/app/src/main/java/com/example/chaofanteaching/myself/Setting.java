@@ -82,6 +82,7 @@ public class Setting extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 pre.edit().clear().commit();
+                finish();
                 Intent i=new Intent(Setting.this, LoginActivity.class);
                 startActivity(i);
             }
