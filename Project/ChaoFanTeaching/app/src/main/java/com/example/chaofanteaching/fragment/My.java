@@ -218,7 +218,7 @@ public class My extends Fragment {
 
     private void downimg() throws IOException {
         String fileName = path + a+".png";// 图片名字
-        Request request=new Request.Builder().url("http://"+host+":8080/androidhttp/downimg?name="+a).build();
+        Request request=new Request.Builder().url("http://175.24.102.160:8080/ChaoFanTeaching/DownImg?name="+a).build();
         Call call=okHttpClient.newCall(request);
         Response response=call.execute();
         InputStream in=response.body().byteStream();
@@ -300,9 +300,7 @@ public class My extends Fragment {
                     Bitmap bitmap = null;
                     try {
                         bitmap = BitmapFactory.decodeStream(getActivity().getContentResolver().openInputStream(uritempFile));
-                    //Bitmap bitmap = data.getParcelableExtra("data");
                     image.setImageBitmap(bitmap);
-                    //uploadPic(bitmap);
                     setPicToView(bitmap);
                     asyncupop();
                     }  catch (IOException e) {
@@ -339,35 +337,11 @@ public class My extends Fragment {
             }
         }
     }
-
-
-//    public String uploadImage() throws IOException, JSONException {
-//        String host="10.7.89.221";
-//        String imagePath=path + a+".png";
-//        OkHttpClient okHttpClient = new OkHttpClient();
-//        Log.d("imagePath", imagePath);
-//        File file = new File(imagePath);
-//        RequestBody image = RequestBody.create(MediaType.parse("image/png"), file);
-//        RequestBody requestBody = new MultipartBody.Builder()
-//                .setType(MultipartBody.FORM)
-//                .addFormDataPart("file", imagePath, image)
-//                .build();
-//        Request request = new Request.Builder()
-//                .url("http://"+host+":8080/androidhttp/upfile")
-//                .post(requestBody)
-//                .build();
-//        Response response = okHttpClient.newCall(request).execute();
-//        JSONObject jsonObject = new JSONObject(response.body().string());
-//        return jsonObject.optString("image");}
-
-
-
     private void asyncupop() {
-        String host="192.168.137.1";
         String filepath=path + a+".png";
         //创建上传异步任务类的对象
         UpLoadFile task=new UpLoadFile(getContext(),filepath);
         //开始执行异步任务
-        task.execute("http://"+host+":8080/androidhttp/upfile?name="+a);
+        task.execute("http://175.24.102.160:8080/ChaoFanTeaching/PhotoInsert?name="+a);
     }
 }
