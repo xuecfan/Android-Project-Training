@@ -98,9 +98,10 @@ public class LoginActivity extends AppCompatActivity {
                 switch (message.what){
                     case 1:
                         String string = message.obj.toString();
-                        String para = String.valueOf(1);
+                        String para0 = String.valueOf(0);
+                        String para1 = String.valueOf(1);
                         System.out.println("从服务器传来的servlet页面数字："+string);
-                        if (string.equals(para)){
+                        if (string.equals(para1)){
                             SharedPreferences sharedPreferences = getSharedPreferences("login", Context.MODE_PRIVATE);
                             SharedPreferences.Editor editor = sharedPreferences.edit();
                             editor.putString("loginOrNot", string);
@@ -111,7 +112,7 @@ public class LoginActivity extends AppCompatActivity {
                             intent.setClass( LoginActivity.this, All.class);
                             startActivity(intent);
                             finish();
-                        }else {
+                        }else if(string.equals(para0)){
                             Toast.makeText(getApplication(),"用户名或密码错误",Toast.LENGTH_LONG).show();
                             myPW.setText("");
                         }
