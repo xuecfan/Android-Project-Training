@@ -14,5 +14,12 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="title_activity_signup">SignupActivity</string>
+
+<!--    all页面toast-->
     <string name="Exit">再按一次返回键退出超凡家教</string>
+
+<!--    登陆页面toast-->
+    <string name="status">请选择您的身份</string>
+    <string name="IdAndPWIsEmpty">用户名和密码不能为空</string>
+    <string name="PWDiffer">两次密码不一致</string>
 </resources>

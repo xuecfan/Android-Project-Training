@@ -24,7 +24,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 
 public class LogonActivity extends AppCompatActivity {
-    private int status;//表示身份是家长还是老师，0为家长，1为老师
+    private int status = 2;//表示身份是家长还是老师，0为家长，1为老师，2为初值表示status还未修改过
     private EditText myId;
     private EditText myPW;
     private EditText myPWAgain;
@@ -103,12 +103,14 @@ public class LogonActivity extends AppCompatActivity {
                 String pasd=myPW.getText().toString();
                 String pasdAgain = myPWAgain.getText().toString();
                 if ((user.isEmpty()) || (pasd.isEmpty()) || (pasdAgain.isEmpty())){
-                    Toast.makeText(getApplication(),"用户名和密码不能为空",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplication(),R.string.IdAndPWIsEmpty,Toast.LENGTH_SHORT).show();
                 }else if (!pasd.equals(pasdAgain)){
-                    Toast.makeText(getApplication(),"两次密码不一致",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplication(),R.string.PWDiffer,Toast.LENGTH_SHORT).show();
+                }else if (status == 2){
+                    Toast.makeText(getApplication(),R.string.status,Toast.LENGTH_SHORT).show();
+
                 }else{
                     addUser(user,pasd,status);
-
                 }
 
             }
