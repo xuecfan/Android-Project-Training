@@ -4,11 +4,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.example.chaofanteaching.sign.ChooseIdentityActivity;
 
+
 public class WelcomeActivity extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,10 +17,8 @@ public class WelcomeActivity extends AppCompatActivity {
         //getSupportActionBar().hide();//隐藏标题栏
         setContentView(R.layout.welcome);
 
-        //判断是否登录
-        SharedPreferences preferences = getSharedPreferences("login",MODE_PRIVATE);
-        String string = preferences.getString("loginOrNot","");
-        Log.e("login",string);
+
+
         Thread myThread=new Thread(){//创建子线程
             @Override
             public void run() {
@@ -33,6 +32,28 @@ public class WelcomeActivity extends AppCompatActivity {
                 }
             }
         };
-        myThread.start();//启动线程
+        Thread myThread1=new Thread(){//创建子线程
+            @Override
+            public void run() {
+                try{
+                    sleep(2000);//使程序休眠2秒
+                    Intent it=new Intent(getApplicationContext(), All.class);//启动MainActivity
+                    startActivity(it);
+                    finish();//关闭当前活动
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        };
+
+
+        //判断是否登录
+        SharedPreferences sharedPreferences = getSharedPreferences("login",MODE_PRIVATE);
+        String value = sharedPreferences.getString("userName","");
+        if (value.equals("")){
+            myThread.start();//启动线程
+        }else{
+            myThread1.start();
+        }
     }
 }
