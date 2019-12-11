@@ -89,6 +89,7 @@ public class ChooseIdentityActivity extends Activity implements View.OnTouchList
     //将按钮放大变透明，并跳转
     public void BtnToIntent(final Button button) {
         Intent intent = new Intent(ChooseIdentityActivity.this, All.class);
+        intent.setAction("true");
         if(button == mTestBtn){
             intent.putExtra("status",0);
         }else if (button == mTestBtn2){
