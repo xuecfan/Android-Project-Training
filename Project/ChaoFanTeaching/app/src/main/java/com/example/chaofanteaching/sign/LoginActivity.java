@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.chaofanteaching.ActivityCollector;
 import com.example.chaofanteaching.All;
 import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.R;
@@ -37,6 +38,9 @@ public class LoginActivity extends AppCompatActivity {
         setStatusBar();//设置状态栏
 
         setContentView(R.layout.activity_login);
+
+        //将此页添加到Activity控制器列表中
+        ActivityCollector.addActivity(this);
 
         //获取id
         myId = findViewById(R.id.myId);
@@ -85,6 +89,12 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        ActivityCollector.removeActivity(this);
+    }
+
     //设置状态栏为白色，图标和字体为暗色
     protected void setStatusBar() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -115,11 +125,13 @@ public class LoginActivity extends AppCompatActivity {
                             editor1.apply();
 
                             Toast.makeText(getApplication(),"登陆成功",Toast.LENGTH_LONG).show();
-//                            Intent intent = new Intent();
-//                            intent.setClass( LoginActivity.this, All.class);
-//                            intent.setAction("true");
-//                            startActivity(intent);
-                            finish();
+                            Intent intent = new Intent();
+                            intent.setClass( LoginActivity.this, All.class);
+                            intent.setAction("true");
+                            startActivity(intent);
+//                            finish();
+                            ActivityCollector.finishAll();
+
                         }else if(string.equals(para0)){
                             Toast.makeText(getApplication(),"用户名或密码错误",Toast.LENGTH_LONG).show();
                             myPW.setText("");
