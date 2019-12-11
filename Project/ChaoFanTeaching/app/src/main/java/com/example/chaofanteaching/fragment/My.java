@@ -100,7 +100,7 @@ public class My extends Fragment {
         student=view.findViewById(R.id.student);
         setting=view.findViewById(R.id.setting);
         image=view.findViewById(R.id.image);
-        name.setText(name1);
+        if(name1.equals("")){name.setText("姓名");}else{name.setText(name1);}
         if(a.equals("")){
             image.setImageDrawable(getContext().getResources().getDrawable(R.drawable.boy));
         }else{initView();}

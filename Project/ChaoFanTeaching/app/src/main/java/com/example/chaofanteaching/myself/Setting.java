@@ -31,7 +31,9 @@ public class Setting extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
         final SharedPreferences pre = getSharedPreferences("login", Context.MODE_PRIVATE);
-        String a = pre.getString("loginOrNot", "");
+        final SharedPreferences pre1 = getSharedPreferences("data", Context.MODE_PRIVATE);
+
+
         about=findViewById(R.id.about);
         btn1=findViewById(R.id.btn1);
         btn2=findViewById(R.id.btn2);
@@ -82,6 +84,7 @@ public class Setting extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 pre.edit().clear().commit();
+                pre1.edit().clear().commit();
                 Intent i=new Intent(Setting.this, LoginActivity.class);
                 startActivity(i);
             }
@@ -90,6 +93,8 @@ public class Setting extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                     pre.edit().clear().commit();
+                    pre1.edit().clear().commit();
+                    Setting.super.onBackPressed();
                     moveTaskToBack(true);
                     android.os.Process.killProcess(android.os.Process.myPid());
                     System.exit(1);
