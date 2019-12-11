@@ -87,7 +87,7 @@ public class My extends Fragment {
         final View view=inflater.inflate(R.layout.my,container,false);
         okHttpClient=new OkHttpClient();
         pre= getContext().getSharedPreferences("login", Context.MODE_PRIVATE);
-        a = pre.getString("loginOrNot", "");
+        a = pre.getString("userName", "");
         Log.e("yxt",a);
 
         customer_service=view.findViewById(R.id.customer_service);
