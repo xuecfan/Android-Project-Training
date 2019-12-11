@@ -223,10 +223,12 @@ public class My extends Fragment {
     }
 
     private void downimg() throws IOException {
+        Log.e("error","11");
         String fileName = path + a+".png";// 图片名字
         Request request=new Request.Builder().url("http://175.24.102.160:8080/ChaoFanTeaching/DownImg?name="+a).build();
         Call call=okHttpClient.newCall(request);
         Response response=call.execute();
+        Log.e("yxt", String.valueOf(response.body().byteStream()));
         InputStream in=response.body().byteStream();
         FileOutputStream out=new FileOutputStream(fileName);
         byte[] bytes=new byte[1024];

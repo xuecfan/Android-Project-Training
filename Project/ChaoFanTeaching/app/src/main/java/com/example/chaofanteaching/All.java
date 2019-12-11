@@ -36,6 +36,7 @@ public class All extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all);
 
+        ActivityCollector.addActivity(this);
         SharedPreferences pre=getSharedPreferences("login", Context.MODE_PRIVATE);
         String user = pre.getString("userName", "");
         FragmentTabHost fragmentTabHost = findViewById(android.R.id.tabhost);
@@ -120,6 +121,12 @@ public class All extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        ActivityCollector.removeActivity(this);
     }
 
     public View getTabSpecView(String tag, int imageResId, String title){

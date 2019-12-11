@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.example.chaofanteaching.ActivityCollector;
 import com.example.chaofanteaching.All;
 import com.example.chaofanteaching.R;
 import com.example.chaofanteaching.about.About;
@@ -33,6 +34,7 @@ public class Setting extends AppCompatActivity {
         final SharedPreferences pre = getSharedPreferences("login", Context.MODE_PRIVATE);
         final SharedPreferences pre1 = getSharedPreferences("data", Context.MODE_PRIVATE);
 
+        ActivityCollector.addActivity(this);
 
         about=findViewById(R.id.about);
         btn1=findViewById(R.id.btn1);
@@ -83,21 +85,25 @@ public class Setting extends AppCompatActivity {
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
                 pre.edit().clear().commit();
                 pre1.edit().clear().commit();
                 Intent i=new Intent(Setting.this, LoginActivity.class);
                 startActivity(i);
+                ActivityCollector.finishAll();
             }
         });
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    finish();
                     pre.edit().clear().commit();
                     pre1.edit().clear().commit();
 
             }
         });
+    }
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        ActivityCollector.removeActivity(this);
     }
 }

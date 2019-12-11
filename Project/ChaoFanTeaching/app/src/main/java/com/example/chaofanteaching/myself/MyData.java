@@ -74,9 +74,7 @@ public class MyData extends AppCompatActivity {
         fanhui.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(MyData.this, All.class);
-                i.setAction("data");
-                startActivity(i);
+                finish();
             }
         });
         SharedPreferences pre=getSharedPreferences("data",MODE_PRIVATE);
