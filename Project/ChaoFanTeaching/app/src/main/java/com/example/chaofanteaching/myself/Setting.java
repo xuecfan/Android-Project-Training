@@ -83,6 +83,7 @@ public class Setting extends AppCompatActivity {
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                finish();
                 pre.edit().clear().commit();
                 pre1.edit().clear().commit();
                 Intent i=new Intent(Setting.this, LoginActivity.class);
