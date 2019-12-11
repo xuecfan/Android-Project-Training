@@ -115,10 +115,10 @@ public class LoginActivity extends AppCompatActivity {
                             editor1.apply();
 
                             Toast.makeText(getApplication(),"登陆成功",Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent();
-                            intent.setClass( LoginActivity.this, All.class);
-                            intent.setAction("true");
-                            startActivity(intent);
+//                            Intent intent = new Intent();
+//                            intent.setClass( LoginActivity.this, All.class);
+//                            intent.setAction("true");
+//                            startActivity(intent);
                             finish();
                         }else if(string.equals(para0)){
                             Toast.makeText(getApplication(),"用户名或密码错误",Toast.LENGTH_LONG).show();
