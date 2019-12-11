@@ -27,6 +27,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText myId;
     private EditText myPW;
     private Handler handler;
+    private String myid;
 
 
     @Override
@@ -49,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                String myid = myId.getText().toString();
+                myid = myId.getText().toString();
                 String mypw = myPW.getText().toString();
                 String IdAndPW = myid +","+ mypw;
                 System.out.println(myid+"   "+mypw+"   "+IdAndPW);
@@ -100,12 +101,18 @@ public class LoginActivity extends AppCompatActivity {
                         String string = message.obj.toString();
                         String para0 = String.valueOf(0);
                         String para1 = String.valueOf(1);
+
                         System.out.println("从服务器传来的servlet页面数字："+string);
                         if (string.equals(para1)){
                             SharedPreferences sharedPreferences = getSharedPreferences("login", Context.MODE_PRIVATE);
                             SharedPreferences.Editor editor = sharedPreferences.edit();
                             editor.putString("loginOrNot", string);
                             editor.apply();
+
+                            //保存用户名
+                            SharedPreferences.Editor editor1 = sharedPreferences.edit();
+                            editor1.putString("userName",myid);
+                            editor1.apply();
 
                             Toast.makeText(getApplication(),"登陆成功",Toast.LENGTH_LONG).show();
                             Intent intent = new Intent();
