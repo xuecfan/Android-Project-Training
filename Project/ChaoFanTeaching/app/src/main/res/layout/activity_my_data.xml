@@ -38,7 +38,7 @@
             android:textStyle="bold"
             android:textSize="20dp"/>
         <TextView
-            android:layout_width="200dp"
+            android:layout_width="220dp"
             android:layout_height="50dp"
             android:text=""
             android:textStyle="bold"
@@ -109,7 +109,7 @@
             android:textStyle="bold"
             android:textSize="20dp"/>
         <TextView
-            android:layout_width="200dp"
+            android:layout_width="220dp"
             android:layout_height="50dp"
             android:text=""
             android:textStyle="bold"
@@ -137,7 +137,7 @@
             android:textStyle="bold"
             android:textSize="20dp"/>
         <TextView
-            android:layout_width="200dp"
+            android:layout_width="220dp"
             android:layout_height="50dp"
             android:text=""
             android:textStyle="bold"

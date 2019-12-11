@@ -92,12 +92,9 @@ public class Setting extends AppCompatActivity {
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                    finish();
                     pre.edit().clear().commit();
                     pre1.edit().clear().commit();
-                    Setting.super.onBackPressed();
-                    moveTaskToBack(true);
-                    android.os.Process.killProcess(android.os.Process.myPid());
-                    System.exit(1);
 
             }
         });

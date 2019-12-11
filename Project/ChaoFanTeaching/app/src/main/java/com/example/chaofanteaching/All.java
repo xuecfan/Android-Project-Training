@@ -1,6 +1,8 @@
 package com.example.chaofanteaching;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Handler;
 import android.support.v4.app.FragmentTabHost;
@@ -32,9 +34,10 @@ public class All extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_all);
 
+        SharedPreferences pre=getSharedPreferences("login", Context.MODE_PRIVATE);
+        String user = pre.getString("userName", "");
         FragmentTabHost fragmentTabHost = findViewById(android.R.id.tabhost);
 
         fragmentTabHost.setup(this,
@@ -73,9 +76,10 @@ public class All extends AppCompatActivity {
         fragmentTabHost.addTab(tabSpec3,
                 My.class,
                 null);
-        Intent intent=getIntent();
-        //String data=intent.getAction();
-//        if(data.equals("true")){
+//        Intent intent=getIntent();
+//        String data=intent.getAction();
+//        if(data.equals(""))
+//        if(!user.equals("")){
             fragmentTabHost.setCurrentTab(0);
             imageViewMap.get("tag1").setImageResource(R.drawable.list1);
             textViewMap.get("tag1").setTextColor(getResources().getColor(R.color.colorPrimary));

@@ -249,6 +249,7 @@ public class My extends Fragment {
         } else {
             //如果SD里面没有则需要从服务器取头像，取回来的头像再保存在SD中
             asyncdownop();
+
         }
     }
 
