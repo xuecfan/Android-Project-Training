@@ -77,7 +77,7 @@ public class My extends Fragment {
         public void handleMessage(Message msg) {
             switch (msg.what){
                 case  1:
-                    Toast.makeText(getContext(),"文件下载成功",Toast.LENGTH_SHORT).show();
+                    Log.i("file","头像以更新");
             }
         }
     };

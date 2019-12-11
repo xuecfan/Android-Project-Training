@@ -2,6 +2,8 @@ package com.example.chaofanteaching;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
+
 import java.io.File;
 import java.io.IOException;
 import okhttp3.Call;
@@ -39,8 +41,8 @@ public class UpLoadFile extends AsyncTask<String,Void,String> {
         Response response=null;
         try {
             response=call.execute();
-//            Log.i("photo",response.body().string());
-            return response.body().string();
+            Log.e("photo",response.body().string());
+//            return response.body().string();
         } catch (IOException e) {
             e.printStackTrace();
         }
