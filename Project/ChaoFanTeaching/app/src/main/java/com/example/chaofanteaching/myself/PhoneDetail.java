@@ -1,6 +1,7 @@
 package com.example.chaofanteaching.myself;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -26,7 +27,10 @@ public class PhoneDetail extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i=new Intent(PhoneDetail.this,MyData.class);
-                i.putExtra("phone",phone.getText().toString());
+                SharedPreferences sharedPreferences=getSharedPreferences("data",MODE_PRIVATE);
+                SharedPreferences.Editor editor=sharedPreferences.edit();
+                editor.putString("phoneContent",phone.getText().toString());
+                editor.apply();
                 startActivity(i);
             }
         });

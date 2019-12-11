@@ -1,6 +1,7 @@
 package com.example.chaofanteaching.myself;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.Address;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
@@ -27,7 +28,10 @@ public class AddressDetail extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i=new Intent(AddressDetail.this,MyData.class);
-                i.putExtra("address",address.getText().toString());
+                SharedPreferences sharedPreferences=getSharedPreferences("data",MODE_PRIVATE);
+                SharedPreferences.Editor editor=sharedPreferences.edit();
+                editor.putString("addressContent",address.getText().toString());
+                editor.apply();
                 startActivity(i);
             }
         });

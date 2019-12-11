@@ -3,6 +3,7 @@ package com.example.chaofanteaching.myself;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.location.Address;
 import android.net.Uri;
@@ -22,7 +23,10 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.chaofanteaching.All;
 import com.example.chaofanteaching.R;
+import com.example.chaofanteaching.fragment.My;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -34,6 +38,7 @@ public class MyData extends AppCompatActivity {
     private LinearLayout name;
     private LinearLayout phone;
     private LinearLayout address;
+    private LinearLayout fanhui;
     private TextView show;
     private TextView name_content;
     private TextView phone_content;
@@ -45,6 +50,7 @@ public class MyData extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_data);
+        fanhui=findViewById(R.id.fanhui);
         name = findViewById(R.id.name);
         phone = findViewById(R.id.phone);
         address = findViewById(R.id.address);
@@ -53,22 +59,35 @@ public class MyData extends AppCompatActivity {
         phone_content=findViewById(R.id.phone_content);
         address_content=findViewById(R.id.address_content);
         rg = findViewById(R.id.rg);
-        Intent i=getIntent();
-        String name1=i.getStringExtra("name");
-        String phone1=i.getStringExtra("phone");
-        String address1=i.getStringExtra("address");
-        name_content.setText(name1);
-        phone_content.setText(phone1);
-        address_content.setText(address1);
-
         rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
                 String tip = checkedId == R.id.male ? "男" : "女";
                 show.setVisibility(View.VISIBLE);
                 show.setText(tip);
+                SharedPreferences sharedPreferences=getSharedPreferences("data",MODE_PRIVATE);
+                SharedPreferences.Editor editor=sharedPreferences.edit();
+                editor.putString("sexContent",tip);
+                editor.apply();
             }
         });
+        fanhui.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(MyData.this, All.class);
+                i.setAction("data");
+                startActivity(i);
+            }
+        });
+        SharedPreferences pre=getSharedPreferences("data",MODE_PRIVATE);
+        String name1=pre.getString("nameContent","");
+        String phone1=pre.getString("phoneContent","");
+        String address1=pre.getString("addressContent","");
+        String sex=pre.getString("sexContent","");
+        show.setText(sex);
+        name_content.setText(name1);
+        phone_content.setText(phone1);
+        address_content.setText(address1);
         name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -23,6 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.chaofanteaching.BottomPopupOption;
@@ -66,6 +67,7 @@ public class My extends Fragment {
     private LinearLayout setting;
     private LinearLayout customer_service;
     private LinearLayout send;
+    private TextView name;
     private ImageView image;
     private Bitmap bitmap;
     private SharedPreferences pre;
@@ -77,7 +79,7 @@ public class My extends Fragment {
         public void handleMessage(Message msg) {
             switch (msg.what){
                 case  1:
-                    Log.i("file","头像以更新");
+                    Log.i("file","头像已更新");
             }
         }
     };
@@ -88,14 +90,17 @@ public class My extends Fragment {
         okHttpClient=new OkHttpClient();
         pre= getContext().getSharedPreferences("login", Context.MODE_PRIVATE);
         a = pre.getString("userName", "");
-        Log.e("yxt",a);
+        SharedPreferences pre1=getContext().getSharedPreferences("data",Context.MODE_PRIVATE);
+        String name1=pre1.getString("nameContent","");
 
         customer_service=view.findViewById(R.id.customer_service);
         send=view.findViewById(R.id.send);
+        name=view.findViewById(R.id.name);
         myself=view.findViewById(R.id.myself);
         student=view.findViewById(R.id.student);
         setting=view.findViewById(R.id.setting);
         image=view.findViewById(R.id.image);
+        name.setText(name1);
         if(a.equals("")){
             image.setImageDrawable(getContext().getResources().getDrawable(R.drawable.boy));
         }else{initView();}

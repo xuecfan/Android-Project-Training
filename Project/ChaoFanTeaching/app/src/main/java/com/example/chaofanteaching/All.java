@@ -74,15 +74,15 @@ public class All extends AppCompatActivity {
                 My.class,
                 null);
 
-//        if(getIntent().getStringExtra("value").equals("3")){
-//            fragmentTabHost.setCurrentTab(2);
-//            imageViewMap.get("tag3").setImageResource(R.drawable.my1);
-//            textViewMap.get("tag3").setTextColor(getResources().getColor(R.color.colorPrimary));
-//        }else{
+        if(getIntent().getAction().equals("data")){
+            fragmentTabHost.setCurrentTab(2);
+            imageViewMap.get("tag3").setImageResource(R.drawable.my1);
+            textViewMap.get("tag3").setTextColor(getResources().getColor(R.color.colorPrimary));
+        }else{
             fragmentTabHost.setCurrentTab(0);
             imageViewMap.get("tag1").setImageResource(R.drawable.list1);
             textViewMap.get("tag1").setTextColor(getResources().getColor(R.color.colorPrimary));
-//        }
+        }
 
         fragmentTabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
             @Override
