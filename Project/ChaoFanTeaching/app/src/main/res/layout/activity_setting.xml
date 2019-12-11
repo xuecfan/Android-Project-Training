@@ -56,7 +56,7 @@
             android:layout_height="30dp"
             android:text=">"
             android:textSize="30dp"
-            android:layout_marginLeft="90dp"/>
+            android:layout_marginLeft="70dp"/>
 
     </LinearLayout>
     <LinearLayout
@@ -86,7 +86,7 @@
             android:layout_height="30dp"
             android:text=">"
             android:textSize="30dp"
-            android:layout_marginLeft="90dp"/>
+            android:layout_marginLeft="70dp"/>
 
     </LinearLayout>
     <LinearLayout
@@ -116,7 +116,7 @@
             android:layout_height="30dp"
             android:text=">"
             android:textSize="30dp"
-            android:layout_marginLeft="90dp"/>
+            android:layout_marginLeft="70dp"/>
 
     </LinearLayout>
     <LinearLayout
@@ -146,7 +146,7 @@
             android:layout_height="30dp"
             android:text=">"
             android:textSize="30dp"
-            android:layout_marginLeft="90dp"/>
+            android:layout_marginLeft="70dp"/>
 
     </LinearLayout>
     <LinearLayout
@@ -176,7 +176,7 @@
             android:layout_height="30dp"
             android:text=">"
             android:textSize="30dp"
-            android:layout_marginLeft="90dp"/>
+            android:layout_marginLeft="70dp"/>
 
     </LinearLayout>
     <Button
