@@ -88,6 +88,7 @@ public class My extends Fragment {
         okHttpClient=new OkHttpClient();
         pre= getContext().getSharedPreferences("login", Context.MODE_PRIVATE);
         a = pre.getString("loginOrNot", "");
+        Log.e("yxt",a);
 
         customer_service=view.findViewById(R.id.customer_service);
         send=view.findViewById(R.id.send);
@@ -241,10 +242,7 @@ public class My extends Fragment {
             Drawable drawable = new BitmapDrawable(bt);//转换成drawable
             image.setImageDrawable(drawable);
         } else {
-            /**
-             *	如果SD里面没有则需要从服务器取头像，取回来的头像再保存在SD中
-             *
-             */
+            //如果SD里面没有则需要从服务器取头像，取回来的头像再保存在SD中
             asyncdownop();
         }
     }
@@ -283,7 +281,6 @@ public class My extends Fragment {
             //获取系统摄像头拍照的结果
             bitmap = data.getParcelableExtra("data");
             image.setImageBitmap(bitmap);
-            //uploadPic(bitmap);
             setPicToView(bitmap);
             asyncupop();
         }

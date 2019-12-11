@@ -2,8 +2,6 @@ package com.example.chaofanteaching;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
-import android.widget.Toast;
 import java.io.File;
 import java.io.IOException;
 import okhttp3.Call;
