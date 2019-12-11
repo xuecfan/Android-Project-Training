@@ -95,8 +95,12 @@ public class Setting extends AppCompatActivity {
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                     pre.edit().clear().commit();
                     pre1.edit().clear().commit();
+                    Intent i=new Intent(Setting.this,All.class);
+                    startActivity(i);
+                    ActivityCollector.finishAll();
 
             }
         });

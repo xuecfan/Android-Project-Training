@@ -274,7 +274,7 @@ public class My extends Fragment {
         intent.putExtra("noFaceDetection", true);// 取消人脸识别
         intent.putExtra("return-data", true);
 
-        uritempFile = Uri.parse("file://" + "/" + Environment.getExternalStorageDirectory().getPath() + "/" + System.currentTimeMillis() + ".png");
+        uritempFile = Uri.parse("file://" + "/" + Environment.getExternalStorageDirectory().getPath() + "/" + a + ".png");
         intent.putExtra(MediaStore.EXTRA_OUTPUT, uritempFile);
 
         // 开启一个带有返回值的Activity，请求码为PHOTO_REQUEST_CUT

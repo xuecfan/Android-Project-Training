@@ -3,12 +3,15 @@ package com.example.chaofanteaching;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.os.Build;
 import android.os.Handler;
 import android.support.v4.app.FragmentTabHost;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +24,7 @@ import com.example.chaofanteaching.fragment.List;
 import com.example.chaofanteaching.fragment.List1;
 import com.example.chaofanteaching.fragment.Message;
 import com.example.chaofanteaching.fragment.My;
+import com.example.chaofanteaching.myself.MyData;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -77,18 +81,30 @@ public class All extends AppCompatActivity {
         fragmentTabHost.addTab(tabSpec3,
                 My.class,
                 null);
-//        Intent intent=getIntent();
-//        String data=intent.getAction();
-//        if(data.equals(""))
-//        if(!user.equals("")){
+//        Intent intent=new Intent();
+//        intent.setClassName(getPackageName(),"com.example.chaofanteaching.myself.MyData");
+//        ResolveInfo resolveInfo = getPackageManager().resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY);
+//        if(resolveInfo != null) {
+//            //activity found
+//            Intent intent1=getIntent();
+//            String b=intent1.getStringExtra("all");
+//            //Log.e("yxt",b);
+//            if(b.equals("3")){
+//                fragmentTabHost.setCurrentTab(2);
+//                imageViewMap.get("tag3").setImageResource(R.drawable.my1);
+//                textViewMap.get("tag3").setTextColor(getResources().getColor(R.color.colorPrimary));
+//            }
+//        }else{
             fragmentTabHost.setCurrentTab(0);
             imageViewMap.get("tag1").setImageResource(R.drawable.list1);
             textViewMap.get("tag1").setTextColor(getResources().getColor(R.color.colorPrimary));
-//        }else{
-//            fragmentTabHost.setCurrentTab(2);
-//            imageViewMap.get("tag3").setImageResource(R.drawable.my1);
-//            textViewMap.get("tag3").setTextColor(getResources().getColor(R.color.colorPrimary));
+            //activity not found
 //        }
+
+
+
+
+
 
         fragmentTabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
             @Override
