@@ -6,6 +6,19 @@
 
     <LinearLayout
         android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="0dp"
+        android:layout_weight="1">.
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/boy" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_marginLeft="15dp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -20,10 +33,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="姓名："/>
-            <EditText
+            <TextView
                 android:id="@+id/name"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="张三"/>
         </LinearLayout>
 
         <LinearLayout
@@ -34,20 +48,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="性别："/>
-            <RadioGroup
-                android:id="@+id/myradio"
-                android:orientation="horizontal"
+            <TextView
+                android:id="@+id/sex"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="男"/>
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="女"/>
-            </RadioGroup>
+                android:layout_height="wrap_content"
+                android:text="男"/>
         </LinearLayout>
 
         <LinearLayout
@@ -58,13 +63,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="年级："/>
-            <Spinner
-                android:id="@+id/gradespinner"
-                android:layout_width="200dp"
+            <TextView
+                android:id="@+id/grade"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:entries="@array/grade">
-            </Spinner>
-
+                android:text="大一"/>
         </LinearLayout>
 
         <LinearLayout
@@ -74,13 +77,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="学科："/>
-            <Spinner
-                android:id="@+id/subjectspinner"
-                android:layout_width="150dp"
+                android:text="补习学科："/>
+            <TextView
+                android:id="@+id/subject"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:entries="@array/subject">
-            </Spinner>
+                android:text="语文、数学、英语"/>
         </LinearLayout>
 
         <LinearLayout
@@ -90,25 +92,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="时间："/>
-            <Spinner
-                android:id="@+id/weekspinner"
-                android:layout_width="120dp"
+                android:text="补课时间："/>
+            <TextView
+                android:id="@+id/freetime"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:entries="@array/week">
-            </Spinner>
-            <Spinner
-                android:id="@+id/hourspinner"
-                android:layout_width="90dp"
-                android:layout_height="wrap_content"
-                android:entries="@array/hour">
-            </Spinner>
-            <Spinner
-                android:id="@+id/minspinner"
-                android:layout_width="90dp"
-                android:layout_height="wrap_content"
-                android:entries="@array/minute">
-            </Spinner>
+                android:text="星期六"/>
         </LinearLayout>
 
         <LinearLayout
@@ -118,15 +107,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="时长："/>
-            <EditText
-                android:id="@+id/time"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content" />
+                android:text="家教酬劳："/>
             <TextView
+                android:id="@+id/price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="小时"/>
+                android:text="50元/小时"/>
         </LinearLayout>
 
         <LinearLayout
@@ -136,29 +122,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="酬劳："/>
-            <EditText
-                android:id="@+id/pay"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content" />
+                android:text="联系电话："/>
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="元/小时"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="电话："/>
-            <EditText
                 android:id="@+id/tel"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="18866668888"/>
         </LinearLayout>
 
         <LinearLayout
@@ -168,15 +137,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="要求："/>
-            <EditText
-                android:id="@+id/require"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content" />
+                android:text="其它要求："/>
             <TextView
+                android:id="@+id/require"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="(性别、学院等)"/>
+                android:text="无"/>
+
         </LinearLayout>
 
         <com.baidu.mapapi.map.MapView
@@ -185,6 +152,7 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:clickable="true" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -195,13 +163,23 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/add_finish"
             android:gravity="center"
-            android:layout_width="250dp"
+            android:layout_gravity="left"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:background="#FF9800"
             android:textColor="#ffffff"
-            android:text="完成"/>
+            android:text="请Ta试讲"/>
+
+        <Button
+            android:layout_marginLeft="50dp"
+            android:gravity="center"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:background="#FF9800"
+            android:textColor="#ffffff"
+            android:text="发送信息"/>
+
     </LinearLayout>
 
 </LinearLayout>

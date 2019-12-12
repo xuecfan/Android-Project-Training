@@ -17,7 +17,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
-
 import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.InfoList.AddInfoActivity;
 import com.example.chaofanteaching.InfoList.Info;
@@ -52,7 +51,7 @@ public class List extends Fragment {
         dbKey("");
         infoAdapter.notifyDataSetChanged();
         pre= getContext().getSharedPreferences("login", Context.MODE_PRIVATE);
-        a = pre.getString("loginOrNot", "");
+        a = pre.getString("userName", "");
         infolist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

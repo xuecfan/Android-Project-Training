@@ -17,16 +17,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
-
 import com.example.chaofanteaching.HttpConnectionUtils;
-import com.example.chaofanteaching.InfoList.AddInfoActivity;
+import com.example.chaofanteaching.InfoList.AddStuInfoActivity;
 import com.example.chaofanteaching.InfoList.Info;
 import com.example.chaofanteaching.InfoList.InfoAdapter;
 import com.example.chaofanteaching.InfoList.InfoDetailActivity;
+import com.example.chaofanteaching.InfoList.ParInfoActivity;
 import com.example.chaofanteaching.R;
 import com.example.chaofanteaching.StreamChangeStrUtils;
 import com.example.chaofanteaching.sign.LoginActivity;
-
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
@@ -52,20 +51,24 @@ public class List1 extends Fragment {
         dbKey("");
         infoAdapter.notifyDataSetChanged();
         pre= getContext().getSharedPreferences("login", Context.MODE_PRIVATE);
-        a = pre.getString("loginOrNot", "");
+        a = pre.getString("userName", "");
         infolist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (a.equals("")) {
-                    Toast.makeText(getContext(),"请您先登录", Toast.LENGTH_SHORT).show();
-                    Intent i=new Intent(getContext(), LoginActivity.class);
-                    startActivity(i);
-                }else{
-                    Intent intent = new Intent();
-                    intent.putExtra("name", infoList.get(position).getName());
-                    intent.setClass(getActivity(), InfoDetailActivity.class);
-                    startActivity(intent);
-                }
+                Intent intent = new Intent();
+                intent.putExtra("name", infoList.get(position).getName());
+                intent.setClass(getActivity(), ParInfoActivity.class);
+                startActivity(intent);
+//                if (a.equals("")) {
+//                    Toast.makeText(getContext(),"请您先登录", Toast.LENGTH_SHORT).show();
+//                    Intent i=new Intent(getContext(), LoginActivity.class);
+//                    startActivity(i);
+//                }else{
+//                    Intent intent = new Intent();
+//                    intent.putExtra("name", infoList.get(position).getName());
+//                    intent.setClass(getActivity(), ParInfoActivity.class);
+//                    startActivity(intent);
+//                }
             }
         });
         Button btnadd = view.findViewById(R.id.add);
@@ -78,7 +81,7 @@ public class List1 extends Fragment {
                     startActivity(i);
                 }else{
                     Intent intent = new Intent();
-                    intent.setClass(getActivity(), AddInfoActivity.class);
+                    intent.setClass(getActivity(), AddStuInfoActivity.class);
                     startActivity(intent);
                 }
             }
@@ -118,7 +121,6 @@ public class List1 extends Fragment {
         };
         new Thread() {
             HttpURLConnection connection = null;
-
             @Override
             public void run() {
                 try {

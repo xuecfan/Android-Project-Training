@@ -49,4 +49,42 @@
         <item>00</item>
         <item>30</item>
     </string-array>
+    <string-array name="stugrade">
+        <item>大一</item>
+        <item>大二</item>
+        <item>大三</item>
+        <item>大四</item>
+        <item>研究生</item>
+    </string-array>
+    <string-array name="freetime">
+        <item>上午</item>
+        <item>下午</item>
+    </string-array>
+    <string-array name="university">
+        <item>河北师范大学</item>
+        <item>河北科技大学</item>
+        <item>河北经贸大学</item>
+        <item>石家庄铁道大学</item>
+    </string-array>
+    <string-array name="college">
+        <item>马克思主义学院</item>
+        <item>教育学院</item>
+        <item>文学院</item>
+        <item>历史文化学院</item>
+        <item>外国语学院</item>
+        <item>音乐学院</item>
+        <item>美术与设计学院</item>
+        <item>新闻传播学院</item>
+        <item>商学院</item>
+        <item>法政与公共管理学院</item>
+        <item>数学科学学院</item>
+        <item>物理学院</item>
+        <item>化学与材料科学新学院</item>
+        <item>生命科学学院</item>
+        <item>资源与环境科学学院</item>
+        <item>体育学院</item>
+        <item>软件学院</item>
+        <item>国际文化交流学院</item>
+        <item>其它学院</item>
+    </string-array>
 </resources>

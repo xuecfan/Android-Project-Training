@@ -18,7 +18,6 @@
 
     </LinearLayout>
 
-
     <LinearLayout
         android:layout_marginLeft="15dp"
         android:layout_width="match_parent"
@@ -50,6 +49,7 @@
                 android:layout_height="wrap_content"
                 android:text="性别："/>
             <TextView
+                android:id="@+id/sex"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="男"/>
@@ -64,6 +64,7 @@
                 android:layout_height="wrap_content"
                 android:text="年级："/>
             <TextView
+                android:id="@+id/grade"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="大一"/>
@@ -78,6 +79,7 @@
                 android:layout_height="wrap_content"
                 android:text="学校："/>
             <TextView
+                android:id="@+id/university"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="河北师范大学"/>
@@ -92,6 +94,7 @@
                 android:layout_height="wrap_content"
                 android:text="学院："/>
             <TextView
+                android:id="@+id/college"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="软件学院"/>
@@ -106,6 +109,7 @@
                 android:layout_height="wrap_content"
                 android:text="专业："/>
             <TextView
+                android:id="@+id/major"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="软件工程"/>
@@ -120,6 +124,7 @@
                 android:layout_height="wrap_content"
                 android:text="擅长学科："/>
             <TextView
+                android:id="@+id/subject"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="语文、数学、英语"/>
@@ -132,8 +137,24 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="空闲时间："/>
+            <TextView
+                android:id="@+id/freetime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="星期六-上午"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="家教酬劳："/>
             <TextView
+                android:id="@+id/price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="50元/小时"/>
@@ -148,6 +169,7 @@
                 android:layout_height="wrap_content"
                 android:text="自我介绍："/>
             <TextView
+                android:id="@+id/introduce"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="这个人话很少，什么都没有留下"/>

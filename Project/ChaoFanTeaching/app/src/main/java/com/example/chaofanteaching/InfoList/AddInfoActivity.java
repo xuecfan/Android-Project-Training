@@ -13,7 +13,6 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.ZoomControls;
-
 import com.baidu.location.BDAbstractLocationListener;
 import com.baidu.location.BDLocation;
 import com.baidu.location.LocationClient;
@@ -46,12 +45,12 @@ public class AddInfoActivity extends AppCompatActivity {
     private EditText inTel;
     private EditText inRequirement;
     private RadioGroup radioGroup;
-    private String sex;
     private Spinner myspinner;
     private Spinner myspinner1;
     private Spinner myspinner2;
     private Spinner myspinner3;
     private Spinner myspinner4;
+    private String sex;
     private String grade;
     private String subjcet;
     private String week;
@@ -92,7 +91,6 @@ public class AddInfoActivity extends AppCompatActivity {
                 String pay=inPay.getText().toString();
                 String tel=inTel.getText().toString();
                 String require=inRequirement.getText().toString();
-                String finaltime=week+","+hour+","+min;
                 dbKey(name,sex,grade,subjcet,week,hour,min,ilong,pay,tel,require);
                 finish();
             }
@@ -239,7 +237,7 @@ public class AddInfoActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    connection = HttpConnectionUtils.getConnection("AddInfoServlet?name="+name+"&sex="+sex+"&grade="+grade+"&subject="+subject+"&week="+week+"&hour="+hour+"&min="+min+"&len="+ilong+"&pay="+pay+"&tel="+tel+"&require="+require);
+                    connection = HttpConnectionUtils.getConnection("AddInfoServlet?id=0&name="+name+"&sex="+sex+"&grade="+grade+"&subject="+subject+"&week="+week+"&hour="+hour+"&min="+min+"&len="+ilong+"&pay="+pay+"&tel="+tel+"&require="+require);
                     int code = connection.getResponseCode();
                     if (code == 200) {
                         Toast.makeText(getApplication(),"添加信息成功",Toast.LENGTH_LONG);
