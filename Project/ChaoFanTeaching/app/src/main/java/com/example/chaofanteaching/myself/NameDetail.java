@@ -1,5 +1,6 @@
 package com.example.chaofanteaching.myself;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -27,7 +28,8 @@ public class NameDetail extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i=new Intent(NameDetail.this,MyData.class);
-
+                SharedPreferences pre=getSharedPreferences("login", Context.MODE_PRIVATE);
+                String a = pre.getString("userName", "");
                 SharedPreferences sharedPreferences=getSharedPreferences("data",MODE_PRIVATE);
                 SharedPreferences.Editor editor=sharedPreferences.edit();
                 editor.putString("nameContent",name.getText().toString());
