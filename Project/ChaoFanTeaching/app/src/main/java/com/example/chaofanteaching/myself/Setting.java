@@ -3,6 +3,8 @@ package com.example.chaofanteaching.myself;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,9 +15,14 @@ import android.widget.Toast;
 
 import com.example.chaofanteaching.ActivityCollector;
 import com.example.chaofanteaching.All;
+import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.R;
+import com.example.chaofanteaching.StreamChangeStrUtils;
 import com.example.chaofanteaching.about.About;
 import com.example.chaofanteaching.sign.LoginActivity;
+
+import java.io.InputStream;
+import java.net.HttpURLConnection;
 
 public class Setting extends AppCompatActivity {
     private LinearLayout about;
@@ -26,6 +33,7 @@ public class Setting extends AppCompatActivity {
     private LinearLayout cuurency;
     private LinearLayout help;
     private LinearLayout plug;
+    private Handler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +93,10 @@ public class Setting extends AppCompatActivity {
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String userName = pre.getString("userName","");
+                System.out.println(userName);
+                changeLandingStatus(userName);
+
                 pre.edit().clear().commit();
                 pre1.edit().clear().commit();
                 Intent i=new Intent(Setting.this, LoginActivity.class);
@@ -95,12 +107,15 @@ public class Setting extends AppCompatActivity {
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String userName = pre.getString("userName","");
+                System.out.println(userName);
+                changeLandingStatus(userName);
 
-                    pre.edit().clear().commit();
-                    pre1.edit().clear().commit();
-                    Intent i=new Intent(Setting.this,All.class);
-                    startActivity(i);
-                    ActivityCollector.finishAll();
+                pre.edit().clear().commit();
+                pre1.edit().clear().commit();
+                Intent i=new Intent(Setting.this,All.class);
+                startActivity(i);
+                ActivityCollector.finishAll();
 
             }
         });
@@ -109,5 +124,45 @@ public class Setting extends AppCompatActivity {
     protected void onDestroy(){
         super.onDestroy();
         ActivityCollector.removeActivity(this);
+    }
+
+    //退出后更改用户登录状态为未登录
+    private void changeLandingStatus(final String a){
+        handler = new Handler(){
+            public void handleMessage(android.os.Message message){
+                switch (message.what){
+                    case 1:
+                        String string = message.obj.toString();
+                        System.out.println("从服务器传来的servlet页面数字："+string);
+                        if (string.equals("1")){
+                            Toast.makeText(getApplication(),"成功退出账号",Toast.LENGTH_SHORT).show();
+                        }
+                        break;
+                }
+            }
+        };
+        new Thread(){
+            HttpURLConnection connection = null;
+            @Override
+            public void run() {
+                try {
+                    Log.e("a",a);
+                    connection = HttpConnectionUtils.getConnection("LogoutServlet?userName="+a);
+                    int code = connection.getResponseCode();
+                    if(code!=200){
+                        Log.e("error","网络连接失败");
+                    }else{
+                        InputStream inputStream = connection.getInputStream();
+                        String str = StreamChangeStrUtils.toChange(inputStream);
+                        android.os.Message message = Message.obtain();
+                        message.obj = str;
+                        message.what = 1;
+                        handler.sendMessage(message);
+                    }
+                }catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
     }
 }
