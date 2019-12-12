@@ -1,10 +1,8 @@
 package com.example.chaofanteaching.fragment;
 
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -19,8 +17,6 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.LocalBroadcastManager;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,33 +25,25 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.chaofanteaching.BottomPopupOption;
+import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.R;
+import com.example.chaofanteaching.StreamChangeStrUtils;
 import com.example.chaofanteaching.UpLoadFile;
 import com.example.chaofanteaching.about.Student_Authentication;
 import com.example.chaofanteaching.myself.MyData;
 import com.example.chaofanteaching.myself.Setting;
 import com.example.chaofanteaching.sign.LoginActivity;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
+import java.net.HttpURLConnection;
 
 import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.FormBody;
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.Response;
 
 
@@ -74,9 +62,8 @@ public class My extends Fragment {
     private TextView name;
     private ImageView image;
     private Bitmap bitmap;
-    private SharedPreferences pre;
+    private SharedPreferences pre,pre1;
     private String a="";
-    private final String host="192.168.137.1";
     private static final int PHOTO_REQUEST_GALLERY = 2;// 从相册中选择
     private Handler handler=new Handler(){
         @Override
@@ -84,6 +71,16 @@ public class My extends Fragment {
             switch (msg.what){
                 case  1:
                     Log.i("file","头像已更新");
+                    break;
+                case 2:
+                    String str = msg.obj.toString();
+                    Log.e("11",str);
+
+                    SharedPreferences.Editor editor=pre1.edit();
+                    editor.putString("nameContent",str);
+                    editor.commit();
+                    name.setText(str);
+                    break;
             }
         }
     };
@@ -108,9 +105,13 @@ public class My extends Fragment {
             image.setImageDrawable(getContext().getResources().getDrawable(R.drawable.boy));
         }else{initView();}
 
-        SharedPreferences pre1=getContext().getSharedPreferences("data",Context.MODE_PRIVATE);
+        pre1=getContext().getSharedPreferences("data",Context.MODE_PRIVATE);
         String name1=pre1.getString("nameContent","");
-        if(name1.equals("")){name.setText("姓名");}else{name.setText(name1);}
+
+        if(!a.equals("")){
+        if(name1.equals("")){
+            look();
+        }else{name.setText(name1);}}
         customer_service.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -366,26 +367,27 @@ public class My extends Fragment {
         SharedPreferences pre1=getContext().getSharedPreferences("data",Context.MODE_PRIVATE);
         String name1=pre1.getString("nameContent","");
         if(name1.equals("")){name.setText("姓名");}else{name.setText(name1);}
-
     }
-//    @Override
-//    public void onActivityCreated(Bundle savedInstanceState) {
-//        super.onActivityCreated(savedInstanceState);
-//        LocalBroadcastManager broadcastManager = LocalBroadcastManager.getInstance(getActivity());
-//        IntentFilter intentFilter = new IntentFilter();
-//        intentFilter.addAction("android.intent.action.CART_BROADCAST");
-//        BroadcastReceiver mItemViewListClickReceiver = new BroadcastReceiver() {
-//            @Override
-//            public void onReceive(Context context, Intent intent){
-//                String msg = intent.getStringExtra("data");
-//                if("refresh".equals(msg)){
-//                    //SharedPreferences pre1=getContext().getSharedPreferences("data",Context.MODE_PRIVATE);
-//                    //String name1=pre1.getString("nameContent","");
-//                    //if(name1.equals("")){name.setText("姓名");}else{name.setText(name1);}
-//                }
-//            }
-//        };
-//        broadcastManager.registerReceiver(mItemViewListClickReceiver, intentFilter);
-//    }
-
+    private void look(){
+        new Thread() {
+            HttpURLConnection connection = null;
+            @Override
+            public void run() {
+                try {
+                    connection = HttpConnectionUtils.getConnection("MyData?index=name&name="+a);
+                    int code = connection.getResponseCode();
+                    if (code == 200) {
+                        InputStream inputStream = connection.getInputStream();
+                        String str = StreamChangeStrUtils.toChange(inputStream);
+                        android.os.Message message = Message.obtain();
+                        message.obj = str;
+                        message.what = 2;
+                        handler.sendMessage(message);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+    }
 }

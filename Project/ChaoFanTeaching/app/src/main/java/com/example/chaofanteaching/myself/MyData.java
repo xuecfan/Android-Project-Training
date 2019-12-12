@@ -17,8 +17,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.chaofanteaching.All;
+import com.example.chaofanteaching.HttpConnectionUtils;
+import com.example.chaofanteaching.InfoList.Info;
 import com.example.chaofanteaching.R;
+import com.example.chaofanteaching.StreamChangeStrUtils;
+
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -47,6 +54,20 @@ public class MyData extends AppCompatActivity {
             switch (msg.what){
                 case  1:
                     Toast.makeText(getApplicationContext(),"信息保存成功",Toast.LENGTH_SHORT).show();
+                    break;
+                case 2:
+                    String str = msg.obj.toString();
+                    Log.e("11",str);
+                    String[] s = str.split(";");
+                    for (int i = 0; i < s.length; i++) {
+                        String[] r = s[i].split(",");
+                        Log.e("11",r[0]);
+                        name_content.setText(r[0]);
+                        show.setText(r[1]);
+                        phone_content.setText(r[2]);
+                        address_content.setText(r[3]);
+                        break;
+                    }
             }
         }
     };
@@ -94,6 +115,9 @@ public class MyData extends AppCompatActivity {
         final String phone1=pre.getString("phoneContent","");
         final String address1=pre.getString("addressContent","");
         final String sex=pre.getString("sexContent","");
+        if(name1.equals("")||phone1.equals("")||address1.equals("")||sex.equals("")){
+            look();
+        }
         show.setText(sex);
         name_content.setText(name1);
         phone_content.setText(phone1);
@@ -131,31 +155,27 @@ public class MyData extends AppCompatActivity {
                 new Thread(){
                     @Override
                     public void run() {
-                        asynchttpform(name1,phone1,address1,sex);
+                        insert(name1,phone1,address1,sex);
                         android.os.Message msg= Message.obtain();
                         msg.what=1;
                         handler.sendMessage(msg);
                     }
                 }.start();
-//
             }
         });
 
-//        Intent intent = new Intent("android.intent.action.CART_BROADCAST");
-//        intent.putExtra("data","refresh");
-//        LocalBroadcastManager.getInstance(MyData.this).sendBroadcast(intent);
-//        sendBroadcast(intent);
+
     }
-    private void asynchttpform(String name1,String phone1,String address1,String sex){
+    private void insert(String name1,String phone1,String address1,String sex){
         OkHttpClient okHttpClient=new OkHttpClient();
         Request request=new Request.Builder().
-                url("http://175.24.102.160:8080/ChaoFanTeaching/MyData?name="+user+"&nameContent="+name1+"&phoneContent="+phone1+"&addressContent="+address1+"&sexContent="+sex)
+                url("http://175.24.102.160:8080/ChaoFanTeaching/MyData?name="+user+"&nameContent="+name1+"&phoneContent="+phone1+"&addressContent="+address1+"&sexContent="+sex+"&index=insert")
                 .build();
         Call call=okHttpClient.newCall(request);
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                Log.e("yxt","失败");
+                Log.e("data","失败");
             }
 
             @Override
@@ -164,6 +184,28 @@ public class MyData extends AppCompatActivity {
             }
         });
 
+    }
+    private void look(){
+        new Thread() {
+            HttpURLConnection connection = null;
+            @Override
+            public void run() {
+                try {
+                    connection = HttpConnectionUtils.getConnection("MyData?index=look&name="+user);
+                    int code = connection.getResponseCode();
+                    if (code == 200) {
+                        InputStream inputStream = connection.getInputStream();
+                        String str = StreamChangeStrUtils.toChange(inputStream);
+                        android.os.Message message = Message.obtain();
+                        message.obj = str;
+                        message.what = 2;
+                        handler.sendMessage(message);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
     }
 
 
