@@ -135,6 +135,8 @@ public class LoginActivity extends AppCompatActivity {
                         }else if(string.equals(para0)){
                             Toast.makeText(getApplication(),"用户名或密码错误",Toast.LENGTH_LONG).show();
                             myPW.setText("");
+                        }else if (string.equals("900")){
+                            Toast.makeText(getApplication(),"此账号登陆中，请检查",Toast.LENGTH_SHORT).show();
                         }
                         break;
                 }

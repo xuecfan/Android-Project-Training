@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.chaofanteaching.ActivityCollector;
 import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.R;
 import com.example.chaofanteaching.StreamChangeStrUtils;
@@ -25,6 +26,7 @@ import java.net.HttpURLConnection;
 
 public class LogonActivity extends AppCompatActivity {
     private int status = 2;//表示身份是家长还是老师，0为家长，1为老师，2为初值表示status还未修改过
+    private int landingStatus = 0;//表示登录状态，刚注册时默认为0，登录中为，未登录为0
     private EditText myId;
     private EditText myPW;
     private EditText myPWAgain;
@@ -38,6 +40,7 @@ public class LogonActivity extends AppCompatActivity {
         setContentView(R.layout.activity_logon);
 
 
+        ActivityCollector.addActivity(this);
 
         //获取id
         ImageView backToLogin = findViewById(R.id.backToLogin);
@@ -110,11 +113,17 @@ public class LogonActivity extends AppCompatActivity {
                     Toast.makeText(getApplication(),R.string.status,Toast.LENGTH_SHORT).show();
 
                 }else{
-                    addUser(user,pasd,status);
+                    addUser(user,pasd,status,landingStatus);
                 }
 
             }
         });
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        ActivityCollector.removeActivity(this);
     }
 
     //设置状态栏为白色，图标和字体为暗色
@@ -126,7 +135,7 @@ public class LogonActivity extends AppCompatActivity {
     }
 
     //在数据库里添加用户，判断是否注册成功
-    private void addUser(final String a, final String b, final int c){
+    private void addUser(final String a, final String b, final int c,final int d){
         handler = new Handler(){
             public void handleMessage(android.os.Message message){
                 switch (message.what){
@@ -135,13 +144,14 @@ public class LogonActivity extends AppCompatActivity {
                         String para = String.valueOf(1);
                         if (string.equals(para)){
                             Toast.makeText(getApplication(),"注册成功，请登录",Toast.LENGTH_LONG).show();
-                            finish();
+//                            finish();
 
-//                            Intent intent = new Intent();
-//                            intent.setClass(LogonActivity.this,LoginActivity.class);
-//                            startActivity(intent);
-                        }else{
-                            Toast.makeText(getApplication(),"注册失败",Toast.LENGTH_LONG).show();
+                            ActivityCollector.finishAll();
+                            Intent intent = new Intent();
+                            intent.setClass(LogonActivity.this,LoginActivity.class);
+                            startActivity(intent);
+                        }else if (string.equals("0")){
+                            Toast.makeText(getApplication(),"注册失败，此账号已存在",Toast.LENGTH_SHORT).show();
 
                         }
                 }
@@ -152,7 +162,7 @@ public class LogonActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    connection = HttpConnectionUtils.getConnection("AccountServlet?name="+a+"&pasd="+b+"&role="+c);
+                    connection = HttpConnectionUtils.getConnection("AccountServlet?name="+a+"&pasd="+b+"&role="+c+"&landingStatus="+d);
                     int code = connection.getResponseCode();
                     if(code!=200){
                         Log.e("error","网络连接失败");
