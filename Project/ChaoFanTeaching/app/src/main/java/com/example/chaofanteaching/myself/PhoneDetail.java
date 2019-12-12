@@ -32,6 +32,7 @@ public class PhoneDetail extends AppCompatActivity {
                 editor.putString("phoneContent",phone.getText().toString());
                 editor.apply();
                 startActivity(i);
+                finish();
             }
         });
         btn2.setOnClickListener(new View.OnClickListener() {

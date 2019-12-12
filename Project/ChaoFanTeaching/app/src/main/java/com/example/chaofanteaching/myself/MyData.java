@@ -9,9 +9,11 @@ import android.location.Address;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.annotation.IdRes;
 import android.support.v4.content.FileProvider;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -23,6 +25,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.chaofanteaching.ActivityCollector;
 import com.example.chaofanteaching.All;
 import com.example.chaofanteaching.R;
 import com.example.chaofanteaching.fragment.My;
@@ -35,6 +38,8 @@ import java.io.IOException;
 
 public class MyData extends AppCompatActivity {
 
+    private boolean run = false;
+    private final Handler handler = new Handler();
     private LinearLayout name;
     private LinearLayout phone;
     private LinearLayout address;
@@ -50,6 +55,7 @@ public class MyData extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_data);
+
         fanhui=findViewById(R.id.fanhui);
         name = findViewById(R.id.name);
         phone = findViewById(R.id.phone);
@@ -95,6 +101,7 @@ public class MyData extends AppCompatActivity {
                 Intent i = new Intent();
                 i.setClass(getApplicationContext(), NameDetail.class);
                 startActivity(i);
+                finish();
             }
         });
         phone.setOnClickListener(new View.OnClickListener() {
@@ -103,6 +110,7 @@ public class MyData extends AppCompatActivity {
                 Intent i = new Intent();
                 i.setClass(getApplicationContext(), PhoneDetail.class);
                 startActivity(i);
+                finish();
             }
         });
         address.setOnClickListener(new View.OnClickListener() {
@@ -111,8 +119,16 @@ public class MyData extends AppCompatActivity {
                 Intent i = new Intent();
                 i.setClass(getApplicationContext(), AddressDetail.class);
                 startActivity(i);
+                finish();
             }
         });
+//        Intent intent = new Intent("android.intent.action.CART_BROADCAST");
+//        intent.putExtra("data","refresh");
+//        LocalBroadcastManager.getInstance(MyData.this).sendBroadcast(intent);
+//        sendBroadcast(intent);
     }
+
+
+
 
 }

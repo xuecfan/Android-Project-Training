@@ -27,11 +27,14 @@ public class NameDetail extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i=new Intent(NameDetail.this,MyData.class);
+
                 SharedPreferences sharedPreferences=getSharedPreferences("data",MODE_PRIVATE);
                 SharedPreferences.Editor editor=sharedPreferences.edit();
                 editor.putString("nameContent",name.getText().toString());
                 editor.apply();
+
                 startActivity(i);
+                finish();
             }
         });
         btn2.setOnClickListener(new View.OnClickListener() {

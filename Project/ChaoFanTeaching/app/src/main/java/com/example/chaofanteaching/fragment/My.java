@@ -1,8 +1,10 @@
 package com.example.chaofanteaching.fragment;
 
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -17,6 +19,8 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.LocalBroadcastManager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -90,8 +94,7 @@ public class My extends Fragment {
         okHttpClient=new OkHttpClient();
         pre= getContext().getSharedPreferences("login", Context.MODE_PRIVATE);
         a = pre.getString("userName", "");
-        SharedPreferences pre1=getContext().getSharedPreferences("data",Context.MODE_PRIVATE);
-        String name1=pre1.getString("nameContent","");
+
 
         customer_service=view.findViewById(R.id.customer_service);
         send=view.findViewById(R.id.send);
@@ -100,11 +103,14 @@ public class My extends Fragment {
         student=view.findViewById(R.id.student);
         setting=view.findViewById(R.id.setting);
         image=view.findViewById(R.id.image);
-        if(name1.equals("")){name.setText("姓名");}else{name.setText(name1);}
+
         if(a.equals("")){
             image.setImageDrawable(getContext().getResources().getDrawable(R.drawable.boy));
         }else{initView();}
 
+        SharedPreferences pre1=getContext().getSharedPreferences("data",Context.MODE_PRIVATE);
+        String name1=pre1.getString("nameContent","");
+        if(name1.equals("")){name.setText("姓名");}else{name.setText(name1);}
         customer_service.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -137,7 +143,11 @@ public class My extends Fragment {
                 }else{
                 Intent i=new Intent();
                 i.setClass(getContext(), MyData.class);
-                startActivity(i);}
+                    i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
+
+                }
+
             }
         });
         student.setOnClickListener(new View.OnClickListener() {
@@ -349,4 +359,33 @@ public class My extends Fragment {
         //开始执行异步任务
         task.execute("http://175.24.102.160:8080/ChaoFanTeaching/PhotoInsert?name="+a);
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        SharedPreferences pre1=getContext().getSharedPreferences("data",Context.MODE_PRIVATE);
+        String name1=pre1.getString("nameContent","");
+        if(name1.equals("")){name.setText("姓名");}else{name.setText(name1);}
+
+    }
+//    @Override
+//    public void onActivityCreated(Bundle savedInstanceState) {
+//        super.onActivityCreated(savedInstanceState);
+//        LocalBroadcastManager broadcastManager = LocalBroadcastManager.getInstance(getActivity());
+//        IntentFilter intentFilter = new IntentFilter();
+//        intentFilter.addAction("android.intent.action.CART_BROADCAST");
+//        BroadcastReceiver mItemViewListClickReceiver = new BroadcastReceiver() {
+//            @Override
+//            public void onReceive(Context context, Intent intent){
+//                String msg = intent.getStringExtra("data");
+//                if("refresh".equals(msg)){
+//                    //SharedPreferences pre1=getContext().getSharedPreferences("data",Context.MODE_PRIVATE);
+//                    //String name1=pre1.getString("nameContent","");
+//                    //if(name1.equals("")){name.setText("姓名");}else{name.setText(name1);}
+//                }
+//            }
+//        };
+//        broadcastManager.registerReceiver(mItemViewListClickReceiver, intentFilter);
+//    }
+
 }

@@ -33,6 +33,7 @@ public class AddressDetail extends AppCompatActivity {
                 editor.putString("addressContent",address.getText().toString());
                 editor.apply();
                 startActivity(i);
+                finish();
             }
         });
         btn2.setOnClickListener(new View.OnClickListener() {
