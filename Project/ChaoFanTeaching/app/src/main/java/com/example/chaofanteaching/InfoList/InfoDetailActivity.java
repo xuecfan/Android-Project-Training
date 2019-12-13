@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.R;
@@ -14,6 +14,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 
 public class InfoDetailActivity extends AppCompatActivity {
+    private TextView back;
     private Handler handler;
     private TextView nametext;
     private TextView sextext;
@@ -30,6 +31,13 @@ public class InfoDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.info_detail);
+        back=findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         Intent request=getIntent();
         String name=request.getStringExtra("name");
         nametext=findViewById(R.id.name);

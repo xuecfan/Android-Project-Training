@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ZoomControls;
 import com.baidu.location.BDAbstractLocationListener;
@@ -35,6 +36,7 @@ import java.net.HttpURLConnection;
 import java.util.List;
 
 public class AddInfoActivity extends AppCompatActivity {
+    private TextView back;
     private MapView mapView;
     private LocationClient locationClient;
     private LocationClientOption locationClientOption;
@@ -62,6 +64,13 @@ public class AddInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         SDKInitializer.initialize(getApplicationContext());
         setContentView(R.layout.add_info);
+        back=findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         mapView = findViewById(R.id.bmapView);
         baiduMap=mapView.getMap();
         baiduMap.setMyLocationEnabled(true);

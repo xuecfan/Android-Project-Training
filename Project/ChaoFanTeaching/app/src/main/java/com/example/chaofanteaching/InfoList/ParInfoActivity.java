@@ -35,6 +35,7 @@ import java.net.HttpURLConnection;
 import java.util.List;
 
 public class ParInfoActivity extends AppCompatActivity {
+    private TextView back;
     private LocationClient locationClient;
     private LocationClientOption locationClientOption;
     private BaiduMap baiduMap;
@@ -56,6 +57,13 @@ public class ParInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         SDKInitializer.initialize(getApplicationContext());
         setContentView(R.layout.infopar_deatil);
+        back=findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         Intent request=getIntent();
         String name=request.getStringExtra("name");
         nametext=findViewById(R.id.name);
