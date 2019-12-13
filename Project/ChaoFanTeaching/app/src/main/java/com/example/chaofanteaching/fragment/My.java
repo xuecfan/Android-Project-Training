@@ -358,7 +358,7 @@ public class My extends Fragment {
         //创建上传异步任务类的对象
         UpLoadFile task=new UpLoadFile(getContext(),filepath);
         //开始执行异步任务
-        task.execute("http://175.24.102.160:8080/ChaoFanTeaching/PhotoInsert?name="+a);
+        task.execute("http://175.24.102.160:8080/ChaoFanTeaching/PhotoInsert?index=photo&name="+a);
     }
 
     @Override

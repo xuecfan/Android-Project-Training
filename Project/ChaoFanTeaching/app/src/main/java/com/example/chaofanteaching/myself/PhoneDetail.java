@@ -26,12 +26,12 @@ public class PhoneDetail extends AppCompatActivity {
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(PhoneDetail.this,MyData.class);
+                //Intent i=new Intent(PhoneDetail.this,MyData.class);
                 SharedPreferences sharedPreferences=getSharedPreferences("data",MODE_PRIVATE);
                 SharedPreferences.Editor editor=sharedPreferences.edit();
                 editor.putString("phoneContent",phone.getText().toString());
                 editor.apply();
-                startActivity(i);
+                //startActivity(i);
                 finish();
             }
         });

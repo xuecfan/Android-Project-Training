@@ -27,7 +27,7 @@ public class NameDetail extends AppCompatActivity {
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(NameDetail.this,MyData.class);
+                //Intent i=new Intent(NameDetail.this,MyData.class);
                 SharedPreferences pre=getSharedPreferences("login", Context.MODE_PRIVATE);
                 String a = pre.getString("userName", "");
                 SharedPreferences sharedPreferences=getSharedPreferences("data",MODE_PRIVATE);
@@ -35,7 +35,7 @@ public class NameDetail extends AppCompatActivity {
                 editor.putString("nameContent",name.getText().toString());
                 editor.apply();
 
-                startActivity(i);
+                //startActivity(i);
                 finish();
             }
         });
