@@ -26,6 +26,10 @@ import com.example.chaofanteaching.fragment.Message;
 import com.example.chaofanteaching.fragment.My;
 import com.example.chaofanteaching.myself.MyData;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,6 +38,8 @@ public class All extends AppCompatActivity {
     private static int isExit = 0;
     private Map<String, ImageView> imageViewMap = new HashMap<>();
     private Map<String, TextView> textViewMap = new HashMap<>();
+    private EventBus eventBus;
+    private FragmentTabHost fragmentTabHost;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +49,8 @@ public class All extends AppCompatActivity {
         ActivityCollector.addActivity(this);
         SharedPreferences pre=getSharedPreferences("login", Context.MODE_PRIVATE);
         String user = pre.getString("userName", "");
-        FragmentTabHost fragmentTabHost = findViewById(android.R.id.tabhost);
+        String role=pre.getString("role","");
+        fragmentTabHost = findViewById(android.R.id.tabhost);
 
         fragmentTabHost.setup(this,
                 getSupportFragmentManager(),
@@ -51,21 +58,30 @@ public class All extends AppCompatActivity {
 
         Intent i=getIntent();
         int a=i.getIntExtra("status",0);
-        if(a==0){
-            TabHost.TabSpec tabSpec1 = fragmentTabHost.newTabSpec("tag1")
-                    .setIndicator(getTabSpecView("tag1",R.drawable.list,"列表"));
-
+        TabHost.TabSpec tabSpec1 = fragmentTabHost.newTabSpec("tag1")
+                .setIndicator(getTabSpecView("tag1",R.drawable.list,"列表"));
+        if(!role.equals("")){
+        if(role.equals("10")){
             fragmentTabHost.addTab(tabSpec1,
                     List.class,
                     null);
-        }else if(a==1){
-            TabHost.TabSpec tabSpec1 = fragmentTabHost.newTabSpec("tag1")
-                    .setIndicator(getTabSpecView("tag1",R.drawable.list,"列表"));
-
+        }else if(role.equals("11")){
             fragmentTabHost.addTab(tabSpec1,
                     List1.class,
                     null);
         }
+        }else {
+            if(a==0){
+                fragmentTabHost.addTab(tabSpec1,
+                        List.class,
+                        null);
+            }else if(a==1){
+                fragmentTabHost.addTab(tabSpec1,
+                        List1.class,
+                        null);
+            }
+        }
+
 
 
         TabHost.TabSpec tabSpec2 = fragmentTabHost.newTabSpec("tag2")
@@ -94,13 +110,13 @@ public class All extends AppCompatActivity {
 //            }
 //        }else{
 
-                fragmentTabHost.setCurrentTab(2);
-                imageViewMap.get("tag3").setImageResource(R.drawable.my1);
-                textViewMap.get("tag3").setTextColor(getResources().getColor(R.color.colorPrimary));
+//                fragmentTabHost.setCurrentTab(2);
+//                imageViewMap.get("tag3").setImageResource(R.drawable.my1);
+//                textViewMap.get("tag3").setTextColor(getResources().getColor(R.color.colorPrimary));
 
-//            fragmentTabHost.setCurrentTab(0);
-//            imageViewMap.get("tag1").setImageResource(R.drawable.list1);
-//            textViewMap.get("tag1").setTextColor(getResources().getColor(R.color.colorPrimary));
+            fragmentTabHost.setCurrentTab(0);
+            imageViewMap.get("tag1").setImageResource(R.drawable.list1);
+            textViewMap.get("tag1").setTextColor(getResources().getColor(R.color.colorPrimary));
             //activity not found
 //        }
 
@@ -141,6 +157,25 @@ public class All extends AppCompatActivity {
             }
         });
     }
+
+//    @Subscribe(sticky = true)
+//    public void onEventBeanEvent(String message){
+//        if(message.equals("parent")){
+//            TabHost.TabSpec tabSpec1 = fragmentTabHost.newTabSpec("tag1")
+//                    .setIndicator(getTabSpecView("tag1",R.drawable.list,"列表"));
+//
+//            fragmentTabHost.addTab(tabSpec1,
+//                    List.class,
+//                    null);
+//        }else if(message.equals("teacher")){
+//            TabHost.TabSpec tabSpec1 = fragmentTabHost.newTabSpec("tag1")
+//                    .setIndicator(getTabSpecView("tag1",R.drawable.list,"列表"));
+//
+//            fragmentTabHost.addTab(tabSpec1,
+//                    List1.class,
+//                    null);
+//        }
+//    }
 
     @Override
     protected void onDestroy(){

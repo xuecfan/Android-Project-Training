@@ -2,7 +2,9 @@ package com.example.chaofanteaching.sign;
 
 import android.animation.ObjectAnimator;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -12,6 +14,8 @@ import android.widget.Button;
 import com.example.chaofanteaching.ActivityCollector;
 import com.example.chaofanteaching.All;
 import com.example.chaofanteaching.R;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -91,8 +95,10 @@ public class ChooseIdentityActivity extends Activity implements View.OnTouchList
         Intent intent = new Intent(ChooseIdentityActivity.this, All.class);
         intent.setAction("true");
         if(button == mTestBtn){
+            //EventBus.getDefault().postSticky("parent");
             intent.putExtra("status",0);
         }else if (button == mTestBtn2){
+            //EventBus.getDefault().postSticky("teacher");
             intent.putExtra("status",1);
         }
         startActivity(intent);

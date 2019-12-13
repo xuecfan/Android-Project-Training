@@ -21,6 +21,8 @@ import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.R;
 import com.example.chaofanteaching.StreamChangeStrUtils;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 
@@ -110,6 +112,11 @@ public class LoginActivity extends AppCompatActivity {
                     case 1:
                         String string = message.obj.toString();
                         System.out.println("从服务器传来的servlet页面数字："+string);
+//                        if(string.equals("10")){
+//                            EventBus.getDefault().post("parent");
+//                        }else{
+//                            EventBus.getDefault().post("teacher");
+//                        }
                         if (string.equals("10") || string.equals("11")){
                             SharedPreferences sharedPreferences = getSharedPreferences("login", Context.MODE_PRIVATE);
                             SharedPreferences.Editor editor = sharedPreferences.edit();

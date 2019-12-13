@@ -57,6 +57,7 @@ public class MyData extends AppCompatActivity {
                     break;
                 case 2:
                     String str = msg.obj.toString();
+//                    if(!str.equals("null")){
                     Log.e("11",str);
                     String[] s = str.split(";");
                     for (int i = 0; i < s.length; i++) {
@@ -67,9 +68,9 @@ public class MyData extends AppCompatActivity {
                         phone_content.setText(r[2]);
                         address_content.setText(r[3]);
                         break;
-                    }
+                    }}
             }
-        }
+//        }
     };
 
 
@@ -104,9 +105,10 @@ public class MyData extends AppCompatActivity {
         fanhui.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(MyData.this,All.class);
-                i.putExtra("all","3");
-                startActivity(i);
+//                Intent i=new Intent(MyData.this,All.class);
+//                i.putExtra("all","3");
+//                startActivity(i);
+                finish();
 
             }
         });
@@ -115,6 +117,7 @@ public class MyData extends AppCompatActivity {
         final String phone1=pre.getString("phoneContent","");
         final String address1=pre.getString("addressContent","");
         final String sex=pre.getString("sexContent","");
+
         if(name1.equals("")||phone1.equals("")||address1.equals("")||sex.equals("")){
             look();
         }
