@@ -109,14 +109,18 @@ public class All extends AppCompatActivity {
 
 //            }
 //        }else{
-
-//                fragmentTabHost.setCurrentTab(2);
-//                imageViewMap.get("tag3").setImageResource(R.drawable.my1);
-//                textViewMap.get("tag3").setTextColor(getResources().getColor(R.color.colorPrimary));
-
+//            Intent intent=getIntent();
+//
+//
+//        if(!(intent ==null) &&intent.getStringExtra("all").equals("3")){
+//            fragmentTabHost.setCurrentTab(2);
+//            imageViewMap.get("tag3").setImageResource(R.drawable.my1);
+//            textViewMap.get("tag3").setTextColor(getResources().getColor(R.color.colorPrimary));
+//        }else{
             fragmentTabHost.setCurrentTab(0);
             imageViewMap.get("tag1").setImageResource(R.drawable.list1);
             textViewMap.get("tag1").setTextColor(getResources().getColor(R.color.colorPrimary));
+//    }
             //activity not found
 //        }
 

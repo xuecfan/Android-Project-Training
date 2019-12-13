@@ -58,18 +58,30 @@ public class MyData extends AppCompatActivity {
                 case 2:
                     String str = msg.obj.toString();
 //                    if(!str.equals("null")){
-                    Log.e("11",str);
                     String[] s = str.split(";");
                     for (int i = 0; i < s.length; i++) {
                         String[] r = s[i].split(",");
                         if(r[0].equals("null")){name_content.setText("");}
-                        else{name_content.setText(r[0]);}
-                        if(!r[1].equals("null")){show.setText(r[1]);}
+                        else{name_content.setText(r[0]);
+                            SharedPreferences.Editor editor=pre.edit();
+                            editor.putString("nameContent",r[0]);
+                            editor.commit();}
+                        if(!r[1].equals("null")){show.setText(r[1]);
+                            SharedPreferences.Editor editor=pre.edit();
+                            editor.putString("sexContent",r[1]);
+                            editor.commit();}
                         else{show.setText("");}
                         if(r[2].equals("null")){phone_content.setText("");}
-                        else{phone_content.setText(r[2]);}
+                        else{phone_content.setText(r[2]);
+                            SharedPreferences.Editor editor=pre.edit();
+                            editor.putString("phoneContent",r[2]);
+                            editor.commit();}
                         if(r[3].equals("null")){address_content.setText("");}
-                        else{address_content.setText(r[3]);}
+                        else{address_content.setText(r[3]);
+                            SharedPreferences.Editor editor=pre.edit();
+                            editor.putString("addressContent",r[3]);
+                            editor.commit();}
+
                         break;
                     }}
             }
@@ -99,8 +111,8 @@ public class MyData extends AppCompatActivity {
                 String tip = checkedId == R.id.male ? "男" : "女";
                 show.setVisibility(View.VISIBLE);
                 show.setText(tip);
-                SharedPreferences sharedPreferences=getSharedPreferences("data",MODE_PRIVATE);
-                SharedPreferences.Editor editor=sharedPreferences.edit();
+                pre=getSharedPreferences("data",MODE_PRIVATE);
+                final SharedPreferences.Editor editor=pre.edit();
                 editor.putString("sexContent",tip);
                 editor.apply();
             }
@@ -115,13 +127,16 @@ public class MyData extends AppCompatActivity {
 
             }
         });
-        final SharedPreferences pre=getSharedPreferences("data",MODE_PRIVATE);
+        pre=getSharedPreferences("data",MODE_PRIVATE);
         final String name1=pre.getString("nameContent","");
         final String phone1=pre.getString("phoneContent","");
         final String address1=pre.getString("addressContent","");
         final String sex=pre.getString("sexContent","");
-
-        if(pre.edit().equals("")){
+        Log.e("yxt",name1);
+        Log.e("yxt",sex);
+        Log.e("yxt",phone1);
+        Log.e("yxt",address1);
+        if(name1.equals("")||phone1.equals("")||sex.equals("")||address1.equals("")){
             look();
         }else{
         show.setText(sex);
@@ -158,17 +173,28 @@ public class MyData extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(name1.equals("")||phone1.equals("")||address1.equals("")||sex.equals("")){
+                    Toast.makeText(getApplicationContext(),"您的信息有空值，请重新填写",Toast.LENGTH_SHORT).show();
+                }else{
                 new Thread(){
                     @Override
                     public void run() {
-                        insert(name1,phone1,address1,sex);
-                        pre.edit().clear().commit();
-                        android.os.Message msg= Message.obtain();
-                        msg.what=1;
-                        handler.sendMessage(msg);
+
+                            insert(name1,phone1,address1,sex);
+                            //pre.edit().clear().commit();
+                            android.os.Message msg= Message.obtain();
+                            msg.what=1;
+                            handler.sendMessage(msg);
+
+
                     }
                 }.start();
+                    finish();}
+
+
             }
+
+
         });
 
 
@@ -216,6 +242,13 @@ public class MyData extends AppCompatActivity {
     }
 
 
-
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        String a= pre.getString("nameContent","");
+        name_content.setText(a);
+        SharedPreferences.Editor editor=pre.edit();
+        editor.putString("nameContent",a);
+        editor.commit();
+    }
 }
