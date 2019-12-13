@@ -21,7 +21,6 @@ import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.R;
 import com.example.chaofanteaching.StreamChangeStrUtils;
 
-import org.greenrobot.eventbus.EventBus;
 
 import java.io.InputStream;
 import java.net.HttpURLConnection;
