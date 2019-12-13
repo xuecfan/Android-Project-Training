@@ -62,11 +62,14 @@ public class MyData extends AppCompatActivity {
                     String[] s = str.split(";");
                     for (int i = 0; i < s.length; i++) {
                         String[] r = s[i].split(",");
-                        Log.e("11",r[0]);
-                        name_content.setText(r[0]);
-                        show.setText(r[1]);
-                        phone_content.setText(r[2]);
-                        address_content.setText(r[3]);
+                        if(r[0].equals("null")){name_content.setText("");}
+                        else{name_content.setText(r[0]);}
+                        if(!r[1].equals("null")){show.setText(r[1]);}
+                        else{show.setText("");}
+                        if(r[2].equals("null")){phone_content.setText("");}
+                        else{phone_content.setText(r[2]);}
+                        if(r[3].equals("null")){address_content.setText("");}
+                        else{address_content.setText(r[3]);}
                         break;
                     }}
             }
@@ -112,19 +115,19 @@ public class MyData extends AppCompatActivity {
 
             }
         });
-        SharedPreferences pre=getSharedPreferences("data",MODE_PRIVATE);
+        final SharedPreferences pre=getSharedPreferences("data",MODE_PRIVATE);
         final String name1=pre.getString("nameContent","");
         final String phone1=pre.getString("phoneContent","");
         final String address1=pre.getString("addressContent","");
         final String sex=pre.getString("sexContent","");
 
-        if(name1.equals("")||phone1.equals("")||address1.equals("")||sex.equals("")){
+        if(pre.edit().equals("")){
             look();
-        }
+        }else{
         show.setText(sex);
         name_content.setText(name1);
         phone_content.setText(phone1);
-        address_content.setText(address1);
+        address_content.setText(address1);}
         name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -159,6 +162,7 @@ public class MyData extends AppCompatActivity {
                     @Override
                     public void run() {
                         insert(name1,phone1,address1,sex);
+                        pre.edit().clear().commit();
                         android.os.Message msg= Message.obtain();
                         msg.what=1;
                         handler.sendMessage(msg);
