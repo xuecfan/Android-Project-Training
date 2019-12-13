@@ -184,7 +184,6 @@ public class MyData extends AppCompatActivity {
                     @Override
                     public void run() {
                             insert(name1,phone1,address1,sex1);
-                            //pre.edit().clear().commit();
                             android.os.Message msg= Message.obtain();
                             msg.what=1;
                             handler.sendMessage(msg);

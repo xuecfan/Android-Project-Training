@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -13,16 +15,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-
+import android.widget.Toast;
 import com.example.chaofanteaching.R;
 import com.example.chaofanteaching.UpLoadFile;
-import com.example.chaofanteaching.fragment.My;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-
 import okhttp3.OkHttpClient;
 
 public class Student_Authentication extends AppCompatActivity {
@@ -34,6 +33,22 @@ public class Student_Authentication extends AppCompatActivity {
     private ImageButton student1;
     private ImageButton student2;
     private Button shangchuan;
+    private Handler handler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what){
+                case  0:
+                    Log.i("file","学生证正面上传成功");
+                    Toast.makeText(getApplicationContext(),"上传成功",Toast.LENGTH_SHORT).show();
+                    student1.setImageDrawable(getResources().getDrawable(R.drawable.boy));
+                    break;
+                case  1:
+                    Log.i("file","学生证背面上传成功");
+                    student2.setImageDrawable(getResources().getDrawable(R.drawable.boy));
+                    break;
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +67,30 @@ public class Student_Authentication extends AppCompatActivity {
         au_fanhui.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                finish();
+            }
+        });
+        shangchuan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new Thread(){
+                    @Override
+                    public void run() {
+                        asyncupop();
+                        android.os.Message msg= Message.obtain();
+                        msg.what=0;
+                        handler.sendMessage(msg);
+                    }
+                }.start();
+                new Thread(){
+                    @Override
+                    public void run() {
+                        asyncupop1();
+                        android.os.Message msg= Message.obtain();
+                        msg.what=1;
+                        handler.sendMessage(msg);
+                    }
+                }.start();
                 finish();
             }
         });
@@ -82,14 +121,14 @@ public class Student_Authentication extends AppCompatActivity {
             Bitmap img = (Bitmap) data.getExtras().get("data");
             student1.setImageBitmap(img);
             setPicToView(img);
-            asyncupop();
+
         }
         if(requestCode == 8889 && resultCode == RESULT_OK) {
             //获取系统摄像头拍照的结果
             Bitmap img = (Bitmap) data.getExtras().get("data");
             student2.setImageBitmap(img);
             setPicToView1(img);
-            asyncupop1();
+
         }
     }
     private void setPicToView(Bitmap mBitmap){

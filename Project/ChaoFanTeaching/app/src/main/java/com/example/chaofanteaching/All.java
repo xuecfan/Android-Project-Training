@@ -97,38 +97,10 @@ public class All extends AppCompatActivity {
         fragmentTabHost.addTab(tabSpec3,
                 My.class,
                 null);
-//        Intent intent=new Intent();
-//        intent.setClassName(getPackageName(),"com.example.chaofanteaching.myself.MyData");
-//        ResolveInfo resolveInfo = getPackageManager().resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY);
-//        if(resolveInfo != null) {
-//            //activity found
-//            Intent intent1=getIntent();
-//            String b=intent1.getStringExtra("all");
-//            //Log.e("yxt",b);
-//            if(b.equals("3")){
 
-//            }
-//        }else{
-//            Intent intent=getIntent();
-//
-//
-//        if(!(intent ==null) &&intent.getStringExtra("all").equals("3")){
-//            fragmentTabHost.setCurrentTab(2);
-//            imageViewMap.get("tag3").setImageResource(R.drawable.my1);
-//            textViewMap.get("tag3").setTextColor(getResources().getColor(R.color.colorPrimary));
-//        }else{
-            fragmentTabHost.setCurrentTab(0);
-            imageViewMap.get("tag1").setImageResource(R.drawable.list1);
-            textViewMap.get("tag1").setTextColor(getResources().getColor(R.color.colorPrimary));
-//    }
-            //activity not found
-//        }
-
-
-
-
-
-
+        fragmentTabHost.setCurrentTab(0);
+        imageViewMap.get("tag1").setImageResource(R.drawable.list1);
+        textViewMap.get("tag1").setTextColor(getResources().getColor(R.color.colorPrimary));
         fragmentTabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
             @Override
             public void onTabChanged(String tabId) {
