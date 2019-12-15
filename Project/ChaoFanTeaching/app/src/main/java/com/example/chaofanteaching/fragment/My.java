@@ -33,6 +33,7 @@ import com.example.chaofanteaching.StreamChangeStrUtils;
 import com.example.chaofanteaching.UpLoadFile;
 import com.example.chaofanteaching.about.Student_Authentication;
 import com.example.chaofanteaching.myself.MyData;
+import com.example.chaofanteaching.myself.RenZheng;
 import com.example.chaofanteaching.myself.Setting;
 import com.example.chaofanteaching.sign.LoginActivity;
 import java.io.File;
@@ -63,8 +64,11 @@ public class My extends Fragment {
     private TextView name;
     private ImageView image;
     private Bitmap bitmap;
+    private ImageView img;
+    private TextView renzheng;
     private SharedPreferences pre,pre1;
     private String a="";
+    private SharedPreferences.Editor editor;
     private static final int PHOTO_REQUEST_GALLERY = 2;// 从相册中选择
     private Handler handler=new Handler(){
         @Override
@@ -77,10 +81,21 @@ public class My extends Fragment {
                     String str = msg.obj.toString();
                     Log.e("11",str);
 
-                    SharedPreferences.Editor editor=pre1.edit();
+                    editor=pre1.edit();
                     editor.putString("nameContent",str);
                     editor.commit();
                     name.setText(str);
+                    break;
+                case 3:
+                    String result=  msg.obj.toString();
+                    Log.e("yxt",result);
+                    if(result.equals("1")){
+                        editor=pre1.edit();
+                        editor.putString("renzheng",result);
+                        editor.commit();
+                        renzheng.setText("已认证");
+                        img.setImageDrawable(getResources().getDrawable(R.drawable.v1));
+                    }
                     break;
             }
         }
@@ -101,6 +116,8 @@ public class My extends Fragment {
         student=view.findViewById(R.id.student);
         setting=view.findViewById(R.id.setting);
         image=view.findViewById(R.id.image);
+        img=view.findViewById(R.id.img);
+        renzheng=view.findViewById(R.id.renzheng);
 
         if(a.equals("")){
             image.setImageDrawable(getContext().getResources().getDrawable(R.drawable.boy));
@@ -108,6 +125,9 @@ public class My extends Fragment {
 
         pre1=getContext().getSharedPreferences("data",Context.MODE_PRIVATE);
         String name1=pre1.getString("nameContent","");
+        if(pre1.getString("renzheng","").equals("")){
+            renzheng();
+        }
 
         if(!a.equals("")){
         if(name1.equals("")){
@@ -163,9 +183,15 @@ public class My extends Fragment {
                     Intent i=new Intent(getContext(), LoginActivity.class);
                     startActivity(i);
                 }else {
-                Intent i=new Intent();
-                i.setClass(getContext(), Student_Authentication.class);
-                startActivity(i);}
+                    Intent i=new Intent();
+                    if(pre1.getString("renzheng","").equals("1")){
+                        i.setClass(getContext(),RenZheng.class);
+                        startActivity(i);
+                    }else{
+                        i.setClass(getContext(), Student_Authentication.class);
+                        startActivity(i);
+                    }
+                }
             }
         });
         setting.setOnClickListener(new View.OnClickListener() {
@@ -368,9 +394,13 @@ public class My extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        SharedPreferences pre1=getContext().getSharedPreferences("data",Context.MODE_PRIVATE);
+        pre1=getContext().getSharedPreferences("data",Context.MODE_PRIVATE);
         String name1=pre1.getString("nameContent","");
         if(name1.equals("")){name.setText("姓名");}else{name.setText(name1);}
+        if(pre1.getString("renzheng","").equals("1")){
+            renzheng.setText("已认证");
+            img.setImageDrawable(getResources().getDrawable(R.drawable.v1));
+        }
     }
     private void look(){
         new Thread() {
@@ -386,6 +416,28 @@ public class My extends Fragment {
                         android.os.Message message = Message.obtain();
                         message.obj = str;
                         message.what = 2;
+                        handler.sendMessage(message);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+    }
+    private void renzheng(){
+        new Thread() {
+            HttpURLConnection connection = null;
+            @Override
+            public void run() {
+                try {
+                    connection = HttpConnectionUtils.getConnection("MyData?index=renzheng&name="+a);
+                    int code = connection.getResponseCode();
+                    if (code == 200) {
+                        InputStream inputStream = connection.getInputStream();
+                        String str = StreamChangeStrUtils.toChange(inputStream);
+                        android.os.Message message = Message.obtain();
+                        message.obj = str;
+                        message.what = 3;
                         handler.sendMessage(message);
                     }
                 } catch (Exception e) {

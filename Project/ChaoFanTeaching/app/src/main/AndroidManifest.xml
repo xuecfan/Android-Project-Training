@@ -32,7 +32,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".MyPublish.MyPublishActivity"></activity>
+        <activity android:name=".MyPublish.MyPublishActivity" />
 
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
@@ -80,6 +80,7 @@
         </provider>
 
         <activity android:name=".myself.Setting" />
+        <activity android:name=".myself.RenZheng"></activity>
     </application>
 
 </manifest>
