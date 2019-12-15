@@ -283,6 +283,7 @@ public class My extends Fragment {
     }
 
     private void initView() {
+
         //初始化控件
         Bitmap bt = BitmapFactory.decodeFile(path + a+".png");//从Sd中找头像，转换成Bitmap
         if (bt != null) {
@@ -396,12 +397,27 @@ public class My extends Fragment {
         super.onResume();
         pre1=getContext().getSharedPreferences("data",Context.MODE_PRIVATE);
         String name1=pre1.getString("nameContent","");
-        if(name1.equals("")){name.setText("姓名");}else{name.setText(name1);}
+        if(name1.equals("")||name1.equals("null")){name.setText("用户名");}
+        else{name.setText(name1);}
+
         if(pre1.getString("renzheng","").equals("1")){
             renzheng.setText("已认证");
             img.setImageDrawable(getResources().getDrawable(R.drawable.v1));
         }
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        pre1=getContext().getSharedPreferences("data",Context.MODE_PRIVATE);
+        String name1=pre1.getString("nameContent","");
+        if(name1.equals("")||name1.equals("null")){name.setText("用户名");}else{name.setText(name1);}
+        if(pre1.getString("renzheng","").equals("1")){
+            renzheng.setText("已认证");
+            img.setImageDrawable(getResources().getDrawable(R.drawable.v1));
+        }
+    }
+
     private void look(){
         new Thread() {
             HttpURLConnection connection = null;
@@ -424,6 +440,9 @@ public class My extends Fragment {
             }
         }.start();
     }
+
+
+
     private void renzheng(){
         new Thread() {
             HttpURLConnection connection = null;

@@ -12,6 +12,7 @@
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:hint="请输入修改后的电话"
+        android:paddingLeft="70dp"
         android:textSize="20dp"
         android:background="@drawable/shape"
         android:id="@+id/phone"

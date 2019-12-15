@@ -55,7 +55,11 @@ public class MyData extends AppCompatActivity {
                     String[] s = str.split(";");
                     for (int i = 0; i < s.length; i++) {
                         String[] r = s[i].split(",");
-                        if(r[0].equals("null")){name_content.setText("");}
+                        if(r[0].equals("null")){name_content.setText("");
+                            editor=pre.edit();
+                            editor.putString("nameContent","");
+                            editor.commit();
+                            }
                         else{name_content.setText(r[0]);
                             editor=pre.edit();
                             editor.putString("nameContent",r[0]);
