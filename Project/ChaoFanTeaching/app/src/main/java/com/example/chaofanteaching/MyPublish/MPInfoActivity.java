@@ -1,9 +1,6 @@
 package com.example.chaofanteaching.MyPublish;
 
-import android.content.Context;
 import android.content.Intent;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,12 +13,8 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.R;
-import com.example.chaofanteaching.StreamChangeStrUtils;
-
-import java.io.InputStream;
 import java.net.HttpURLConnection;
 
 public class MPInfoActivity extends AppCompatActivity {

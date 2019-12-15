@@ -81,6 +81,7 @@
 
         <activity android:name=".myself.Setting" />
         <activity android:name=".myself.RenZheng"></activity>
+        <activity android:name=".MyPublish.MPInfoActivity"></activity>
     </application>
 
 </manifest>
