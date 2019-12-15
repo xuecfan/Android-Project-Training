@@ -5,46 +5,60 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ImageButton
-        android:id="@+id/au_fanhui"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#00000000"
-        android:src="@drawable/left"
-        />
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="学生证正面:"
-        />
-    <ImageButton
-        android:id="@+id/student1"
+        android:layout_width="20dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:text="＜"
+        android:textStyle="bold"
+        android:textSize="17dp"
+        android:id="@+id/au_fanhui"/>
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="20dp"
         android:layout_gravity="center"
-        android:background="#00000000"
-        android:src="@drawable/boy"
+        android:text="学生证正面"
         />
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:id="@+id/student1"
+        android:scaleType="fitXY"
+        android:visibility="visible"
+        android:background="@drawable/rect_dash" />
+
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:layout_gravity="center"
         android:text="学生证背面"
         />
-    <ImageButton
-        android:id="@+id/student2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="20dp"
         android:layout_gravity="center"
-        android:background="#00000000"
-        android:src="@drawable/boy"
-        />
+        android:id="@+id/student2"
+        android:scaleType="fitXY"
+        android:background="@drawable/rect_dash" />
     <Button
-        android:id="@+id/shangchuang"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#00000000"
-        android:textColor="@color/colorPrimary"
+        android:background="@drawable/shape"
+        android:layout_marginTop="50dp"
         android:text="上传信息"
-        android:textSize="25dp"
-        />
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:id="@+id/shangchuang"/>
 </LinearLayout>

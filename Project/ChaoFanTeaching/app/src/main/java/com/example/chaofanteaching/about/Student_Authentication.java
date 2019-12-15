@@ -15,6 +15,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.example.chaofanteaching.R;
 import com.example.chaofanteaching.UpLoadFile;
@@ -29,9 +31,9 @@ public class Student_Authentication extends AppCompatActivity {
     private SharedPreferences pre;
     private static String path = "/storage/emulated/0/";// sd路径
     private String a="";
-    private ImageButton au_fanhui;
-    private ImageButton student1;
-    private ImageButton student2;
+    private TextView au_fanhui;
+    private ImageView student1;
+    private ImageView student2;
     private Button shangchuan;
     private Handler handler=new Handler(){
         @Override
@@ -40,11 +42,9 @@ public class Student_Authentication extends AppCompatActivity {
                 case  0:
                     Log.i("file","学生证正面上传成功");
                     Toast.makeText(getApplicationContext(),"上传成功",Toast.LENGTH_SHORT).show();
-                    student1.setImageDrawable(getResources().getDrawable(R.drawable.boy));
                     break;
                 case  1:
                     Log.i("file","学生证背面上传成功");
-                    student2.setImageDrawable(getResources().getDrawable(R.drawable.boy));
                     break;
             }
         }
