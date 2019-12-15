@@ -27,6 +27,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.example.chaofanteaching.BottomPopupOption;
 import com.example.chaofanteaching.HttpConnectionUtils;
+import com.example.chaofanteaching.MyPublish.MyPublishActivity;
 import com.example.chaofanteaching.R;
 import com.example.chaofanteaching.StreamChangeStrUtils;
 import com.example.chaofanteaching.UpLoadFile;
@@ -131,7 +132,10 @@ public class My extends Fragment {
                     Toast.makeText(getContext(),"请您先登录", Toast.LENGTH_SHORT).show();
                     Intent i=new Intent(getContext(), LoginActivity.class);
                     startActivity(i);
-                }else{}
+                }else{
+                    Intent intent=new Intent(getContext(), MyPublishActivity.class);
+                    startActivity(intent);
+                }
             }
         });
         myself.setOnClickListener(new View.OnClickListener() {

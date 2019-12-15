@@ -1,5 +1,7 @@
 package com.example.chaofanteaching.InfoList;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -17,6 +19,8 @@ import com.example.chaofanteaching.R;
 import java.net.HttpURLConnection;
 
 public class AddStuInfoActivity extends AppCompatActivity {
+    private SharedPreferences pre;
+    private String a="";
     private TextView back;
     private EditText inName;
     private EditText inMajor;
@@ -42,6 +46,9 @@ public class AddStuInfoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_stu_info);
+        pre= getSharedPreferences("login", Context.MODE_PRIVATE);
+        a = pre.getString("userName", "");
+        Log.e("myl",a);
         back=findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,8 +79,7 @@ public class AddStuInfoActivity extends AppCompatActivity {
                 String pay=inPay.getText().toString();
                 String tel=inTel.getText().toString();
                 String introduce=ipintroduce.getText().toString();
-                Log.e("myl",name+sex+week+time+pay+tel+introduce+university+college+grade+subjcet);
-                dbKey(name,sex,grade,subjcet,week,time,university,pay,tel,introduce,college,major);
+                dbKey(name,sex,grade,subjcet,week,time,university,pay,tel,introduce,college,major,a);
                 finish();
             }
         });
@@ -146,14 +152,13 @@ public class AddStuInfoActivity extends AppCompatActivity {
             }
         });
     }
-    private void dbKey(final String name, final String sex, final String grade, final String subject, final String week, final String time, final String university, final String pay, final String tel, final String introduce,final String college,final String major) {
+    private void dbKey(final String name, final String sex, final String grade, final String subject, final String week, final String time, final String university, final String pay, final String tel, final String introduce,final String college,final String major,final String user) {
         new Thread() {
             HttpURLConnection connection = null;
             @Override
             public void run() {
                 try {
-                    //name,sex,university,college,major,grade,subject,week,time,price,introduce
-                    connection = HttpConnectionUtils.getConnection("AddInfoServlet?id=1&name="+name+"&sex="+sex+"&grade="+grade+"&subject="+subject+"&week="+week+"&time="+time+"&university="+university+"&pay="+pay+"&tel="+tel+"&require="+introduce+"&college="+college+"&major="+major);
+                    connection = HttpConnectionUtils.getConnection("AddInfoServlet?id=1&name="+name+"&sex="+sex+"&grade="+grade+"&subject="+subject+"&week="+week+"&time="+time+"&university="+university+"&pay="+pay+"&tel="+tel+"&require="+introduce+"&college="+college+"&major="+major+"&user="+user);
                     int code = connection.getResponseCode();
                     if (code == 200) {
                         Toast.makeText(getApplication(),"添加信息成功",Toast.LENGTH_LONG);

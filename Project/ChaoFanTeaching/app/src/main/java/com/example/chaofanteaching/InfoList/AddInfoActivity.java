@@ -1,5 +1,7 @@
 package com.example.chaofanteaching.InfoList;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -36,7 +38,10 @@ import java.net.HttpURLConnection;
 import java.util.List;
 
 public class AddInfoActivity extends AppCompatActivity {
+    private SharedPreferences pre;
+    private String a="";
     private TextView back;
+    private TextView latlng;
     private MapView mapView;
     private LocationClient locationClient;
     private LocationClientOption locationClientOption;
@@ -46,6 +51,7 @@ public class AddInfoActivity extends AppCompatActivity {
     private EditText inPay;
     private EditText inTel;
     private EditText inRequirement;
+    private EditText inlocation;
     private RadioGroup radioGroup;
     private Spinner myspinner;
     private Spinner myspinner1;
@@ -64,6 +70,8 @@ public class AddInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         SDKInitializer.initialize(getApplicationContext());
         setContentView(R.layout.add_info);
+        pre= getSharedPreferences("login", Context.MODE_PRIVATE);
+        a = pre.getString("userName", "");
         back=findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,12 +103,14 @@ public class AddInfoActivity extends AppCompatActivity {
                 inPay=findViewById(R.id.pay);
                 inTel=findViewById(R.id.tel);
                 inRequirement=findViewById(R.id.require);
+                latlng=findViewById(R.id.latlng);
+                String locate=latlng.getText().toString();
                 String name=inName.getText().toString();
                 String ilong=inLong.getText().toString();
                 String pay=inPay.getText().toString();
                 String tel=inTel.getText().toString();
                 String require=inRequirement.getText().toString();
-                dbKey(name,sex,grade,subjcet,week,hour,min,ilong,pay,tel,require);
+                dbKey(name,sex,grade,subjcet,week,hour,min,ilong,pay,tel,require,a,locate);
                 finish();
             }
         });
@@ -198,11 +208,16 @@ public class AddInfoActivity extends AppCompatActivity {
             public void onReceiveLocation(BDLocation bdLocation) {
                 //获取定位详细数据
                 //获取地址信息
+                inlocation=findViewById(R.id.location);
                 String addr=bdLocation.getAddrStr();
+                inlocation.setText(addr);
                 Log.i("myl","地址"+addr);
                 //获取经纬度
                 double lat=bdLocation.getLatitude();
                 double lng=bdLocation.getLongitude();
+                String locate= String.valueOf(lat+","+lng);
+                latlng=findViewById(R.id.latlng);
+                latlng.setText(locate);
                 Log.i("myl","纬度"+lat+"经度"+lng);
                 //获取POI
                 List<Poi> pois=bdLocation.getPoiList();
@@ -211,8 +226,6 @@ public class AddInfoActivity extends AppCompatActivity {
 //                    String paddr=p.getAddr();
 //                    Log.i("myl","poi"+name+":"+paddr);
 //                }
-                String time=bdLocation.getTime();
-                Log.i("myl","time"+time);
                 //将定位数据显示在地图上
                 showLocOnMap(lat,lng);
             }
@@ -240,13 +253,13 @@ public class AddInfoActivity extends AppCompatActivity {
         MapStatusUpdate msu= MapStatusUpdateFactory.zoomTo(16);
         baiduMap.setMapStatus(msu);
     }
-    private void dbKey(final String name, final String sex, final String grade, final String subject, final String week, final String hour, final String min, final String ilong, final String pay, final String tel, final String require) {
+    private void dbKey(final String name, final String sex, final String grade, final String subject, final String week, final String hour, final String min, final String ilong, final String pay, final String tel, final String require,final String user,final String locate) {
         new Thread() {
             HttpURLConnection connection = null;
             @Override
             public void run() {
                 try {
-                    connection = HttpConnectionUtils.getConnection("AddInfoServlet?id=0&name="+name+"&sex="+sex+"&grade="+grade+"&subject="+subject+"&week="+week+"&hour="+hour+"&min="+min+"&len="+ilong+"&pay="+pay+"&tel="+tel+"&require="+require);
+                    connection = HttpConnectionUtils.getConnection("AddInfoServlet?id=0&name="+name+"&sex="+sex+"&grade="+grade+"&subject="+subject+"&week="+week+"&hour="+hour+"&min="+min+"&len="+ilong+"&pay="+pay+"&tel="+tel+"&require="+require+"&user="+user+"&locate="+locate);
                     int code = connection.getResponseCode();
                     if (code == 200) {
                         Toast.makeText(getApplication(),"添加信息成功",Toast.LENGTH_LONG);

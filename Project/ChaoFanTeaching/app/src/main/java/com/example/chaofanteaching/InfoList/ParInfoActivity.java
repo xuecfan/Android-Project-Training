@@ -35,6 +35,7 @@ import java.net.HttpURLConnection;
 import java.util.List;
 
 public class ParInfoActivity extends AppCompatActivity {
+    private String user;
     private TextView back;
     private LocationClient locationClient;
     private LocationClientOption locationClientOption;
@@ -100,6 +101,7 @@ public class ParInfoActivity extends AppCompatActivity {
                         requiretext.setText(s[6]);
                         String lat1=s[7];
                         String lng1=s[8];
+                        user=s[9];
                         lat=Double.parseDouble(lat1);
                         lng=Double.parseDouble(lng1);
                         break;
