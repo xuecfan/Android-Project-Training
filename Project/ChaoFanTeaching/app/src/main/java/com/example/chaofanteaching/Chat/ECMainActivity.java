@@ -1,49 +1,53 @@
-package com.example.chaofanteaching.fragment;
+package com.example.chaofanteaching.Chat;
 
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.chaofanteaching.Chat.ECChatActivity;
-import com.example.chaofanteaching.Chat.ECLoginActivity;
+import com.example.chaofanteaching.R;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 
-import com.example.chaofanteaching.R;
+public class ECMainActivity extends AppCompatActivity {
 
-public class Message extends Fragment {
     // 发起聊天 username 输入框
     private EditText mChatIdEdit;
     // 发起聊天
     private Button mStartChatBtn;
     // 退出登录
     private Button mSignOutBtn;
-    @Nullable
+
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        // 判断sdk是否登录成功过，并没有退出和被踢，否则跳转到登陆界面
         if (!EMClient.getInstance().isLoggedInBefore()) {
-            Intent intent = new Intent(getActivity(), ECLoginActivity.class);
+            Intent intent = new Intent(ECMainActivity.this, ECLoginActivity.class);
             startActivity(intent);
+            finish();
+            return;
         }
-        final View view=inflater.inflate(R.layout.activity_main,container,false);
-        mChatIdEdit = view.findViewById(R.id.ec_edit_chat_id);
-        mStartChatBtn = view.findViewById(R.id.ec_btn_start_chat);
-        mSignOutBtn = view.findViewById(R.id.ec_btn_sign_out);
+
+        setContentView(R.layout.activity_main);
+
         initView();
-        return view;
     }
+
+    /**
+     * 初始化界面
+     */
     private void initView() {
 
+        mChatIdEdit = findViewById(R.id.ec_edit_chat_id);
+
+        mStartChatBtn = findViewById(R.id.ec_btn_start_chat);
         mStartChatBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,18 +57,20 @@ public class Message extends Fragment {
                     // 获取当前登录用户的 username
                     String currUsername = EMClient.getInstance().getCurrentUser();
                     if (chatId.equals(currUsername)) {
-                        Toast.makeText(getContext(), "不能和自己聊天", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ECMainActivity.this, "不能和自己聊天", Toast.LENGTH_SHORT).show();
                         return;
                     }
                     // 跳转到聊天界面，开始聊天
-                    Intent intent = new Intent(getContext(), ECChatActivity.class);
+                    Intent intent = new Intent(ECMainActivity.this, ECChatActivity.class);
                     intent.putExtra("ec_chat_id", chatId);
                     startActivity(intent);
                 } else {
-                    Toast.makeText(getContext(), "Username 不能为空", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ECMainActivity.this, "Username 不能为空", Toast.LENGTH_LONG).show();
                 }
             }
         });
+
+        mSignOutBtn = findViewById(R.id.ec_btn_sign_out);
         mSignOutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,6 +78,7 @@ public class Message extends Fragment {
             }
         });
     }
+
     /**
      * 退出登录
      */
@@ -82,6 +89,7 @@ public class Message extends Fragment {
             public void onSuccess() {
                 Log.i("lzan13", "logout success");
                 // 调用退出成功，结束app
+                finish();
             }
 
             @Override

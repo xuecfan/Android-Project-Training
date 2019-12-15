@@ -24,7 +24,59 @@
         android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
         tools:ignore="ProtectedPermissions" />
 
+    <!-- 相机 -->
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <!-- 网络 -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- 录音 -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <!-- 震动 -->
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <!-- 访问网络状态 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <!-- 访问WIFI状态 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <!-- 读取手机状态 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <!--唤醒锁屏-->
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <!-- 写入外部存储 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <!-- 访问精确定位 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <!-- 修改音频设置 -->
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+    <!-- 允许读写系统设置项 使用设置时需要 -->
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+    <!-- 读取启动设置 -->
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS"/>
+
+    <!-- 音视频通话所需权限 -->
+    <!-- 唤醒锁屏 -->
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+
+    <!-- 非必需权限 -->
+    <!--获取当前和最近执行的任务
+    TODO 已被弃用后期可能会添加另一个权限 REAL_GET_TASKS
+    TODO https://android.googlesource.com/platform/frameworks/base/+/2d7576b%5E!/-->
+    <uses-permission android:name="android.permission.GET_TASKS"/>
+    <!-- 读取联系人 -->
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+
+    <!-- Demo新添加的一些属性 -->
+    <!-- 访问GMail账户列表 -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <!-- 使用证书 -->
+    <uses-permission android:name="android.permission.USE_CREDENTIALS"/>
+    <!-- 管理账户 -->
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>
+    <!-- 验证账户 -->
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS"/>
+    <!-- 连续广播（允许一个程序收到广播后快速收到下一个广播） -->
+    <uses-permission android:name="android.permission.BROADCAST_STICKY"/>
+
     <application
+        android:name=".ECApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="超凡家教"
@@ -82,6 +134,17 @@
         <activity android:name=".myself.Setting" />
         <activity android:name=".myself.RenZheng"></activity>
         <activity android:name=".MyPublish.MPInfoActivity"></activity>
+        <activity android:name=".Chat.ECMainActivity"/>
+
+        <activity android:name=".Chat.ECLoginActivity"/>>
+        <activity
+            android:name=".Chat.ECChatActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden">
+        </activity>
+        <meta-data
+            android:name="EASEMOB_APPKEY"
+            android:value="1105191204107210#chaofanteach"/>
+        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
     </application>
 
 </manifest>
