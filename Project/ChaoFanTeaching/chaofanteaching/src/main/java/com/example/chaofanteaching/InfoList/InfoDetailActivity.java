@@ -6,10 +6,13 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.R;
 import com.example.chaofanteaching.StreamChangeStrUtils;
+import com.example.chaofanteaching.ui.ECMainActivity;
+
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 
@@ -27,6 +30,7 @@ public class InfoDetailActivity extends AppCompatActivity {
     private TextView timetext;
     private TextView pricetext;
     private TextView introducetext;
+    private Button sendbtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +41,14 @@ public class InfoDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+        sendbtn=findViewById(R.id.send);
+        sendbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(InfoDetailActivity.this, ECMainActivity.class);
+                startActivity(intent);
             }
         });
         Intent request=getIntent();

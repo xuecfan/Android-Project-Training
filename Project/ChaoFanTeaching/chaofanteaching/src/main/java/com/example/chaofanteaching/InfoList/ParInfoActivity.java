@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ZoomControls;
@@ -30,6 +31,8 @@ import com.baidu.mapapi.model.LatLng;
 import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.R;
 import com.example.chaofanteaching.StreamChangeStrUtils;
+import com.example.chaofanteaching.ui.ECMainActivity;
+
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.util.List;
@@ -52,6 +55,7 @@ public class ParInfoActivity extends AppCompatActivity {
     private TextView pricetext;
     private TextView teltext;
     private TextView requiretext;
+    private Button sendbtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +67,14 @@ public class ParInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+        sendbtn=findViewById(R.id.send);
+        sendbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(ParInfoActivity.this, ECMainActivity.class);
+                startActivity(intent);
             }
         });
         Intent request=getIntent();

@@ -1,1 +1,1 @@
-include ':chaofanteaching'
+include ':chaofanteaching', ':easeui'

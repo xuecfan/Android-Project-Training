@@ -78,7 +78,7 @@
     <uses-permission android:name="android.permission.BROADCAST_STICKY" />
 
     <application
-
+        android:name=".MyApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="超凡家教"
@@ -87,6 +87,56 @@
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true">
         <activity android:name=".MyPublish.MyPublishActivity" />
+
+        <meta-data
+            android:name="EASEMOB_APPKEY"
+            android:value="1105191204107210#chaofanteach"/>
+        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+        <service
+            android:name="com.hyphenate.chat.EMChatService"
+            android:exported="true" />
+        <service
+            android:name="com.hyphenate.chat.EMJobService"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+        <!-- 声明SDK所需的receiver -->
+        <receiver android:name="com.hyphenate.chat.EMMonitorReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+                <data android:scheme="package" />
+            </intent-filter>
+            <!-- 可选filter -->
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.USER_PRESENT" />
+            </intent-filter>
+        </receiver>
+
+        <!--点击查看大图崩溃-->
+        <activity
+            android:name="com.hyphenate.easeui.ui.EaseShowBigImageActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide" />
+
+        <!-- 地图 -->
+        <activity
+            android:name="com.hyphenate.easeui.ui.EaseBaiduMapActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide" />
+
+        <!-- 百度地图所需的service -->
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote" />
+
+
+
+        <activity android:name=".ui.ECMainActivity">
+        </activity>
+        <activity android:name=".ui.ECLoginActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".ui.ChatListActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".ui.ChatActivity" android:screenOrientation="portrait"/>
 
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
