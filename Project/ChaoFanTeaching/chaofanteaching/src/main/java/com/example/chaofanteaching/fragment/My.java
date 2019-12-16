@@ -264,12 +264,11 @@ public class My extends Fragment {
     }
 
     private void downimg() throws IOException {
-        Log.e("error","11");
         String fileName = path + a+".png";// 图片名字
         Request request=new Request.Builder().url("http://175.24.102.160:8080/ChaoFanTeaching/DownImg?name="+a).build();
         Call call=okHttpClient.newCall(request);
         Response response=call.execute();
-        Log.e("yxt", String.valueOf(response.body().byteStream()));
+        Log.e("photo", String.valueOf(response.body().byteStream()));
         InputStream in=response.body().byteStream();
         FileOutputStream out=new FileOutputStream(fileName);
         byte[] bytes=new byte[1024];
@@ -397,7 +396,8 @@ public class My extends Fragment {
         super.onResume();
         pre1=getContext().getSharedPreferences("data",Context.MODE_PRIVATE);
         String name1=pre1.getString("nameContent","");
-        if(name1.equals("")||name1.equals("null")){name.setText("用户名");}
+        Log.e("789",name1);
+        if(name1.equals("")||name1.equals("null")||name1==null){name.setText("用户名");}
         else{name.setText(name1);}
 
         if(pre1.getString("renzheng","").equals("1")){
@@ -406,17 +406,17 @@ public class My extends Fragment {
         }
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        pre1=getContext().getSharedPreferences("data",Context.MODE_PRIVATE);
-        String name1=pre1.getString("nameContent","");
-        if(name1.equals("")||name1.equals("null")){name.setText("用户名");}else{name.setText(name1);}
-        if(pre1.getString("renzheng","").equals("1")){
-            renzheng.setText("已认证");
-            img.setImageDrawable(getResources().getDrawable(R.drawable.v1));
-        }
-    }
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//        pre1=getContext().getSharedPreferences("data",Context.MODE_PRIVATE);
+//        String name1=pre1.getString("nameContent","");
+//        if(name1.equals("")||name1.equals("null")){name.setText("用户名");}else{name.setText(name1);}
+//        if(pre1.getString("renzheng","").equals("1")){
+//            renzheng.setText("已认证");
+//            img.setImageDrawable(getResources().getDrawable(R.drawable.v1));
+//        }
+//    }
 
     private void look(){
         new Thread() {

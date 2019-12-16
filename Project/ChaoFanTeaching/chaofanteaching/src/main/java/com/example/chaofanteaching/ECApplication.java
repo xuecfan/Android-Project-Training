@@ -10,6 +10,8 @@ import com.hyphenate.chat.EMOptions;
 import java.util.Iterator;
 import java.util.List;
 
+import cn.jpush.android.api.JPushInterface;
+
 /**
  * Created by lz on 2016/4/16.
  * 项目的 Application类，做一些项目的初始化操作，比如sdk的初始化等
@@ -25,6 +27,8 @@ public class ECApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        JPushInterface.setDebugMode(true);
+        JPushInterface.init(this);
         mContext = this;
 
         // 初始化环信SDK
