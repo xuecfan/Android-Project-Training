@@ -13,6 +13,8 @@ import com.hyphenate.easeui.EaseUI;
 import java.util.Iterator;
 import java.util.List;
 
+import cn.jpush.android.api.JPushInterface;
+
 /**
  * author:Meris
  * date:2018/5/30
@@ -30,6 +32,11 @@ public class MyApp extends Application {
         super.onCreate();
         Utils.init(this);
         myApp = this;
+
+        JPushInterface.setDebugMode(true);
+        JPushInterface.init(this);
+        String id= JPushInterface.getRegistrationID(this);
+        Log.e("aaa",id);
 
         // 初始化环信SDK
         initEasemob();
