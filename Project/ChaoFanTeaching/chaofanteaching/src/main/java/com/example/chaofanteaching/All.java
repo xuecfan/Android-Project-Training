@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Handler;
 import android.support.v4.app.FragmentTabHost;
@@ -109,6 +110,7 @@ public class All extends AppCompatActivity {
                 switch (tabId){
                     case "tag1":
                         imageViewMap.get("tag1").setImageResource(R.drawable.list1);
+                        textViewMap.get("tag1").setTextColor(Color.parseColor("#D8900A"));
                         imageViewMap.get("tag2").setImageResource(R.drawable.message);
                         textViewMap.get("tag2").setTextColor(getResources().getColor(android.R.color.black));
                         imageViewMap.get("tag3").setImageResource(R.drawable.my);
@@ -118,11 +120,13 @@ public class All extends AppCompatActivity {
                     case "tag2":
                         imageViewMap.get("tag1").setImageResource(R.drawable.list);
                         imageViewMap.get("tag2").setImageResource(R.drawable.message1);
+                        textViewMap.get("tag2").setTextColor(Color.parseColor("#D8900A"));
                         textViewMap.get("tag1").setTextColor(getResources().getColor(android.R.color.black));
                         imageViewMap.get("tag3").setImageResource(R.drawable.my);
                         textViewMap.get("tag3").setTextColor(getResources().getColor(android.R.color.black));
                         break;
                     case "tag3":
+                        textViewMap.get("tag3").setTextColor(Color.parseColor("#D8900A"));
                         imageViewMap.get("tag3").setImageResource(R.drawable.my1);
                         imageViewMap.get("tag1").setImageResource(R.drawable.list);
                         textViewMap.get("tag1").setTextColor(getResources().getColor(android.R.color.black));
