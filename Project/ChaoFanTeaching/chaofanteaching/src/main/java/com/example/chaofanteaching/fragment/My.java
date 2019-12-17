@@ -136,7 +136,7 @@ public class My extends Fragment {
         }
         if(!a.equals("")){
         pre2=getContext().getSharedPreferences("id",Context.MODE_PRIVATE);
-        String id1=pre.getString("id","");
+        String id1=pre2.getString("id","");
         saveid(id1);}
 
 
