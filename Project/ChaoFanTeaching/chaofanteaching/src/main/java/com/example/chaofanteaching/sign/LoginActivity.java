@@ -100,7 +100,7 @@ public class LoginActivity extends AppCompatActivity {
     public void login() {
         mDialog = new ProgressDialog(this);
         mDialog.setMessage("正在登陆请稍后......");
-        mDialog.show();
+        //mDialog.show();
 
         EMClient.getInstance().login(myId.getText().toString(), myPW.getText().toString(), new EMCallBack() {
             @Override

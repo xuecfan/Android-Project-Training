@@ -2,18 +2,30 @@ package com.example.chaofanteaching;
 
 import android.app.ActivityManager;
 import android.app.Application;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.chaofanteaching.utils.Utils;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMOptions;
 import com.hyphenate.easeui.EaseUI;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.util.Iterator;
 import java.util.List;
 
 import cn.jpush.android.api.JPushInterface;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * author:Meris
@@ -24,23 +36,47 @@ public class MyApp extends Application {
     private static final String TAG = "MyApp";
     public static boolean isDebug = true;
     private static MyApp myApp;
+    private String user="";
+    private SharedPreferences pre,pre1;
+    private SharedPreferences.Editor editor;
 
     // 记录是否已经初始化
     private boolean isInit = false;
     @Override
     public void onCreate() {
         super.onCreate();
+        JPushInterface.setDebugMode(true);
+        JPushInterface.init(this);
+
         Utils.init(this);
         myApp = this;
 
-        JPushInterface.setDebugMode(true);
-        JPushInterface.init(this);
+
         String id= JPushInterface.getRegistrationID(this);
         Log.e("aaa",id);
+
+        pre1=getSharedPreferences("login",MODE_PRIVATE);
+        user=pre1.getString("userName","");
+
+        pre=getSharedPreferences("saveId",MODE_PRIVATE);
+        editor=pre.edit();
+        if(!id.equals("")){
+            editor.putString("id",id);
+            editor.commit();
+
+        }
+
+        if(!user.equals("")){
+            String id1=pre.getString("id","");
+            if(!id1.equals("")){
+                saveid(id1);
+            }
+        }
 
         // 初始化环信SDK
         initEasemob();
     }
+
 
     private void initEasemob(){
         int pid = android.os.Process.myPid();
@@ -119,7 +155,22 @@ public class MyApp extends Application {
         return null;
     }
 
+    private void saveid(String id){
+        OkHttpClient okHttpClient=new OkHttpClient();
+        Request request=new Request.Builder().
+                url("http://175.24.102.160:8080/ChaoFanTeaching/MyData?name="+user+"&index=id&id="+id)
+                .build();
+        Call call=okHttpClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {Log.i("aaa","");}
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {Log.i("aaa","存入id");}
+        });
+
+    }
     public static MyApp getInstance() {
         return myApp;
     }
+
 }

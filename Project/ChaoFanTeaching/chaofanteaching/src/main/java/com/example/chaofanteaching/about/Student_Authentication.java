@@ -41,7 +41,7 @@ public class Student_Authentication extends AppCompatActivity {
             switch (msg.what){
                 case  0:
                     Log.i("file","学生证正面上传成功");
-                    Toast.makeText(getApplicationContext(),"上传成功",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"上传成功，请等待认证",Toast.LENGTH_SHORT).show();
                     break;
                 case  1:
                     Log.i("file","学生证背面上传成功");
