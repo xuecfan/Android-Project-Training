@@ -146,11 +146,12 @@ public class MyData extends AppCompatActivity {
         final String sex1=pre.getString("sexContent","");
         if(name1.equals("")||phone1.equals("")||sex1.equals("")||address1.equals("")){
             look();
-        }else{
-        sex.setText(sex1);
-        name_content.setText(name1);
-        phone_content.setText(phone1);
-        address_content.setText(address1);}
+//        }else{
+//        sex.setText(sex1);
+//        name_content.setText(name1);
+//        phone_content.setText(phone1);
+//        address_content.setText(address1);
+ }
         name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
