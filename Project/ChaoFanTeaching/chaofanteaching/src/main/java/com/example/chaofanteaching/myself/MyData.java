@@ -181,9 +181,6 @@ public class MyData extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(name1.equals("")||phone1.equals("")||address1.equals("")||sex1.equals("")){
-                    Toast.makeText(getApplicationContext(),"您的信息有空值，请重新填写",Toast.LENGTH_SHORT).show();
-                }else{
                 new Thread(){
                     @Override
                     public void run() {
@@ -194,7 +191,6 @@ public class MyData extends AppCompatActivity {
                     }
                 }.start();
                     finish();}
-            }
         });
     }
     private void insert(String name1,String phone1,String address1,String sex){

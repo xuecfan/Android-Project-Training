@@ -222,9 +222,7 @@
             android:enabled="true"
             android:exported="false">
             <intent-filter>
-                <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED" />
                 <action android:name="cn.jpush.android.intent.REGISTRATION" />
-                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED" /> <!-- 不加也行，默认打开 -->
                 <category android:name="com.example.chaofanteaching" />
             </intent-filter>
         </receiver>

@@ -55,23 +55,16 @@ public class MyApp extends Application {
         String id= JPushInterface.getRegistrationID(this);
         //Log.e("aaa",id);
 
-        pre1=getSharedPreferences("login",MODE_PRIVATE);
-        user=pre1.getString("userName","");
-
-        pre=getSharedPreferences("saveId",MODE_PRIVATE);
-        editor=pre.edit();
-        if(!id.equals("")){
-            editor.putString("id",id);
-            editor.commit();
-
-        }
-
-        if(!user.equals("")){
-            String id1=pre.getString("id","");
-            if(!id1.equals("")){
-                saveid(id1);
-            }
-        }
+//        pre1=getSharedPreferences("login",MODE_PRIVATE);
+//        user=pre1.getString("userName","");
+//
+//        pre=getSharedPreferences("id",MODE_PRIVATE);
+//        if(!user.equals("")){
+//            String id1=pre.getString("id","");
+//            if(!id1.equals("")){
+//                saveid(id1);
+//            }
+//        }
 
         // 初始化环信SDK
         initEasemob();
@@ -155,20 +148,7 @@ public class MyApp extends Application {
         return null;
     }
 
-    private void saveid(String id){
-        OkHttpClient okHttpClient=new OkHttpClient();
-        Request request=new Request.Builder().
-                url("http://175.24.102.160:8080/ChaoFanTeaching/MyData?name="+user+"&index=id&id="+id)
-                .build();
-        Call call=okHttpClient.newCall(request);
-        call.enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {Log.i("aaa","");}
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {Log.i("aaa","存入id");}
-        });
 
-    }
     public static MyApp getInstance() {
         return myApp;
     }

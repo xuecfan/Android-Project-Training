@@ -44,6 +44,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 
 import okhttp3.Call;
+import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -66,7 +67,7 @@ public class My extends Fragment {
     private Bitmap bitmap;
     private ImageView img;
     private TextView renzheng;
-    private SharedPreferences pre,pre1;
+    private SharedPreferences pre,pre1,pre2;
     private String a="";
     private SharedPreferences.Editor editor;
     private static final int PHOTO_REQUEST_GALLERY = 2;// 从相册中选择
@@ -80,11 +81,16 @@ public class My extends Fragment {
                 case 2:
                     String str = msg.obj.toString();
                     Log.e("11",str);
-
+                    if(str.equals("null")){
+                        editor=pre1.edit();
+                        editor.putString("nameContent","");
+                        editor.commit();
+                        name.setText("用户名");
+                    }else{
                     editor=pre1.edit();
                     editor.putString("nameContent",str);
                     editor.commit();
-                    name.setText(str);
+                    name.setText(str);}
                     break;
                 case 3:
                     String result=  msg.obj.toString();
@@ -128,11 +134,17 @@ public class My extends Fragment {
         if(pre1.getString("renzheng","").equals("")){
             renzheng();
         }
+        if(!a.equals("")){
+        pre2=getContext().getSharedPreferences("id",Context.MODE_PRIVATE);
+        String id1=pre.getString("id","");
+        saveid(id1);}
+
 
         if(!a.equals("")){
-        if(name1.equals("")){
-            look();
-        }else{name.setText(name1);}}
+            if(name1.equals("")){
+                look();
+            }else{name.setText(name1);}
+        }
         customer_service.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -464,5 +476,19 @@ public class My extends Fragment {
                 }
             }
         }.start();
+    }
+    private void saveid(String id){
+        OkHttpClient okHttpClient=new OkHttpClient();
+        Request request=new Request.Builder().
+                url("http://175.24.102.160:8080/ChaoFanTeaching/MyData?name="+a+"&index=id&id="+id)
+                .build();
+        Call call=okHttpClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {Log.i("aaa","");}
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {Log.i("aaa","存入id");}
+        });
+
     }
 }
