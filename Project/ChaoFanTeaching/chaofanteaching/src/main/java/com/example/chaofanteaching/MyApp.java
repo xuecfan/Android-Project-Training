@@ -53,7 +53,7 @@ public class MyApp extends Application {
 
 
         String id= JPushInterface.getRegistrationID(this);
-        Log.e("aaa",id);
+        //Log.e("aaa",id);
 
         pre1=getSharedPreferences("login",MODE_PRIVATE);
         user=pre1.getString("userName","");
