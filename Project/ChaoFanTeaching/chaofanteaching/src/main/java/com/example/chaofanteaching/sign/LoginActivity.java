@@ -101,7 +101,9 @@ public class LoginActivity extends AppCompatActivity {
         EMClient.getInstance().login(myId.getText().toString(), myPW.getText().toString(), new EMCallBack() {
             @Override
             public void onSuccess() {
-                mDialog.dismiss();
+                if (!LoginActivity.this.isFinishing()) {
+                    mDialog.dismiss();
+                }
 
                 // 加载所有群组到内存，如果使用了群组的话
 //                EMClient.getInstance().groupManager().loadAllGroups();
