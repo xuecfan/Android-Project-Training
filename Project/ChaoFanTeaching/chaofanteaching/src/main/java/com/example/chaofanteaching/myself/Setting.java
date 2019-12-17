@@ -20,6 +20,9 @@ import com.example.chaofanteaching.R;
 import com.example.chaofanteaching.StreamChangeStrUtils;
 import com.example.chaofanteaching.about.About;
 import com.example.chaofanteaching.sign.LoginActivity;
+import com.example.chaofanteaching.utils.LogUtils;
+import com.hyphenate.EMCallBack;
+import com.hyphenate.chat.EMClient;
 
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -96,7 +99,7 @@ public class Setting extends AppCompatActivity {
                 String userName = pre.getString("userName","");
                 System.out.println(userName);
                 changeLandingStatus(userName);
-
+                logOut();
                 pre.edit().clear().commit();
                 pre1.edit().clear().commit();
                 Intent i=new Intent(Setting.this, LoginActivity.class);
@@ -110,12 +113,33 @@ public class Setting extends AppCompatActivity {
                 String userName = pre.getString("userName","");
                 System.out.println(userName);
                 changeLandingStatus(userName);
-
+                logOut();
                 pre.edit().clear().commit();
                 pre1.edit().clear().commit();
                 Intent i=new Intent(Setting.this,All.class);
                 startActivity(i);
                 ActivityCollector.finishAll();
+
+            }
+        });
+    }
+
+    //退出聊天服务器
+    public void logOut() {
+        EMClient.getInstance().logout(false, new EMCallBack() {
+            @Override
+            public void onSuccess() {
+                LogUtils.d("logout success");
+                finish();
+            }
+
+            @Override
+            public void onError(int i, String s) {
+                LogUtils.d("logout error" + i + s);
+            }
+
+            @Override
+            public void onProgress(int i, String s) {
 
             }
         });

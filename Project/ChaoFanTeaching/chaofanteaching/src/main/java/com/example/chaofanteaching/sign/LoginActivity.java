@@ -21,8 +21,6 @@ import com.example.chaofanteaching.All;
 import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.R;
 import com.example.chaofanteaching.StreamChangeStrUtils;
-import com.example.chaofanteaching.ui.ECLoginActivity;
-import com.example.chaofanteaching.ui.ECMainActivity;
 import com.example.chaofanteaching.utils.ToastUtils;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.EMError;
@@ -71,7 +69,7 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(getApplication(),"邮箱和密码不能为空",Toast.LENGTH_LONG).show();
                 } else{
                     testUser(myid,mypw);
-                    login();
+                    //login();
                 }
 
             }
@@ -98,7 +96,7 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    //登陆通讯服务器
+    //登陆聊天服务器
     public void login() {
         mDialog = new ProgressDialog(this);
         mDialog.setMessage("正在登陆请稍后......");
@@ -113,7 +111,7 @@ public class LoginActivity extends AppCompatActivity {
 //                EMClient.getInstance().groupManager().loadAllGroups();
                 // 加载所有会话到内存
                 EMClient.getInstance().chatManager().loadAllConversations();
-                ToastUtils.showLong("登录，成功开始聊天吧");
+                ToastUtils.showLong("登录成功");
                 //ECMainActivity.show(LoginActivity.this);
                 finish();
 
@@ -209,7 +207,8 @@ public class LoginActivity extends AppCompatActivity {
                             editor1.putString("userName",myid);
                             editor1.apply();
 
-                            Toast.makeText(getApplication(),"登陆成功",Toast.LENGTH_LONG).show();
+                            login();
+                            //Toast.makeText(getApplication(),"登陆成功",Toast.LENGTH_LONG).show();
                             Intent intent = new Intent();
                             intent.setClass( LoginActivity.this, All.class);
                             intent.setAction("true");

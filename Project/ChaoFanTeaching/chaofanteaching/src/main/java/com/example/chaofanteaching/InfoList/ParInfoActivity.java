@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -28,10 +29,14 @@ import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.model.LatLng;
+import com.example.chaofanteaching.ChatActivity;
 import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.R;
 import com.example.chaofanteaching.StreamChangeStrUtils;
-import com.example.chaofanteaching.ui.ECMainActivity;
+import com.example.chaofanteaching.utils.ToastUtils;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMMessage;
+import com.hyphenate.easeui.EaseConstant;
 
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -73,8 +78,7 @@ public class ParInfoActivity extends AppCompatActivity {
         sendbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(ParInfoActivity.this, ECMainActivity.class);
-                startActivity(intent);
+                chatIn();
             }
         });
         Intent request=getIntent();
@@ -95,6 +99,24 @@ public class ParInfoActivity extends AppCompatActivity {
         locationOption();
         hidelogo();//隐藏logo
         zoomlevel();//改变比列尺
+    }
+    //发起聊天
+    public void chatIn() {
+        String name = user;
+        String myName = EMClient.getInstance().getCurrentUser();
+        if (!TextUtils.isEmpty(name)) {
+            if (name.equals(myName)) {
+                ToastUtils.showLong("不能和自己聊天");
+                return;
+            }
+            Intent chat = new Intent(this, ChatActivity.class);
+            chat.putExtra(EaseConstant.EXTRA_USER_ID, name);  //对方账号
+            chat.putExtra(EaseConstant.EXTRA_CHAT_TYPE, EMMessage.ChatType.Chat); //单聊模式
+            startActivity(chat);
+
+        } else {
+            ToastUtils.showLong("用户名不可为空");
+        }
     }
     private void dbKey(final String key) {
         handler = new Handler() {

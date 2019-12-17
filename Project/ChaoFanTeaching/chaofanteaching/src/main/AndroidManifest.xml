@@ -131,12 +131,7 @@
             android:process=":remote" />
 
 
-
-        <activity android:name=".ui.ECMainActivity">
-        </activity>
-        <activity android:name=".ui.ECLoginActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".ui.ChatListActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".ui.ChatActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".ChatActivity" android:screenOrientation="portrait"/>
 
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"

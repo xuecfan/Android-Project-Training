@@ -1,17 +1,24 @@
 package com.example.chaofanteaching.InfoList;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.R;
 import com.example.chaofanteaching.StreamChangeStrUtils;
-import com.example.chaofanteaching.ui.ECMainActivity;
+import com.example.chaofanteaching.ChatActivity;
+import com.example.chaofanteaching.utils.ToastUtils;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMMessage;
+import com.hyphenate.easeui.EaseConstant;
 
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -31,11 +38,14 @@ public class InfoDetailActivity extends AppCompatActivity {
     private TextView pricetext;
     private TextView introducetext;
     private Button sendbtn;
+    private SharedPreferences pre;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.info_detail);
+        pre= getSharedPreferences("login", Context.MODE_PRIVATE);
+        user = pre.getString("userName", "");
         back=findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,8 +57,7 @@ public class InfoDetailActivity extends AppCompatActivity {
         sendbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(InfoDetailActivity.this, ECMainActivity.class);
-                startActivity(intent);
+                chatIn();
             }
         });
         Intent request=getIntent();
@@ -65,6 +74,24 @@ public class InfoDetailActivity extends AppCompatActivity {
         introducetext=findViewById(R.id.introduce);
         nametext.setText(name);
         dbKey(name);
+    }
+    //发起聊天
+    public void chatIn() {
+        String name = user;
+        String myName = EMClient.getInstance().getCurrentUser();
+        if (!TextUtils.isEmpty(name)) {
+            if (name.equals(myName)) {
+                ToastUtils.showLong("不能和自己聊天");
+                return;
+            }
+            Intent chat = new Intent(this, ChatActivity.class);
+            chat.putExtra(EaseConstant.EXTRA_USER_ID, name);  //对方账号
+            chat.putExtra(EaseConstant.EXTRA_CHAT_TYPE, EMMessage.ChatType.Chat); //单聊模式
+            startActivity(chat);
+
+        } else {
+            ToastUtils.showLong("用户名不可为空");
+        }
     }
     private void dbKey(final String key) {
         handler = new Handler() {

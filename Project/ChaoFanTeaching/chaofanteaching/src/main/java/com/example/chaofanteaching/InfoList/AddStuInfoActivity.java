@@ -16,6 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.R;
+import com.example.chaofanteaching.utils.ToastUtils;
+
 import java.net.HttpURLConnection;
 
 public class AddStuInfoActivity extends AppCompatActivity {
@@ -161,7 +163,7 @@ public class AddStuInfoActivity extends AppCompatActivity {
                     connection = HttpConnectionUtils.getConnection("AddInfoServlet?id=1&name="+name+"&sex="+sex+"&grade="+grade+"&subject="+subject+"&week="+week+"&time="+time+"&university="+university+"&pay="+pay+"&tel="+tel+"&require="+introduce+"&college="+college+"&major="+major+"&user="+user);
                     int code = connection.getResponseCode();
                     if (code == 200) {
-                        Toast.makeText(getApplication(),"添加信息成功",Toast.LENGTH_LONG);
+                        ToastUtils.showLong("添加成功");
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

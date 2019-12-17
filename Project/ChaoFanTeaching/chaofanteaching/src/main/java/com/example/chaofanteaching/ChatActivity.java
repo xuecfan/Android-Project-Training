@@ -1,11 +1,9 @@
-package com.example.chaofanteaching.ui;
+package com.example.chaofanteaching;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.view.Window;
-
-import com.example.chaofanteaching.R;
 import com.hyphenate.easeui.ui.EaseChatFragment;
 
 

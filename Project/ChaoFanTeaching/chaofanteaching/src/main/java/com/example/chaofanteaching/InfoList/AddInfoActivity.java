@@ -34,6 +34,8 @@ import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.model.LatLng;
 import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.R;
+import com.example.chaofanteaching.utils.ToastUtils;
+
 import java.net.HttpURLConnection;
 import java.util.List;
 
@@ -262,7 +264,7 @@ public class AddInfoActivity extends AppCompatActivity {
                     connection = HttpConnectionUtils.getConnection("AddInfoServlet?id=0&name="+name+"&sex="+sex+"&grade="+grade+"&subject="+subject+"&week="+week+"&hour="+hour+"&min="+min+"&len="+ilong+"&pay="+pay+"&tel="+tel+"&require="+require+"&user="+user+"&locate="+locate);
                     int code = connection.getResponseCode();
                     if (code == 200) {
-                        Toast.makeText(getApplication(),"添加信息成功",Toast.LENGTH_LONG);
+                        ToastUtils.showLong("添加成功");
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

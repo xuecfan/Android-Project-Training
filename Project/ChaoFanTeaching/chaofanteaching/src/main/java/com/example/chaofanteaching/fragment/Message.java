@@ -8,12 +8,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-
-
 import com.example.chaofanteaching.R;
-import com.example.chaofanteaching.ui.ChatActivity;
-import com.example.chaofanteaching.ui.ChatListActivity;
+import com.example.chaofanteaching.ChatActivity;
 import com.hyphenate.EMMessageListener;
 import com.hyphenate.chat.EMConversation;
 import com.hyphenate.easeui.EaseConstant;
