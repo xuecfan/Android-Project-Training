@@ -55,20 +55,16 @@ public class List1 extends Fragment {
         infolist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent();
-                intent.putExtra("name", infoList.get(position).getName());
-                intent.setClass(getActivity(), ParInfoActivity.class);
-                startActivity(intent);
-//                if (a.equals("")) {
-//                    Toast.makeText(getContext(),"请您先登录", Toast.LENGTH_SHORT).show();
-//                    Intent i=new Intent(getContext(), LoginActivity.class);
-//                    startActivity(i);
-//                }else{
-//                    Intent intent = new Intent();
-//                    intent.putExtra("name", infoList.get(position).getName());
-//                    intent.setClass(getActivity(), ParInfoActivity.class);
-//                    startActivity(intent);
-//                }
+                if (a.equals("")) {
+                    Toast.makeText(getContext(),"请您先登录", Toast.LENGTH_SHORT).show();
+                    Intent i=new Intent(getContext(), LoginActivity.class);
+                    startActivity(i);
+                }else{
+                    Intent intent = new Intent();
+                    intent.putExtra("name", infoList.get(position).getName());
+                    intent.setClass(getActivity(), ParInfoActivity.class);
+                    startActivity(intent);
+                }
             }
         });
         Button btnadd = view.findViewById(R.id.add);

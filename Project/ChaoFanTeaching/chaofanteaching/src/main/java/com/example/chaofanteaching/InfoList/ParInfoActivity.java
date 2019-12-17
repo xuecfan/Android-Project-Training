@@ -6,18 +6,15 @@ import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ZoomControls;
-
 import com.baidu.location.BDAbstractLocationListener;
 import com.baidu.location.BDLocation;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
-import com.baidu.location.Poi;
 import com.baidu.mapapi.CoordType;
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMap;
@@ -37,10 +34,9 @@ import com.example.chaofanteaching.utils.ToastUtils;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.easeui.EaseConstant;
-
 import java.io.InputStream;
 import java.net.HttpURLConnection;
-import java.util.List;
+
 
 public class ParInfoActivity extends AppCompatActivity {
     private String user;
@@ -215,24 +211,6 @@ public class ParInfoActivity extends AppCompatActivity {
         locationClient.registerLocationListener(new BDAbstractLocationListener() {
             @Override
             public void onReceiveLocation(BDLocation bdLocation) {
-                //获取定位详细数据
-                //获取地址信息
-                String addr=bdLocation.getAddrStr();
-                Log.i("myl","地址"+addr);
-                //获取经纬度
-//                double lat=bdLocation.getLatitude();
-//                double lng=bdLocation.getLongitude();
-                Log.i("myl","纬度"+lat+"经度"+lng);
-                //获取POI
-                List<Poi> pois=bdLocation.getPoiList();
-//                for (Poi p:pois){
-//                    String name=p.getName();
-//                    String paddr=p.getAddr();
-//                    Log.i("myl","poi"+name+":"+paddr);
-//                }
-                String time=bdLocation.getTime();
-                Log.i("myl","time"+time);
-                //将定位数据显示在地图上
                 showLocOnMap(lat,lng);
             }
         });

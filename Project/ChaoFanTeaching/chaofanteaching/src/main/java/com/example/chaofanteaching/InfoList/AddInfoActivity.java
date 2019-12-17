@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -20,7 +19,6 @@ import com.baidu.location.BDAbstractLocationListener;
 import com.baidu.location.BDLocation;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
-import com.baidu.location.Poi;
 import com.baidu.mapapi.CoordType;
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMap;
@@ -35,9 +33,7 @@ import com.baidu.mapapi.model.LatLng;
 import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.R;
 import com.example.chaofanteaching.utils.ToastUtils;
-
 import java.net.HttpURLConnection;
-import java.util.List;
 
 public class AddInfoActivity extends AppCompatActivity {
     private SharedPreferences pre;
@@ -213,21 +209,13 @@ public class AddInfoActivity extends AppCompatActivity {
                 inlocation=findViewById(R.id.location);
                 String addr=bdLocation.getAddrStr();
                 inlocation.setText(addr);
-                Log.i("myl","地址"+addr);
                 //获取经纬度
                 double lat=bdLocation.getLatitude();
                 double lng=bdLocation.getLongitude();
                 String locate= String.valueOf(lat+","+lng);
                 latlng=findViewById(R.id.latlng);
                 latlng.setText(locate);
-                Log.i("myl","纬度"+lat+"经度"+lng);
                 //获取POI
-                List<Poi> pois=bdLocation.getPoiList();
-//                for (Poi p:pois){
-//                    String name=p.getName();
-//                    String paddr=p.getAddr();
-//                    Log.i("myl","poi"+name+":"+paddr);
-//                }
                 //将定位数据显示在地图上
                 showLocOnMap(lat,lng);
             }

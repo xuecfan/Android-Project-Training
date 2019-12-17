@@ -6,12 +6,6 @@ import android.support.v4.app.FragmentActivity;
 import android.view.Window;
 import com.hyphenate.easeui.ui.EaseChatFragment;
 
-
-/**
- * author:Meris
- * date:2018/5/31
- */
-
 public class ChatActivity extends FragmentActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -22,7 +16,5 @@ public class ChatActivity extends FragmentActivity {
         EaseChatFragment easeChatFragment = new EaseChatFragment();  //环信聊天界面
         easeChatFragment.setArguments(getIntent().getExtras()); //需要的参数
         getSupportFragmentManager().beginTransaction().add(R.id.layout_chat,easeChatFragment).commit();  //Fragment切换
-
-
     }
 }

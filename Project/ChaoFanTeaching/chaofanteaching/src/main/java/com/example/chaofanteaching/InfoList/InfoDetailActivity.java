@@ -19,7 +19,6 @@ import com.example.chaofanteaching.utils.ToastUtils;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.easeui.EaseConstant;
-
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 
@@ -44,8 +43,8 @@ public class InfoDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.info_detail);
-        pre= getSharedPreferences("login", Context.MODE_PRIVATE);
-        user = pre.getString("userName", "");
+//        pre= getSharedPreferences("login", Context.MODE_PRIVATE);
+//        user = pre.getString("userName", "");
         back=findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override

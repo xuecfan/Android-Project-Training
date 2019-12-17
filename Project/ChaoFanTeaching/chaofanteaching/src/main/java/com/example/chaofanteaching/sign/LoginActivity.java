@@ -15,7 +15,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import com.example.chaofanteaching.ActivityCollector;
 import com.example.chaofanteaching.All;
 import com.example.chaofanteaching.HttpConnectionUtils;
@@ -25,8 +24,6 @@ import com.example.chaofanteaching.utils.ToastUtils;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.EMError;
 import com.hyphenate.chat.EMClient;
-
-
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 
@@ -36,7 +33,6 @@ public class LoginActivity extends AppCompatActivity {
     private Handler handler;
     private String myid;
     ProgressDialog mDialog;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -100,7 +96,7 @@ public class LoginActivity extends AppCompatActivity {
     public void login() {
         mDialog = new ProgressDialog(this);
         mDialog.setMessage("正在登陆请稍后......");
-        //mDialog.show();
+        mDialog.show();
 
         EMClient.getInstance().login(myId.getText().toString(), myPW.getText().toString(), new EMCallBack() {
             @Override
