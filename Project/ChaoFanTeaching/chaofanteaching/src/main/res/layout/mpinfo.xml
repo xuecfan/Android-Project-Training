@@ -223,17 +223,17 @@
             android:layout_gravity="left"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:background="#FF9800"
+            android:background="@drawable/round_yellow"
             android:textColor="#ffffff"
             android:text="删除信息"/>
 
         <Button
             android:id="@+id/saveinfo"
-            android:layout_marginLeft="50dp"
+            android:layout_marginLeft="30dp"
             android:gravity="center"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:background="#FF9800"
+            android:background="@drawable/round_yellow"
             android:textColor="#ffffff"
             android:text="保存信息"/>
 

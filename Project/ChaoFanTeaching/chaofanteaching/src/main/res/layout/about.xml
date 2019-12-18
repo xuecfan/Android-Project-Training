@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:hyphenate="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-    <ImageView
-        android:layout_width="wrap_content"
+    <com.hyphenate.easeui.widget.EaseTitleBar
+        android:id="@+id/title_bar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/welcome"
-        />
+        hyphenate:titleBarLeftImage="@drawable/ease_mm_title_back" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
