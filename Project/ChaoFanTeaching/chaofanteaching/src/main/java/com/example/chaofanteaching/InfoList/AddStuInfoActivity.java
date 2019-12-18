@@ -17,6 +17,8 @@ import android.widget.Toast;
 import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.R;
 import com.example.chaofanteaching.utils.ToastUtils;
+import com.hyphenate.easeui.widget.EaseTitleBar;
+
 import java.net.HttpURLConnection;
 
 public class AddStuInfoActivity extends AppCompatActivity {
@@ -42,6 +44,7 @@ public class AddStuInfoActivity extends AppCompatActivity {
     private Spinner myspinner3;
     private Spinner myspinner4;
     private Spinner myspinner5;
+    protected EaseTitleBar titleBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,12 +52,13 @@ public class AddStuInfoActivity extends AppCompatActivity {
         setContentView(R.layout.add_stu_info);
         pre= getSharedPreferences("login", Context.MODE_PRIVATE);
         a = pre.getString("userName", "");
-        Log.e("myl",a);
-        back=findViewById(R.id.back);
-        back.setOnClickListener(new View.OnClickListener() {
+        titleBar=findViewById(R.id.title_bar);
+        titleBar.setTitle("添加信息");
+        titleBar.setLeftLayoutClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-                finish();
+                onBackPressed();
             }
         });
         radioGroup=findViewById(R.id.myradio);

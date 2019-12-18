@@ -33,6 +33,8 @@ import com.baidu.mapapi.model.LatLng;
 import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.R;
 import com.example.chaofanteaching.utils.ToastUtils;
+import com.hyphenate.easeui.widget.EaseTitleBar;
+
 import java.net.HttpURLConnection;
 
 public class AddInfoActivity extends AppCompatActivity {
@@ -62,6 +64,7 @@ public class AddInfoActivity extends AppCompatActivity {
     private String week;
     private String hour;
     private String min;
+    protected EaseTitleBar titleBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,11 +73,13 @@ public class AddInfoActivity extends AppCompatActivity {
         setContentView(R.layout.add_info);
         pre= getSharedPreferences("login", Context.MODE_PRIVATE);
         a = pre.getString("userName", "");
-        back=findViewById(R.id.back);
-        back.setOnClickListener(new View.OnClickListener() {
+        titleBar=findViewById(R.id.title_bar);
+        titleBar.setTitle("添加信息");
+        titleBar.setLeftLayoutClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-                finish();
+                onBackPressed();
             }
         });
         mapView = findViewById(R.id.bmapView);
