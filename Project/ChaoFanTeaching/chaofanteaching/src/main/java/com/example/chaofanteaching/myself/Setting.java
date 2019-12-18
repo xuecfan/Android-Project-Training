@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Message;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,14 +29,14 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 
 public class Setting extends AppCompatActivity {
-    private LinearLayout about;
+    private ConstraintLayout about;
     private Button btn1;
     private Button btn2;
-    private LinearLayout fanhui;
-    private LinearLayout privacy;
-    private LinearLayout cuurency;
-    private LinearLayout help;
-    private LinearLayout plug;
+    private ConstraintLayout fanhui;
+    private ConstraintLayout privacy;
+    private ConstraintLayout cuurency;
+    private ConstraintLayout help;
+    private ConstraintLayout plug;
     private Handler handler;
 
     @Override
