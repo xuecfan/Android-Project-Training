@@ -72,7 +72,6 @@ public class FindMyPWActivity extends AppCompatActivity {
                     Random random = new Random();
                     int num = random.nextInt(max)%(max-min+1) + min;
                     sNum = num+"";
-                    Toast.makeText(getApplication(),num+"",Toast.LENGTH_SHORT).show();
 
                     Log.e("2",userEmail);
                     testUserCode(sNum,userEmail);
