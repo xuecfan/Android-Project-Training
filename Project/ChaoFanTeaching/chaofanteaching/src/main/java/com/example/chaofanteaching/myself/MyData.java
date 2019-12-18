@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.example.chaofanteaching.BottomPopupOption;
@@ -19,7 +18,6 @@ import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.R;
 import com.example.chaofanteaching.StreamChangeStrUtils;
 import com.hyphenate.easeui.widget.EaseTitleBar;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -46,7 +44,7 @@ public class MyData extends AppCompatActivity {
     private TextView address_content;
     private TextView sex;
     private String user="";
-    private SharedPreferences pre;
+    private SharedPreferences pre,pre1;
     private SharedPreferences.Editor editor = null;
     private Handler handler=new Handler(){
         @Override
@@ -107,8 +105,8 @@ public class MyData extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        pre=getSharedPreferences("login",MODE_PRIVATE);
-        user=pre.getString("userName","");
+        pre1=getSharedPreferences("login",MODE_PRIVATE);
+        user=pre1.getString("userName","");
         btn=findViewById(R.id.btn);
         name = findViewById(R.id.name);
         phone = findViewById(R.id.phone);
@@ -200,6 +198,12 @@ public class MyData extends AppCompatActivity {
                 new Thread(){
                     @Override
                     public void run() {
+                            pre=getSharedPreferences("data",MODE_PRIVATE);
+                            String name1=pre.getString("nameContent","");
+                            String phone1=pre.getString("phoneContent","");
+                            String address1=pre.getString("addressContent","");
+                            String sex1=pre.getString("sexContent","");
+                            String email1=pre.getString("emailContent","");
                             insert(name1,phone1,address1,sex1,email1);
                             android.os.Message msg= Message.obtain();
                             msg.what=1;

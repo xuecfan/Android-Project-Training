@@ -170,7 +170,6 @@
         <activity android:name=".sign.LogonActivity" />
         <activity android:name=".sign.FindMyPWActivity" />
         <activity android:name=".about.About" />
-        <activity android:name=".about.A2" />
         <activity android:name=".about.Student_Authentication" />
         <activity android:name=".myself.AddressDetail" />
 

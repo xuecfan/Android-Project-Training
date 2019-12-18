@@ -11,9 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.Toast;
-
 import com.example.chaofanteaching.ActivityCollector;
 import com.example.chaofanteaching.All;
 import com.example.chaofanteaching.HttpConnectionUtils;
@@ -33,7 +31,6 @@ public class Setting extends AppCompatActivity {
     private ConstraintLayout about;
     private Button btn1;
     private Button btn2;
-    private ConstraintLayout fanhui;
     private ConstraintLayout privacy;
     private ConstraintLayout cuurency;
     private ConstraintLayout help;
@@ -61,7 +58,6 @@ public class Setting extends AppCompatActivity {
         about=findViewById(R.id.about);
         btn1=findViewById(R.id.btn1);
         btn2=findViewById(R.id.btn2);
-        fanhui=findViewById(R.id.fanhui);
         privacy=findViewById(R.id.privacy);
         cuurency=findViewById(R.id.currency);
         help=findViewById(R.id.help);
@@ -96,12 +92,6 @@ public class Setting extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i=new Intent(Setting.this, About.class);
                 startActivity(i);
-            }
-        });
-        fanhui.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
             }
         });
         btn1.setOnClickListener(new View.OnClickListener() {

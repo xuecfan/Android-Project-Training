@@ -23,7 +23,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,7 +47,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -65,11 +63,6 @@ public class My extends Fragment {
     private static String path = "/storage/emulated/0/";// sd路径
     protected static Uri uritempFile;
     private BottomPopupOption bottomPopupOption;
-//    private LinearLayout myself;
-//    private LinearLayout student;
-//    private LinearLayout setting;
-//    private LinearLayout customer_service;
-//    private LinearLayout send;
     private TextView name;
     private ImageView image;
     private Bitmap bitmap;
@@ -123,12 +116,8 @@ public class My extends Fragment {
         a = pre.getString("userName", "");
 
 
-        //customer_service=view.findViewById(R.id.customer_service);
-        //send=view.findViewById(R.id.send);
+
         name=view.findViewById(R.id.name);
-        //myself=view.findViewById(R.id.myself);
-        //student=view.findViewById(R.id.student);
-        //setting=view.findViewById(R.id.setting);
         image=view.findViewById(R.id.image);
         img=view.findViewById(R.id.img);
         renzheng=view.findViewById(R.id.renzheng);
@@ -177,8 +166,13 @@ public class My extends Fragment {
                             startActivity(intent);
                             break;
                         case 2:
-                            Intent intent1=new Intent(getContext(), Student_Authentication.class);
-                            startActivity(intent1);
+                            if(pre1.getString("renzheng","").equals("1")){
+                                Intent intent1=new Intent(getContext(), RenZheng.class);
+                                startActivity(intent1);
+                            }else{
+                                Intent intent1=new Intent(getContext(), Student_Authentication.class);
+                                startActivity(intent1);
+                            }
                             break;
                         case 3:
                             Toast.makeText(getContext(),"暂未开放，敬请期待", Toast.LENGTH_SHORT).show();
@@ -212,82 +206,6 @@ public class My extends Fragment {
                 look();
             }else{name.setText(name1);}
         }
-//        customer_service.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (a.equals("")) {
-//                    Toast.makeText(getContext(),"请您先登录", Toast.LENGTH_SHORT).show();
-//                    Intent i=new Intent(getContext(), LoginActivity.class);
-//                    startActivity(i);
-//                }else{
-//                    Toast.makeText(getContext(),"暂未开放，敬请期待", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        });
-//        send.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (a.equals("")) {
-//                    Toast.makeText(getContext(),"请您先登录", Toast.LENGTH_SHORT).show();
-//                    Intent i=new Intent(getContext(), LoginActivity.class);
-//                    startActivity(i);
-//                }else{
-//                    Intent intent=new Intent(getContext(), MyPublishActivity.class);
-//                    startActivity(intent);
-//                }
-//            }
-//        });
-//        myself.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (a.equals("")) {
-//                    Toast.makeText(getContext(),"请您先登录", Toast.LENGTH_SHORT).show();
-//                    Intent i=new Intent(getContext(), LoginActivity.class);
-//                    startActivity(i);
-//                }else{
-//                Intent i=new Intent();
-//                i.setClass(getContext(), MyData.class);
-//                    i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                startActivity(i);
-//
-//                }
-//
-//            }
-//        });
-//        student.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (a.equals("")) {
-//                    Toast.makeText(getContext(), "请您先登录", Toast.LENGTH_SHORT).show();
-//                    Intent i=new Intent(getContext(), LoginActivity.class);
-//                    startActivity(i);
-//                }else {
-//                    Intent i=new Intent();
-//                    if(pre1.getString("renzheng","").equals("1")){
-//                        i.setClass(getContext(),RenZheng.class);
-//                        startActivity(i);
-//                    }else{
-//                        i.setClass(getContext(), Student_Authentication.class);
-//                        startActivity(i);
-//                    }
-//                }
-//            }
-//        });
-//        setting.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (a.equals("")) {
-//                    Toast.makeText(getContext(),"请您先登录", Toast.LENGTH_SHORT).show();
-//                    Intent i=new Intent(getContext(), LoginActivity.class);
-//                    startActivity(i);
-//                }else{
-//                Intent i=new Intent();
-//                i.setClass(getContext(),Setting.class);
-//                startActivity(i);}
-//            }
-//        });
-
-
         image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -485,17 +403,6 @@ public class My extends Fragment {
         }
     }
 
-//    @Override
-//    public void onStart() {
-//        super.onStart();
-//        pre1=getContext().getSharedPreferences("data",Context.MODE_PRIVATE);
-//        String name1=pre1.getString("nameContent","");
-//        if(name1.equals("")||name1.equals("null")){name.setText("用户名");}else{name.setText(name1);}
-//        if(pre1.getString("renzheng","").equals("1")){
-//            renzheng.setText("已认证");
-//            img.setImageDrawable(getResources().getDrawable(R.drawable.v1));
-//        }
-//    }
 
     private void look(){
         new Thread() {

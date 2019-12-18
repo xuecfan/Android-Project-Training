@@ -14,14 +14,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.example.chaofanteaching.R;
 import com.example.chaofanteaching.UpLoadFile;
 import com.hyphenate.easeui.widget.EaseTitleBar;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
