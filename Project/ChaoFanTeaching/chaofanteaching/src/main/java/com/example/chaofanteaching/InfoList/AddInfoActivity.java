@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -113,6 +114,7 @@ public class AddInfoActivity extends AppCompatActivity {
                 String pay=inPay.getText().toString();
                 String tel=inTel.getText().toString();
                 String require=inRequirement.getText().toString();
+                sex="男";
                 dbKey(name,sex,grade,subjcet,week,hour,min,ilong,pay,tel,require,a,locate);
                 finish();
             }
@@ -190,7 +192,7 @@ public class AddInfoActivity extends AppCompatActivity {
         //打开GPS
         locationClientOption.setOpenGps(true);
         //定位间隔时间
-        locationClientOption.setScanSpan(1000);
+        //locationClientOption.setScanSpan(1000);
         //定位坐标系
         SDKInitializer.setCoordType(CoordType.GCJ02);
         //设置定位模式
@@ -211,13 +213,14 @@ public class AddInfoActivity extends AppCompatActivity {
             public void onReceiveLocation(BDLocation bdLocation) {
                 //获取定位详细数据
                 //获取地址信息
-                inlocation=findViewById(R.id.location);
-                String addr=bdLocation.getAddrStr();
-                inlocation.setText(addr);
+//                inlocation=findViewById(R.id.location);
+//                String addr=bdLocation.getAddrStr();
+//                inlocation.setText(addr);
                 //获取经纬度
                 double lat=bdLocation.getLatitude();
                 double lng=bdLocation.getLongitude();
                 String locate= String.valueOf(lat+","+lng);
+                Log.e("myl",locate);
                 latlng=findViewById(R.id.latlng);
                 latlng.setText(locate);
                 //获取POI
