@@ -130,10 +130,10 @@ public class LoginActivity extends AppCompatActivity {
                                 ToastUtils.showLong("无效用户名！ code: " + i + "，message: " + s);
                                 break;
                             case EMError.INVALID_PASSWORD:
-                                ToastUtils.showLong("用户密码不正确！ code: " + i + "，message: " + s);
+//                                ToastUtils.showLong("用户密码不正确！ code: " + i + "，message: " + s);
                                 break;
                             case EMError.USER_AUTHENTICATION_FAILED:
-                                ToastUtils.showLong("用户名或密码不正确！ code: " + i + "，message: " + s);
+//                                ToastUtils.showLong("用户名或密码不正确！ code: " + i + "，message: " + s);
                                 break;
                             case EMError.USER_NOT_FOUND:
                                 ToastUtils.showLong("用户不存在！ code: " + i + "，message: " + s);
