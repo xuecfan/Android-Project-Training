@@ -1,8 +1,7 @@
 package com.example.chaofanteaching.sign;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
@@ -14,18 +13,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.chaofanteaching.ActivityCollector;
-import com.example.chaofanteaching.All;
 import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.R;
 import com.example.chaofanteaching.StreamChangeStrUtils;
-import com.google.android.gms.tasks.Task;
 
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class FindMyPWActivity extends AppCompatActivity {
     private int sendCodeStatus = 0;
@@ -39,6 +33,7 @@ public class FindMyPWActivity extends AppCompatActivity {
     private String userEmail;
     private String userCode;
     private String string;
+    private Resources resources;
 
 
     @Override
@@ -52,6 +47,9 @@ public class FindMyPWActivity extends AppCompatActivity {
 
         TextView sendCode = findViewById(R.id.sendCode);
         toTestCode = findViewById(R.id.toTestCode);
+
+        //初始化常用邮箱格式
+        resources = this.getResources();
 
 
         //点击返回登录页
@@ -70,7 +68,7 @@ public class FindMyPWActivity extends AppCompatActivity {
                 userCode = myCode.getText().toString();
                 if (userEmail.isEmpty()){
                     Toast.makeText(getApplication(),"请输入邮箱",Toast.LENGTH_SHORT).show();
-                }else if (userEmail.contains("@qq.com")){
+                }else if (emailStyle(userEmail)){
                     Random random = new Random();
                     int num = random.nextInt(max)%(max-min+1) + min;
                     sNum = num+"";
@@ -115,6 +113,17 @@ public class FindMyPWActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+    private boolean emailStyle(String useremail){
+        String[] arr = resources.getStringArray(R.array.emails);
+        for (int i = 0;i < arr.length;i++){
+            if (useremail.contains(arr[i])){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        return false;
     }
 
     //连接数据库，向数据库发送用户邮箱和验证码

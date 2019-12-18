@@ -87,4 +87,19 @@
         <item>国际文化交流学院</item>
         <item>其它学院</item>
     </string-array>
+    <string-array name="emails">
+        <item>\&#064;qq.com</item>
+        <item>\&#064;163.com</item>
+        <item>\&#064;126.com</item>
+        <item>\&#064;gmail.com</item>
+        <item>\&#064;sina.com</item>
+        <item>\&#064;hotmail.com</item>
+        <item>\&#064;yahoo.cn</item>
+        <item>\&#064;sohu.com</item>
+        <item>\&#064;foxmail.com</item>
+        <item>\&#064;139.com</item>
+        <item>\&#064;yeah.net</item>
+        <item>\&#064;vip.qq.com</item>
+        <item>\&#064;vip.sina.com</item>
+    </string-array>
 </resources>
