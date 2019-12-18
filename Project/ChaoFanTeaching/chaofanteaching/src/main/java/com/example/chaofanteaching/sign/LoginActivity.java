@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.example.chaofanteaching.ActivityCollector;
 import com.example.chaofanteaching.All;
@@ -49,9 +50,9 @@ public class LoginActivity extends AppCompatActivity {
         myId = findViewById(R.id.myId);
         myPW = findViewById(R.id.myPW);
         ImageView loginBtn = findViewById(R.id.myLoginBtn);
-        Button toLogonBtn=findViewById(R.id.toLogonBtn);
-        Button findMyPW = findViewById(R.id.findMyPW);
-        Button serviceAgreement = findViewById(R.id.serviceAgreement);
+        TextView toLogonBtn=findViewById(R.id.toLogonBtn);
+        TextView findMyPW = findViewById(R.id.findMyPW);
+        TextView serviceAgreement = findViewById(R.id.serviceAgreement);
 
         //登陆按钮
         loginBtn.setOnClickListener(new View.OnClickListener(){

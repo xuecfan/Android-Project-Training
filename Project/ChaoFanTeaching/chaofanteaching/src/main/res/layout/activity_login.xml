@@ -70,12 +70,13 @@
         app:layout_constraintVertical_bias="0.7"/>
 
     /*底部按钮和文字*/
-    <Button
+    <TextView
         android:id="@+id/findMyPW"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="?android:attr/borderlessButtonStyle"
         android:text="忘记密码"
+        android:textSize="15sp"
+        android:textColor="#4B4B4B"
         android:textStyle="bold"
         android:background="#fff"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -83,7 +84,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.9"/>
+        app:layout_constraintVertical_bias="0.88"/>
     <TextView
         android:background="#fff"
         android:layout_width="wrap_content"
@@ -97,11 +98,12 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.89"/>
-    <Button
+    <TextView
         android:id="@+id/toLogonBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="?android:attr/borderlessButtonStyle"
+        android:textSize="15sp"
+        android:textColor="#4B4B4B"
         android:text="用户注册"
         android:textStyle="bold"
         android:background="#fff"
@@ -110,7 +112,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.9"/>
+        app:layout_constraintVertical_bias="0.88"/>
 
 
     <TextView
@@ -123,11 +125,12 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.93"/>
-    <Button
+    <TextView
         android:id="@+id/serviceAgreement"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="?android:attr/borderlessButtonStyle"
+        android:textSize="15sp"
+        android:textColor="#4B4B4B"
         android:text="服务协议"
         android:textStyle="bold"
         android:background="#fff"
@@ -136,7 +139,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.95"/>
+        app:layout_constraintVertical_bias="0.93"/>
 
 
 
