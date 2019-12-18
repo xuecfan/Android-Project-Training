@@ -5,35 +5,35 @@
     android:orientation="vertical">
 
     <LinearLayout
+        android:background="#D8900A"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="46dp"
         android:focusable="true"
         android:focusableInTouchMode="true"
-        android:gravity="center_horizontal">
+        android:gravity="center">
 
         <EditText
+            android:singleLine="true"
+            android:imeOptions="actionSearch"
+            android:background="@drawable/edittext_normal"
             android:id="@+id/input"
-            android:layout_width="240dp"
-            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_width="300dp"
+            android:layout_height="30dp"
             android:hint="河北师范大学"/>
-
-        <Button
-            android:id="@+id/search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="搜索"/>
 
         <Button
             android:id="@+id/add"
             android:layout_marginLeft="5dp"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:background="@drawable/add"/>
 
     </LinearLayout>
 
     <ListView
         android:layout_marginLeft="15dp"
+        android:layout_marginTop="1dp"
         android:id="@+id/infolist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

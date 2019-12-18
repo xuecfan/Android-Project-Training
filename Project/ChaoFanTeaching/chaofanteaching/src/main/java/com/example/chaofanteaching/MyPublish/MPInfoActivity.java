@@ -11,14 +11,14 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.R;
+import com.hyphenate.easeui.widget.EaseTitleBar;
+
 import java.net.HttpURLConnection;
 
 public class MPInfoActivity extends AppCompatActivity {
-    private TextView back;
     private EditText name;
     private EditText inMajor;
     private EditText inPay;
@@ -41,21 +41,23 @@ public class MPInfoActivity extends AppCompatActivity {
     private Spinner myspinner5;
     private Button save;
     private Button del;
+    protected EaseTitleBar titleBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mpinfo);
-        back=findViewById(R.id.back);
-        back.setOnClickListener(new View.OnClickListener() {
+        Intent request=getIntent();
+        String name1=request.getStringExtra("name");
+        titleBar=findViewById(R.id.title_bar);
+        titleBar.setTitle(name1+"的信息");
+        titleBar.setLeftLayoutClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                onBackPressed();
             }
         });
         name=findViewById(R.id.name);
-        Intent request=getIntent();
-        String name1=request.getStringExtra("name");
         id=request.getStringExtra("id");
         name.setText(name1);
         getSpinner();

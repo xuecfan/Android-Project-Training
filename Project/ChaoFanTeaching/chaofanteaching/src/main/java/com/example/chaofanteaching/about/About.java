@@ -7,10 +7,10 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import com.example.chaofanteaching.R;
-import com.example.chaofanteaching.fragment.My;
+import com.hyphenate.easeui.widget.EaseTitleBar;
 
 public class About extends AppCompatActivity {
-    private ImageButton about_fanhui;
+    protected EaseTitleBar titleBar;
     private ImageButton a1;
     private ImageButton a2;
     private ImageButton a3;
@@ -19,17 +19,17 @@ public class About extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.about);
-
-        about_fanhui=findViewById(R.id.about_fanhui);
+        titleBar=findViewById(R.id.title_bar);
+        titleBar.setTitle("关于");
+        titleBar.setLeftLayoutClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         a1=findViewById(R.id.a1);
         a2=findViewById(R.id.a2);
         a3=findViewById(R.id.a3);
-        about_fanhui.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
         a1.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {

@@ -20,6 +20,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.example.chaofanteaching.R;
 import com.example.chaofanteaching.UpLoadFile;
+import com.hyphenate.easeui.widget.EaseTitleBar;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -27,6 +29,7 @@ import java.io.IOException;
 import okhttp3.OkHttpClient;
 
 public class Student_Authentication extends AppCompatActivity {
+    protected EaseTitleBar titleBar;
     private OkHttpClient okHttpClient;
     private SharedPreferences pre;
     private static String path = "/storage/emulated/0/";// sd路径
@@ -53,23 +56,21 @@ public class Student_Authentication extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.student_authenticaation);
+        titleBar=findViewById(R.id.title_bar);
+        titleBar.setTitle("身份认证");
+        titleBar.setLeftLayoutClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         okHttpClient=new OkHttpClient();
         pre=getSharedPreferences("login", Context.MODE_PRIVATE);
         a = pre.getString("userName", "");
-
-        au_fanhui = findViewById(R.id.au_fanhui);
         student1 = findViewById(R.id.student1);
         student2 = findViewById(R.id.student2);
         shangchuan = findViewById(R.id.shangchuang);
-
-        au_fanhui.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
         shangchuan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

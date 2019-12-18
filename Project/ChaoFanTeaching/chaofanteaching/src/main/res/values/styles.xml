@@ -6,7 +6,7 @@
         <item name="colorPrimary">#D8900A</item>//标题栏
         <item name="android:windowNoTitle">true</item>
         <item name="colorPrimaryDark">#D8900A</item>//状态栏
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">#D8900A</item>
     </style>
 
     <style name="AppTheme.NoActionBar">

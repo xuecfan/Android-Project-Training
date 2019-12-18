@@ -24,6 +24,7 @@ import com.example.chaofanteaching.sign.LoginActivity;
 import com.example.chaofanteaching.utils.LogUtils;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
+import com.hyphenate.easeui.widget.EaseTitleBar;
 
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -38,11 +39,20 @@ public class Setting extends AppCompatActivity {
     private ConstraintLayout help;
     private ConstraintLayout plug;
     private Handler handler;
+    protected EaseTitleBar titleBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
+        titleBar=findViewById(R.id.title_bar);
+        titleBar.setTitle("设置");
+        titleBar.setLeftLayoutClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         final SharedPreferences pre = getSharedPreferences("login", Context.MODE_PRIVATE);
         final SharedPreferences pre1 = getSharedPreferences("data", Context.MODE_PRIVATE);
 

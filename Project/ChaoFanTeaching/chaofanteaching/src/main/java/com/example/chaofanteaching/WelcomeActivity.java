@@ -16,14 +16,11 @@ public class WelcomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //getSupportActionBar().hide();//隐藏标题栏
         setContentView(R.layout.welcome);
-
-
-
         Thread myThread=new Thread(){//创建子线程
             @Override
             public void run() {
                 try{
-                    sleep(2000);//使程序休眠2秒
+                    sleep(1500);//使程序休眠2秒
                     Intent it=new Intent(getApplicationContext(), ChooseIdentityActivity.class);//启动MainActivity
                     startActivity(it);
                     finish();//关闭当前活动
@@ -36,7 +33,7 @@ public class WelcomeActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try{
-                    sleep(2000);//使程序休眠2秒
+                    sleep(1500);//使程序休眠2秒
                     Intent it=new Intent(getApplicationContext(), All.class);//启动MainActivity
                     startActivity(it);
                     finish();//关闭当前活动

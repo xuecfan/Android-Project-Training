@@ -34,13 +34,15 @@ import com.example.chaofanteaching.utils.ToastUtils;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.easeui.EaseConstant;
+import com.hyphenate.easeui.widget.EaseTitleBar;
+
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 
 
 public class ParInfoActivity extends AppCompatActivity {
+    protected EaseTitleBar titleBar;
     private String user;
-    private TextView back;
     private LocationClient locationClient;
     private LocationClientOption locationClientOption;
     private BaiduMap baiduMap;
@@ -63,13 +65,7 @@ public class ParInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         SDKInitializer.initialize(getApplicationContext());
         setContentView(R.layout.infopar_deatil);
-        back=findViewById(R.id.back);
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+
         sendbtn=findViewById(R.id.send);
         sendbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,6 +75,15 @@ public class ParInfoActivity extends AppCompatActivity {
         });
         Intent request=getIntent();
         String name=request.getStringExtra("name");
+        titleBar=findViewById(R.id.title_bar);
+        titleBar.setTitle(name);
+        titleBar.setLeftLayoutClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         nametext=findViewById(R.id.name);
         nametext.setText(name);
         sextext=findViewById(R.id.sex);

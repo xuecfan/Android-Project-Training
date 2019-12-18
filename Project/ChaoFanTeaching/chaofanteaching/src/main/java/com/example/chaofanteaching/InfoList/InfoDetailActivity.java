@@ -19,12 +19,13 @@ import com.example.chaofanteaching.utils.ToastUtils;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.easeui.EaseConstant;
+import com.hyphenate.easeui.widget.EaseTitleBar;
+
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 
 public class InfoDetailActivity extends AppCompatActivity {
     private String user;
-    private TextView back;
     private Handler handler;
     private TextView nametext;
     private TextView sextext;
@@ -38,6 +39,7 @@ public class InfoDetailActivity extends AppCompatActivity {
     private TextView introducetext;
     private Button sendbtn;
     private SharedPreferences pre;
+    protected EaseTitleBar titleBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,13 +47,7 @@ public class InfoDetailActivity extends AppCompatActivity {
         setContentView(R.layout.info_detail);
 //        pre= getSharedPreferences("login", Context.MODE_PRIVATE);
 //        user = pre.getString("userName", "");
-        back=findViewById(R.id.back);
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+
         sendbtn=findViewById(R.id.send);
         sendbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +57,15 @@ public class InfoDetailActivity extends AppCompatActivity {
         });
         Intent request=getIntent();
         String name=request.getStringExtra("name");
+        titleBar=findViewById(R.id.title_bar);
+        titleBar.setTitle(name);
+        titleBar.setLeftLayoutClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         nametext=findViewById(R.id.name);
         sextext=findViewById(R.id.sex);
         universitytext=findViewById(R.id.university);

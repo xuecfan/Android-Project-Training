@@ -11,8 +11,10 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.chaofanteaching.R;
+import com.hyphenate.easeui.widget.EaseTitleBar;
 
 public class AddressDetail extends AppCompatActivity {
+    protected EaseTitleBar titleBar;
     private Button btn1;
     private Button btn2;
     private EditText address;
@@ -21,6 +23,14 @@ public class AddressDetail extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_address_detail);
+        titleBar=findViewById(R.id.title_bar);
+        titleBar.setTitle("修改地址");
+        titleBar.setLeftLayoutClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         address=findViewById(R.id.address);
         btn1=findViewById(R.id.btn1);
         btn2=findViewById(R.id.btn2);

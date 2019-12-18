@@ -3,12 +3,14 @@ package com.example.chaofanteaching.fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,6 +52,22 @@ public class List1 extends Fragment {
         infolist.setAdapter(infoAdapter);
         dbKey("");
         infoAdapter.notifyDataSetChanged();
+        editText=view.findViewById(R.id.input);
+        Drawable drawable=getResources().getDrawable(R.drawable.find);
+        drawable.setBounds(0,0,60,60);//第一0是距左边距离，第二0是距上边距离
+        editText.setCompoundDrawables(drawable,null,null,null);//只放左边
+        editText.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                editText.setCursorVisible(true);
+                if (keyCode == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN) {
+                    String key=editText.getText().toString();
+                    dbKey(key);
+                    editText.setCursorVisible(false);
+                }
+                return false;
+            }
+        });
         pre= getContext().getSharedPreferences("login", Context.MODE_PRIVATE);
         a = pre.getString("userName", "");
         infolist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -82,16 +100,6 @@ public class List1 extends Fragment {
                 }
             }
         });
-        Button btnserach=view.findViewById(R.id.search);
-        editText=view.findViewById(R.id.input);
-        btnserach.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                infoList.clear();
-                String key=editText.getText().toString();
-                dbKey(key);
-            }
-        });
         return view;
     }
 
@@ -104,12 +112,16 @@ public class List1 extends Fragment {
                     case 1:
                         Info scanInfo;
                         String str = msg.obj.toString();
-                        String[] s = str.split(";");
-                        for (int i = 0; i < s.length; i++) {
-                            String[] r = s[i].split(",");
-                            scanInfo = new Info(r[0], r[1], r[2], r[3]);
-                            infoList.add(scanInfo);
-                            infoAdapter.notifyDataSetChanged();
+                        if(str.isEmpty()){
+                            Toast.makeText(getContext(),"没有搜到任何东西",Toast.LENGTH_LONG).show();
+                        }else{
+                            String[] s = str.split(";");
+                            for (int i = 0; i < s.length; i++) {
+                                String[] r = s[i].split(",");
+                                scanInfo = new Info(r[0], r[1], r[2], r[3]);
+                                infoList.add(scanInfo);
+                                infoAdapter.notifyDataSetChanged();
+                            }
                         }
                         break;
                 }

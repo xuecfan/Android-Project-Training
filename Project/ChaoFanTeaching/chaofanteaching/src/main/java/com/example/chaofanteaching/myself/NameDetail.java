@@ -10,16 +10,26 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.chaofanteaching.R;
+import com.hyphenate.easeui.widget.EaseTitleBar;
 
 public class NameDetail extends AppCompatActivity {
     private Button btn1;
     private Button btn2;
     private EditText name;
+    protected EaseTitleBar titleBar;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_name_detail);
+        titleBar=findViewById(R.id.title_bar);
+        titleBar.setTitle("修改昵称");
+        titleBar.setLeftLayoutClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         name=findViewById(R.id.name);
         btn1=findViewById(R.id.btn1);
         btn2=findViewById(R.id.btn2);

@@ -10,9 +10,11 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.chaofanteaching.R;
+import com.hyphenate.easeui.widget.EaseTitleBar;
 
 public class PhoneDetail extends AppCompatActivity {
 
+    protected EaseTitleBar titleBar;
     private Button btn1;
     private Button btn2;
     private EditText phone;
@@ -20,6 +22,14 @@ public class PhoneDetail extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phone_detail);
+        titleBar=findViewById(R.id.title_bar);
+        titleBar.setTitle("修改电话");
+        titleBar.setLeftLayoutClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         phone=findViewById(R.id.phone);
         btn1=findViewById(R.id.btn1);
         btn2=findViewById(R.id.btn2);

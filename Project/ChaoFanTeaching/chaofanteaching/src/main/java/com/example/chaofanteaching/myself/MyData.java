@@ -18,6 +18,8 @@ import com.example.chaofanteaching.BottomPopupOption;
 import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.R;
 import com.example.chaofanteaching.StreamChangeStrUtils;
+import com.hyphenate.easeui.widget.EaseTitleBar;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -30,12 +32,12 @@ import okhttp3.Response;
 
 public class MyData extends AppCompatActivity {
 
+    protected EaseTitleBar titleBar;
     private BottomPopupOption bottomPopupOption;
     private Button btn;
     private ConstraintLayout name;
     private ConstraintLayout phone;
     private ConstraintLayout address;
-    private ConstraintLayout fanhui;
     private ConstraintLayout person;
     private ConstraintLayout email;
     private TextView email_content;
@@ -97,16 +99,22 @@ public class MyData extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_data);
+        titleBar=findViewById(R.id.title_bar);
+        titleBar.setTitle("我的信息");
+        titleBar.setLeftLayoutClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         pre=getSharedPreferences("login",MODE_PRIVATE);
         user=pre.getString("userName","");
         btn=findViewById(R.id.btn);
-        fanhui=findViewById(R.id.fanhui);
         name = findViewById(R.id.name);
         phone = findViewById(R.id.phone);
         address = findViewById(R.id.address);
         person=findViewById(R.id.person);
         email=findViewById(R.id.email);
-
         email_content=findViewById(R.id.email_content);
         name_content=findViewById(R.id.name_content);
         sex=findViewById(R.id.sex);
@@ -140,12 +148,6 @@ public class MyData extends AppCompatActivity {
                         }
                     }
                 });
-            }
-        });
-        fanhui.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
             }
         });
         pre=getSharedPreferences("data",MODE_PRIVATE);

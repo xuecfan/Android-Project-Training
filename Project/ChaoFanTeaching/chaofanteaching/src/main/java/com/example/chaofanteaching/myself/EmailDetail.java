@@ -8,16 +8,26 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.chaofanteaching.R;
+import com.hyphenate.easeui.widget.EaseTitleBar;
 
 public class EmailDetail extends AppCompatActivity {
     private Button btn1;
     private Button btn2;
     private EditText email;
+    protected EaseTitleBar titleBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_email_detail);
+        titleBar=findViewById(R.id.title_bar);
+        titleBar.setTitle("修改邮箱");
+        titleBar.setLeftLayoutClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         email=findViewById(R.id.email);
         btn1=findViewById(R.id.btn1);
         btn2=findViewById(R.id.btn2);

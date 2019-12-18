@@ -13,16 +13,21 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.R;
 import com.example.chaofanteaching.StreamChangeStrUtils;
+import com.hyphenate.easeui.widget.EaseTitleBar;
+
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MyPublishActivity extends AppCompatActivity {
-    private TextView back;
+
+    protected EaseTitleBar titleBar;
     private ListView infolist;
     private ArrayAdapter adapter;
     private List<String> infos=new ArrayList<>();
@@ -38,12 +43,12 @@ public class MyPublishActivity extends AppCompatActivity {
         pre=getSharedPreferences("login", Context.MODE_PRIVATE);
         a = pre.getString("userName", "");
         String role=pre.getString("role","");
-
-        back=findViewById(R.id.back);
-        back.setOnClickListener(new View.OnClickListener() {
+        titleBar=findViewById(R.id.title_bar);
+        titleBar.setTitle("我发布的");
+        titleBar.setLeftLayoutClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                onBackPressed();
             }
         });
         infolist=findViewById(R.id.infolist);
@@ -73,11 +78,15 @@ public class MyPublishActivity extends AppCompatActivity {
                 switch (msg.what) {
                     case 1:
                         String str = msg.obj.toString();
-                        String[] s = str.split(",");
-                        for (int i = 0; i < s.length; i+=2) {
-                            infos.add(s[i]);
-                            ids.add(s[i+1]);
-                            adapter.notifyDataSetChanged();
+                        if(str.isEmpty()){
+                            Toast.makeText(getApplicationContext(),"没有任何东西",Toast.LENGTH_LONG).show();
+                        }else{
+                            String[] s = str.split(",");
+                            for (int i = 0; i < s.length; i+=2) {
+                                infos.add(s[i]);
+                                ids.add(s[i+1]);
+                                adapter.notifyDataSetChanged();
+                            }
                         }
                         break;
                 }
