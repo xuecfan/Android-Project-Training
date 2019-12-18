@@ -80,7 +80,7 @@
     <application
         android:name=".MyApp"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/cfjj1"
         android:label="超凡家教"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
