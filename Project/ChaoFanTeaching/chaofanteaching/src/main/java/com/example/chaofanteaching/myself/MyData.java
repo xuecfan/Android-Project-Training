@@ -36,6 +36,8 @@ public class MyData extends AppCompatActivity {
     private LinearLayout address;
     private LinearLayout fanhui;
     private LinearLayout person;
+    private LinearLayout email;
+    private TextView email_content;
     private TextView name_content;
     private TextView phone_content;
     private TextView address_content;
@@ -79,6 +81,11 @@ public class MyData extends AppCompatActivity {
                             editor=pre.edit();
                             editor.putString("addressContent",r[3]);
                             editor.commit();}
+                        if(r[4].equals("null")){email_content.setText("");}
+                        else{email_content.setText(r[4]);
+                            editor=pre.edit();
+                            editor.putString("emailContent",r[4]);
+                            editor.commit();}
                         break;
                     }}
             }
@@ -97,7 +104,9 @@ public class MyData extends AppCompatActivity {
         phone = findViewById(R.id.phone);
         address = findViewById(R.id.address);
         person=findViewById(R.id.person);
+        email=findViewById(R.id.email);
 
+        email_content=findViewById(R.id.email_content);
         name_content=findViewById(R.id.name_content);
         sex=findViewById(R.id.sex);
         phone_content=findViewById(R.id.phone_content);
@@ -136,7 +145,6 @@ public class MyData extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
-
             }
         });
         pre=getSharedPreferences("data",MODE_PRIVATE);
@@ -144,7 +152,8 @@ public class MyData extends AppCompatActivity {
         final String phone1=pre.getString("phoneContent","");
         final String address1=pre.getString("addressContent","");
         final String sex1=pre.getString("sexContent","");
-        if(name1.equals("")||phone1.equals("")||sex1.equals("")||address1.equals("")){
+        final String email1=pre.getString("emailContent","");
+        if(name1.equals("")||phone1.equals("")||sex1.equals("")||address1.equals("")||email1.equals("")){
             look();
 //        }else{
 //        sex.setText(sex1);
@@ -179,13 +188,21 @@ public class MyData extends AppCompatActivity {
 
             }
         });
+        email.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent();
+                i.setClass(getApplicationContext(),EmailDetail.class);
+                startActivity(i);
+            }
+        });
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new Thread(){
                     @Override
                     public void run() {
-                            insert(name1,phone1,address1,sex1);
+                            insert(name1,phone1,address1,sex1,email1);
                             android.os.Message msg= Message.obtain();
                             msg.what=1;
                             handler.sendMessage(msg);
@@ -194,10 +211,10 @@ public class MyData extends AppCompatActivity {
                     finish();}
         });
     }
-    private void insert(String name1,String phone1,String address1,String sex){
+    private void insert(String name1,String phone1,String address1,String sex,String email){
         OkHttpClient okHttpClient=new OkHttpClient();
         Request request=new Request.Builder().
-                url("http://175.24.102.160:8080/ChaoFanTeaching/MyData?name="+user+"&nameContent="+name1+"&phoneContent="+phone1+"&addressContent="+address1+"&sexContent="+sex+"&index=insert")
+                url("http://175.24.102.160:8080/ChaoFanTeaching/MyData?name="+user+"&nameContent="+name1+"&phoneContent="+phone1+"&addressContent="+address1+"&sexContent="+sex+"&index=insert&email="+email)
                 .build();
         Call call=okHttpClient.newCall(request);
         call.enqueue(new Callback() {
@@ -244,6 +261,8 @@ public class MyData extends AppCompatActivity {
         String sex1=pre.getString("sexContent","");
         String phone=pre.getString("phoneContent","");
         String address=pre.getString("addressContent","");
+        String email=pre.getString("emailContent","");
+        email_content.setText(email);
         name_content.setText(name);
         sex.setText(sex1);
         phone_content.setText(phone);
@@ -253,6 +272,7 @@ public class MyData extends AppCompatActivity {
         editor.putString("sexContent",sex1);
         editor.putString("phoneContent",phone);
         editor.putString("addressContent",address);
+        editor.putString("emailContent",email);
         editor.commit();
     }
 }

@@ -45,157 +45,163 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginLeft="15dp"-->
+        <!--android:layout_marginRight="15dp"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:id="@+id/myself">-->
+
+        <!--<ImageView-->
+            <!--android:layout_width="20dp"-->
+            <!--android:layout_height="20dp"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:layout_marginTop="16dp"-->
+            <!--android:src="@drawable/person_data" />-->
+
+        <!--<TextView-->
+            <!--android:layout_width="200dp"-->
+            <!--android:layout_height="50dp"-->
+            <!--android:text="个人资料"-->
+            <!--android:textStyle="bold"-->
+            <!--android:textSize="20dp" />-->
+
+        <!--<TextView-->
+            <!--android:layout_width="30dp"-->
+            <!--android:layout_height="30dp"-->
+            <!--android:text=">"-->
+            <!--android:textSize="30dp"-->
+            <!--android:layout_marginLeft="70dp"/>-->
+
+    <!--</LinearLayout>-->
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginLeft="15dp"-->
+        <!--android:layout_marginRight="15dp"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:id="@+id/send">-->
+
+        <!--<ImageView-->
+            <!--android:layout_width="20dp"-->
+            <!--android:layout_height="20dp"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:layout_marginTop="16dp"-->
+            <!--android:src="@drawable/send"/>-->
+
+        <!--<TextView-->
+            <!--android:layout_width="200dp"-->
+            <!--android:layout_height="50dp"-->
+            <!--android:text="我发布的"-->
+            <!--android:textStyle="bold"-->
+            <!--android:textSize="20dp" />-->
+
+        <!--<TextView-->
+            <!--android:layout_width="30dp"-->
+            <!--android:layout_height="30dp"-->
+            <!--android:text=">"-->
+            <!--android:textSize="30dp"-->
+            <!--android:layout_marginLeft="70dp"/>-->
+
+    <!--</LinearLayout>-->
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginLeft="15dp"-->
+        <!--android:layout_marginRight="15dp"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:id="@+id/student">-->
+
+        <!--<ImageView-->
+            <!--android:layout_width="30dp"-->
+            <!--android:layout_height="30dp"-->
+            <!--android:layout_marginRight="3dp"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:layout_marginLeft="-4dp"-->
+            <!--android:src="@drawable/authentication" />-->
+
+        <!--<TextView-->
+            <!--android:layout_width="200dp"-->
+            <!--android:layout_height="50dp"-->
+            <!--android:text="学生认证"-->
+            <!--android:textStyle="bold"-->
+            <!--android:textSize="20dp" />-->
+
+        <!--<TextView-->
+            <!--android:layout_width="30dp"-->
+            <!--android:layout_height="30dp"-->
+            <!--android:text=">"-->
+            <!--android:textSize="30dp"-->
+            <!--android:layout_marginLeft="70dp"/>-->
+
+    <!--</LinearLayout>-->
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginLeft="15dp"-->
+        <!--android:layout_marginRight="15dp"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:id="@+id/customer_service">-->
+
+        <!--<ImageView-->
+            <!--android:layout_width="20dp"-->
+            <!--android:layout_height="20dp"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:layout_marginTop="15dp"-->
+            <!--android:src="@drawable/customer_service" />-->
+
+        <!--<TextView-->
+            <!--android:layout_width="200dp"-->
+            <!--android:layout_height="50dp"-->
+            <!--android:text="我的客服"-->
+            <!--android:textStyle="bold"-->
+            <!--android:textSize="20dp" />-->
+
+        <!--<TextView-->
+            <!--android:layout_width="30dp"-->
+            <!--android:layout_height="30dp"-->
+            <!--android:text=">"-->
+            <!--android:textSize="30dp"-->
+            <!--android:layout_marginLeft="70dp"/>-->
+
+    <!--</LinearLayout>-->
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginLeft="15dp"-->
+        <!--android:layout_marginRight="15dp"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:id="@+id/setting">-->
+
+        <!--<ImageView-->
+            <!--android:layout_width="20dp"-->
+            <!--android:layout_height="20dp"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:layout_marginTop="15dp"-->
+            <!--android:src="@drawable/setting" />-->
+
+        <!--<TextView-->
+            <!--android:layout_width="200dp"-->
+            <!--android:layout_height="50dp"-->
+            <!--android:text="设置"-->
+            <!--android:textStyle="bold"-->
+            <!--android:textSize="20dp" />-->
+
+        <!--<TextView-->
+            <!--android:layout_width="30dp"-->
+            <!--android:layout_height="30dp"-->
+            <!--android:text=">"-->
+            <!--android:textSize="30dp"-->
+            <!--android:layout_marginLeft="70dp"/>-->
+
+    <!--</LinearLayout>-->
+
+    <ListView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal"
-        android:id="@+id/myself">
+        android:id="@+id/list">
 
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="16dp"
-            android:src="@drawable/person_data" />
-
-        <TextView
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:text="个人资料"
-            android:textStyle="bold"
-            android:textSize="20dp" />
-
-        <TextView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:text=">"
-            android:textSize="30dp"
-            android:layout_marginLeft="70dp"/>
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:orientation="horizontal"
-        android:id="@+id/send">
-
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="16dp"
-            android:src="@drawable/send"/>
-
-        <TextView
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:text="我发布的"
-            android:textStyle="bold"
-            android:textSize="20dp" />
-
-        <TextView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:text=">"
-            android:textSize="30dp"
-            android:layout_marginLeft="70dp"/>
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:orientation="horizontal"
-        android:id="@+id/student">
-
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginRight="3dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="-4dp"
-            android:src="@drawable/authentication" />
-
-        <TextView
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:text="学生认证"
-            android:textStyle="bold"
-            android:textSize="20dp" />
-
-        <TextView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:text=">"
-            android:textSize="30dp"
-            android:layout_marginLeft="70dp"/>
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:orientation="horizontal"
-        android:id="@+id/customer_service">
-
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="15dp"
-            android:src="@drawable/customer_service" />
-
-        <TextView
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:text="我的客服"
-            android:textStyle="bold"
-            android:textSize="20dp" />
-
-        <TextView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:text=">"
-            android:textSize="30dp"
-            android:layout_marginLeft="70dp"/>
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:orientation="horizontal"
-        android:id="@+id/setting">
-
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="15dp"
-            android:src="@drawable/setting" />
-
-        <TextView
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:text="设置"
-            android:textStyle="bold"
-            android:textSize="20dp" />
-
-        <TextView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:text=">"
-            android:textSize="30dp"
-            android:layout_marginLeft="70dp"/>
-
-    </LinearLayout>
-
+    </ListView>
 </LinearLayout>

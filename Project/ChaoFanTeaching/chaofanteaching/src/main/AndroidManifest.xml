@@ -223,9 +223,12 @@
             android:exported="false">
             <intent-filter>
                 <action android:name="cn.jpush.android.intent.REGISTRATION" />
+
                 <category android:name="com.example.chaofanteaching" />
             </intent-filter>
         </receiver>
+
+        <activity android:name=".myself.EmailDetail"></activity>
     </application>
 
 </manifest>
