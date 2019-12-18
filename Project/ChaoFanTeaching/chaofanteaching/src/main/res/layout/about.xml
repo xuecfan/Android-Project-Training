@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     xmlns:hyphenate="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
@@ -11,6 +12,11 @@
         android:layout_height="wrap_content"
         hyphenate:titleBarLeftImage="@drawable/ease_mm_title_back" />
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/login"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -41,19 +47,7 @@
              android:text="功能介绍"
              />
         </LinearLayout>
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="1">
-            <ImageButton
-                android:id="@+id/a1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right|center_vertical"
-                android:layout_marginRight="3.0dip"
-                android:background="@drawable/right" />
-        </LinearLayout>
+
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -72,19 +66,6 @@
                 android:textSize="20dp"
                 android:text="投诉"
                 />
-        </LinearLayout>
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="1">
-            <ImageButton
-                android:id="@+id/a2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right|center_vertical"
-                android:layout_marginRight="3.0dip"
-                android:background="@drawable/right" />
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
@@ -105,24 +86,11 @@
                 android:text="检查版本更新"
                 />
         </LinearLayout>
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="1">
-            <ImageButton
-                android:id="@+id/a3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right|center_vertical"
-                android:layout_marginRight="3.0dip"
-                android:background="@drawable/right" />
-        </LinearLayout>
     </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="220dp"
+        android:layout_marginTop="20dp"
         android:layout_gravity="center"
         >
 

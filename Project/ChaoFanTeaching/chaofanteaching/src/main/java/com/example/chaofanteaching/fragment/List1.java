@@ -23,7 +23,6 @@ import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.InfoList.AddStuInfoActivity;
 import com.example.chaofanteaching.InfoList.Info;
 import com.example.chaofanteaching.InfoList.InfoAdapter;
-import com.example.chaofanteaching.InfoList.InfoDetailActivity;
 import com.example.chaofanteaching.InfoList.ParInfoActivity;
 import com.example.chaofanteaching.R;
 import com.example.chaofanteaching.StreamChangeStrUtils;

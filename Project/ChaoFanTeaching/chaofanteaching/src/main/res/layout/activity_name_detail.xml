@@ -21,13 +21,13 @@
         android:paddingLeft="70dp"
         android:hint="请输入修改后的昵称"
         android:textSize="20dp"
-        android:background="@drawable/shape"
+        android:background="@drawable/round_yellow"
         android:id="@+id/name"
         android:layout_marginTop="100dp"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/shape"
+        android:background="@drawable/round_yellow"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:layout_marginTop="90dp"
@@ -38,7 +38,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/shape"
+        android:background="@drawable/round_yellow"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:layout_marginTop="10dp"

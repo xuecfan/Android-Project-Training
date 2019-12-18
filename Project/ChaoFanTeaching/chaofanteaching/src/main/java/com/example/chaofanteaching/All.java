@@ -3,16 +3,11 @@ package com.example.chaofanteaching;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Handler;
 import android.support.v4.app.FragmentTabHost;
-
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,17 +15,10 @@ import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.chaofanteaching.fragment.List;
 import com.example.chaofanteaching.fragment.List1;
 import com.example.chaofanteaching.fragment.Message;
 import com.example.chaofanteaching.fragment.My;
-import com.example.chaofanteaching.myself.MyData;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,7 +27,6 @@ public class All extends AppCompatActivity {
     private static int isExit = 0;
     private Map<String, ImageView> imageViewMap = new HashMap<>();
     private Map<String, TextView> textViewMap = new HashMap<>();
-    private EventBus eventBus;
     private FragmentTabHost fragmentTabHost;
 
     @Override
@@ -101,7 +88,7 @@ public class All extends AppCompatActivity {
 
         fragmentTabHost.setCurrentTab(0);
         imageViewMap.get("tag1").setImageResource(R.drawable.list1);
-        textViewMap.get("tag1").setTextColor(getResources().getColor(R.color.colorPrimary));
+        textViewMap.get("tag1").setTextColor(getResources().getColor(R.color.buju));
         fragmentTabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
             @Override
             public void onTabChanged(String tabId) {
@@ -137,25 +124,6 @@ public class All extends AppCompatActivity {
             }
         });
     }
-
-//    @Subscribe(sticky = true)
-//    public void onEventBeanEvent(String message){
-//        if(message.equals("parent")){
-//            TabHost.TabSpec tabSpec1 = fragmentTabHost.newTabSpec("tag1")
-//                    .setIndicator(getTabSpecView("tag1",R.drawable.list,"列表"));
-//
-//            fragmentTabHost.addTab(tabSpec1,
-//                    List.class,
-//                    null);
-//        }else if(message.equals("teacher")){
-//            TabHost.TabSpec tabSpec1 = fragmentTabHost.newTabSpec("tag1")
-//                    .setIndicator(getTabSpecView("tag1",R.drawable.list,"列表"));
-//
-//            fragmentTabHost.addTab(tabSpec1,
-//                    List1.class,
-//                    null);
-//        }
-//    }
 
     @Override
     protected void onDestroy(){

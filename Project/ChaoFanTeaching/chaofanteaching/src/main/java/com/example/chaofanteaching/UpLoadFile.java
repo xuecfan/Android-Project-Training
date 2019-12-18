@@ -41,17 +41,10 @@ public class UpLoadFile extends AsyncTask<String,Void,String> {
         Response response=null;
         try {
             response=call.execute();
-            Log.e("photo",response.body().string());
-//            return response.body().string();
+            Log.i("photo",response.body().string());
         } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
     }
-
-//    @Override
-//    protected void onPostExecute(String s) {
-////        super.onPostExecute(s);
-//        Toast.makeText(context,s,Toast.LENGTH_SHORT).show();
-//    }
 }

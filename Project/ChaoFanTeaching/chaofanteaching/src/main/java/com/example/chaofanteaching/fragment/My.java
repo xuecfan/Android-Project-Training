@@ -84,7 +84,6 @@ public class My extends Fragment {
                     break;
                 case 2:
                     String str = msg.obj.toString();
-                    Log.e("11",str);
                     if(str.equals("null")){
                         editor=pre1.edit();
                         editor.putString("nameContent","");
@@ -98,7 +97,6 @@ public class My extends Fragment {
                     break;
                 case 3:
                     String result=  msg.obj.toString();
-                    Log.e("yxt",result);
                     if(result.equals("1")){
                         editor=pre1.edit();
                         editor.putString("renzheng",result);
@@ -267,7 +265,7 @@ public class My extends Fragment {
         Request request=new Request.Builder().url("http://175.24.102.160:8080/ChaoFanTeaching/DownImg?name="+a).build();
         Call call=okHttpClient.newCall(request);
         Response response=call.execute();
-        Log.e("photo", String.valueOf(response.body().byteStream()));
+        Log.i("photo", String.valueOf(response.body().byteStream()));
         InputStream in=response.body().byteStream();
         FileOutputStream out=new FileOutputStream(fileName);
         byte[] bytes=new byte[1024];
@@ -366,7 +364,7 @@ public class My extends Fragment {
         File file = new File(path);
         file.mkdirs();// 创建文件夹
         String fileName = path + a+".png";// 图片名字
-        Log.e("11",fileName);
+        Log.i("11",fileName);
         try {
             b = new FileOutputStream(fileName);
             mBitmap.compress(Bitmap.CompressFormat.JPEG, 100, b);// 把数据写入文件
@@ -395,10 +393,8 @@ public class My extends Fragment {
         super.onResume();
         pre1=getContext().getSharedPreferences("data",Context.MODE_PRIVATE);
         String name1=pre1.getString("nameContent","");
-        Log.e("789",name1);
         if(name1.equals("")||name1.equals("null")||name1==null){name.setText("用户名");}
         else{name.setText(name1);}
-
         if(pre1.getString("renzheng","").equals("1")){
             renzheng.setText("已认证");
             img.setImageDrawable(getResources().getDrawable(R.drawable.v1));

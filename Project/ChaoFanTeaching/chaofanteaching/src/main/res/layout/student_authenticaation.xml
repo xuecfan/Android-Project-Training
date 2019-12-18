@@ -51,7 +51,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/shape"
+        android:background="@drawable/round_yellow"
         android:layout_marginTop="50dp"
         android:text="上传信息"
         android:textColor="@color/white"
