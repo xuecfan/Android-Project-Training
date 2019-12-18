@@ -118,7 +118,7 @@ public class List extends Fragment {
                             String[] s = str.split(";");
                             for (int i = 0; i < s.length; i++) {
                                 String[] r = s[i].split(",");
-                                scanInfo = new Info(r[0], r[1], r[2], r[3]);
+                                scanInfo = new Info(r[0], r[1], r[2], "擅长"+r[3]);
                                 infoList.add(scanInfo);
                                 infoAdapter.notifyDataSetChanged();
                             }

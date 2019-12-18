@@ -8,7 +8,7 @@
         android:layout_width="0dp"
         android:layout_weight="2"
         android:layout_height="60dp"
-        android:src="@drawable/tea"/>
+        android:src="@drawable/boy1"/>
 
     <LinearLayout
         android:layout_marginTop="12dp"
@@ -32,7 +32,7 @@
             android:textSize="15sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="学院"/>
+            android:text="年级学科"/>
 
     </LinearLayout>
 
@@ -50,7 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="12sp"
-            android:text="学校"/>
+            android:text="性别"/>
 
         <TextView
             android:textColor="#FFA07A"
@@ -59,8 +59,9 @@
             android:textSize="15sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="科目"/>
+            android:text="价格"/>
 
     </LinearLayout>
 
 </LinearLayout>
+

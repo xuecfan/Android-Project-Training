@@ -50,13 +50,13 @@ public class InfoAdapter extends BaseAdapter{
             convertView = inflater.inflate(itemLayoutId, null);
         }
         TextView infoname=convertView.findViewById(R.id.name);
-        TextView infofrom=convertView.findViewById(R.id.from);
+        TextView infoschool=convertView.findViewById(R.id.school);
+        TextView infocollege=convertView.findViewById(R.id.college);
         TextView infosubject=convertView.findViewById(R.id.subject);
-        TextView infoprice=convertView.findViewById(R.id.price);
         infoname.setText(infoList.get(position).getName());
-        infofrom.setText(infoList.get(position).getFrom());
+        infoschool.setText(infoList.get(position).getSchool());
+        infocollege.setText(infoList.get(position).getCollege());
         infosubject.setText(infoList.get(position).getSubject());
-        infoprice.setText(infoList.get(position).getPrice());
         return convertView;
     }
 }

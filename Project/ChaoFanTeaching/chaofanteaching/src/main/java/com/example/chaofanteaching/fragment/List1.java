@@ -47,7 +47,7 @@ public class List1 extends Fragment {
         view = inflater.inflate(R.layout.list, container, false);
         infoList.clear();
         infolist = view.findViewById(R.id.infolist);
-        infoAdapter = new InfoAdapter(this.getContext(), infoList, R.layout.info_item);
+        infoAdapter = new InfoAdapter(this.getContext(), infoList, R.layout.info_item1);
         infolist.setAdapter(infoAdapter);
         dbKey("");
         infoAdapter.notifyDataSetChanged();
@@ -117,7 +117,7 @@ public class List1 extends Fragment {
                             String[] s = str.split(";");
                             for (int i = 0; i < s.length; i++) {
                                 String[] r = s[i].split(",");
-                                scanInfo = new Info(r[0], r[1], r[2], r[3]);
+                                scanInfo = new Info(r[0], r[1], r[2], r[3]+"元/小时");
                                 infoList.add(scanInfo);
                                 infoAdapter.notifyDataSetChanged();
                             }
