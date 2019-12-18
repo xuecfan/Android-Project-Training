@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Message;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -31,12 +32,12 @@ public class MyData extends AppCompatActivity {
 
     private BottomPopupOption bottomPopupOption;
     private Button btn;
-    private LinearLayout name;
-    private LinearLayout phone;
-    private LinearLayout address;
-    private LinearLayout fanhui;
-    private LinearLayout person;
-    private LinearLayout email;
+    private ConstraintLayout name;
+    private ConstraintLayout phone;
+    private ConstraintLayout address;
+    private ConstraintLayout fanhui;
+    private ConstraintLayout person;
+    private ConstraintLayout email;
     private TextView email_content;
     private TextView name_content;
     private TextView phone_content;

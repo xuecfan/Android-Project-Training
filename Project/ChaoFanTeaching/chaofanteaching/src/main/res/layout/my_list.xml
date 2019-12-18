@@ -1,42 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:orientation="horizontal"
-        android:id="@+id/setting">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
 
     <ImageView
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
         android:src="@drawable/setting"
-
-        android:id="@+id/a5"/>
+        android:id="@+id/a5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintHorizontal_bias="0.05"/>
 
     <TextView
-        android:layout_width="200dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="wrap_content"
         android:layout_height="26dp"
         android:text="设置"
-        android:textStyle="bold"
         android:textSize="20dp"
-        android:layout_marginTop="6dp"
-        android:id="@+id/a5text"/>
+        android:id="@+id/a5text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/a5"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintHorizontal_bias="0.05"/>
 
     <TextView
-    android:layout_width="30dp"
-    android:layout_height="30dp"
-    android:layout_marginTop="3dp"
-    android:text=">"
-        android:layout_marginLeft="75dp"
-    android:textSize="20dp"
-    android:textAlignment="center"/>
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:text=">"
+        android:textSize="20dp"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintHorizontal_bias="0.95"/>
 
-    </LinearLayout>
-</LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

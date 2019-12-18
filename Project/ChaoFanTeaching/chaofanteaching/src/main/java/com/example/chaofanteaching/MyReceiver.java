@@ -1,14 +1,10 @@
 package com.example.chaofanteaching;
 
 
-import android.content.BroadcastReceiver;
+
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
 import android.util.Log;
 import cn.jpush.android.api.CustomMessage;
-import cn.jpush.android.api.JPushInterface;
 import cn.jpush.android.api.NotificationMessage;
 import cn.jpush.android.service.JPushMessageReceiver;
 
