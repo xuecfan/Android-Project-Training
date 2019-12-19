@@ -72,7 +72,13 @@
                     android:singleLine="true"
                     android:text="张三"
                     android:textSize="18dp"
-                    tools:layout_editor_absoluteX="331dp" />
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0"
+                    app:layout_constraintHorizontal_bias="0.95"
+                    />
             </android.support.constraint.ConstraintLayout>
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
@@ -214,7 +220,12 @@
                     android:singleLine="true"
                     android:text="软件学院"
                     android:textSize="18dp"
-                    tools:layout_editor_absoluteX="297dp" />
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0"
+                    app:layout_constraintHorizontal_bias="0.95" />
             </android.support.constraint.ConstraintLayout>
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
