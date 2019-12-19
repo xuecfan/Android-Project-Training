@@ -27,6 +27,10 @@ import com.example.chaofanteaching.InfoList.InfoDetailActivity;
 import com.example.chaofanteaching.R;
 import com.example.chaofanteaching.StreamChangeStrUtils;
 import com.example.chaofanteaching.sign.LoginActivity;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
@@ -41,11 +45,23 @@ public class List extends Fragment {
     private EditText editText;
     private SharedPreferences pre;
     private String a="";
+    private SmartRefreshLayout srl;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.list, container, false);
+        srl = view.findViewById(R.id.srl);
+        srl.setReboundDuration(1000);
+        srl.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                srl.finishRefresh();
+                Toast.makeText(getContext(),
+                        "刷新完成",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
         infoList.clear();
         infolist = view.findViewById(R.id.infolist);
         infoAdapter = new InfoAdapter(this.getContext(), infoList, R.layout.info_item);

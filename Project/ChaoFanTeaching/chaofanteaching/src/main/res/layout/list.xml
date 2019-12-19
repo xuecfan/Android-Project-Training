@@ -31,6 +31,15 @@
 
     </LinearLayout>
 
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/srl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <pl.droidsonroids.gif.GifImageButton
+            android:background="#fcfbfb"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/rect"/>
     <ListView
         android:layout_marginLeft="15dp"
         android:layout_marginTop="1dp"
@@ -38,5 +47,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </ListView>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
 </LinearLayout>
