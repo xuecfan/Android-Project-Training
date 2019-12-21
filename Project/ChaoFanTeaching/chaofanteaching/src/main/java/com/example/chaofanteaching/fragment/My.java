@@ -36,6 +36,7 @@ import com.example.chaofanteaching.about.Student_Authentication;
 import com.example.chaofanteaching.myself.MyData;
 import com.example.chaofanteaching.myself.RenZheng;
 import com.example.chaofanteaching.myself.Setting;
+import com.example.chaofanteaching.robot.Chatrobot;
 import com.example.chaofanteaching.sign.LoginActivity;
 import com.hyphenate.easeui.widget.EaseTitleBar;
 
@@ -175,7 +176,8 @@ public class My extends Fragment {
                             }
                             break;
                         case 3:
-                            Toast.makeText(getContext(),"暂未开放，敬请期待", Toast.LENGTH_SHORT).show();
+                            Intent intent3=new Intent(getContext(), Chatrobot.class);
+                            startActivity(intent3);
                             break;
                         case 4:
                             Intent intent2=new Intent(getContext(), Setting.class);

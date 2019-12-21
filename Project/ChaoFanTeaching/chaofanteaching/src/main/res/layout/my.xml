@@ -21,7 +21,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.05"
+        app:layout_constraintVertical_bias="0.09"
         app:layout_constraintHorizontal_bias="0.063"/>
     <TextView
         android:layout_width="wrap_content"
@@ -79,7 +79,7 @@
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/ji"
+            android:src="@drawable/collection"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -97,7 +97,7 @@
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/ji"
+            android:src="@drawable/talk"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -126,16 +126,7 @@
         <TextView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:text="认证"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintVertical_bias="0.05"
-            app:layout_constraintHorizontal_bias="0.15"/>
-        <TextView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:text="认证"
+            android:text="收藏"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -144,7 +135,7 @@
         <TextView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:text="绩点"
+            android:text="成绩"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -153,7 +144,7 @@
         <TextView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:text="认证"
+            android:text="评价"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"

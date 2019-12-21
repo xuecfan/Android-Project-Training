@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/a"
+    android:orientation="vertical" >
+
+    <!-- 头部 -->
+
+    <RelativeLayout
+        android:id="@+id/chat_top"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#D8900A" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="小乖"
+            android:textColor="#ffffff"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+    <!-- 底部 -->
+
+    <RelativeLayout
+        android:id="@+id/chat_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/a" >
+
+        <EditText
+            android:id="@+id/chat_input_message"
+            android:layout_width="280dp"
+            android:background="@drawable/round_yellow"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:gravity="center" />
+        <ImageView
+            android:src="@drawable/s"
+            android:id="@+id/chat_send"
+            android:layout_width="20dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/chat_input_message"/>
+    </RelativeLayout>
+
+    <!-- 中间 -->
+
+    <ListView
+        android:id="@+id/chat_listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/chat_bottom"
+        android:layout_below="@id/chat_top"
+        android:divider="@null"
+        android:dividerHeight="3dp" >
+    </ListView>
+
+</RelativeLayout>
