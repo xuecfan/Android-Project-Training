@@ -20,5 +20,24 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@android:id/tabs"></FrameLayout>
+        <ImageView
+            android:id="@+id/main_image_center"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="18dp"
+            android:src="@drawable/circle" />
+
+        <TextView
+            android:id="@+id/main_tv_final"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:text="添加"
+            android:textColor="@color/black_deep"
+            android:textSize="14sp" />
     </RelativeLayout>
 </android.support.v4.app.FragmentTabHost>

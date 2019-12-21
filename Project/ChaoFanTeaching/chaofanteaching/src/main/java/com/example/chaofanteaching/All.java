@@ -15,10 +15,15 @@ import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.chaofanteaching.InfoList.AddInfoActivity;
+import com.example.chaofanteaching.fragment.Blank;
 import com.example.chaofanteaching.fragment.List;
 import com.example.chaofanteaching.fragment.List1;
 import com.example.chaofanteaching.fragment.Message;
 import com.example.chaofanteaching.fragment.My;
+import com.example.chaofanteaching.fragment.White;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,6 +38,24 @@ public class All extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all);
+        ImageView main_image_center =  findViewById(R.id.main_image_center);
+        TextView main_tv_final =  findViewById(R.id.main_tv_final);
+        main_image_center.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(All.this, AddInfoActivity.class);
+                startActivity(i);
+            }
+        });
+        main_tv_final.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(All.this, AddInfoActivity.class);
+                startActivity(i);
+            }
+        });
+
+
 
         ActivityCollector.addActivity(this);
         SharedPreferences pre=getSharedPreferences("login", Context.MODE_PRIVATE);
@@ -79,10 +102,28 @@ public class All extends AppCompatActivity {
                 Message.class,
                 null);
 
+//        TabHost.TabSpec tabSpec3 = fragmentTabHost.newTabSpec("tag3")
+//                .setIndicator(getTabSpecView("tag3",R.drawable.my,"我的"));
+//
+//        fragmentTabHost.addTab(tabSpec3,
+//                My.class,
+//                null);
         TabHost.TabSpec tabSpec3 = fragmentTabHost.newTabSpec("tag3")
-                .setIndicator(getTabSpecView("tag3",R.drawable.my,"我的"));
+                .setIndicator(getTabSpecView("tag3",R.drawable.white,""));
 
         fragmentTabHost.addTab(tabSpec3,
+                Blank.class,
+                null);
+        TabHost.TabSpec tabSpec4 = fragmentTabHost.newTabSpec("tag4")
+                .setIndicator(getTabSpecView("tag4",R.drawable.ren,"空白"));
+
+        fragmentTabHost.addTab(tabSpec4,
+                White.class,
+                null);
+        TabHost.TabSpec tabSpec5 = fragmentTabHost.newTabSpec("tag5")
+                .setIndicator(getTabSpecView("tag5",R.drawable.my,"我的"));
+
+        fragmentTabHost.addTab(tabSpec5,
                 My.class,
                 null);
 
@@ -100,8 +141,8 @@ public class All extends AppCompatActivity {
                         textViewMap.get("tag1").setTextColor(Color.parseColor("#D8900A"));
                         imageViewMap.get("tag2").setImageResource(R.drawable.message);
                         textViewMap.get("tag2").setTextColor(getResources().getColor(android.R.color.black));
-                        imageViewMap.get("tag3").setImageResource(R.drawable.my);
-                        textViewMap.get("tag3").setTextColor(getResources().getColor(android.R.color.black));
+                        imageViewMap.get("tag5").setImageResource(R.drawable.my);
+                        textViewMap.get("tag5").setTextColor(getResources().getColor(android.R.color.black));
 
                         break;
                     case "tag2":
@@ -109,12 +150,12 @@ public class All extends AppCompatActivity {
                         imageViewMap.get("tag2").setImageResource(R.drawable.message1);
                         textViewMap.get("tag2").setTextColor(Color.parseColor("#D8900A"));
                         textViewMap.get("tag1").setTextColor(getResources().getColor(android.R.color.black));
-                        imageViewMap.get("tag3").setImageResource(R.drawable.my);
-                        textViewMap.get("tag3").setTextColor(getResources().getColor(android.R.color.black));
+                        imageViewMap.get("tag5").setImageResource(R.drawable.my);
+                        textViewMap.get("tag5").setTextColor(getResources().getColor(android.R.color.black));
                         break;
-                    case "tag3":
-                        textViewMap.get("tag3").setTextColor(Color.parseColor("#D8900A"));
-                        imageViewMap.get("tag3").setImageResource(R.drawable.my1);
+                    case "tag5":
+                        textViewMap.get("tag5").setTextColor(Color.parseColor("#D8900A"));
+                        imageViewMap.get("tag5").setImageResource(R.drawable.my1);
                         imageViewMap.get("tag1").setImageResource(R.drawable.list);
                         textViewMap.get("tag1").setTextColor(getResources().getColor(android.R.color.black));
                         imageViewMap.get("tag2").setImageResource(R.drawable.message);
