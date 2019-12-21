@@ -24,17 +24,17 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import okhttp3.OkHttpClient;
 
 public class Student_Authentication extends AppCompatActivity {
     protected EaseTitleBar titleBar;
-    private OkHttpClient okHttpClient;
+    private SharedPreferences.Editor editor;
     private SharedPreferences pre;
     private static String path = "/storage/emulated/0/";// sd路径
     private String a="";
-    private TextView au_fanhui;
     private ImageView student1;
     private ImageView student2;
+    private TextView front;
+    private TextView behind;
     private Button shangchuan;
     private Handler handler=new Handler(){
         @Override
@@ -55,19 +55,32 @@ public class Student_Authentication extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.student_authenticaation);
+        pre=getSharedPreferences("login", Context.MODE_PRIVATE);
+        a = pre.getString("userName", "");
+        String b=pre.getString("role","");
         titleBar=findViewById(R.id.title_bar);
-        titleBar.setTitle("身份认证");
+        student1 = findViewById(R.id.student1);
+        student2 = findViewById(R.id.student2);
+        front=findViewById(R.id.front);
+        behind=findViewById(R.id.behind);
+        if(b.equals("10")&&pre.getString("grade","").equals("0")){titleBar.setTitle("身份认证");}
+        else if(b.equals("11")&&pre.getString("grade","").equals("0")){titleBar.setTitle("学生认证");}
+        else if(pre.getString("grade","").equals("1")){titleBar.setTitle("成绩上传");}
+
         titleBar.setLeftLayoutClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
             }
         });
-        okHttpClient=new OkHttpClient();
-        pre=getSharedPreferences("login", Context.MODE_PRIVATE);
-        a = pre.getString("userName", "");
-        student1 = findViewById(R.id.student1);
-        student2 = findViewById(R.id.student2);
+        if(b.equals("10")){front.setText("身份证正面");behind.setText("身份证背面");}
+        if(pre.getString("grade","").equals("1")){
+            front.setText("学生绩点");
+            behind.setText("学期成绩");
+            editor=pre.edit();
+            editor.putString("grade","0");
+            editor.commit();
+        }
         shangchuan = findViewById(R.id.shangchuang);
         shangchuan.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -17,12 +17,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.chaofanteaching.InfoList.AddInfoActivity;
+import com.example.chaofanteaching.InfoList.AddStuInfoActivity;
 import com.example.chaofanteaching.fragment.Blank;
 import com.example.chaofanteaching.fragment.List;
 import com.example.chaofanteaching.fragment.List1;
 import com.example.chaofanteaching.fragment.Message;
 import com.example.chaofanteaching.fragment.My;
 import com.example.chaofanteaching.fragment.White;
+import com.example.chaofanteaching.sign.LoginActivity;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,30 +35,32 @@ public class All extends AppCompatActivity {
     private Map<String, ImageView> imageViewMap = new HashMap<>();
     private Map<String, TextView> textViewMap = new HashMap<>();
     private FragmentTabHost fragmentTabHost;
+    private SharedPreferences pre;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all);
+        pre=getSharedPreferences("login",MODE_PRIVATE);
         ImageView main_image_center =  findViewById(R.id.main_image_center);
-        TextView main_tv_final =  findViewById(R.id.main_tv_final);
         main_image_center.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(All.this, AddInfoActivity.class);
-                startActivity(i);
+                if(pre.getString("userName","").equals("")){
+                    Toast.makeText(getApplicationContext(),"请您先登录", Toast.LENGTH_SHORT).show();
+                    Intent i=new Intent(All.this, LoginActivity.class);
+                    startActivity(i);
+                }else{
+                    if(pre.getString("role","").equals("10")){
+                        Intent i=new Intent(All.this, AddInfoActivity.class);
+                        startActivity(i);
+                    }else if(pre.getString("role","").equals("11")){
+                        Intent i=new Intent(All.this, AddStuInfoActivity.class);
+                        startActivity(i);
+                    }
+                }
             }
         });
-        main_tv_final.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i=new Intent(All.this, AddInfoActivity.class);
-                startActivity(i);
-            }
-        });
-
-
-
         ActivityCollector.addActivity(this);
         SharedPreferences pre=getSharedPreferences("login", Context.MODE_PRIVATE);
         String user = pre.getString("userName", "");

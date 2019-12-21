@@ -26,6 +26,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.chaofanteaching.All;
 import com.example.chaofanteaching.BottomPopupOption;
 import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.MyPublish.MyPublishActivity;
@@ -69,6 +71,10 @@ public class My extends Fragment {
     private BottomPopupOption bottomPopupOption;
     private TextView name;
     private ImageView image;
+    private ImageView img1;
+    private ImageView img2;
+    private ImageView img3;
+    private ImageView img4;
     private Bitmap bitmap;
     private ImageView img;
     private TextView renzheng;
@@ -121,27 +127,65 @@ public class My extends Fragment {
         name=view.findViewById(R.id.name);
         image=view.findViewById(R.id.image);
         img=view.findViewById(R.id.img);
+        img1=view.findViewById(R.id.img1);
+        img2=view.findViewById(R.id.img2);
+        img3=view.findViewById(R.id.img3);
+        img4=view.findViewById(R.id.img4);
         renzheng=view.findViewById(R.id.renzheng);
+        img1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(pre.getString("userName","").equals("")){
+                    Toast.makeText(getContext(),"请您先登录", Toast.LENGTH_SHORT).show();
+                    Intent i=new Intent(getContext(), LoginActivity.class);
+                    startActivity(i);
+                }else{
+                if(pre1.getString("renzheng","").equals("1")){
+                    Intent intent1=new Intent(getContext(), RenZheng.class);
+                    startActivity(intent1);
+                }else{
+                    Intent intent1=new Intent(getContext(), Student_Authentication.class);
+                    startActivity(intent1);
+                }}
+            }
+        });
+        img3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(pre.getString("userName","").equals("")){
+                    Toast.makeText(getContext(),"请您先登录", Toast.LENGTH_SHORT).show();
+                    Intent i=new Intent(getContext(), LoginActivity.class);
+                    startActivity(i);
+                }else{
+                    Intent i=new Intent(getContext(),Student_Authentication.class);
+                    editor=pre.edit();
+                    editor.putString("grade","1");
+                    editor.commit();
+                    startActivity(i);
+                }
+            }
+        });
+
 
         dataSource.clear();
         Map<String,String> map=new HashMap<>();
         Map<String,String> map1=new HashMap<>();
-        Map<String,String> map2=new HashMap<>();
+       // Map<String,String> map2=new HashMap<>();
         Map<String,String> map3=new HashMap<>();
         Map<String,String> map4=new HashMap<>();
         map.put("text","个人资料");
         map.put("img","person_data");
         map1.put("text","我发布的");
         map1.put("img","send");
-        map2.put("text","学生认证");
-        map2.put("img","authentication");
+//        map2.put("text","学生认证");
+//        map2.put("img","authentication");
         map3.put("text","我的客服");
         map3.put("img","customer_service");
         map4.put("text","设置");
         map4.put("img","setting");
         dataSource.add(map);
         dataSource.add(map1);
-        dataSource.add(map2);
+        //dataSource.add(map2);
         dataSource.add(map3);
         dataSource.add(map4);
 
@@ -166,20 +210,20 @@ public class My extends Fragment {
                             Intent intent=new Intent(getContext(), MyPublishActivity.class);
                             startActivity(intent);
                             break;
+//                        case 2:
+//                            if(pre1.getString("renzheng","").equals("1")){
+//                                Intent intent1=new Intent(getContext(), RenZheng.class);
+//                                startActivity(intent1);
+//                            }else{
+//                                Intent intent1=new Intent(getContext(), Student_Authentication.class);
+//                                startActivity(intent1);
+//                            }
+//                            break;
                         case 2:
-                            if(pre1.getString("renzheng","").equals("1")){
-                                Intent intent1=new Intent(getContext(), RenZheng.class);
-                                startActivity(intent1);
-                            }else{
-                                Intent intent1=new Intent(getContext(), Student_Authentication.class);
-                                startActivity(intent1);
-                            }
-                            break;
-                        case 3:
                             Intent intent3=new Intent(getContext(), Chatrobot.class);
                             startActivity(intent3);
                             break;
-                        case 4:
+                        case 3:
                             Intent intent2=new Intent(getContext(), Setting.class);
                             startActivity(intent2);
                             break;
