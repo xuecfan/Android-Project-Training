@@ -110,7 +110,6 @@ public class List extends Fragment {
                     dis.setCompoundDrawables(null,null,down,null);
                 }
                 pri.setCompoundDrawables(null,null,null,null);
-                infoList.clear();
             }
         });
         pri.setOnClickListener(new View.OnClickListener() {
@@ -143,6 +142,7 @@ public class List extends Fragment {
                 dis.setCompoundDrawables(null,null,null,null);
                 pri.setCompoundDrawables(null,null,null,null);
                 infoList.clear();
+                dbKey("sortexp","");
             }
         });
         infoList.clear();
@@ -196,7 +196,6 @@ public class List extends Fragment {
                     sign2-=1;
                     sort.setVisibility(View.GONE);
                 }
-
             }
         });
         return view;

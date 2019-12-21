@@ -1,6 +1,7 @@
 package com.example.chaofanteaching.InfoList;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,11 +54,17 @@ public class ParInfoAdapter extends BaseAdapter{
         TextView infoschool=convertView.findViewById(R.id.school);
         TextView infocollege=convertView.findViewById(R.id.college);
         TextView infosubject=convertView.findViewById(R.id.subject);
-        TextView infoexp=convertView.findViewById(R.id.exp);
+        TextView infotime=convertView.findViewById(R.id.time);
+        TextView infodis=convertView.findViewById(R.id.dis);
+        Drawable drawable=context.getResources().getDrawable(R.drawable.dis);
+        drawable.setBounds(0,0,45,45);//第一0是距左边距离，第二0是距上边距离
+        infodis.setCompoundDrawables(drawable,null,null,null);//只放左边
         infoname.setText(infoList.get(position).getName());
         infoschool.setText(infoList.get(position).getSchool());
         infocollege.setText(infoList.get(position).getCollege());
         infosubject.setText(infoList.get(position).getSubject());
+        infotime.setText(infoList.get(position).getPrice());
+        infodis.setText(infoList.get(position).getExperience());
         return convertView;
     }
 }
