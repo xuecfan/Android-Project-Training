@@ -27,7 +27,51 @@
             android:layout_marginLeft="5dp"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:background="@drawable/add"/>
+            android:background="@drawable/scerrn"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/sort"
+        android:gravity="right"
+        android:background="#ffffff"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_marginRight="20dp"
+            android:textColor="#DC143C"
+            android:id="@+id/def"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="默认"/>
+        <TextView
+            android:layout_marginRight="20dp"
+            android:id="@+id/dis"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="距离"/>
+        <TextView
+            android:layout_marginRight="20dp"
+            android:id="@+id/pri"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="价格"/>
+        <TextView
+            android:layout_marginRight="30dp"
+            android:id="@+id/exp"
+            android:textSize="16sp"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="经验"/>
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/sort"/>
 
     </LinearLayout>
 

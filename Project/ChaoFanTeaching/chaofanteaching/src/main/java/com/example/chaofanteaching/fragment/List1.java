@@ -22,8 +22,8 @@ import android.widget.Toast;
 import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.InfoList.AddStuInfoActivity;
 import com.example.chaofanteaching.InfoList.Info;
-import com.example.chaofanteaching.InfoList.InfoAdapter;
 import com.example.chaofanteaching.InfoList.ParInfoActivity;
+import com.example.chaofanteaching.InfoList.ParInfoAdapter;
 import com.example.chaofanteaching.R;
 import com.example.chaofanteaching.StreamChangeStrUtils;
 import com.example.chaofanteaching.sign.LoginActivity;
@@ -40,11 +40,13 @@ public class List1 extends Fragment {
     private View view;
     private Handler handler;
     private ListView infolist;
-    private InfoAdapter infoAdapter;
+    private ParInfoAdapter parInfoAdapter;
     private EditText editText;
     private SharedPreferences pre;
     private String a="";
     private SmartRefreshLayout srl;
+
+    //展示家长列表
 
     @Nullable
     @Override
@@ -63,10 +65,10 @@ public class List1 extends Fragment {
         });
         infoList.clear();
         infolist = view.findViewById(R.id.infolist);
-        infoAdapter = new InfoAdapter(this.getContext(), infoList, R.layout.info_item1);
-        infolist.setAdapter(infoAdapter);
+        parInfoAdapter = new ParInfoAdapter(this.getContext(), infoList, R.layout.info_item1);
+        infolist.setAdapter(parInfoAdapter);
         dbKey("");
-        infoAdapter.notifyDataSetChanged();
+        parInfoAdapter.notifyDataSetChanged();
         editText=view.findViewById(R.id.input);
         Drawable drawable=getResources().getDrawable(R.drawable.find);
         drawable.setBounds(0,0,60,60);//第一0是距左边距离，第二0是距上边距离
@@ -133,9 +135,9 @@ public class List1 extends Fragment {
                             String[] s = str.split(";");
                             for (int i = 0; i < s.length; i++) {
                                 String[] r = s[i].split(",");
-                                scanInfo = new Info(r[0], r[1], r[2], r[3]+"元/小时");
+                                scanInfo = new Info(r[0], r[1], r[2], r[3]+"元/小时",r[4],r[5]);
                                 infoList.add(scanInfo);
-                                infoAdapter.notifyDataSetChanged();
+                                parInfoAdapter.notifyDataSetChanged();
                             }
                         }
                         break;

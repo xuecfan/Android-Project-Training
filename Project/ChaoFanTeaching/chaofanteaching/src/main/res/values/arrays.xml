@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="grade">
-        <item>小学一、二年级</item>
-        <item>小学三、四年级</item>
-        <item>小学五、六年级</item>
+        <item>小学</item>
         <item>初一</item>
         <item>初二</item>
         <item>初三</item>

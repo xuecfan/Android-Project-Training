@@ -3,6 +3,7 @@ package com.example.chaofanteaching.fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,10 +18,11 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.example.chaofanteaching.HttpConnectionUtils;
-import com.example.chaofanteaching.InfoList.AddInfoActivity;
 import com.example.chaofanteaching.InfoList.Info;
 import com.example.chaofanteaching.InfoList.InfoAdapter;
 import com.example.chaofanteaching.InfoList.InfoDetailActivity;
@@ -30,11 +32,11 @@ import com.example.chaofanteaching.sign.LoginActivity;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
-
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
 
+//展示老师列表
 public class List extends Fragment {
 
     private java.util.List<Info> infoList = new ArrayList<>();
@@ -46,6 +48,13 @@ public class List extends Fragment {
     private SharedPreferences pre;
     private String a="";
     private SmartRefreshLayout srl;
+    private TextView def;
+    private TextView dis;
+    private TextView pri;
+    private TextView exp;
+    private int sign;
+    private int sign1;
+    private int sign2;
 
     @Nullable
     @Override
@@ -62,11 +71,85 @@ public class List extends Fragment {
                         Toast.LENGTH_SHORT).show();
             }
         });
+        sign=0;
+        sign1=0;
+        sign2=0;
+        def=view.findViewById(R.id.def);
+        dis=view.findViewById(R.id.dis);
+        pri=view.findViewById(R.id.pri);
+        exp=view.findViewById(R.id.exp);
+        Drawable up=getResources().getDrawable(R.drawable.up);
+        Drawable down=getResources().getDrawable(R.drawable.down);
+        up.setBounds(0,0,50,50);
+        down.setBounds(0,0,50,50);
+        def.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                infoList.clear();
+                dbKey("serach","");
+                def.setTextColor(Color.parseColor("#FF0000"));
+                pri.setTextColor(Color.parseColor("#000000"));
+                exp.setTextColor(Color.parseColor("#000000"));
+                dis.setTextColor(Color.parseColor("#000000"));
+                dis.setCompoundDrawables(null,null,null,null);
+                pri.setCompoundDrawables(null,null,null,null);
+            }
+        });
+        dis.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                def.setTextColor(Color.parseColor("#000000"));
+                pri.setTextColor(Color.parseColor("#000000"));
+                exp.setTextColor(Color.parseColor("#000000"));
+                dis.setTextColor(Color.parseColor("#FF0000"));
+                if(sign==0){
+                    sign+=1;
+                    dis.setCompoundDrawables(null,null,up,null);
+                }else{
+                    sign-=1;
+                    dis.setCompoundDrawables(null,null,down,null);
+                }
+                pri.setCompoundDrawables(null,null,null,null);
+                infoList.clear();
+            }
+        });
+        pri.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                def.setTextColor(Color.parseColor("#000000"));
+                pri.setTextColor(Color.parseColor("#FF0000"));
+                exp.setTextColor(Color.parseColor("#000000"));
+                dis.setTextColor(Color.parseColor("#000000"));
+                infoList.clear();
+                if(sign1==0){
+                    sign1+=1;
+                    pri.setCompoundDrawables(null,null,up,null);
+                    dbKey("upprice","");
+                }else{
+                    sign1-=1;
+                    pri.setCompoundDrawables(null,null,down,null);
+                    dbKey("downprice","");
+                }
+                dis.setCompoundDrawables(null,null,null,null);
+            }
+        });
+        exp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                def.setTextColor(Color.parseColor("#000000"));
+                pri.setTextColor(Color.parseColor("#000000"));
+                exp.setTextColor(Color.parseColor("#FF0000"));
+                dis.setTextColor(Color.parseColor("#000000"));
+                dis.setCompoundDrawables(null,null,null,null);
+                pri.setCompoundDrawables(null,null,null,null);
+                infoList.clear();
+            }
+        });
         infoList.clear();
         infolist = view.findViewById(R.id.infolist);
         infoAdapter = new InfoAdapter(this.getContext(), infoList, R.layout.info_item);
         infolist.setAdapter(infoAdapter);
-        dbKey("");
+        dbKey("serach","");
         infoAdapter.notifyDataSetChanged();
         editText=view.findViewById(R.id.input);
         Drawable drawable=getResources().getDrawable(R.drawable.find);
@@ -78,7 +161,7 @@ public class List extends Fragment {
                 editText.setCursorVisible(true);
                 if (keyCode == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN) {
                     String key=editText.getText().toString();
-                    dbKey(key);
+                    dbKey("serach",key);
                     editText.setCursorVisible(false);
                 }
                 return false;
@@ -105,21 +188,21 @@ public class List extends Fragment {
         btnadd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (a.equals("")) {
-                    Toast.makeText(getContext(),"请您先登录", Toast.LENGTH_SHORT).show();
-                    Intent i=new Intent(getContext(), LoginActivity.class);
-                    startActivity(i);
+                LinearLayout sort=view.findViewById(R.id.sort);
+                if(sign2==0){
+                    sign2+=1;
+                    sort.setVisibility(View.VISIBLE);
                 }else{
-                    Intent intent = new Intent();
-                    intent.setClass(getActivity(), AddInfoActivity.class);
-                    startActivity(intent);
+                    sign2-=1;
+                    sort.setVisibility(View.GONE);
                 }
+
             }
         });
         return view;
     }
 
-    private void dbKey(final String key) {
+    private void dbKey(final String op,final String key) {
         infoList.clear();
         handler = new Handler() {
             @Override
@@ -134,7 +217,7 @@ public class List extends Fragment {
                             String[] s = str.split(";");
                             for (int i = 0; i < s.length; i++) {
                                 String[] r = s[i].split(",");
-                                scanInfo = new Info(r[0], r[1], r[2], "擅长"+r[3]);
+                                scanInfo = new Info(r[0], r[1], r[2], "擅长"+r[3],r[4]+"元/小时",r[5]);
                                 infoList.add(scanInfo);
                                 infoAdapter.notifyDataSetChanged();
                             }
@@ -149,7 +232,7 @@ public class List extends Fragment {
             @Override
             public void run() {
                 try {
-                    connection = HttpConnectionUtils.getConnection("ListInfoServlet?op=serach&key="+key);
+                    connection = HttpConnectionUtils.getConnection("ListInfoServlet?op="+op+"&key="+key);
                     int code = connection.getResponseCode();
                     if (code == 200) {
                         InputStream inputStream = connection.getInputStream();
