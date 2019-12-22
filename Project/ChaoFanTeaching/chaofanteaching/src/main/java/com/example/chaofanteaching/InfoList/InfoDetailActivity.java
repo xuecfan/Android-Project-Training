@@ -17,6 +17,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.R;
 import com.example.chaofanteaching.StreamChangeStrUtils;
@@ -36,7 +38,6 @@ import gdut.bsx.share2.ShareContentType;
 public class InfoDetailActivity extends AppCompatActivity {
     private static String path = "/storage/emulated/0/";// sd路径
     private String user;
-    private Handler handler;
     private TextView nametext;
     private TextView sextext;
     private TextView universitytext;
@@ -52,14 +53,47 @@ public class InfoDetailActivity extends AppCompatActivity {
     private SharedPreferences pre;
     protected EaseTitleBar titleBar;
     private ConstraintLayout shareLayout;
+    private ConstraintLayout starLaylout;
     private String name;
+    private String me;
+    private String infoId;
 
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(android.os.Message msg) {
+            switch (msg.what) {
+                case 1:
+                    String str = msg.obj.toString();
+                    String[] s = str.split(",");
+                    sextext.setText(s[1]);
+                    universitytext.setText(s[2]);
+                    collegetext.setText(s[3]);
+                    majortext.setText(s[4]);
+                    gradetext.setText(s[5]);
+                    subjecttext.setText(s[6]);
+                    timetext.setText(s[7]);
+                    pricetext.setText(s[8]);
+                    introducetext.setText(s[9]);
+                    infoId = s[11];
+                    user=s[12];
+                    break;
+                case 2:
+                    String string = msg.obj.toString();
+                    if (string.equals("1")){
+                        Toast.makeText(getApplication(),"收藏成功",Toast.LENGTH_LONG).show();
+                    }else if (string.equals("0")){
+                        Toast.makeText(getApplication(),"收藏失败",Toast.LENGTH_LONG).show();
+                    }
+                    break;
+            }
+        }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.info_detail);
-//        pre= getSharedPreferences("login", Context.MODE_PRIVATE);
-//        user = pre.getString("userName", "");
+        pre= getSharedPreferences("login", Context.MODE_PRIVATE);
+        me = pre.getString("userName", "");
 
         //分享
         shareLayout = findViewById(R.id.shareLayout);
@@ -72,6 +106,14 @@ public class InfoDetailActivity extends AppCompatActivity {
                         .setTitle("分享到")
                         .build()
                         .shareBySystem();
+            }
+        });
+        //收藏
+        starLaylout = findViewById(R.id.starLayout);
+        starLaylout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                starUser(me,user,infoId);
             }
         });
         sendbtn=findViewById(R.id.send);
@@ -130,30 +172,8 @@ public class InfoDetailActivity extends AppCompatActivity {
         }
     }
     private void dbKey(final String key) {
-        handler = new Handler() {
-            @Override
-            public void handleMessage(android.os.Message msg) {
-                switch (msg.what) {
-                    case 1:
-                        String str = msg.obj.toString();
-                        String[] s = str.split(",");
-                        sextext.setText(s[1]);
-                        universitytext.setText(s[2]);
-                        collegetext.setText(s[3]);
-                        majortext.setText(s[4]);
-                        gradetext.setText(s[5]);
-                        subjecttext.setText(s[6]);
-                        timetext.setText(s[7]);
-                        pricetext.setText(s[8]);
-                        introducetext.setText(s[9]);
-                        user=s[10];
-                        break;
-                }
-            }
-        };
         new Thread() {
             HttpURLConnection connection = null;
-
             @Override
             public void run() {
                 try {
@@ -170,6 +190,32 @@ public class InfoDetailActivity extends AppCompatActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+            }
+        }.start();
+    }
+    //收藏
+    private void starUser(String collector, String collection, String collectionId){
+
+        new Thread(){
+            HttpURLConnection connection =null;
+            public void run(){
+                try {
+                    connection = HttpConnectionUtils
+                            .getConnection("InfoDetailServlet?id=2&collector="+collector
+                                    +"&collection="+collection+"&collectionId="+collectionId);
+                    int code = connection.getResponseCode();
+                    if (code == 200){
+                        InputStream inputStream = connection.getInputStream();
+                        String string = StreamChangeStrUtils.toChange(inputStream);
+                        android.os.Message message = Message.obtain();
+                        message.obj = string;
+                        message.what = 2;
+                        handler.sendMessage(message);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
             }
         }.start();
     }

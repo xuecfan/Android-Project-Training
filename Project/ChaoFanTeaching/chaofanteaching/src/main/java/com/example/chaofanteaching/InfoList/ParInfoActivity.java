@@ -1,12 +1,15 @@
 package com.example.chaofanteaching.InfoList;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Message;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -14,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ZoomControls;
 import com.baidu.location.BDAbstractLocationListener;
 import com.baidu.location.BDLocation;
@@ -43,6 +47,9 @@ import com.hyphenate.easeui.widget.EaseTitleBar;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 
+import gdut.bsx.share2.Share2;
+import gdut.bsx.share2.ShareContentType;
+
 
 public class ParInfoActivity extends AppCompatActivity {
     private static String path = "/storage/emulated/0/";// sd路径
@@ -54,7 +61,6 @@ public class ParInfoActivity extends AppCompatActivity {
     private MapView mapView;
     private double lat;
     private double lng;
-    private Handler handler;
     private TextView nametext;
     private TextView sextext;
     private TextView gradetext;
@@ -65,12 +71,78 @@ public class ParInfoActivity extends AppCompatActivity {
     private TextView requiretext;
     private Button sendbtn;
     private ImageView img;
+    private ConstraintLayout shareLayout;
+    private ConstraintLayout starLaylout;
+    private String name;
+    private SharedPreferences pre;
+    private String me;
+    private String infoId;
+
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(android.os.Message msg) {
+            switch (msg.what) {
+                case 1:
+                    String str = msg.obj.toString();
+                    String[] s = str.split(",");
+                    sextext.setText(s[0]);
+                    gradetext.setText(s[1]);
+                    subjecttext.setText(s[2]);
+                    timetext.setText(s[3]);
+                    pricetext.setText(s[4]+"元/小时");
+                    teltext.setText(s[5]);
+                    requiretext.setText(s[6]);
+                    String lat1=s[7];
+                    String lng1=s[8];
+                    infoId = s[9];
+                    user=s[10];
+                    lat=Double.parseDouble(lat1);
+                    lng=Double.parseDouble(lng1);
+                    break;
+                case 2:
+                    String string = msg.obj.toString();
+                    if (string.equals("1")){
+                        Toast.makeText(getApplication(),"收藏成功",Toast.LENGTH_LONG).show();
+                    }else if (string.equals("0")){
+                        Toast.makeText(getApplication(),"收藏失败",Toast.LENGTH_LONG).show();
+                    }
+                    break;
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         SDKInitializer.initialize(getApplicationContext());
         setContentView(R.layout.infopar_deatil);
+
+        //获取当前登录用户的用户名
+        pre= getSharedPreferences("login", Context.MODE_PRIVATE);
+        me = pre.getString("userName", "");
+
+        //分享
+        shareLayout = findViewById(R.id.shareLayout);
+        shareLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new Share2.Builder(ParInfoActivity.this)
+                        .setContentType(ShareContentType.TEXT)
+                        .setTextContent("Hello!我在“超凡家教APP”上看到这个家教待遇还不错，分享给你，上超凡家教APP搜索“"+name+"”查看更多")
+                        .setTitle("分享到")
+                        .build()
+                        .shareBySystem();
+            }
+        });
+
+        //收藏
+        starLaylout = findViewById(R.id.starLayout);
+        starLaylout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                starUser(me,user,infoId);
+            }
+        });
 
         img=findViewById(R.id.img);
         sendbtn=findViewById(R.id.send);
@@ -81,7 +153,7 @@ public class ParInfoActivity extends AppCompatActivity {
             }
         });
         Intent request=getIntent();
-        String name=request.getStringExtra("name");
+        name=request.getStringExtra("name");
         String user=request.getStringExtra("user");
         Bitmap bt = BitmapFactory.decodeFile(path +user+".png");//从Sd中找头像，转换成Bitmap
         @SuppressWarnings("deprecation")
@@ -132,29 +204,7 @@ public class ParInfoActivity extends AppCompatActivity {
         }
     }
     private void dbKey(final String key) {
-        handler = new Handler() {
-            @Override
-            public void handleMessage(android.os.Message msg) {
-                switch (msg.what) {
-                    case 1:
-                        String str = msg.obj.toString();
-                        String[] s = str.split(",");
-                        sextext.setText(s[0]);
-                        gradetext.setText(s[1]);
-                        subjecttext.setText(s[2]);
-                        timetext.setText(s[3]);
-                        pricetext.setText(s[4]+"元/小时");
-                        teltext.setText(s[5]);
-                        requiretext.setText(s[6]);
-                        String lat1=s[7];
-                        String lng1=s[8];
-                        user=s[9];
-                        lat=Double.parseDouble(lat1);
-                        lng=Double.parseDouble(lng1);
-                        break;
-                }
-            }
-        };
+
         new Thread() {
             HttpURLConnection connection = null;
 
@@ -238,8 +288,33 @@ public class ParInfoActivity extends AppCompatActivity {
         baiduMap.setMapStatus(msu);
     }
     private void initView() {
-
         //初始化控件
+    }
 
+    //收藏
+    private void starUser(String collector, String collection ,String collectionId){
+
+        new Thread(){
+            HttpURLConnection connection =null;
+            public void run(){
+                try {
+                    connection = HttpConnectionUtils
+                            .getConnection("InfoDetailServlet?id=2&collector="+collector
+                                    +"&collection="+collection+"&collectionId="+collectionId);
+                    int code = connection.getResponseCode();
+                    if (code == 200){
+                        InputStream inputStream = connection.getInputStream();
+                        String string = StreamChangeStrUtils.toChange(inputStream);
+                        android.os.Message message = Message.obtain();
+                        message.obj = string;
+                        message.what = 2;
+                        handler.sendMessage(message);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }.start();
     }
 }
