@@ -36,7 +36,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp">
-                <ImageView
+                <com.example.chaofanteaching.RoundImageView
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:src="@drawable/boy"
