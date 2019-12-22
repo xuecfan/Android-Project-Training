@@ -60,6 +60,7 @@ public class List extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.list, container, false);
+        infoList.clear();
         srl = view.findViewById(R.id.srl);
         srl.setReboundDuration(1000);
         srl.setOnRefreshListener(new OnRefreshListener() {
@@ -145,7 +146,7 @@ public class List extends Fragment {
                 dbKey("sortexp","");
             }
         });
-        infoList.clear();
+
         infolist = view.findViewById(R.id.infolist);
         infoAdapter = new InfoAdapter(this.getContext(), infoList, R.layout.info_item);
         infolist.setAdapter(infoAdapter);
@@ -216,7 +217,7 @@ public class List extends Fragment {
                             String[] s = str.split(";");
                             for (int i = 0; i < s.length; i++) {
                                 String[] r = s[i].split(",");
-                                scanInfo = new Info(r[0], r[1], r[2], "擅长"+r[3],r[4]+"元/小时",r[5]);
+                                scanInfo = new Info(r[0], r[1], r[2], "擅长"+r[3],r[4]+"元/小时",r[5],r[6]);
                                 infoList.add(scanInfo);
                                 infoAdapter.notifyDataSetChanged();
                             }

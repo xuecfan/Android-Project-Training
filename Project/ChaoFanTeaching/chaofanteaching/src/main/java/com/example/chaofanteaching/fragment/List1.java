@@ -220,7 +220,7 @@ public class List1 extends Fragment {
                             String[] s = str.split(";");
                             for (int i = 0; i < s.length; i++) {
                                 String[] r = s[i].split(",");
-                                scanInfo = new Info(r[0], r[1], r[2], r[3]+"元/小时",r[4],r[5]);
+                                scanInfo = new Info(r[0], r[1], r[2], r[3]+"元/小时",r[4],r[5],r[6]);
                                 infoList.add(scanInfo);
                                 parInfoAdapter.notifyDataSetChanged();
                             }

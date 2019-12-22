@@ -41,7 +41,6 @@ import java.net.HttpURLConnection;
 public class AddInfoActivity extends AppCompatActivity {
     private SharedPreferences pre;
     private String a="";
-    private TextView back;
     private TextView latlng;
     private MapView mapView;
     private LocationClient locationClient;

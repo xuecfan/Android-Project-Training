@@ -7,14 +7,16 @@ public class Info {
     private String school;
     private String price;
     private String experience;
+    private String user;
 
-    public Info(String _name,String _school,String _college,String _subject,String _price,String _experience){
+    public Info(String _name,String _school,String _college,String _subject,String _price,String _experience,String _user){
         this.name=_name;
         this.college=_college;
         this.subject=_subject;
         this.school=_school;
         this.price=_price;
         this.experience=_experience;
+        this.user=_user;
     }
 
     public String getName() {
@@ -59,5 +61,13 @@ public class Info {
 
     public String getExperience() {
         return experience;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
     }
 }
