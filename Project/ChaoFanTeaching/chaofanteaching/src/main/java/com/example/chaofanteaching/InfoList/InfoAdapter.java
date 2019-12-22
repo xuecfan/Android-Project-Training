@@ -15,18 +15,21 @@ import android.widget.TextView;
 import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.R;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.List;
 
 
 public class InfoAdapter extends BaseAdapter{
-    private Drawable str;
+
     private Handler handler;
     private List<Info> infoList;
     private int itemLayoutId;
     private Context context;
     private ImageView header;
+
     public InfoAdapter(Context context, List<Info> infoList, int itemLayoutId){
         this.context = context;
         this.infoList= infoList;
@@ -89,7 +92,7 @@ public class InfoAdapter extends BaseAdapter{
 //        TextView infosubject=convertView.findViewById(R.id.subject);
 //        TextView infoprice=convertView.findViewById(R.id.price);
 //        TextView infoexp=convertView.findViewById(R.id.exp);
-//        header=convertView.findViewById(R.id.header);
+        header=convertView.findViewById(R.id.header);
         Drawable drawable=context.getResources().getDrawable(R.drawable.exp);
         drawable.setBounds(0,0,70,50);//第一0是距左边距离，第二0是距上边距离
         viewHolder.infoexp.setCompoundDrawables(drawable,null,null,null);//只放左边
@@ -99,18 +102,18 @@ public class InfoAdapter extends BaseAdapter{
         viewHolder.infosubject.setText(infoList.get(position).getSubject());
         viewHolder.infoprice.setText(infoList.get(position).getPrice());
         viewHolder.infoexp.setText(infoList.get(position).getExperience());
+        
         //dbKey(infoList.get(position).getUser());
-        viewHolder.header.setImageDrawable(dbKey(infoList.get(position).getUser()));
-        Log.e("用户",infoList.get(position).getName());
+        //Log.e("用户",infoList.get(position).getUser());
         return convertView;
     }
-    private Drawable dbKey(final String key) {
+    private void dbKey(final String key) {
         handler = new Handler() {
             @Override
             public void handleMessage(android.os.Message msg) {
                 switch (msg.what) {
                     case 1:
-                        str = (Drawable) msg.obj;
+                        Drawable myl = (Drawable) msg.obj;
                         break;
                 }
             }
@@ -129,12 +132,12 @@ public class InfoAdapter extends BaseAdapter{
                         message.obj = drawable;
                         message.what = 1;
                         handler.sendMessage(message);
+                        inputStream.close();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         }.start();
-        return str;
     }
 }
