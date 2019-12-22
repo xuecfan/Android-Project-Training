@@ -36,7 +36,7 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_centerInParent="true"
-            android:text="添加"
+            android:text="发布"
             android:textColor="@color/black_deep"
             android:textSize="14sp" />
     </RelativeLayout>
