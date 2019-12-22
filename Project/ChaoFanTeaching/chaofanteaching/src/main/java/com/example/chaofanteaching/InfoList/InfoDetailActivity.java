@@ -14,8 +14,10 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,6 +59,11 @@ public class InfoDetailActivity extends AppCompatActivity {
     private String name;
     private String me;
     private String infoId;
+    private String data[] = {"老师教的很好，支持。",
+            "讲的孩子都听不懂",
+            "老师教的不错，大家可以请他哦",
+            "老师教课后，孩子成绩有很大提高"};
+    private ListView comment_listView;
 
     private Handler handler = new Handler() {
         @Override
@@ -73,7 +80,7 @@ public class InfoDetailActivity extends AppCompatActivity {
                     subjecttext.setText(s[6]);
                     timetext.setText(s[7]);
                     pricetext.setText(s[8]);
-                    introducetext.setText(s[9]);
+                    introducetext.setText(s[10]);
                     infoId = s[11];
                     user=s[12];
                     break;
@@ -116,6 +123,15 @@ public class InfoDetailActivity extends AppCompatActivity {
                 starUser(me,user,infoId);
             }
         });
+
+        //评论
+        comment_listView = findViewById(R.id.comment_listView);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                this,
+                android.R.layout.simple_list_item_1,
+                data);
+        comment_listView.setAdapter(adapter);
+
         sendbtn=findViewById(R.id.send);
         sendbtn.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -596,7 +596,7 @@
                     android:id="@+id/comment_area"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:text="全部留言"
+                    android:text="全部评价"
                     android:textSize="18dp"
                     android:textColor="#000"
                     android:textStyle="bold"
@@ -607,12 +607,15 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0"/>
                 <ListView
+                    android:id="@+id/comment_listView"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="100dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/comment_area">
+                    app:layout_constraintTop_toBottomOf="@+id/comment_area"
+                    app:layout_constraintVertical_bias="0">
+
 
                 </ListView>
             </android.support.constraint.ConstraintLayout>
