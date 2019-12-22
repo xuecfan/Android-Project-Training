@@ -10,6 +10,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
@@ -29,6 +30,9 @@ import com.hyphenate.easeui.widget.EaseTitleBar;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 
+import gdut.bsx.share2.Share2;
+import gdut.bsx.share2.ShareContentType;
+
 public class InfoDetailActivity extends AppCompatActivity {
     private static String path = "/storage/emulated/0/";// sd路径
     private String user;
@@ -47,6 +51,8 @@ public class InfoDetailActivity extends AppCompatActivity {
     private Button sendbtn;
     private SharedPreferences pre;
     protected EaseTitleBar titleBar;
+    private ConstraintLayout shareLayout;
+    private String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +61,19 @@ public class InfoDetailActivity extends AppCompatActivity {
 //        pre= getSharedPreferences("login", Context.MODE_PRIVATE);
 //        user = pre.getString("userName", "");
 
+        //分享
+        shareLayout = findViewById(R.id.shareLayout);
+        shareLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new Share2.Builder(InfoDetailActivity.this)
+                        .setContentType(ShareContentType.TEXT)
+                        .setTextContent("Hello!我在“超凡家教APP”上看到这个老师还不错，分享给你，上超凡家教APP搜索“"+name+"”查看更多")
+                        .setTitle("分享到")
+                        .build()
+                        .shareBySystem();
+            }
+        });
         sendbtn=findViewById(R.id.send);
         sendbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,7 +83,7 @@ public class InfoDetailActivity extends AppCompatActivity {
         });
         img=findViewById(R.id.img);
         Intent request=getIntent();
-        String name=request.getStringExtra("name");
+        name=request.getStringExtra("name");
         String user=request.getStringExtra("user");
         Bitmap bt = BitmapFactory.decodeFile(path +user+".png");//从Sd中找头像，转换成Bitmap
         @SuppressWarnings("deprecation")

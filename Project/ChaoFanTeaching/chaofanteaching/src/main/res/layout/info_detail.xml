@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".InfoList.InfoDetailActivity">
 
     <com.hyphenate.easeui.widget.EaseTitleBar
         android:id="@+id/title_bar"
@@ -34,18 +35,10 @@
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
-                <!--<ImageView-->
-                    <!--android:layout_width="80dp"-->
-                    <!--android:layout_height="80dp"-->
-                    <!--android:src="@drawable/boy"-->
-                    <!--android:id="@+id/img"-->
-                    <!--app:layout_constraintBottom_toBottomOf="parent"-->
-                    <!--app:layout_constraintLeft_toLeftOf="parent"-->
-                    <!--app:layout_constraintRight_toRightOf="parent"-->
-                    <!--app:layout_constraintTop_toTopOf="parent"-->
-                    <!--app:layout_constraintVertical_bias="0"/>-->
-                <com.example.chaofanteaching.RoundImageView
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp">
+                <ImageView
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:src="@drawable/boy"
@@ -54,8 +47,112 @@
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0"/>
+                    app:layout_constraintHorizontal_bias="0.1"/>
 
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/starLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_bias="0.25"
+                    app:layout_constraintLeft_toRightOf="@+id/img"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.2">
+
+                    <ImageView
+                        android:id="@+id/star"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/star"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintHorizontal_bias="0"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:layout_marginLeft="5dp"
+                        android:gravity="center"
+                        android:text="收藏"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintHorizontal_bias="0"
+                        app:layout_constraintLeft_toRightOf="@+id/star"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </android.support.constraint.ConstraintLayout>
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/shareLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/starLayout"
+                    app:layout_constraintHorizontal_bias="0"
+                    app:layout_constraintLeft_toRightOf="@+id/starLayout"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/starLayout">
+
+                    <ImageView
+                        android:id="@+id/share"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/share"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintHorizontal_bias="0"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:layout_marginLeft="5dp"
+                        android:gravity="center"
+                        android:text="分享"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintHorizontal_bias="0"
+                        app:layout_constraintLeft_toRightOf="@+id/share"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </android.support.constraint.ConstraintLayout>
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/commentLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="@+id/starLayout"
+                    app:layout_constraintRight_toRightOf="@+id/starLayout"
+                    app:layout_constraintTop_toBottomOf="@+id/starLayout">
+
+                    <ImageView
+                        android:id="@+id/comment_img"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/comment"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintHorizontal_bias="0"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:layout_marginLeft="5dp"
+                        android:gravity="center"
+                        android:text="评论"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintHorizontal_bias="0"
+                        app:layout_constraintLeft_toRightOf="@+id/comment_img"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </android.support.constraint.ConstraintLayout>
             </android.support.constraint.ConstraintLayout>
 
             <android.support.constraint.ConstraintLayout
@@ -94,6 +191,7 @@
                     android:singleLine="true"
                     android:text="张三"
                     android:textSize="18dp"
+                    android:textColor="#000"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
@@ -133,6 +231,7 @@
                     android:gravity="center"
                     android:text="男"
                     android:textSize="18dp"
+                    android:textColor="#000"
                     android:maxEms="15"
                     android:ellipsize="end"
                     android:singleLine="true"
@@ -174,6 +273,7 @@
                     android:gravity="center"
                     android:text="大一"
                     android:textSize="18dp"
+                    android:textColor="#000"
                     android:maxEms="15"
                     android:ellipsize="end"
                     android:singleLine="true"
@@ -183,6 +283,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintHorizontal_bias="1"/>
             </android.support.constraint.ConstraintLayout>
+
             <android.support.constraint.ConstraintLayout
                 android:id="@+id/university1"
                 android:layout_width="match_parent"
@@ -214,6 +315,7 @@
                     android:layout_height="40dp"
                     android:text="河北师范大学"
                     android:textSize="18dp"
+                    android:textColor="#000"
                     android:gravity="center"
                     android:maxEms="15"
                     android:ellipsize="end"
@@ -258,6 +360,7 @@
                     android:singleLine="true"
                     android:text="软件学院"
                     android:textSize="18dp"
+                    android:textColor="#000"
                     android:gravity="center"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
@@ -296,6 +399,7 @@
                     android:layout_height="40dp"
                     android:text="软件工程"
                     android:textSize="18dp"
+                    android:textColor="#000"
                     android:gravity="center"
                     android:maxEms="15"
                     android:ellipsize="end"
@@ -337,6 +441,7 @@
                     android:layout_height="40dp"
                     android:text="语文、数学、英语"
                     android:textSize="18dp"
+                    android:textColor="#000"
                     android:gravity="center"
                     android:maxEms="15"
                     android:ellipsize="end"
@@ -382,6 +487,7 @@
                     android:singleLine="true"
                     android:text="星期六-上午"
                     android:textSize="18dp"
+                    android:textColor="#000"
                     android:gravity="center"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintHorizontal_bias="1"
@@ -422,6 +528,7 @@
                     android:layout_height="40dp"
                     android:text="50元/小时"
                     android:textSize="18dp"
+                    android:textColor="#000"
                     android:gravity="center"
                     android:maxEms="15"
                     android:ellipsize="end"
@@ -467,6 +574,7 @@
                     android:layout_height="40dp"
                     android:text="这个人话很少，什么都没有留下"
                     android:textSize="18dp"
+                    android:textColor="#000"
                     android:gravity="center"
                     android:maxEms="15"
                     android:ellipsize="end"
@@ -476,6 +584,38 @@
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintHorizontal_bias="1"/>
+            </android.support.constraint.ConstraintLayout>
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/add_info_background_selector">
+                <TextView
+                    android:id="@+id/comment_area"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:text="全部留言"
+                    android:textSize="18dp"
+                    android:textColor="#000"
+                    android:textStyle="bold"
+                    android:gravity="center_vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0"/>
+                <ListView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/comment_area">
+
+                </ListView>
+
             </android.support.constraint.ConstraintLayout>
         </LinearLayout>
     </ScrollView>
@@ -496,7 +636,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/round_yellow"
             android:gravity="center"
-            android:text="请他试讲"
+            android:text="请TA试讲"
             android:textColor="#ffffff"
             android:textSize="18dp"
             android:textStyle="bold"
