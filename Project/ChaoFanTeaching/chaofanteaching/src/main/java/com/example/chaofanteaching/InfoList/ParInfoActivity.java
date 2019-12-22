@@ -1,6 +1,10 @@
 package com.example.chaofanteaching.InfoList;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
@@ -41,6 +45,7 @@ import java.net.HttpURLConnection;
 
 
 public class ParInfoActivity extends AppCompatActivity {
+    private static String path = "/storage/emulated/0/";// sd路径
     protected EaseTitleBar titleBar;
     private String user;
     private LocationClient locationClient;
@@ -59,6 +64,7 @@ public class ParInfoActivity extends AppCompatActivity {
     private TextView teltext;
     private TextView requiretext;
     private Button sendbtn;
+    private ImageView img;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +72,7 @@ public class ParInfoActivity extends AppCompatActivity {
         SDKInitializer.initialize(getApplicationContext());
         setContentView(R.layout.infopar_deatil);
 
+        img=findViewById(R.id.img);
         sendbtn=findViewById(R.id.send);
         sendbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,6 +82,11 @@ public class ParInfoActivity extends AppCompatActivity {
         });
         Intent request=getIntent();
         String name=request.getStringExtra("name");
+        String user=request.getStringExtra("user");
+        Bitmap bt = BitmapFactory.decodeFile(path +user+".png");//从Sd中找头像，转换成Bitmap
+        @SuppressWarnings("deprecation")
+        Drawable drawable = new BitmapDrawable(bt);//转换成drawable
+        img.setImageDrawable(drawable);
         titleBar=findViewById(R.id.title_bar);
         titleBar.setTitle(name);
         titleBar.setLeftLayoutClickListener(new View.OnClickListener() {
@@ -224,5 +236,10 @@ public class ParInfoActivity extends AppCompatActivity {
         baiduMap.setMaxAndMinZoomLevel(19,13);
         MapStatusUpdate msu= MapStatusUpdateFactory.zoomTo(16);
         baiduMap.setMapStatus(msu);
+    }
+    private void initView() {
+
+        //初始化控件
+
     }
 }

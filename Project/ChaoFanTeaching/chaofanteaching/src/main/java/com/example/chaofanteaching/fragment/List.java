@@ -180,6 +180,7 @@ public class List extends Fragment {
                 }else{
                     Intent intent = new Intent();
                     intent.putExtra("name", infoList.get(position).getName());
+                    intent.putExtra("user",infoList.get(position).getUser());
                     intent.setClass(getActivity(), InfoDetailActivity.class);
                     startActivity(intent);
                 }

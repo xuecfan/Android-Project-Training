@@ -3,6 +3,10 @@ package com.example.chaofanteaching.InfoList;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -10,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.R;
@@ -25,6 +30,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 
 public class InfoDetailActivity extends AppCompatActivity {
+    private static String path = "/storage/emulated/0/";// sd路径
     private String user;
     private Handler handler;
     private TextView nametext;
@@ -37,6 +43,7 @@ public class InfoDetailActivity extends AppCompatActivity {
     private TextView timetext;
     private TextView pricetext;
     private TextView introducetext;
+    private ImageView img;
     private Button sendbtn;
     private SharedPreferences pre;
     protected EaseTitleBar titleBar;
@@ -55,8 +62,14 @@ public class InfoDetailActivity extends AppCompatActivity {
                 chatIn();
             }
         });
+        img=findViewById(R.id.img);
         Intent request=getIntent();
         String name=request.getStringExtra("name");
+        String user=request.getStringExtra("user");
+        Bitmap bt = BitmapFactory.decodeFile(path +user+".png");//从Sd中找头像，转换成Bitmap
+        @SuppressWarnings("deprecation")
+        Drawable drawable = new BitmapDrawable(bt);//转换成drawable
+        img.setImageDrawable(drawable);
         titleBar=findViewById(R.id.title_bar);
         titleBar.setTitle(name);
         titleBar.setLeftLayoutClickListener(new View.OnClickListener() {

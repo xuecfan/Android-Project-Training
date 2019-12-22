@@ -183,6 +183,7 @@ public class List1 extends Fragment {
                 }else{
                     Intent intent = new Intent();
                     intent.putExtra("name", infoList.get(position).getName());
+                    intent.putExtra("user",infoList.get(position).getUser());
                     intent.setClass(getActivity(), ParInfoActivity.class);
                     startActivity(intent);
                 }

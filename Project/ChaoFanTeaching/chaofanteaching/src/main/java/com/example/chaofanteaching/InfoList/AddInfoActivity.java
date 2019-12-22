@@ -82,6 +82,7 @@ public class AddInfoActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+
         mapView = findViewById(R.id.bmapView);
         baiduMap=mapView.getMap();
         baiduMap.setMyLocationEnabled(true);

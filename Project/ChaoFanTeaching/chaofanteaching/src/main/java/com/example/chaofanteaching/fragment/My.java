@@ -149,6 +149,16 @@ public class My extends Fragment {
                 }}
             }
         });
+        img2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(pre.getString("userName","").equals("")){
+                    Toast.makeText(getContext(),"请您先登录", Toast.LENGTH_SHORT).show();
+                    Intent i=new Intent(getContext(), LoginActivity.class);
+                    startActivity(i);
+                }
+            }
+        });
         img3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -161,6 +171,16 @@ public class My extends Fragment {
                     editor=pre.edit();
                     editor.putString("grade","1");
                     editor.commit();
+                    startActivity(i);
+                }
+            }
+        });
+        img4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(pre.getString("userName","").equals("")){
+                    Toast.makeText(getContext(),"请您先登录", Toast.LENGTH_SHORT).show();
+                    Intent i=new Intent(getContext(), LoginActivity.class);
                     startActivity(i);
                 }
             }
