@@ -105,13 +105,6 @@ public class All extends AppCompatActivity {
         fragmentTabHost.addTab(tabSpec2,
                 Message.class,
                 null);
-
-//        TabHost.TabSpec tabSpec3 = fragmentTabHost.newTabSpec("tag3")
-//                .setIndicator(getTabSpecView("tag3",R.drawable.my,"我的"));
-//
-//        fragmentTabHost.addTab(tabSpec3,
-//                My.class,
-//                null);
         TabHost.TabSpec tabSpec3 = fragmentTabHost.newTabSpec("tag3")
                 .setIndicator(getTabSpecView("tag3",R.drawable.white,""));
 
@@ -119,7 +112,7 @@ public class All extends AppCompatActivity {
                 Blank.class,
                 null);
         TabHost.TabSpec tabSpec4 = fragmentTabHost.newTabSpec("tag4")
-                .setIndicator(getTabSpecView("tag4",R.drawable.ren,"空白"));
+                .setIndicator(getTabSpecView("tag4",R.drawable.subject,"科目"));
 
         fragmentTabHost.addTab(tabSpec4,
                 White.class,
@@ -145,6 +138,8 @@ public class All extends AppCompatActivity {
                         textViewMap.get("tag1").setTextColor(Color.parseColor("#D8900A"));
                         imageViewMap.get("tag2").setImageResource(R.drawable.message);
                         textViewMap.get("tag2").setTextColor(getResources().getColor(android.R.color.black));
+                        imageViewMap.get("tag4").setImageResource(R.drawable.subject);
+                        textViewMap.get("tag4").setTextColor(getResources().getColor(android.R.color.black));
                         imageViewMap.get("tag5").setImageResource(R.drawable.my);
                         textViewMap.get("tag5").setTextColor(getResources().getColor(android.R.color.black));
 
@@ -154,6 +149,18 @@ public class All extends AppCompatActivity {
                         imageViewMap.get("tag2").setImageResource(R.drawable.message1);
                         textViewMap.get("tag2").setTextColor(Color.parseColor("#D8900A"));
                         textViewMap.get("tag1").setTextColor(getResources().getColor(android.R.color.black));
+                        imageViewMap.get("tag4").setImageResource(R.drawable.subject);
+                        textViewMap.get("tag4").setTextColor(getResources().getColor(android.R.color.black));
+                        imageViewMap.get("tag5").setImageResource(R.drawable.my);
+                        textViewMap.get("tag5").setTextColor(getResources().getColor(android.R.color.black));
+                        break;
+                    case "tag4":
+                        textViewMap.get("tag4").setTextColor(Color.parseColor("#D8900A"));
+                        imageViewMap.get("tag4").setImageResource(R.drawable.subject1);
+                        imageViewMap.get("tag1").setImageResource(R.drawable.list);
+                        textViewMap.get("tag1").setTextColor(getResources().getColor(android.R.color.black));
+                        imageViewMap.get("tag2").setImageResource(R.drawable.message);
+                        textViewMap.get("tag2").setTextColor(getResources().getColor(android.R.color.black));
                         imageViewMap.get("tag5").setImageResource(R.drawable.my);
                         textViewMap.get("tag5").setTextColor(getResources().getColor(android.R.color.black));
                         break;
@@ -164,6 +171,8 @@ public class All extends AppCompatActivity {
                         textViewMap.get("tag1").setTextColor(getResources().getColor(android.R.color.black));
                         imageViewMap.get("tag2").setImageResource(R.drawable.message);
                         textViewMap.get("tag2").setTextColor(getResources().getColor(android.R.color.black));
+                        imageViewMap.get("tag4").setImageResource(R.drawable.subject);
+                        textViewMap.get("tag4").setTextColor(getResources().getColor(android.R.color.black));
                         break;
                 }
             }

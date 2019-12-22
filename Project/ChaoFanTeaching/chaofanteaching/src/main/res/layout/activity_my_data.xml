@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:hyphenate="http://schemas.android.com/apk/res-auto"
-    tools:context=".myself.MyData">
+    tools:context=".myself.MyData"
+    android:background="@drawable/a">
 
     <com.hyphenate.easeui.widget.EaseTitleBar
         android:id="@+id/title_bar"

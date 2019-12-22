@@ -62,7 +62,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".InfoList.Info_Map"></activity>
+        <activity android:name=".InfoList.Info_Map" />
         <activity android:name=".MyPublish.MyPublishActivity" />
 
         <meta-data
@@ -188,6 +188,7 @@
 
         <activity android:name=".myself.EmailDetail" />
         <activity android:name=".robot.Chatrobot" />
+        <activity android:name=".Video"></activity>
     </application>
 
 </manifest>
