@@ -9,6 +9,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 
 import com.example.chaofanteaching.R;
+import com.hyphenate.easeui.widget.EaseTitleBar;
 
 public class VideoChinese extends AppCompatActivity {
     private WebView wv;
@@ -20,10 +21,19 @@ public class VideoChinese extends AppCompatActivity {
     private WebView wv2;
     private WebView wv12;
     private WebView wv112;
+    protected EaseTitleBar titleBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_videochinese);
+        titleBar=findViewById(R.id.title_bar);
+        titleBar.setTitle("语文");
+        titleBar.setLeftLayoutClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         wv = findViewById(R.id.wv);
         wv.getSettings().setJavaScriptEnabled(true);
         wv.setWebChromeClient(new WebChromeClient());

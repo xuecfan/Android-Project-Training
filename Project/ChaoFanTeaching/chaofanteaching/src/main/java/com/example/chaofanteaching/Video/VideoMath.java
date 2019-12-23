@@ -9,6 +9,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 
 import com.example.chaofanteaching.R;
+import com.hyphenate.easeui.widget.EaseTitleBar;
 
 public class VideoMath extends AppCompatActivity {
     private WebView wv;
@@ -20,10 +21,19 @@ public class VideoMath extends AppCompatActivity {
     private WebView wv2;
     private WebView wv12;
     private WebView wv112;
+    protected EaseTitleBar titleBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_math);
+        titleBar=findViewById(R.id.title_bar);
+        titleBar.setTitle("数学");
+        titleBar.setLeftLayoutClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         wv0 = findViewById(R.id.wv0);
         wv0.getSettings().setJavaScriptEnabled(true);
         wv0.setWebChromeClient(new WebChromeClient());

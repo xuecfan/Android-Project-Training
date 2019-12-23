@@ -3,71 +3,112 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:hyphenate="http://schemas.android.com/apk/res-auto"
     tools:context=".Video.VideoChinese">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+        <com.hyphenate.easeui.widget.EaseTitleBar
+            android:id="@+id/title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            hyphenate:titleBarLeftImage="@drawable/ease_mm_title_back"
+            tools:ignore="MissingConstraints" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="讲课视频"/>
         <WebView
             android:layout_width="match_parent"
-            android:layout_height="290dp"
+            android:layout_height="200dp"
             android:layerType="hardware"
             android:id="@+id/wv">
-
         </WebView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="讲课视频"/>
         <WebView
             android:layout_width="match_parent"
-            android:layout_height="290dp"
+            android:layout_height="200dp"
             android:layerType="hardware"
             android:id="@+id/wv1">
         </WebView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="讲课视频"/>
         <WebView
             android:layout_width="match_parent"
-            android:layout_height="290dp"
+            android:layout_height="200dp"
             android:layerType="hardware"
             android:id="@+id/wv11"
             android:paddingBottom="5dp">
         </WebView>
 
-
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="讲课视频"/>
         <WebView
             android:layout_width="match_parent"
-            android:layout_height="290dp"
+            android:layout_height="200dp"
             android:layerType="hardware"
             android:id="@+id/wv0">
 
         </WebView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="讲课视频"/>
         <WebView
             android:layout_width="match_parent"
-            android:layout_height="290dp"
+            android:layout_height="200dp"
             android:layerType="hardware"
             android:id="@+id/wv10">
         </WebView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="讲课视频"/>
         <WebView
             android:layout_width="match_parent"
-            android:layout_height="290dp"
+            android:layout_height="200dp"
             android:layerType="hardware"
             android:id="@+id/wv110"
             android:paddingBottom="5dp">
         </WebView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="讲课视频"/>
 
         <WebView
             android:layout_width="match_parent"
-            android:layout_height="290dp"
+            android:layout_height="200dp"
             android:layerType="hardware"
             android:id="@+id/wv2">
 
         </WebView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="讲课视频"/>
         <WebView
             android:layout_width="match_parent"
-            android:layout_height="290dp"
+            android:layout_height="200dp"
             android:layerType="hardware"
             android:id="@+id/wv12">
         </WebView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="讲课视频"/>
         <WebView
             android:layout_width="match_parent"
-            android:layout_height="290dp"
+            android:layout_height="200dp"
             android:layerType="hardware"
             android:id="@+id/wv112"
             android:paddingBottom="5dp">
