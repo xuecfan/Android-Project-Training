@@ -156,6 +156,10 @@ public class My extends Fragment {
                     Toast.makeText(getContext(),"请您先登录", Toast.LENGTH_SHORT).show();
                     Intent i=new Intent(getContext(), LoginActivity.class);
                     startActivity(i);
+                }else{
+                    Intent intent=new Intent(getContext(),MyCollection.class);
+                    intent.putExtra("user",a);
+                    startActivity(intent);
                 }
             }
         });

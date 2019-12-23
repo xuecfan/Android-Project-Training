@@ -165,7 +165,7 @@ public class List1 extends Fragment {
                 editText.setCursorVisible(true);
                 if (keyCode == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN) {
                     String key=editText.getText().toString();
-                    dbKey("serach1","");
+                    dbKey("serach1",key);
                     editText.setCursorVisible(false);
                 }
                 return false;

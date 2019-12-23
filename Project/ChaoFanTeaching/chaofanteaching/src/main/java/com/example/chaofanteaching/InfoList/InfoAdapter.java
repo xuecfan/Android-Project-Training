@@ -116,6 +116,7 @@ public class InfoAdapter extends BaseAdapter{
         header=convertView.findViewById(R.id.header);
         initView();
         Drawable drawable=context.getResources().getDrawable(R.drawable.exp);
+        drawable.setBounds(0,0,70,50);//第一0是距左边距离，第二0是距上边距离
         viewHolder.infoexp.setCompoundDrawables(drawable,null,null,null);//只放左边
         viewHolder.infoname.setText(infoList.get(position).getName());
         viewHolder.infoschool.setText(infoList.get(position).getSchool());
