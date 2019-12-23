@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Video.VideoMath">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <WebView
+            android:layout_width="match_parent"
+            android:layout_height="290dp"
+            android:layerType="hardware"
+            android:id="@+id/wv">
+
+        </WebView>
+        <WebView
+            android:layout_width="match_parent"
+            android:layout_height="290dp"
+            android:layerType="hardware"
+            android:id="@+id/wv1">
+        </WebView>
+        <WebView
+            android:layout_width="match_parent"
+            android:layout_height="290dp"
+            android:layerType="hardware"
+            android:id="@+id/wv11"
+            android:paddingBottom="5dp">
+        </WebView>
+
+
+        <WebView
+            android:layout_width="match_parent"
+            android:layout_height="290dp"
+            android:layerType="hardware"
+            android:id="@+id/wv0">
+
+        </WebView>
+        <WebView
+            android:layout_width="match_parent"
+            android:layout_height="290dp"
+            android:layerType="hardware"
+            android:id="@+id/wv10">
+        </WebView>
+        <WebView
+            android:layout_width="match_parent"
+            android:layout_height="290dp"
+            android:layerType="hardware"
+            android:id="@+id/wv110"
+            android:paddingBottom="5dp">
+        </WebView>
+
+        <WebView
+            android:layout_width="match_parent"
+            android:layout_height="290dp"
+            android:layerType="hardware"
+            android:id="@+id/wv2">
+
+        </WebView>
+        <WebView
+            android:layout_width="match_parent"
+            android:layout_height="290dp"
+            android:layerType="hardware"
+            android:id="@+id/wv12">
+        </WebView>
+        <WebView
+            android:layout_width="match_parent"
+            android:layout_height="290dp"
+            android:layerType="hardware"
+            android:id="@+id/wv112"
+            android:paddingBottom="5dp">
+        </WebView>
+    </LinearLayout>
+</ScrollView>

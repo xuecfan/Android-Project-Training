@@ -14,7 +14,9 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.example.chaofanteaching.R;
-import com.example.chaofanteaching.Video;
+import com.example.chaofanteaching.Video.VideoChinese;
+import com.example.chaofanteaching.Video.VideoEnglish;
+import com.example.chaofanteaching.Video.VideoMath;
 import com.hyphenate.easeui.widget.EaseTitleBar;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
@@ -25,13 +27,13 @@ import com.youth.banner.loader.ImageLoader;
 import java.util.ArrayList;
 import java.util.List;
 
-import okhttp3.OkHttpClient;
-
 public class White extends Fragment {
 
     protected EaseTitleBar titleBar;
     private Banner mBanner;
     private ImageView img2;
+    private ImageView img1;
+    private ImageView img3;
 
     @Nullable
     @Override
@@ -39,11 +41,27 @@ public class White extends Fragment {
         final View view=inflater.inflate(R.layout.white,container,false);
         titleBar=view.findViewById(R.id.title_bar);
         titleBar.setTitle("科目");
+        img1=view.findViewById(R.id.img1);
+        img1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(getContext(), VideoMath.class);
+                startActivity(i);
+            }
+        });
         img2=view.findViewById(R.id.img2);
         img2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(getContext(), Video.class);
+                Intent i=new Intent(getContext(), VideoChinese.class);
+                startActivity(i);
+            }
+        });
+        img3=view.findViewById(R.id.img3);
+        img3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(getContext(), VideoEnglish.class);
                 startActivity(i);
             }
         });

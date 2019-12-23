@@ -55,6 +55,7 @@
     <application
         android:name=".MyApp"
         android:allowBackup="true"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/cfjj1"
         android:label="超凡家教"
         android:networkSecurityConfig="@xml/network_security_config"
@@ -145,7 +146,7 @@
         <activity android:name=".myself.Setting" />
         <activity android:name=".myself.RenZheng" />
         <activity android:name=".MyPublish.MPInfoActivity" />
-        <activity android:name=".fragment.MyCollection"/>
+        <activity android:name=".fragment.MyCollection" />
 
         <meta-data
             android:name="EASEMOB_APPKEY"
@@ -189,7 +190,9 @@
 
         <activity android:name=".myself.EmailDetail" />
         <activity android:name=".robot.Chatrobot" />
-        <activity android:name=".Video"></activity>
+        <activity android:name=".Video.VideoChinese" />
+        <activity android:name=".Video.VideoMath" />
+        <activity android:name=".Video.VideoEnglish"></activity>
     </application>
 
 </manifest>
