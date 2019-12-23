@@ -9,7 +9,7 @@
         android:id="@+id/suibianLayout"
         android:layout_width="match_parent"
         android:layout_height="330dp"
-        android:paddingTop="30dp"
+        android:paddingTop="10dp"
         android:background="@drawable/mybackground5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

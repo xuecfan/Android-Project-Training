@@ -138,7 +138,7 @@ public class My extends Fragment {
         renzheng=view.findViewById(R.id.renzheng);
 
         //状态栏透明
-        makeStatusBarTransparent(this.getActivity());
+//        makeStatusBarTransparent(this.getActivity());
 
         img1.setOnClickListener(new View.OnClickListener() {
             @Override
