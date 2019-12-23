@@ -57,7 +57,7 @@ public class VideoChinese extends AppCompatActivity {
         wv1.getSettings().setUseWideViewPort(true);
         wv1.setVisibility(View.VISIBLE);
         wv1.getSettings().setMediaPlaybackRequiresUserGesture(false);
-        wv1.loadUrl("https://vdept.bdstatic.com/487a633575666e677a6332344b6a4656/57624c7632714645/2943ef02e6f4b2ffb205860c80b5927ae357c3a6fc28272e30ba8eb2720cb5d712132ba824a07d5f01c12d2a23166ccb.mp4?auth_key=1577075624-0-0-cf65fc259ddad97ab8e033988ce8602f");
+        wv1.loadUrl("https://vdept.bdstatic.com/6d32426a793858454172524e62657250/4676553146447a71/276d85ee2535060646eca1db0104021636d6f0482eaa0c00b3a7cf65fe7bdc5644b23ed6223e1495d7ef3dafb9411f9c.mp4?auth_key=1577083460-0-0-f75acc84a8220a2f94981213b91983a7");
         wv11 = (WebView) findViewById(R.id.wv11);
         wv11.getSettings().setJavaScriptEnabled(true);
         wv11.setWebChromeClient(new WebChromeClient());
