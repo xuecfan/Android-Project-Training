@@ -13,6 +13,7 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -85,17 +86,18 @@ public class ParInfoActivity extends AppCompatActivity {
                 case 1:
                     String str = msg.obj.toString();
                     String[] s = str.split(",");
-                    sextext.setText(s[0]);
-                    gradetext.setText(s[1]);
-                    subjecttext.setText(s[2]);
-                    timetext.setText(s[3]);
-                    pricetext.setText(s[4]+"元/小时");
-                    teltext.setText(s[5]);
-                    requiretext.setText(s[6]);
-                    String lat1=s[7];
-                    String lng1=s[8];
-                    infoId = s[9];
-                    user=s[10];
+                    name = s[0];
+                    sextext.setText(s[1]);
+                    gradetext.setText(s[2]);
+                    subjecttext.setText(s[3]);
+                    timetext.setText(s[4]);
+                    pricetext.setText(s[5]+"元/小时");
+                    teltext.setText(s[6]);
+                    requiretext.setText(s[7]);
+                    String lat1=s[8];
+                    String lng1=s[9];
+                    infoId = s[10];
+                    user=s[11];
                     lat=Double.parseDouble(lat1);
                     lng=Double.parseDouble(lng1);
                     break;
@@ -140,7 +142,7 @@ public class ParInfoActivity extends AppCompatActivity {
         starLaylout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                starUser(me,user,infoId);
+                starUser(me,user,name);
             }
         });
 
@@ -292,7 +294,7 @@ public class ParInfoActivity extends AppCompatActivity {
     }
 
     //收藏
-    private void starUser(String collector, String collection ,String collectionId){
+    private void starUser(String collector, String collection ,String collectionName){
 
         new Thread(){
             HttpURLConnection connection =null;
@@ -300,7 +302,7 @@ public class ParInfoActivity extends AppCompatActivity {
                 try {
                     connection = HttpConnectionUtils
                             .getConnection("InfoDetailServlet?id=2&collector="+collector
-                                    +"&collection="+collection+"&collectionId="+collectionId);
+                                    +"&collection="+collection+"&collectionName="+collectionName);
                     int code = connection.getResponseCode();
                     if (code == 200){
                         InputStream inputStream = connection.getInputStream();

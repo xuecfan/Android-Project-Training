@@ -120,7 +120,7 @@ public class InfoDetailActivity extends AppCompatActivity {
         starLaylout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                starUser(me,user,infoId);
+                starUser(me,user,name);
             }
         });
 
@@ -210,7 +210,7 @@ public class InfoDetailActivity extends AppCompatActivity {
         }.start();
     }
     //收藏
-    private void starUser(String collector, String collection, String collectionId){
+    private void starUser(String collector, String collection,String collectionName){
 
         new Thread(){
             HttpURLConnection connection =null;
@@ -218,7 +218,7 @@ public class InfoDetailActivity extends AppCompatActivity {
                 try {
                     connection = HttpConnectionUtils
                             .getConnection("InfoDetailServlet?id=2&collector="+collector
-                                    +"&collection="+collection+"&collectionId="+collectionId);
+                                    +"&collection="+collection+"&collectionName="+collectionName);
                     int code = connection.getResponseCode();
                     if (code == 200){
                         InputStream inputStream = connection.getInputStream();
