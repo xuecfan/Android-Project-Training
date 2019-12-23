@@ -3,8 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:hyphenate="http://schemas.android.com/tools"
-    android:background="@drawable/a">
+    xmlns:hyphenate="http://schemas.android.com/tools">
 
     <com.hyphenate.easeui.widget.EaseTitleBar
         android:id="@+id/title_bar"
