@@ -48,6 +48,8 @@ android {
 }
 
 dependencies {
+    //管理状态栏
+    implementation 'com.jaeger.statusbarutil:library:1.5.1'
     //banner轮播框架
     implementation 'com.youth.banner:banner:1.4.10'
     // Glide 图片加载

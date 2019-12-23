@@ -1,14 +1,17 @@
 package com.example.chaofanteaching.fragment;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -21,6 +24,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -30,6 +35,7 @@ import android.widget.Toast;
 import com.example.chaofanteaching.All;
 import com.example.chaofanteaching.BottomPopupOption;
 import com.example.chaofanteaching.HttpConnectionUtils;
+import com.example.chaofanteaching.InfoList.InfoDetailActivity;
 import com.example.chaofanteaching.MyPublish.MyPublishActivity;
 import com.example.chaofanteaching.R;
 import com.example.chaofanteaching.StreamChangeStrUtils;
@@ -57,6 +63,8 @@ import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+
+import static com.example.chaofanteaching.InfoList.InfoDetailActivity.makeStatusBarTransparent;
 
 
 public class My extends Fragment {
@@ -128,6 +136,10 @@ public class My extends Fragment {
         img3=view.findViewById(R.id.img3);
         img4=view.findViewById(R.id.img4);
         renzheng=view.findViewById(R.id.renzheng);
+
+        //状态栏透明
+        makeStatusBarTransparent(this.getActivity());
+
         img1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -528,5 +540,22 @@ public class My extends Fragment {
             public void onResponse(Call call, Response response) throws IOException {Log.i("aaa","存入id");}
         });
 
+    }
+
+    //状态栏透明
+    public static void makeStatusBarTransparent(Activity activity) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
+            return;
+        }
+        Window window = activity.getWindow();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            int option = window.getDecorView().getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN;
+            window.getDecorView().setSystemUiVisibility(option);
+            window.setStatusBarColor(Color.TRANSPARENT);
+        } else {
+            window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        }
     }
 }
