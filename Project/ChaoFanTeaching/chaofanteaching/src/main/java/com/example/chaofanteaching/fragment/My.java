@@ -60,8 +60,6 @@ import okhttp3.Response;
 
 
 public class My extends Fragment {
-
-    protected EaseTitleBar titleBar;
     private List<Map<String, String>> dataSource = new ArrayList<>();
     private MyAdapter adapter;
     private OkHttpClient okHttpClient;
@@ -119,8 +117,6 @@ public class My extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view=inflater.inflate(R.layout.my,container,false);
-        titleBar=view.findViewById(R.id.title_bar);
-        titleBar.setTitle("我的");
         okHttpClient=new OkHttpClient();
         pre= getContext().getSharedPreferences("login", Context.MODE_PRIVATE);
         a = pre.getString("userName", "");
