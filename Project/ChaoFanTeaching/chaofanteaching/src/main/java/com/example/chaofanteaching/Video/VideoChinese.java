@@ -83,7 +83,7 @@ public class VideoChinese extends AppCompatActivity {
         wv0.getSettings().setUseWideViewPort(true);
         wv0.setVisibility(View.VISIBLE);
         wv0.getSettings().setMediaPlaybackRequiresUserGesture(false);
-        wv0.loadUrl("https://vdept.bdstatic.com/63744d5369516b687158715379784a38/36656956554e7776/ebf9fe2d17a24f6bbb00ffb441dcf9c06287330f06019814ac97c4d0bfca31474540953b7b72af7165fa11d0c528944c.mp4?auth_key=1577078948-0-0-a641a2a7daff76eda8133e30f57c4459");
+        wv0.loadUrl("https://vdept.bdstatic.com/5257545043524942496a49556d615556/4257513447443572/2841af6feea8c745c63120a5cac039361d25ce828324ffb8d5872a9676cf1e5ecaab544fb6f11e65ee4e536ee442b01a.mp4?auth_key=1577184970-0-0-68f3f88694cc96ab0fa61aff23c88371");
         wv10 = (WebView) findViewById(R.id.wv10);
         wv10.getSettings().setJavaScriptEnabled(true);
         wv10.setWebChromeClient(new WebChromeClient());
@@ -95,7 +95,7 @@ public class VideoChinese extends AppCompatActivity {
         wv10.getSettings().setUseWideViewPort(true);
         wv10.setVisibility(View.VISIBLE);
         wv10.getSettings().setMediaPlaybackRequiresUserGesture(false);
-        wv10.loadUrl("https://vdept.bdstatic.com/424a384e54496a4d6a65473454674453/3256346863727368/4d22c8bc61b37e4e9a0e5f0684868d7a89bff2ac1c764c0c5db2e6d0149834e2a8707d35ee4c6fe2034c23418b2ac518.mp4?auth_key=1577078981-0-0-13e6468b1da664c65d9daf430034d459");
+        wv10.loadUrl("https://vdept.bdstatic.com/4e365a635078685653574a6547797837/6a6575494c636149/77bb39e50b8c79a8e55519fdde74ec1e7e9ad21944c1cf524f15316f789745d8c918c38e844d04d3c0faa155a670c8cc.mp4?auth_key=1577184862-0-0-4275b2ff080f2eeb5afafa40924d84f0");
         wv110 = (WebView) findViewById(R.id.wv110);
         wv110.getSettings().setJavaScriptEnabled(true);
         wv110.setWebChromeClient(new WebChromeClient());
@@ -107,7 +107,7 @@ public class VideoChinese extends AppCompatActivity {
         wv110.getSettings().setUseWideViewPort(true);
         wv110.setVisibility(View.VISIBLE);
         wv110.getSettings().setMediaPlaybackRequiresUserGesture(false);
-        wv110.loadUrl("https://vdept.bdstatic.com/67526b4955514e715657784151486131/6a6147556e6c5175/f87357c8e110501613f22cd9fd0b4a1a252a888dc5256349ef6eb0063193fa17cf3075daa23e3ad216782716487e19ac.mp4?auth_key=1577079135-0-0-2f5ed38f1a8b2d4059ddd315d26ce61b");
+        wv110.loadUrl("https://vdept.bdstatic.com/58726a6348697176466d34726b6d7732/4e41777a6e695571/b8a0500707a835ff24495a2af4f3b904ed4a036b94b901396446307f1c5b45c3d177806c928c2be78d7123337b363b5a.mp4?auth_key=1577184891-0-0-4310a8409b17717bac494a1ff13130c8");
 
         wv2 = (WebView) findViewById(R.id.wv2);
         wv2.getSettings().setJavaScriptEnabled(true);
