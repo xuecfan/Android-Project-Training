@@ -25,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="26dp"
         android:text="设置"
-        android:textSize="20dp"
+        android:textSize="18sp"
         android:id="@+id/a5text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/a5"

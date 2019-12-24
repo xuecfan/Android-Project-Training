@@ -192,7 +192,8 @@
         <activity android:name=".robot.Chatrobot" />
         <activity android:name=".Video.VideoChinese" />
         <activity android:name=".Video.VideoMath" />
-        <activity android:name=".Video.VideoEnglish"></activity>
+        <activity android:name=".Video.VideoEnglish" />
+        <activity android:name=".myself.AboutUs"></activity>
     </application>
 
 </manifest>

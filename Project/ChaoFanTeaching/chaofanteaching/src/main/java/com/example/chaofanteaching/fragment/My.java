@@ -40,7 +40,9 @@ import com.example.chaofanteaching.MyPublish.MyPublishActivity;
 import com.example.chaofanteaching.R;
 import com.example.chaofanteaching.StreamChangeStrUtils;
 import com.example.chaofanteaching.UpLoadFile;
+import com.example.chaofanteaching.about.About;
 import com.example.chaofanteaching.about.Student_Authentication;
+import com.example.chaofanteaching.myself.AboutUs;
 import com.example.chaofanteaching.myself.MyData;
 import com.example.chaofanteaching.myself.RenZheng;
 import com.example.chaofanteaching.myself.Setting;
@@ -202,24 +204,32 @@ public class My extends Fragment {
         dataSource.clear();
         Map<String,String> map=new HashMap<>();
         Map<String,String> map1=new HashMap<>();
-       // Map<String,String> map2=new HashMap<>();
+        Map<String,String> map2=new HashMap<>();
         Map<String,String> map3=new HashMap<>();
         Map<String,String> map4=new HashMap<>();
+        Map<String,String> map5=new HashMap<>();
+        Map<String,String> map6=new HashMap<>();
         map.put("text","个人资料");
         map.put("img","person_data");
         map1.put("text","我发布的");
         map1.put("img","send");
-//        map2.put("text","学生认证");
-//        map2.put("img","authentication");
-        map3.put("text","我的客服");
-        map3.put("img","customer_service");
-        map4.put("text","设置");
-        map4.put("img","setting");
+        map3.put("text","关于我们");
+        map3.put("img","authentication");
+        map2.put("text","我的客服");
+        map2.put("img","customer_service");
+        map4.put("text","关于软件");
+        map4.put("img","about");
+        map5.put("text","插件");
+        map5.put("img","plug");
+        map6.put("text","设置");
+        map6.put("img","setting");
         dataSource.add(map);
         dataSource.add(map1);
-        //dataSource.add(map2);
+        dataSource.add(map2);
         dataSource.add(map3);
         dataSource.add(map4);
+        dataSource.add(map5);
+        dataSource.add(map6);
 
         adapter=new MyAdapter(getContext(),dataSource,R.layout.my_list);
         ListView listView=view.findViewById(R.id.list);
@@ -242,20 +252,22 @@ public class My extends Fragment {
                             Intent intent=new Intent(getContext(), MyPublishActivity.class);
                             startActivity(intent);
                             break;
-//                        case 2:
-//                            if(pre1.getString("renzheng","").equals("1")){
-//                                Intent intent1=new Intent(getContext(), RenZheng.class);
-//                                startActivity(intent1);
-//                            }else{
-//                                Intent intent1=new Intent(getContext(), Student_Authentication.class);
-//                                startActivity(intent1);
-//                            }
-//                            break;
                         case 2:
                             Intent intent3=new Intent(getContext(), Chatrobot.class);
                             startActivity(intent3);
                             break;
                         case 3:
+                            Intent intent4=new Intent(getContext(), AboutUs.class);
+                            startActivity(intent4);
+                            break;
+                        case 4:
+                            Intent intent1=new Intent(getContext(), About.class);
+                            startActivity(intent1);
+                            break;
+                        case 5:
+                            Toast.makeText(getContext(),"暂未开放，敬请期待", Toast.LENGTH_SHORT).show();
+                            break;
+                        case 6:
                             Intent intent2=new Intent(getContext(), Setting.class);
                             startActivity(intent2);
                             break;

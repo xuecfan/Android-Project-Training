@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:orientation="vertical"
+    android:background="#ffffff"
+    android:layout_height="fill_parent">
+    <TextView android:text="关于我们"
+        android:id="@+id/au_title"
+        android:background="@color/buju"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="fill_parent"
+        android:textColor="#ffffff"
+        android:gravity="center"
+        android:layout_height="50dp"></TextView>
+    <TextView android:layout_marginTop="10px"
+        android:paddingLeft="15px"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:text="超凡家教工作室创建于2019年11月,是移动互联网应用开发商。主要致力于为大学生兼职，提供平台服务，为大学生提供家教兼职，缓解大学生经济压力。"
+        android:layout_width="fill_parent"
+        android:id="@+id/au_content"></TextView>
+    <View android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:layout_marginTop="10px"
+        android:background="#CCCCCC" />
+
+    <TextView android:layout_marginTop="10px"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:paddingLeft="15px"
+        android:text="客服电话:   19930511535"
+        android:layout_width="fill_parent"
+        android:id="@+id/phone"
+        android:autoLink="phone"
+        ></TextView>
+    <View android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:layout_marginTop="10px"
+        android:background="#CCCCCC" />
+    <TextView android:layout_marginTop="10px"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:paddingLeft="15px"
+        android:text="网址:  http://chaofanjiajiao.com"
+        android:layout_width="fill_parent"
+        android:autoLink="web"
+        android:id="@+id/web"></TextView>
+    <View android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:layout_marginTop="10px"
+        android:background="#CCCCCC" />
+
+    <TextView android:layout_marginTop="10px"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:paddingLeft="15px"
+        android:text="更多资讯请扫描以下二维码来了解详情"
+        android:layout_width="fill_parent"
+        android:autoLink="phone"
+        ></TextView>
+    <ImageView
+        android:layout_marginTop="20dp"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:src="@drawable/qq"/>
+</LinearLayout>
