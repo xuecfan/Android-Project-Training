@@ -66,7 +66,6 @@ public class Student_Authentication extends AppCompatActivity {
         if(b.equals("10")&&pre.getString("grade","").equals("0")){titleBar.setTitle("身份认证");}
         else if(b.equals("11")&&pre.getString("grade","").equals("0")){titleBar.setTitle("学生认证");}
         else if(pre.getString("grade","").equals("1")){titleBar.setTitle("成绩上传");}
-        titleBar.setTitle("身份认证");
         titleBar.setLeftLayoutClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

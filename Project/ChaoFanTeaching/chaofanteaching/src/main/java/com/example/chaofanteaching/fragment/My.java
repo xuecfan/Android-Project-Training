@@ -219,7 +219,7 @@ public class My extends Fragment {
         map2.put("img","customer_service");
         map4.put("text","关于软件");
         map4.put("img","about");
-        map5.put("text","插件");
+        map5.put("text","更多");
         map5.put("img","plug");
         map6.put("text","设置");
         map6.put("img","setting");

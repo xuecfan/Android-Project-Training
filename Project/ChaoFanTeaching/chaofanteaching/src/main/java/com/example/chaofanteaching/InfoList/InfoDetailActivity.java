@@ -93,9 +93,9 @@ public class InfoDetailActivity extends AppCompatActivity {
                 case 2:
                     String string = msg.obj.toString();
                     if (string.equals("1")){
-                        Toast.makeText(getApplication(),"收藏成功",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplication(),"收藏成功",Toast.LENGTH_SHORT).show();
                     }else if (string.equals("0")){
-                        Toast.makeText(getApplication(),"收藏失败",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplication(),"收藏失败",Toast.LENGTH_SHORT).show();
                     }
                     break;
             }
