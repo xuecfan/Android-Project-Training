@@ -45,7 +45,7 @@ public class VideoChinese extends AppCompatActivity {
         wv.getSettings().setUseWideViewPort(true);
         wv.setVisibility(View.VISIBLE);
         wv.getSettings().setMediaPlaybackRequiresUserGesture(false);
-        wv.loadUrl("https://vdept.bdstatic.com/4c4932504a3469443746385551416363/5667453842444a44/90f905c2bbebba427693b19769d683aec13e2c819a128b6f14ca7e447456c8db923fa86c265c393faea2b1d604e9490b.mp4?auth_key=1577178199-0-0-4cbecb5eb34f7ab83a771c0adf11b06b");//http://player.youku.com/embed/XNTM5MTUwNDA0
+        wv.loadUrl("https://haokan.baidu.com/v?vid=10977578522784829962&pd=bjh&fr=bjhauthor&type=video");//http://player.youku.com/embed/XNTM5MTUwNDA0
         wv1 = (WebView) findViewById(R.id.wv1);
         wv1.getSettings().setJavaScriptEnabled(true);
         wv1.setWebChromeClient(new WebChromeClient());
@@ -57,7 +57,7 @@ public class VideoChinese extends AppCompatActivity {
         wv1.getSettings().setUseWideViewPort(true);
         wv1.setVisibility(View.VISIBLE);
         wv1.getSettings().setMediaPlaybackRequiresUserGesture(false);
-        wv1.loadUrl("https://vdept.bdstatic.com/6b355a6b5358794c7251696c58334248/366b323759546469/ab0c1181817bc45f943f5feb0552f60f811d79745dec917f9b6f8f039196fb0c194c25a27071e0d72e83f1f9dec33142.mp4?auth_key=1577178380-0-0-a1760a161df330a72e3c66c840d34c05");
+        wv1.loadUrl("https://haokan.baidu.com/v?vid=10453568675485455363&pd=bjh&fr=bjhauthor&type=video");
         wv11 = (WebView) findViewById(R.id.wv11);
         wv11.getSettings().setJavaScriptEnabled(true);
         wv11.setWebChromeClient(new WebChromeClient());
@@ -69,7 +69,7 @@ public class VideoChinese extends AppCompatActivity {
         wv11.getSettings().setUseWideViewPort(true);
         wv11.setVisibility(View.VISIBLE);
         wv11.getSettings().setMediaPlaybackRequiresUserGesture(false);
-        wv11.loadUrl("https://vdept.bdstatic.com/733766365a536c7531355736344a5253/486144336d6d5671/0aa239f13591373557a0cedb9e7274d82a847af959906a0517896b837540fd7098edf5b3bddff6f11ad4577c2a55f9f8.mp4?auth_key=1577178394-0-0-2f66b6fb855e5c84261ccd8b648bf3e6");
+        wv11.loadUrl("https://haokan.baidu.com/v?vid=1979149907604693421&pd=bjh&fr=bjhauthor&type=video");
 
 
         wv0 = (WebView) findViewById(R.id.wv0);
@@ -83,7 +83,7 @@ public class VideoChinese extends AppCompatActivity {
         wv0.getSettings().setUseWideViewPort(true);
         wv0.setVisibility(View.VISIBLE);
         wv0.getSettings().setMediaPlaybackRequiresUserGesture(false);
-        wv0.loadUrl("https://vdept.bdstatic.com/5257545043524942496a49556d615556/4257513447443572/2841af6feea8c745c63120a5cac039361d25ce828324ffb8d5872a9676cf1e5ecaab544fb6f11e65ee4e536ee442b01a.mp4?auth_key=1577184970-0-0-68f3f88694cc96ab0fa61aff23c88371");
+        wv0.loadUrl("https://haokan.baidu.com/v?vid=9204642849376084650&pd=bjh&fr=bjhauthor&type=video");//https:haokan.baidu.com/v?vid=7649246158102970750&pd=bjh&fr=bjhauthor&type=video
         wv10 = (WebView) findViewById(R.id.wv10);
         wv10.getSettings().setJavaScriptEnabled(true);
         wv10.setWebChromeClient(new WebChromeClient());
@@ -95,7 +95,7 @@ public class VideoChinese extends AppCompatActivity {
         wv10.getSettings().setUseWideViewPort(true);
         wv10.setVisibility(View.VISIBLE);
         wv10.getSettings().setMediaPlaybackRequiresUserGesture(false);
-        wv10.loadUrl("https://vdept.bdstatic.com/4e365a635078685653574a6547797837/6a6575494c636149/77bb39e50b8c79a8e55519fdde74ec1e7e9ad21944c1cf524f15316f789745d8c918c38e844d04d3c0faa155a670c8cc.mp4?auth_key=1577184862-0-0-4275b2ff080f2eeb5afafa40924d84f0");
+        wv10.loadUrl("https://haokan.baidu.com/v?vid=2405182298945701603&pd=bjh&fr=bjhauthor&type=video");
         wv110 = (WebView) findViewById(R.id.wv110);
         wv110.getSettings().setJavaScriptEnabled(true);
         wv110.setWebChromeClient(new WebChromeClient());
@@ -107,7 +107,7 @@ public class VideoChinese extends AppCompatActivity {
         wv110.getSettings().setUseWideViewPort(true);
         wv110.setVisibility(View.VISIBLE);
         wv110.getSettings().setMediaPlaybackRequiresUserGesture(false);
-        wv110.loadUrl("https://vdept.bdstatic.com/58726a6348697176466d34726b6d7732/4e41777a6e695571/b8a0500707a835ff24495a2af4f3b904ed4a036b94b901396446307f1c5b45c3d177806c928c2be78d7123337b363b5a.mp4?auth_key=1577184891-0-0-4310a8409b17717bac494a1ff13130c8");
+        wv110.loadUrl("https://haokan.baidu.com/v?vid=8272629701185452782&pd=bjh&fr=bjhauthor&type=video");
 
         wv2 = (WebView) findViewById(R.id.wv2);
         wv2.getSettings().setJavaScriptEnabled(true);
@@ -120,7 +120,7 @@ public class VideoChinese extends AppCompatActivity {
         wv2.getSettings().setUseWideViewPort(true);
         wv2.setVisibility(View.VISIBLE);
         wv2.getSettings().setMediaPlaybackRequiresUserGesture(false);
-        wv2.loadUrl("https://vdept.bdstatic.com/714c38386b6272583132414b70743547/6a33483170643832/26e9026ecaeaec8a15ce6d9eb3ecb33664fe1261ab0b15d16aad7c659dcfef9b63a236707eecc6384a7300dd74bec353.mp4?auth_key=1577178700-0-0-995bc9a28c13e14f002124a4cd407fbc");
+        wv2.loadUrl("https://haokan.baidu.com/v?vid=4066868653219187926&pd=bjh&fr=bjhauthor&type=video");
         wv12 = (WebView) findViewById(R.id.wv12);
         wv12.getSettings().setJavaScriptEnabled(true);
         wv12.setWebChromeClient(new WebChromeClient());
@@ -132,7 +132,7 @@ public class VideoChinese extends AppCompatActivity {
         wv12.getSettings().setUseWideViewPort(true);
         wv12.setVisibility(View.VISIBLE);
         wv12.getSettings().setMediaPlaybackRequiresUserGesture(false);
-        wv12.loadUrl("https://vdept.bdstatic.com/7378383336753471517358464c6c6743/51644d5139316a4a/d27cc33522e8e47f8923a21c7e6fbb54625aac1b5e54545a4af8920c95ab8cf9a6ac8033e677e3f9b2f15e25fe218358.mp4?auth_key=1577178742-0-0-b334bc1d6b7eaf0a6a189607e498a985");
+        wv12.loadUrl("https://haokan.baidu.com/v?vid=10126090124672451797&pd=bjh&fr=bjhauthor&type=video");
         wv112 = (WebView) findViewById(R.id.wv112);
         wv112.getSettings().setJavaScriptEnabled(true);
         wv112.setWebChromeClient(new WebChromeClient());
@@ -144,7 +144,7 @@ public class VideoChinese extends AppCompatActivity {
         wv112.getSettings().setUseWideViewPort(true);
         wv112.setVisibility(View.VISIBLE);
         wv112.getSettings().setMediaPlaybackRequiresUserGesture(false);
-        wv112.loadUrl("https://vdept.bdstatic.com/446139577138744e3766314536353755/4e4c764e394b566b/7e89ce6acdc2d2655bf5863b152cbbad69ce404c64bb18fda430a208c28621a4aa83895b7641c9d73623bbc77e55794d.mp4?auth_key=1577178786-0-0-5ce90fbb4c1682c6fdb8cd8cf1841aaa");
+        wv112.loadUrl("https://haokan.baidu.com/v?vid=6724657513488513945&pd=bjh&fr=bjhauthor&type=video");
     }
 
     @Override
