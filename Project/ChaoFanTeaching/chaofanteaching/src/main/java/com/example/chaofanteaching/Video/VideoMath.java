@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebChromeClient;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import com.example.chaofanteaching.R;
 import com.hyphenate.easeui.widget.EaseTitleBar;
@@ -45,6 +47,12 @@ public class VideoMath extends AppCompatActivity {
         wv0.getSettings().setUseWideViewPort(true);
         wv0.setVisibility(View.VISIBLE);
         wv0.getSettings().setMediaPlaybackRequiresUserGesture(false);
+        wv0.setWebViewClient(new WebViewClient(){
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                return true;
+            }
+        });
         wv0.loadUrl("https:haokan.baidu.com/v?vid=7649246158102970750&pd=bjh&fr=bjhauthor&type=video");
         wv10 = (WebView) findViewById(R.id.wv10);
         wv10.getSettings().setJavaScriptEnabled(true);
@@ -57,6 +65,12 @@ public class VideoMath extends AppCompatActivity {
         wv10.getSettings().setUseWideViewPort(true);
         wv10.setVisibility(View.VISIBLE);
         wv10.getSettings().setMediaPlaybackRequiresUserGesture(false);
+        wv10.setWebViewClient(new WebViewClient(){
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                return true;
+            }
+        });
         wv10.loadUrl("https://haokan.baidu.com/v?vid=10453568675485455363&pd=bjh&fr=bjhauthor&type=video");
         wv110 = (WebView) findViewById(R.id.wv110);
         wv110.getSettings().setJavaScriptEnabled(true);
@@ -69,6 +83,12 @@ public class VideoMath extends AppCompatActivity {
         wv110.getSettings().setUseWideViewPort(true);
         wv110.setVisibility(View.VISIBLE);
         wv110.getSettings().setMediaPlaybackRequiresUserGesture(false);
+        wv110.setWebViewClient(new WebViewClient(){
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                return true;
+            }
+        });
         wv110.loadUrl("https://haokan.baidu.com/v?vid=10977578522784829962&pd=bjh&fr=bjhauthor&type=video");
 
 
@@ -83,6 +103,12 @@ public class VideoMath extends AppCompatActivity {
         wv.getSettings().setUseWideViewPort(true);
         wv.setVisibility(View.VISIBLE);
         wv.getSettings().setMediaPlaybackRequiresUserGesture(false);
+        wv.setWebViewClient(new WebViewClient(){
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                return true;
+            }
+        });
         wv.loadUrl("https://haokan.baidu.com/v?vid=2405182298945701603&pd=bjh&fr=bjhauthor&type=video");
         wv1 = (WebView) findViewById(R.id.wv1);
         wv1.getSettings().setJavaScriptEnabled(true);
@@ -95,6 +121,12 @@ public class VideoMath extends AppCompatActivity {
         wv1.getSettings().setUseWideViewPort(true);
         wv1.setVisibility(View.VISIBLE);
         wv1.getSettings().setMediaPlaybackRequiresUserGesture(false);
+        wv1.setWebViewClient(new WebViewClient(){
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                return true;
+            }
+        });
         wv1.loadUrl("https://haokan.baidu.com/v?vid=8272629701185452782&pd=bjh&fr=bjhauthor&type=video");
         wv11 = (WebView) findViewById(R.id.wv11);
         wv11.getSettings().setJavaScriptEnabled(true);
@@ -107,6 +139,12 @@ public class VideoMath extends AppCompatActivity {
         wv11.getSettings().setUseWideViewPort(true);
         wv11.setVisibility(View.VISIBLE);
         wv11.getSettings().setMediaPlaybackRequiresUserGesture(false);
+        wv11.setWebViewClient(new WebViewClient(){
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                return true;
+            }
+        });
         wv11.loadUrl("https://haokan.baidu.com/v?vid=7877854140465089869&pd=bjh&fr=bjhauthor&type=video");
 
         wv2 = (WebView) findViewById(R.id.wv2);
@@ -120,6 +158,12 @@ public class VideoMath extends AppCompatActivity {
         wv2.getSettings().setUseWideViewPort(true);
         wv2.setVisibility(View.VISIBLE);
         wv2.getSettings().setMediaPlaybackRequiresUserGesture(false);
+        wv2.setWebViewClient(new WebViewClient(){
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                return true;
+            }
+        });
         wv2.loadUrl("https://haokan.baidu.com/v?vid=4066868653219187926&pd=bjh&fr=bjhauthor&type=video");
         wv12 = (WebView) findViewById(R.id.wv12);
         wv12.getSettings().setJavaScriptEnabled(true);
@@ -132,6 +176,12 @@ public class VideoMath extends AppCompatActivity {
         wv12.getSettings().setUseWideViewPort(true);
         wv12.setVisibility(View.VISIBLE);
         wv12.getSettings().setMediaPlaybackRequiresUserGesture(false);
+        wv12.setWebViewClient(new WebViewClient(){
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                return true;
+            }
+        });
         wv12.loadUrl("https://haokan.baidu.com/v?vid=10126090124672451797&pd=bjh&fr=bjhauthor&type=video");
         wv112 = (WebView) findViewById(R.id.wv112);
         wv112.getSettings().setJavaScriptEnabled(true);
@@ -144,6 +194,12 @@ public class VideoMath extends AppCompatActivity {
         wv112.getSettings().setUseWideViewPort(true);
         wv112.setVisibility(View.VISIBLE);
         wv112.getSettings().setMediaPlaybackRequiresUserGesture(false);
+        wv112.setWebViewClient(new WebViewClient(){
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                return true;
+            }
+        });
         wv112.loadUrl("https://haokan.baidu.com/v?vid=6724657513488513945&pd=bjh&fr=bjhauthor&type=video");
     }
 
