@@ -70,6 +70,16 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/myPW"
         app:layout_constraintVertical_bias="0.4"/>
+    <ImageView
+        android:id="@+id/quicklogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/login_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/myPW"
+        app:layout_constraintVertical_bias="0.1"/>
 
     /*底部按钮和文字*/
     <TextView

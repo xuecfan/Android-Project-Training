@@ -188,13 +188,22 @@ public class ParInfoActivity extends AppCompatActivity {
         pricetext=findViewById(R.id.price);
         teltext=findViewById(R.id.tel);
         requiretext=findViewById(R.id.require);
-        mapView = findViewById(R.id.bmapView);
-        baiduMap=mapView.getMap();
-        baiduMap.setMyLocationEnabled(true);
+        ConstraintLayout map123=findViewById(R.id.map123);
+        map123.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent();
+                intent.setClass(ParInfoActivity.this, Info_Map.class);
+                startActivity(intent);
+            }
+        });
+//        mapView = findViewById(R.id.bmapView);
+//        baiduMap=mapView.getMap();
+//        baiduMap.setMyLocationEnabled(true);
         dbKey(name);
-        locationOption();
-        hidelogo();//隐藏logo
-        zoomlevel();//改变比列尺
+//        locationOption();
+//        hidelogo();//隐藏logo
+//        zoomlevel();//改变比列尺
     }
     //发起聊天
     public void chatIn() {
