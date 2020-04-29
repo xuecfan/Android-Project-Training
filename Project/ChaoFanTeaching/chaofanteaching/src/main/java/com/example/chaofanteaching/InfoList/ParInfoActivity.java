@@ -64,8 +64,8 @@ public class ParInfoActivity extends AppCompatActivity {
     private LocationClientOption locationClientOption;
     private BaiduMap baiduMap;
     private MapView mapView;
-    private double lat;
-    private double lng;
+    private String lat;
+    private String lng;
     private TextView nametext;
     private TextView sextext;
     private TextView gradetext;
@@ -74,6 +74,7 @@ public class ParInfoActivity extends AppCompatActivity {
     private TextView pricetext;
     private TextView teltext;
     private TextView requiretext;
+    private TextView locatetext;
     private Button sendbtn;
     private ImageView img;
     private ConstraintLayout shareLayout;
@@ -99,12 +100,11 @@ public class ParInfoActivity extends AppCompatActivity {
                     pricetext.setText(s[5]+"元/小时");
                     teltext.setText(s[6]);
                     requiretext.setText(s[7]);
-                    String lat1=s[8];
-                    String lng1=s[9];
+                    locatetext.setText(s[8]+","+s[9]);//lat,lng经纬度
+                    lat=s[8];
+                    lng=s[9];
                     infoId = s[10];
                     user=s[11];
-                    lat=Double.parseDouble(lat1);
-                    lng=Double.parseDouble(lng1);
                     break;
                 case 2:
                     String string = msg.obj.toString();
@@ -178,7 +178,7 @@ public class ParInfoActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
-
+        locatetext=findViewById(R.id.locate);
         nametext=findViewById(R.id.name);
         nametext.setText(name);
         sextext=findViewById(R.id.sex);
@@ -193,6 +193,8 @@ public class ParInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent();
+                intent.putExtra("lat",lat);
+                intent.putExtra("lng",lng);
                 intent.setClass(ParInfoActivity.this, Info_Map.class);
                 startActivity(intent);
             }
@@ -270,38 +272,38 @@ public class ParInfoActivity extends AppCompatActivity {
         MapStatusUpdate msu= MapStatusUpdateFactory.newLatLng(new LatLng(lat,lng));
         baiduMap.animateMapStatus(msu);
     }
-    private void locationOption(){
-        //1.创建定位服务客户端类的对象
-        locationClient=new LocationClient(getApplicationContext());
-        //2.创建定位客户端选项类的对象，并设置参数
-        locationClientOption=new LocationClientOption();
-        //设置定位参数
-        //打开GPS
-        locationClientOption.setOpenGps(true);
-        //定位间隔时间
-        locationClientOption.setScanSpan(1000);
-        //定位坐标系
-        SDKInitializer.setCoordType(CoordType.GCJ02);
-        //设置定位模式
-        locationClientOption.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);
-        //需要定位地址数据
-        locationClientOption.setIsNeedAddress(true);
-        //需要地址描述
-        locationClientOption.setIsNeedLocationDescribe(true);
-        //需要周边POI信息
-        locationClientOption.setIsNeedLocationPoiList(true);
-        //3.将定位选项参数应用给定位服务客户端类的对象
-        locationClient.setLocOption(locationClientOption);
-        //4.开始定位
-        locationClient.start();
-        //5.给定位客户端类的对象注册定位监听器
-        locationClient.registerLocationListener(new BDAbstractLocationListener() {
-            @Override
-            public void onReceiveLocation(BDLocation bdLocation) {
-                showLocOnMap(lat,lng);
-            }
-        });
-    }
+//    private void locationOption(){
+//        //1.创建定位服务客户端类的对象
+//        locationClient=new LocationClient(getApplicationContext());
+//        //2.创建定位客户端选项类的对象，并设置参数
+//        locationClientOption=new LocationClientOption();
+//        //设置定位参数
+//        //打开GPS
+//        locationClientOption.setOpenGps(true);
+//        //定位间隔时间
+//        locationClientOption.setScanSpan(1000);
+//        //定位坐标系
+//        SDKInitializer.setCoordType(CoordType.GCJ02);
+//        //设置定位模式
+//        locationClientOption.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);
+//        //需要定位地址数据
+//        locationClientOption.setIsNeedAddress(true);
+//        //需要地址描述
+//        locationClientOption.setIsNeedLocationDescribe(true);
+//        //需要周边POI信息
+//        locationClientOption.setIsNeedLocationPoiList(true);
+//        //3.将定位选项参数应用给定位服务客户端类的对象
+//        locationClient.setLocOption(locationClientOption);
+//        //4.开始定位
+//        locationClient.start();
+//        //5.给定位客户端类的对象注册定位监听器
+//        locationClient.registerLocationListener(new BDAbstractLocationListener() {
+//            @Override
+//            public void onReceiveLocation(BDLocation bdLocation) {
+//                showLocOnMap(lat,lng);
+//            }
+//        });
+//    }
     private void zoomlevel(){
         baiduMap.setMaxAndMinZoomLevel(19,13);
         MapStatusUpdate msu= MapStatusUpdateFactory.zoomTo(16);

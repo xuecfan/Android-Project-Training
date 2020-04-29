@@ -1,12 +1,13 @@
 package com.example.chaofanteaching.InfoList;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ZoomControls;
-
 import com.baidu.location.BDAbstractLocationListener;
 import com.baidu.location.BDLocation;
 import com.baidu.location.LocationClient;
@@ -23,6 +24,8 @@ import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.utils.DistanceUtil;
+import com.baidu.mapapi.utils.route.BaiduMapRoutePlan;
+import com.baidu.mapapi.utils.route.RouteParaOption;
 import com.example.chaofanteaching.R;
 
 public class Info_Map extends AppCompatActivity {
@@ -30,13 +33,20 @@ public class Info_Map extends AppCompatActivity {
     private LocationClientOption locationClientOption;
     private BaiduMap baiduMap;
     private MapView mapView;
+    private Button btnnavi;
+    private String lat;
+    private String lng;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         SDKInitializer.initialize(getApplicationContext());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info_map);
+        Intent request=getIntent();
+        lat=request.getStringExtra("lat");
+        lng=request.getStringExtra("lng");
         mapView = findViewById(R.id.bmapView);
+        btnnavi=findViewById(R.id.btnnavi);
         baiduMap=mapView.getMap();
         baiduMap.setMyLocationEnabled(true);
         locationOption();
@@ -75,7 +85,7 @@ public class Info_Map extends AppCompatActivity {
         //打开GPS
         locationClientOption.setOpenGps(true);
         //定位间隔时间
-        locationClientOption.setScanSpan(1000);
+        locationClientOption.setScanSpan(0);
         //定位坐标系
         SDKInitializer.setCoordType(CoordType.GCJ02);
         //设置定位模式
@@ -94,10 +104,16 @@ public class Info_Map extends AppCompatActivity {
         locationClient.registerLocationListener(new BDAbstractLocationListener() {
             @Override
             public void onReceiveLocation(BDLocation bdLocation) {
-                double lat=bdLocation.getLatitude();
-                double lng=bdLocation.getLongitude();
-                showLocOnMap(lat,lng);
-                showDisdance(lat,lng);
+                double mylat=bdLocation.getLatitude();
+                double mylng=bdLocation.getLongitude();
+                showLocOnMap(Double.parseDouble(lat),Double.parseDouble(lng));
+                showDisdance(mylat,mylng,Double.parseDouble(lat),Double.parseDouble(lng));
+                btnnavi.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        baidu(mylat,mylng,Double.parseDouble(lat),Double.parseDouble(lng));
+                    }
+                });
             }
         });
     }
@@ -106,8 +122,27 @@ public class Info_Map extends AppCompatActivity {
         MapStatusUpdate msu= MapStatusUpdateFactory.zoomTo(16);
         baiduMap.setMapStatus(msu);
     }
-    public void showDisdance(double lat, double lng){
-        int dis=(int)DistanceUtil. getDistance(new LatLng(lat,lng),new LatLng(38.005486,114.515233));
+    public void showDisdance(double mylat, double mylng,double lat, double lng){
+        int dis=(int)DistanceUtil. getDistance(new LatLng(mylat,mylng),new LatLng(lat,lng));
         Log.e("dis","dis="+dis+"m");
+    }
+    public void baidu(double mylat, double mylng,double lat, double lng){
+        //定义起终点坐标（天安门和百度大厦）
+        LatLng startPoint = new LatLng(mylat, mylng);
+        LatLng endPoint = new LatLng(lat, lng);
+        //构建RouteParaOption参数以及策略
+        //也可以通过startName和endName来构造
+        RouteParaOption paraOption = new RouteParaOption()
+                .startPoint(startPoint)
+                .endPoint(endPoint)
+                .busStrategyType(RouteParaOption.EBusStrategyType.bus_recommend_way);
+        //调起百度地图
+        try {
+            BaiduMapRoutePlan.openBaiduMapTransitRoute(paraOption, this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //调起结束时及时调用finish方法以释放相关资源
+        BaiduMapRoutePlan.finish(this);
     }
 }
