@@ -26,4 +26,5 @@
     <!--    add_info页面-->
     <string name="add_info_height">40dp</string>
     <string name="add_info_marginTop">10dp</string>
+    <string name="add_info_minLines">2</string>
 </resources>
