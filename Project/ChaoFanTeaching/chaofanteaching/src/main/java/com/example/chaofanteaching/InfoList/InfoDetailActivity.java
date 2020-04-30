@@ -56,7 +56,9 @@ public class InfoDetailActivity extends AppCompatActivity {
     private TextView timetext;
     private TextView pricetext;
     private TextView introducetext;
+    private TextView starName;
     private ImageView img;
+    private ImageView star;
     private Button sendbtn;
     private SharedPreferences pre;
     private ConstraintLayout shareLayout;
@@ -91,11 +93,33 @@ public class InfoDetailActivity extends AppCompatActivity {
                     user=s[12];
                     break;
                 case 2:
-                    String string = msg.obj.toString();
-                    if (string.equals("1")){
-                        Toast.makeText(getApplication(),"收藏成功",Toast.LENGTH_SHORT).show();
-                    }else if (string.equals("0")){
-                        Toast.makeText(getApplication(),"收藏失败",Toast.LENGTH_SHORT).show();
+                    String string2 = msg.obj.toString();
+                    switch(string2){
+                        case "0":
+                            star.setColorFilter(Color.RED);
+                            starName.setText("已收藏");
+                            Toast.makeText(getApplication(),"收藏成功",Toast.LENGTH_SHORT).show();
+                            break;
+                        case "1":
+                            Toast.makeText(getApplication(),"收藏失败",Toast.LENGTH_SHORT).show();
+                            break;
+                        case "2":
+                            star.setColorFilter(Color.YELLOW);
+                            starName.setText("收藏");
+                            Toast.makeText(getApplication(),"取消收藏成功",Toast.LENGTH_SHORT).show();
+                            break;
+                        case "3":
+                            Toast.makeText(getApplication(),"取消收藏失败",Toast.LENGTH_SHORT).show();
+                            break;
+
+                    }
+
+                    break;
+                case 3:
+                    String string3 = msg.obj.toString();
+                    if (string3.equals("1")){//显示已收藏
+                        star.setColorFilter(Color.RED);
+                        starName.setText("已收藏");
                     }
                     break;
             }
@@ -123,14 +147,9 @@ public class InfoDetailActivity extends AppCompatActivity {
                         .shareBySystem();
             }
         });
-        //收藏
-        starLaylout = findViewById(R.id.starLayout);
-        starLaylout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                starUser(me,user,name);
-            }
-        });
+
+
+
 
         //评论
         comment_listView = findViewById(R.id.comment_listView);
@@ -178,6 +197,19 @@ public class InfoDetailActivity extends AppCompatActivity {
         introducetext=findViewById(R.id.introduce);
         nametext.setText(name);
         dbKey(name);
+
+        //判断是否收藏
+        judgeStar(me,user,name);
+        //收藏
+        starLaylout = findViewById(R.id.starLayout);
+        star = findViewById(R.id.star);//收藏的图标
+        starName = findViewById(R.id.starName);//收藏的展示文本
+        starLaylout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                starUser(me,user,name);
+            }
+        });
     }
     //发起聊天
     public void chatIn() {
@@ -219,6 +251,33 @@ public class InfoDetailActivity extends AppCompatActivity {
             }
         }.start();
     }
+    //判断是否收藏
+    private void judgeStar(String collector, String collection,String collectionName){
+
+        new Thread(){
+            HttpURLConnection connection =null;
+            public void run(){
+                try {
+                    connection = HttpConnectionUtils
+                            .getConnection("InfoDetailServlet?id=3&collector="+collector
+                                    +"&collectionName="+collectionName+"&collection="+collection);
+
+                    int code = connection.getResponseCode();
+                    if (code == 200){
+                        InputStream inputStream = connection.getInputStream();
+                        String string = StreamChangeStrUtils.toChange(inputStream);
+                        android.os.Message message = Message.obtain();
+                        message.obj = string;
+                        message.what = 3;
+                        handler.sendMessage(message);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }.start();
+    }
     //收藏
     private void starUser(String collector, String collection,String collectionName){
 
@@ -228,7 +287,7 @@ public class InfoDetailActivity extends AppCompatActivity {
                 try {
                     connection = HttpConnectionUtils
                             .getConnection("InfoDetailServlet?id=2&collector="+collector
-                                    +"&collection="+collection+"&collectionName="+collectionName);
+                                    +"&collectionName="+collectionName+"&collection="+collection);
                     int code = connection.getResponseCode();
                     if (code == 200){
                         InputStream inputStream = connection.getInputStream();
