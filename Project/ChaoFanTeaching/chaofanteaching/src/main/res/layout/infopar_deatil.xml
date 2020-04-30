@@ -557,7 +557,7 @@
                     android:gravity="center"
                     android:maxEms="15"
                     android:singleLine="true"
-                    android:text="无"
+                    android:text="点击查看详情"
                     android:textColor="#000"
                     android:textSize="18dp"
                     app:layout_constraintBottom_toBottomOf="parent"
