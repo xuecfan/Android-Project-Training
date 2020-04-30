@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -12,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,23 +22,42 @@ import com.baidu.location.BDAbstractLocationListener;
 import com.baidu.location.BDLocation;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
+import com.baidu.location.Poi;
 import com.baidu.mapapi.CoordType;
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
+import com.baidu.mapapi.map.MapPoi;
 import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.search.core.PoiInfo;
+import com.baidu.mapapi.search.core.SearchResult;
+import com.baidu.mapapi.search.geocode.GeoCodeResult;
+import com.baidu.mapapi.search.geocode.GeoCoder;
+import com.baidu.mapapi.search.geocode.OnGetGeoCoderResultListener;
+import com.baidu.mapapi.search.geocode.ReverseGeoCodeOption;
+import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
 import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.R;
+import com.example.chaofanteaching.StreamChangeStrUtils;
 import com.example.chaofanteaching.utils.ToastUtils;
 import com.hyphenate.easeui.widget.EaseTitleBar;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.impl.client.DefaultHttpClient;
+
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.util.List;
 
 public class AddInfoActivity extends AppCompatActivity {
     private SharedPreferences pre;
@@ -65,32 +86,52 @@ public class AddInfoActivity extends AppCompatActivity {
     private String hour;
     private String min;
     protected EaseTitleBar titleBar;
+    private Button add_finish;
+    private ScrollView scrollView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         SDKInitializer.initialize(getApplicationContext());
         setContentView(R.layout.add_info);
+        initView();
         pre= getSharedPreferences("login", Context.MODE_PRIVATE);
         a = pre.getString("userName", "");
-        titleBar=findViewById(R.id.title_bar);
         titleBar.setTitle("添加信息");
         titleBar.setLeftLayoutClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 onBackPressed();
             }
         });
-
-        mapView = findViewById(R.id.bmapView);
         baiduMap=mapView.getMap();
         baiduMap.setMyLocationEnabled(true);
+        baiduMap.setOnMapTouchListener(new BaiduMap.OnMapTouchListener() {//解决scroll和map冲突
+            @Override
+            public void onTouch(MotionEvent motionEvent) {
+                if(motionEvent.getAction() == MotionEvent.ACTION_UP){
+                    scrollView.requestDisallowInterceptTouchEvent(false);
+                }else{
+                    scrollView.requestDisallowInterceptTouchEvent(true);
+                }
+            }
+        });
+        baiduMap.setOnMapClickListener(new BaiduMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng latLng) {
+                showLocOnMap(latLng.latitude,latLng.longitude);
+                geoCode(latLng);
+            }
+
+            @Override
+            public void onMapPoiClick(MapPoi mapPoi) {
+                showLocOnMap(mapPoi.getPosition().latitude,mapPoi.getPosition().longitude);
+                inlocation.setText(mapPoi.getName());
+            }
+        });
         locationOption();//定位
         hidelogo();//隐藏logo
         zoomlevel();//改变比列尺
-        Button add_finish=findViewById(R.id.add_finish);
-        radioGroup=findViewById(R.id.myradio);
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -99,26 +140,56 @@ public class AddInfoActivity extends AppCompatActivity {
             }
         });
         getSpinner();
-        add_finish.setOnClickListener(new View.OnClickListener() {
+    }
+    public void geoCode(LatLng latLng){
+        GeoCoder mCoder = GeoCoder.newInstance();
+        OnGetGeoCoderResultListener listener = new OnGetGeoCoderResultListener() {
             @Override
-            public void onClick(View v) {
-                inName=findViewById(R.id.name);
-                inLong=findViewById(R.id.time);
-                inPay=findViewById(R.id.pay);
-                inTel=findViewById(R.id.tel);
-                inRequirement=findViewById(R.id.require);
-                latlng=findViewById(R.id.latlng);
-                String locate=latlng.getText().toString();
-                String name=inName.getText().toString();
-                String ilong=inLong.getText().toString();
-                String pay=inPay.getText().toString();
-                String tel=inTel.getText().toString();
-                String require=inRequirement.getText().toString();
-                sex="男";
-                dbKey(name,sex,grade,subjcet,week,hour,min,ilong,pay,tel,require,a,locate);
-                finish();
+            public void onGetGeoCodeResult(GeoCodeResult geoCodeResult) {
+
             }
-        });
+            @Override
+            public void onGetReverseGeoCodeResult(ReverseGeoCodeResult reverseGeoCodeResult) {
+                if (reverseGeoCodeResult == null || reverseGeoCodeResult.error != SearchResult.ERRORNO.NO_ERROR) {
+                    //没有找到检索结果
+                    return;
+                } else {
+                    //详细地址
+                    String address = reverseGeoCodeResult.getAddress();
+                    List<PoiInfo> pois=reverseGeoCodeResult.getPoiList();
+                    if(pois!=null){
+                        for(PoiInfo p:pois){
+                            Log.i("poi",p.getName());
+                            Log.i("poi",p.getAddress());
+                        }
+                        inlocation.setText(pois.get(0).getAddress()+pois.get(0).getName());
+                    }else{
+                        inlocation.setText(address);
+                    }
+
+                }
+            }
+        };
+        mCoder.setOnGetGeoCodeResultListener(listener);
+        mCoder.reverseGeoCode(new ReverseGeoCodeOption()
+                .location(latLng)
+                // POI召回半径，允许设置区间为0-1000米，超过1000米按1000米召回。默认值为1000
+                .radius(500));
+        mCoder.destroy();
+    }
+    public void initView(){
+        scrollView=findViewById(R.id.scroll);
+        inName=findViewById(R.id.name);
+        inLong=findViewById(R.id.time);
+        inPay=findViewById(R.id.pay);
+        inTel=findViewById(R.id.tel);
+        inRequirement=findViewById(R.id.require);
+        inlocation=findViewById(R.id.addmylocation);
+        latlng=findViewById(R.id.latlng);
+        add_finish=findViewById(R.id.add_finish);
+        radioGroup=findViewById(R.id.myradio);
+        mapView = findViewById(R.id.bmapView);
+        titleBar=findViewById(R.id.title_bar);
     }
     private void getSpinner(){
         myspinner=findViewById(R.id.gradespinner);
@@ -213,17 +284,32 @@ public class AddInfoActivity extends AppCompatActivity {
             public void onReceiveLocation(BDLocation bdLocation) {
                 //获取定位详细数据
                 //获取地址信息
-//                inlocation=findViewById(R.id.location);
-//                String addr=bdLocation.getAddrStr();
-//                inlocation.setText(addr);
+                List<Poi> pois=bdLocation.getPoiList();
+                for (Poi p:pois){
+                    String name=p.getName();
+                    String paddr=p.getAddr();
+                    Log.i("myl","poi"+name+":"+paddr);
+                }
+                inlocation.setText(bdLocation.getAddrStr());
                 //获取经纬度
                 double lat=bdLocation.getLatitude();
                 double lng=bdLocation.getLongitude();
                 String locate= String.valueOf(lat+","+lng);
-                Log.e("myl",locate);
                 latlng=findViewById(R.id.latlng);
                 latlng.setText(locate);
-                //获取POI
+                add_finish.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String locate=latlng.getText().toString();
+                        String name=inName.getText().toString();
+                        String ilong=inLong.getText().toString();
+                        String pay=inPay.getText().toString();
+                        String tel=inTel.getText().toString();
+                        String require=inRequirement.getText().toString();
+                        dbKey(name,sex,grade,subjcet,week,hour,min,ilong,pay,tel,require,a,locate);
+                        finish();
+                    }
+                });
                 //将定位数据显示在地图上
                 showLocOnMap(lat,lng);
             }
