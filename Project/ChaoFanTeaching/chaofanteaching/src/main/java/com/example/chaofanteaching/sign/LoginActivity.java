@@ -51,19 +51,10 @@ public class LoginActivity extends AppCompatActivity {
         myId = findViewById(R.id.myId);
         myPW = findViewById(R.id.myPW);
         ImageView loginBtn = findViewById(R.id.myLoginBtn);
-        ImageView quicklogin = findViewById(R.id.quicklogin);
         TextView toLogonBtn=findViewById(R.id.toLogonBtn);
         TextView findMyPW = findViewById(R.id.findMyPW);
         TextView serviceAgreement = findViewById(R.id.serviceAgreement);
-        //快速登录
-        quicklogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent();
-                intent.setClass(LoginActivity.this, Info_Map.class);
-                startActivity(intent);
-            }
-        });
+
 
         //登陆按钮
         loginBtn.setOnClickListener(new View.OnClickListener(){
