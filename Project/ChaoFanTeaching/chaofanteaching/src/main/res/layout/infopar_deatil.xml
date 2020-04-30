@@ -6,17 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".InfoList.ParInfoActivity">
 
-<!--    <com.hyphenate.easeui.widget.EaseTitleBar-->
-<!--        android:id="@+id/title_bar"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintLeft_toLeftOf="parent"-->
-<!--        app:layout_constraintRight_toRightOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintVertical_bias="0"-->
-<!--        app:titleBarLeftImage="@drawable/ease_mm_title_back" />-->
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -162,39 +151,6 @@
                     </android.support.constraint.ConstraintLayout>
                 </android.support.constraint.ConstraintLayout>
 
-                <!--                <android.support.constraint.ConstraintLayout-->
-                <!--                    android:id="@+id/commentLayout"-->
-                <!--                    android:layout_width="wrap_content"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-                <!--                    app:layout_constraintLeft_toLeftOf="@+id/starLayout"-->
-                <!--                    app:layout_constraintRight_toRightOf="@+id/starLayout"-->
-                <!--                    app:layout_constraintTop_toBottomOf="@+id/starLayout">-->
-
-                <!--                    <ImageView-->
-                <!--                        android:id="@+id/comment_img"-->
-                <!--                        android:layout_width="25dp"-->
-                <!--                        android:layout_height="25dp"-->
-                <!--                        android:src="@drawable/comment"-->
-                <!--                        app:layout_constraintBottom_toBottomOf="parent"-->
-                <!--                        app:layout_constraintHorizontal_bias="0"-->
-                <!--                        app:layout_constraintLeft_toLeftOf="parent"-->
-                <!--                        app:layout_constraintRight_toRightOf="parent"-->
-                <!--                        app:layout_constraintTop_toTopOf="parent" />-->
-
-                <!--                    <TextView-->
-                <!--                        android:layout_width="wrap_content"-->
-                <!--                        android:layout_height="25dp"-->
-                <!--                        android:layout_marginLeft="5dp"-->
-                <!--                        android:gravity="center"-->
-                <!--                        android:text="评论"-->
-                <!--                        android:textSize="18sp"-->
-                <!--                        app:layout_constraintBottom_toBottomOf="parent"-->
-                <!--                        app:layout_constraintHorizontal_bias="0"-->
-                <!--                        app:layout_constraintLeft_toRightOf="@+id/comment_img"-->
-                <!--                        app:layout_constraintRight_toRightOf="parent"-->
-                <!--                        app:layout_constraintTop_toTopOf="parent" />-->
-                <!--                </android.support.constraint.ConstraintLayout>-->
             </android.support.constraint.ConstraintLayout>
 
             <android.support.constraint.ConstraintLayout
@@ -610,61 +566,12 @@
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
             </android.support.constraint.ConstraintLayout>
-            <!--            <android.support.constraint.ConstraintLayout-->
-            <!--                app:layout_goneMarginTop="2dp"-->
-            <!--                android:id="@+id/mapLayout"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="40dp"-->
-            <!--                android:layout_marginTop="10dp"-->
-            <!--                android:layout_marginLeft="10dp"-->
-            <!--                android:layout_marginRight="10dp"-->
-            <!--                android:background="@drawable/add_info_background"-->
-            <!--                app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--                app:layout_constraintLeft_toLeftOf="parent"-->
-            <!--                app:layout_constraintRight_toRightOf="parent"-->
-            <!--                app:layout_constraintTop_toBottomOf="@+id/require1"-->
-            <!--                app:layout_constraintVertical_bias="0"-->
-            <!--                app:layout_constraintHorizontal_bias="0">-->
-            <!--                <TextView-->
-            <!--                    android:layout_width="wrap_content"-->
-            <!--                    android:layout_height="40dp"-->
-            <!--                    android:gravity="center"-->
-            <!--                    android:text="点击查看TA的位置"-->
-            <!--                    android:textSize="18dp"-->
-            <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--                    app:layout_constraintLeft_toLeftOf="parent"-->
-            <!--                    app:layout_constraintRight_toRightOf="parent"-->
-            <!--                    app:layout_constraintTop_toTopOf="parent"-->
-            <!--                    app:layout_constraintHorizontal_bias="0"/>-->
-            <!--                <ImageView-->
-            <!--                    android:text="无"-->
-            <!--                    android:layout_width="40dp"-->
-            <!--                    android:layout_height="40dp"-->
-            <!--                    android:gravity="center"-->
-            <!--                    android:src="@drawable/right_info"-->
-            <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--                    app:layout_constraintLeft_toLeftOf="parent"-->
-            <!--                    app:layout_constraintRight_toRightOf="parent"-->
-            <!--                    app:layout_constraintTop_toTopOf="parent"-->
-            <!--                    app:layout_constraintHorizontal_bias="1"/>-->
-            <!--            </android.support.constraint.ConstraintLayout>-->
-
-<!--            <com.baidu.mapapi.map.MapView-->
-<!--                android:id="@+id/bmapView"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="250dp"-->
-<!--                android:layout_marginLeft="10dp"-->
-<!--                android:layout_marginTop="20dp"-->
-<!--                android:layout_marginRight="10dp"-->
-<!--                android:clickable="true"-->
-<!--                />-->
 
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:gravity="center"
-                >
+                android:gravity="center">
 
                 <Button
                     style="?android:attr/borderlessButtonStyle"

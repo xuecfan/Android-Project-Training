@@ -40,6 +40,13 @@ import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.search.core.PoiInfo;
+import com.baidu.mapapi.search.core.SearchResult;
+import com.baidu.mapapi.search.geocode.GeoCodeResult;
+import com.baidu.mapapi.search.geocode.GeoCoder;
+import com.baidu.mapapi.search.geocode.OnGetGeoCoderResultListener;
+import com.baidu.mapapi.search.geocode.ReverseGeoCodeOption;
+import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
 import com.example.chaofanteaching.ChatActivity;
 import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.R;
@@ -52,6 +59,7 @@ import com.hyphenate.easeui.widget.EaseTitleBar;
 
 import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.util.List;
 
 import gdut.bsx.share2.Share2;
 import gdut.bsx.share2.ShareContentType;
@@ -100,7 +108,7 @@ public class ParInfoActivity extends AppCompatActivity {
                     pricetext.setText(s[5]+"元/小时");
                     teltext.setText(s[6]);
                     requiretext.setText(s[7]);
-                    locatetext.setText(s[8]+","+s[9]);//lat,lng经纬度
+                    geoCode(new LatLng(Double.parseDouble(s[8]),Double.parseDouble(s[9])));
                     lat=s[8];
                     lng=s[9];
                     infoId = s[10];
@@ -199,13 +207,7 @@ public class ParInfoActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-//        mapView = findViewById(R.id.bmapView);
-//        baiduMap=mapView.getMap();
-//        baiduMap.setMyLocationEnabled(true);
         dbKey(name);
-//        locationOption();
-//        hidelogo();//隐藏logo
-//        zoomlevel();//改变比列尺
     }
     //发起聊天
     public void chatIn() {
@@ -224,6 +226,42 @@ public class ParInfoActivity extends AppCompatActivity {
         } else {
             ToastUtils.showLong("用户名不可为空");
         }
+    }
+    public void geoCode(LatLng latLng){
+        GeoCoder mCoder = GeoCoder.newInstance();
+        OnGetGeoCoderResultListener listener = new OnGetGeoCoderResultListener() {
+            @Override
+            public void onGetGeoCodeResult(GeoCodeResult geoCodeResult) {
+
+            }
+            @Override
+            public void onGetReverseGeoCodeResult(ReverseGeoCodeResult reverseGeoCodeResult) {
+                if (reverseGeoCodeResult == null || reverseGeoCodeResult.error != SearchResult.ERRORNO.NO_ERROR) {
+                    //没有找到检索结果
+                    return;
+                } else {
+                    //详细地址
+                    String address = reverseGeoCodeResult.getAddress();
+                    List<PoiInfo> pois=reverseGeoCodeResult.getPoiList();
+                    if(pois!=null){
+                        for(PoiInfo p:pois){
+                            Log.i("poi",p.getName());
+                            Log.i("poi",p.getAddress());
+                        }
+                        locatetext.setText(pois.get(0).getAddress()+pois.get(0).getName());
+                    }else{
+                        locatetext.setText(address);
+                    }
+
+                }
+            }
+        };
+        mCoder.setOnGetGeoCodeResultListener(listener);
+        mCoder.reverseGeoCode(new ReverseGeoCodeOption()
+                .location(latLng)
+                // POI召回半径，允许设置区间为0-1000米，超过1000米按1000米召回。默认值为1000
+                .radius(500));
+        mCoder.destroy();
     }
     private void dbKey(final String key) {
 
@@ -249,66 +287,7 @@ public class ParInfoActivity extends AppCompatActivity {
             }
         }.start();
     }
-    private void hidelogo(){
-        View child=mapView.getChildAt(1);
-        if(null!=child && (child instanceof ImageView || child instanceof ZoomControls)){
-            child.setVisibility(View.INVISIBLE);
-        }
-    }
-    private void showLocOnMap(double lat, double lng) {
-        //获取定位图标
-        BitmapDescriptor icon = BitmapDescriptorFactory
-                .fromResource(R.mipmap.loc1);
-        //设置显示方式
-        MyLocationConfiguration config=new MyLocationConfiguration(
-                MyLocationConfiguration.LocationMode.NORMAL,
-                false,
-                icon);
-        baiduMap.setMyLocationConfiguration(config);
-        //显示
-        MyLocationData locData=new MyLocationData.Builder().latitude(lat).longitude(lng).build();
-        baiduMap.setMyLocationData(locData);
-        //移动到中心位置
-        MapStatusUpdate msu= MapStatusUpdateFactory.newLatLng(new LatLng(lat,lng));
-        baiduMap.animateMapStatus(msu);
-    }
-//    private void locationOption(){
-//        //1.创建定位服务客户端类的对象
-//        locationClient=new LocationClient(getApplicationContext());
-//        //2.创建定位客户端选项类的对象，并设置参数
-//        locationClientOption=new LocationClientOption();
-//        //设置定位参数
-//        //打开GPS
-//        locationClientOption.setOpenGps(true);
-//        //定位间隔时间
-//        locationClientOption.setScanSpan(1000);
-//        //定位坐标系
-//        SDKInitializer.setCoordType(CoordType.GCJ02);
-//        //设置定位模式
-//        locationClientOption.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);
-//        //需要定位地址数据
-//        locationClientOption.setIsNeedAddress(true);
-//        //需要地址描述
-//        locationClientOption.setIsNeedLocationDescribe(true);
-//        //需要周边POI信息
-//        locationClientOption.setIsNeedLocationPoiList(true);
-//        //3.将定位选项参数应用给定位服务客户端类的对象
-//        locationClient.setLocOption(locationClientOption);
-//        //4.开始定位
-//        locationClient.start();
-//        //5.给定位客户端类的对象注册定位监听器
-//        locationClient.registerLocationListener(new BDAbstractLocationListener() {
-//            @Override
-//            public void onReceiveLocation(BDLocation bdLocation) {
-//                showLocOnMap(lat,lng);
-//            }
-//        });
-//    }
-    private void zoomlevel(){
-        baiduMap.setMaxAndMinZoomLevel(19,13);
-        MapStatusUpdate msu= MapStatusUpdateFactory.zoomTo(16);
-        baiduMap.setMapStatus(msu);
-    }
+
     private void initView() {
         //初始化控件
     }
