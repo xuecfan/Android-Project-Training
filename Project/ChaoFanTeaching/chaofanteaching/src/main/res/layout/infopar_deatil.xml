@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingBottom="70dp">
+            android:paddingBottom="30dp">
 
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
@@ -88,6 +88,7 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
+                            android:id="@+id/starName"
                             android:layout_width="wrap_content"
                             android:layout_height="30dp"
                             android:layout_marginLeft="5dp"
@@ -580,7 +581,7 @@
                     android:layout_marginRight="20dp"
                     android:background="@drawable/round_yellow"
                     android:gravity="center"
-                    android:text="请TA试讲"
+                    android:text="试讲"
                     android:textColor="#ffffff"
                     android:textSize="18dp"
                     android:textStyle="bold"

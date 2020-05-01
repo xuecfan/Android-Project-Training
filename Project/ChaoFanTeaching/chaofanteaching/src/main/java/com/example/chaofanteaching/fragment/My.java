@@ -36,6 +36,7 @@ import com.example.chaofanteaching.All;
 import com.example.chaofanteaching.BottomPopupOption;
 import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.InfoList.InfoDetailActivity;
+import com.example.chaofanteaching.MyListView;
 import com.example.chaofanteaching.MyPublish.MyPublishActivity;
 import com.example.chaofanteaching.R;
 import com.example.chaofanteaching.StreamChangeStrUtils;
@@ -232,7 +233,7 @@ public class My extends Fragment {
         dataSource.add(map6);
 
         adapter=new MyAdapter(getContext(),dataSource,R.layout.my_list);
-        ListView listView=view.findViewById(R.id.list);
+        MyListView listView=view.findViewById(R.id.list);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
