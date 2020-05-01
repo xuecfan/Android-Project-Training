@@ -38,12 +38,14 @@ public class AddStuInfoActivity extends AppCompatActivity {
     private String grade;
     private String time;
     private String week;
+    private String exp;
     private Spinner myspinner;
     private Spinner myspinner1;
     private Spinner myspinner2;
     private Spinner myspinner3;
     private Spinner myspinner4;
     private Spinner myspinner5;
+    private Spinner myspinner6;
     protected EaseTitleBar titleBar;
 
     @Override
@@ -84,7 +86,7 @@ public class AddStuInfoActivity extends AppCompatActivity {
                 String pay=inPay.getText().toString();
                 String tel=inTel.getText().toString();
                 String introduce=ipintroduce.getText().toString();
-                dbKey(name,sex,grade,subjcet,week,time,university,pay,tel,introduce,college,major,a);
+                dbKey(name,sex,grade,subjcet,week,time,university,pay,tel,introduce,college,major,a,exp);
                 finish();
             }
         });
@@ -156,14 +158,25 @@ public class AddStuInfoActivity extends AppCompatActivity {
                 Toast.makeText(getApplication(),"请选择时间",Toast.LENGTH_LONG).show();
             }
         });
+        myspinner6=findViewById(R.id.expspinner);
+        myspinner6.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                exp=parent.getItemAtPosition(position).toString();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                Toast.makeText(getApplication(),"是否有经验",Toast.LENGTH_LONG).show();
+            }
+        });
     }
-    private void dbKey(final String name, final String sex, final String grade, final String subject, final String week, final String time, final String university, final String pay, final String tel, final String introduce,final String college,final String major,final String user) {
+    private void dbKey(final String name, final String sex, final String grade, final String subject, final String week, final String time, final String university, final String pay, final String tel, final String introduce,final String college,final String major,final String user,final String exp) {
         new Thread() {
             HttpURLConnection connection = null;
             @Override
             public void run() {
                 try {
-                    connection = HttpConnectionUtils.getConnection("AddInfoServlet?id=1&name="+name+"&sex="+sex+"&grade="+grade+"&subject="+subject+"&week="+week+"&time="+time+"&university="+university+"&pay="+pay+"&tel="+tel+"&require="+introduce+"&college="+college+"&major="+major+"&user="+user);
+                    connection = HttpConnectionUtils.getConnection("AddInfoServlet?id=1&name="+name+"&sex="+sex+"&grade="+grade+"&subject="+subject+"&week="+week+"&time="+time+"&university="+university+"&pay="+pay+"&tel="+tel+"&require="+introduce+"&college="+college+"&major="+major+"&user="+user+"&exp="+exp);
                     int code = connection.getResponseCode();
                     if (code == 200) {
                         ToastUtils.showLong("添加成功");

@@ -78,7 +78,6 @@ public class ParInfoActivity extends AppCompatActivity {
     private TextView pricetext;
     private TextView teltext;
     private TextView requiretext;
-    private TextView locatetext;
     private TextView starName;
     private Button sendbtn;
     private ImageView img;
@@ -198,7 +197,6 @@ public class ParInfoActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        locatetext=findViewById(R.id.locate);
         nametext=findViewById(R.id.name);
         nametext.setText(name);
         sextext=findViewById(R.id.sex);
