@@ -67,6 +67,8 @@ public class List extends Fragment {
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
                 srl.finishRefresh();
+                infoList.clear();
+                dbKey("serach","");
                 Toast.makeText(getContext(),
                         "刷新完成",
                         Toast.LENGTH_SHORT).show();
