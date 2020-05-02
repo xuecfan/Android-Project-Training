@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
+import android.text.method.DigitsKeyListener;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -56,6 +58,19 @@ public class LoginActivity extends AppCompatActivity {
         TextView serviceAgreement = findViewById(R.id.serviceAgreement);
 
 
+//        //editView设置弹出英文键盘
+//        myId.setKeyListener(new DigitsKeyListener(){
+//            @Override
+//            public int getInputType(){
+//                return InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD;
+//            }
+//
+//            @Override
+//            protected char[] getAcceptedChars() {
+//                char[] ac = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
+//                return ac;
+//            }
+//        });
         //登陆按钮
         loginBtn.setOnClickListener(new View.OnClickListener(){
             @Override

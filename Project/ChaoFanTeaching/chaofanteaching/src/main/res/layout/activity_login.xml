@@ -23,13 +23,14 @@
     /*输入框*/
 
     <EditText
+        android:singleLine="true"
         android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
         android:id="@+id/myId"
         android:layout_gravity="center"
         android:background="@drawable/round"
         android:layout_width="250dp"
         android:layout_height="70dp"
-        android:inputType="textEmailSubject"
+        android:inputType="textVisiblePassword"
         android:textSize="30sp"
         android:textStyle="bold"
         android:textColor="#888888"
