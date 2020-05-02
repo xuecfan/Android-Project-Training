@@ -15,7 +15,6 @@ import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.chaofanteaching.InfoList.AddInfoActivity;
 import com.example.chaofanteaching.InfoList.AddStuInfoActivity;
 import com.example.chaofanteaching.fragment.Blank;
@@ -25,7 +24,6 @@ import com.example.chaofanteaching.fragment.Message;
 import com.example.chaofanteaching.fragment.My;
 import com.example.chaofanteaching.fragment.White;
 import com.example.chaofanteaching.sign.LoginActivity;
-
 import java.util.HashMap;
 import java.util.Map;
 
