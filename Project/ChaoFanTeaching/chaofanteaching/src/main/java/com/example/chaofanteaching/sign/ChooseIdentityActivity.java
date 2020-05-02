@@ -25,29 +25,23 @@ public class ChooseIdentityActivity extends Activity implements View.OnTouchList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_identity);
         String[]PermissionString={
-                Manifest.permission.CAMERA,
-                Manifest.permission.LOCATION_HARDWARE,
-                Manifest.permission.INTERNET,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.RECORD_AUDIO,
+                Manifest.permission.CAMERA,
                 Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.MODIFY_AUDIO_SETTINGS,
-                Manifest.permission.WRITE_SETTINGS,
-                Manifest.permission.READ_SYNC_SETTINGS,
-                Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS,
                 Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.RECORD_AUDIO,
         };
         permissionHelper=new PermissionHelper(this);
-        permissionHelper.check(PermissionString).onSuccess(new Runnable() {
-            @Override
-            public void run() {
-                Log.i("permisson","允许权限");
-            }
-        }).onDenied(new Runnable() {
+        permissionHelper.check(PermissionString).onDenied(new Runnable() {
             @Override
             public void run() {
                 ChooseIdentityActivity.this.finish();
                 Log.i("permisson","拒绝权限");
+            }
+        }).onSuccess(new Runnable() {
+            @Override
+            public void run() {
+                Log.i("permisson","允许权限");
             }
         }).run();
         //将此页添加到Activity控制器列表中
