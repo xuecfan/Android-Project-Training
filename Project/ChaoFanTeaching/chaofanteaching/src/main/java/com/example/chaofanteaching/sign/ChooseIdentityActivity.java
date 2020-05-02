@@ -1,12 +1,15 @@
 package com.example.chaofanteaching.sign;
 
+import android.Manifest;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -20,14 +23,42 @@ import org.greenrobot.eventbus.EventBus;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import ru.alexbykov.nopermission.PermissionHelper;
+
 public class ChooseIdentityActivity extends Activity implements View.OnTouchListener,View.OnClickListener{
 
     private Button mTestBtn;
     private Button mTestBtn2;
+    private PermissionHelper permissionHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_identity);
+        String[]PermissionString={
+                Manifest.permission.CAMERA,
+                Manifest.permission.LOCATION_HARDWARE,
+                Manifest.permission.INTERNET,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.RECORD_AUDIO,
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.MODIFY_AUDIO_SETTINGS,
+                Manifest.permission.WRITE_SETTINGS,
+                Manifest.permission.READ_SYNC_SETTINGS,
+                Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS,
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+        };
+        permissionHelper=new PermissionHelper(this);
+        permissionHelper.check(PermissionString).onSuccess(new Runnable() {
+            @Override
+            public void run() {
+                Log.i("permisson","允许权限");
+            }
+        }).onDenied(new Runnable() {
+            @Override
+            public void run() {
+                Log.i("permisson","拒绝权限");
+            }
+        }).run();
 
         //将此页添加到Activity控制器列表中
         ActivityCollector.addActivity(this);
@@ -47,14 +78,6 @@ public class ChooseIdentityActivity extends Activity implements View.OnTouchList
         super.onDestroy();
         ActivityCollector.removeActivity(this);
     }
-
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        //设置恢复原大小
-//        changeStatus(mTestBtn,1,1f);
-//        changeStatus(mTestBtn2,1,1f);
-//    }
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
@@ -103,38 +126,8 @@ public class ChooseIdentityActivity extends Activity implements View.OnTouchList
         }
         startActivity(intent);
         ActivityCollector.finishAll();
-//        ObjectAnimator animator = ObjectAnimator
-//                .ofFloat(button, "scaleX",
-//                        1f, 10f);
-//        animator.setDuration(1000);
-//        animator.start();
-//        ObjectAnimator animator1 = ObjectAnimator
-//                .ofFloat(button, "scaleY",
-//                        1f, 10f);
-//        animator1.setDuration(1000);
-//        animator1.start();
-//        ObjectAnimator animator2 = ObjectAnimator
-//                .ofFloat(button, "alpha",
-//                        1f, 0f);
-//        animator2.setDuration(1000);
-//        animator2.start();
-
-
-//        //延时执行任务
-//        Timer timer = new Timer();
-//        TimerTask task = new TimerTask() {
-//            @Override
-//            public void run() {
-//                Intent intent = new Intent(ChooseIdentityActivity.this, All.class);
-//                if(button == mTestBtn){
-//                    intent.putExtra("status",0);
-//                }else if (button == mTestBtn2){
-//                    intent.putExtra("status",1);
-//                }
-//                startActivity(intent);
-//                overridePendingTransition(0, 0);
-//            }
-//        };
-//        timer.schedule(task, 600);
+    }
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        permissionHelper.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 }
