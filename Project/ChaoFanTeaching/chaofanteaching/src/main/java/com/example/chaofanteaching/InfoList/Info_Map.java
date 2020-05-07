@@ -127,7 +127,7 @@ public class Info_Map extends AppCompatActivity {
         Log.e("dis","dis="+dis+"m");
     }
     public void baidu(double mylat, double mylng,double lat, double lng){
-        //定义起终点坐标（天安门和百度大厦）
+        //定义起终点坐标
         LatLng startPoint = new LatLng(mylat, mylng);
         LatLng endPoint = new LatLng(lat, lng);
         //构建RouteParaOption参数以及策略

@@ -666,6 +666,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/title_bar"
                 app:layout_constraintVertical_bias="0.95">
                 <Button
+                    android:id="@+id/trial_teaching"
                     style="?android:attr/borderlessButtonStyle"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"

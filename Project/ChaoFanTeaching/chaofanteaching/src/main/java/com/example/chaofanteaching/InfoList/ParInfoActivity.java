@@ -23,16 +23,17 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.baidu.mapapi.SDKInitializer;
+
 import com.example.chaofanteaching.ChatActivity;
 import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.R;
 import com.example.chaofanteaching.StreamChangeStrUtils;
+import com.example.chaofanteaching.order.TrialteachingByTeacher;
 import com.example.chaofanteaching.utils.ToastUtils;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.easeui.EaseConstant;
-import com.hyphenate.easeui.widget.EaseTitleBar;
+
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import gdut.bsx.share2.Share2;
@@ -122,7 +123,17 @@ public class ParInfoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.infopar_deatil);
-
+        Button trial_teaching=findViewById(R.id.trial_teaching);
+        trial_teaching.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ParInfoActivity.this, TrialteachingByTeacher.class);
+                intent.putExtra("lat",lat);
+                intent.putExtra("lng",lng);
+                intent.putExtra("name",name);
+                startActivity(intent);
+            }
+        });
         //状态栏透明
         makeStatusBarTransparent(ParInfoActivity.this);
         //获取当前登录用户的用户名

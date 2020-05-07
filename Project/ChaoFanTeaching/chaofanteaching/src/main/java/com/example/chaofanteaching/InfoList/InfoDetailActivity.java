@@ -31,11 +31,11 @@ import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.R;
 import com.example.chaofanteaching.StreamChangeStrUtils;
 import com.example.chaofanteaching.ChatActivity;
+import com.example.chaofanteaching.order.TrialteachingByTeacher;
 import com.example.chaofanteaching.utils.ToastUtils;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.easeui.EaseConstant;
-import com.hyphenate.easeui.widget.EaseTitleBar;
 
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -129,6 +129,14 @@ public class InfoDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.info_detail);
+        Button trial_teaching=findViewById(R.id.trial_teaching);
+        trial_teaching.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(InfoDetailActivity.this, TrialteachingByTeacher.class);
+                startActivity(intent);
+            }
+        });
         pre= getSharedPreferences("login", Context.MODE_PRIVATE);
         me = pre.getString("userName", "");
 
@@ -147,9 +155,6 @@ public class InfoDetailActivity extends AppCompatActivity {
                         .shareBySystem();
             }
         });
-
-
-
 
         //评论
         comment_listView = findViewById(R.id.comment_listView);

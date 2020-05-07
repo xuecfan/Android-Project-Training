@@ -24,7 +24,6 @@ import java.net.HttpURLConnection;
 public class AddStuInfoActivity extends AppCompatActivity {
     private SharedPreferences pre;
     private String a="";
-    private TextView back;
     private EditText inName;
     private EditText inMajor;
     private EditText inPay;
