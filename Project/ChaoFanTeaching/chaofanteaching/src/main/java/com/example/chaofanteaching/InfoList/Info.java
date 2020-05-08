@@ -5,8 +5,8 @@ public class Info {
     private String college;
     private String subject;
     private String school;
-    private String price;
-    private String experience;
+    private String price;//time
+    private String experience;//dis
     private String user;
 
     public Info(String _name,String _school,String _college,String _subject,String _price,String _experience,String _user){

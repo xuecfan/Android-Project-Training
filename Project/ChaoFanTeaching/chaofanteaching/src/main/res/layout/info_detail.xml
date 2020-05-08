@@ -610,10 +610,8 @@
                     android:text="这个人话很少，什么都没有留下"
                     android:textSize="18dp"
                     android:textColor="#000"
-
                     android:maxEms="15"
                     android:ellipsize="end"
-
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"

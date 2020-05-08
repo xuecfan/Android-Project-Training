@@ -14,6 +14,7 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="title_activity_signup">SignupActivity</string>
+    <string name="length_spinner">请选择时长</string>
 
     <!--    all页面toast-->
     <string name="Exit">再按一次返回键退出超凡家教</string>

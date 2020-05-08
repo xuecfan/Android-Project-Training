@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.support.v4.app.FragmentTabHost;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,22 @@ import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ZoomControls;
+
+import com.baidu.location.BDAbstractLocationListener;
+import com.baidu.location.BDLocation;
+import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
+import com.baidu.location.Poi;
+import com.baidu.mapapi.CoordType;
+import com.baidu.mapapi.SDKInitializer;
+import com.baidu.mapapi.map.BitmapDescriptor;
+import com.baidu.mapapi.map.BitmapDescriptorFactory;
+import com.baidu.mapapi.map.MapStatusUpdate;
+import com.baidu.mapapi.map.MapStatusUpdateFactory;
+import com.baidu.mapapi.map.MyLocationConfiguration;
+import com.baidu.mapapi.map.MyLocationData;
+import com.baidu.mapapi.model.LatLng;
 import com.example.chaofanteaching.InfoList.AddInfoActivity;
 import com.example.chaofanteaching.InfoList.AddStuInfoActivity;
 import com.example.chaofanteaching.fragment.Blank;
@@ -29,6 +46,8 @@ import java.util.Map;
 
 public class All extends AppCompatActivity {
 
+    private LocationClient locationClient;
+    private LocationClientOption locationClientOption;
     private static int isExit = 0;
     private Map<String, ImageView> imageViewMap = new HashMap<>();
     private Map<String, TextView> textViewMap = new HashMap<>();
@@ -37,8 +56,10 @@ public class All extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        SDKInitializer.initialize(getApplicationContext());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all);
+        locationOption();
         pre=getSharedPreferences("login",MODE_PRIVATE);
         ImageView main_image_center =  findViewById(R.id.main_image_center);
         main_image_center.setOnClickListener(new View.OnClickListener() {
@@ -219,6 +240,46 @@ public class All extends AppCompatActivity {
             return false;
         }
         return super.onKeyDown(keyCode,event);
+    }
+    private void locationOption(){
+        //1.创建定位服务客户端类的对象
+        locationClient=new LocationClient(getApplicationContext());
+        //2.创建定位客户端选项类的对象，并设置参数
+        locationClientOption=new LocationClientOption();
+        //设置定位参数
+        //打开GPS
+        locationClientOption.setOpenGps(true);
+        //定位间隔时间
+        //locationClientOption.setScanSpan(1000);
+        //定位坐标系
+        SDKInitializer.setCoordType(CoordType.GCJ02);
+        //设置定位模式
+        locationClientOption.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);
+        //需要定位地址数据
+        locationClientOption.setIsNeedAddress(true);
+        //需要地址描述
+        locationClientOption.setIsNeedLocationDescribe(true);
+        //需要周边POI信息
+        locationClientOption.setIsNeedLocationPoiList(true);
+        //3.将定位选项参数应用给定位服务客户端类的对象
+        locationClient.setLocOption(locationClientOption);
+        //4.开始定位
+        locationClient.start();
+        //5.给定位客户端类的对象注册定位监听器
+        locationClient.registerLocationListener(new BDAbstractLocationListener() {
+            @Override
+            public void onReceiveLocation(BDLocation bdLocation) {
+                //获取经纬度
+                double lat=bdLocation.getLatitude();
+                double lng=bdLocation.getLongitude();
+                String locate= String.valueOf(lat+","+lng);
+                SharedPreferences sharedPreferences = getSharedPreferences("login", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("lat", String.valueOf(lat));
+                editor.putString("lng", String.valueOf(lng));
+                editor.apply();
+            }
+        });
     }
 
     private void exit(){

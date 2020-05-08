@@ -63,6 +63,13 @@
         <item>上午</item>
         <item>下午</item>
     </string-array>
+    <string-array name="length">
+        <item>30分钟</item>
+        <item>1小时</item>
+        <item>2小时</item>
+        <item>3小时</item>
+        <item>4小时</item>
+    </string-array>
     <string-array name="exp">
         <item>有经验</item>
         <item>无经验</item>

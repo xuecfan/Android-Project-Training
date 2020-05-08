@@ -353,7 +353,7 @@ public class My extends Fragment {
 
     private void downimg() throws IOException {
         String fileName = path + a+".png";// 图片名字
-        Request request=new Request.Builder().url("http://175.24.102.160:8080/ChaoFanTeaching/DownImg?name="+a).build();
+        Request request=new Request.Builder().url("http://39.107.42.87:8080/ChaoFanTeaching/DownImg?name="+a).build();
         Call call=okHttpClient.newCall(request);
         Response response=call.execute();
         Log.i("photo", String.valueOf(response.body().byteStream()));
@@ -476,7 +476,7 @@ public class My extends Fragment {
         //创建上传异步任务类的对象
         UpLoadFile task=new UpLoadFile(getContext(),filepath);
         //开始执行异步任务
-        task.execute("http://175.24.102.160:8080/ChaoFanTeaching/PhotoInsert?index=photo&name="+a);
+        task.execute("http://39.107.42.87:8080/ChaoFanTeaching/PhotoInsert?index=photo&name="+a);
     }
 
     @Override
@@ -543,7 +543,7 @@ public class My extends Fragment {
     private void saveid(String id){
         OkHttpClient okHttpClient=new OkHttpClient();
         Request request=new Request.Builder().
-                url("http://175.24.102.160:8080/ChaoFanTeaching/MyData?name="+a+"&index=id&id="+id)
+                url("http://39.107.42.87:8080/ChaoFanTeaching/MyData?name="+a+"&index=id&id="+id)
                 .build();
         Call call=okHttpClient.newCall(request);
         call.enqueue(new Callback() {
