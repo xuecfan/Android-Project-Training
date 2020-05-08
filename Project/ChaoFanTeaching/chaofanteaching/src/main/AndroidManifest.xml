@@ -38,6 +38,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true">
+        <activity android:name=".comments.MyCommentsActivity"></activity>
+        <activity android:name=".comments.CommentingActivity" />
         <activity android:name=".order.TrialteachingByTeacher" />
         <activity android:name=".InfoList.Info_Map" />
         <activity android:name=".MyPublish.MyPublishActivity" />

@@ -43,6 +43,8 @@ import com.example.chaofanteaching.StreamChangeStrUtils;
 import com.example.chaofanteaching.UpLoadFile;
 import com.example.chaofanteaching.about.About;
 import com.example.chaofanteaching.about.Student_Authentication;
+import com.example.chaofanteaching.comments.CommentingActivity;
+import com.example.chaofanteaching.comments.MyCommentsActivity;
 import com.example.chaofanteaching.myself.AboutUs;
 import com.example.chaofanteaching.myself.MyData;
 import com.example.chaofanteaching.myself.RenZheng;
@@ -79,6 +81,7 @@ public class My extends Fragment {
     protected static Uri uritempFile;
     private BottomPopupOption bottomPopupOption;
     private TextView name;
+    private TextView img4Text;
     private ImageView image;
     private ImageView img1;
     private ImageView img2;
@@ -138,6 +141,7 @@ public class My extends Fragment {
         img2=view.findViewById(R.id.img2);
         img3=view.findViewById(R.id.img3);
         img4=view.findViewById(R.id.img4);
+        img4Text = view.findViewById(R.id.img4Text);
         renzheng=view.findViewById(R.id.renzheng);
 
         //状态栏透明
@@ -197,6 +201,9 @@ public class My extends Fragment {
                     Toast.makeText(getContext(),"请您先登录", Toast.LENGTH_SHORT).show();
                     Intent i=new Intent(getContext(), LoginActivity.class);
                     startActivity(i);
+                }else{
+                    Intent intent = new Intent(getContext(), MyCommentsActivity.class);
+                    startActivity(intent);
                 }
             }
         });
