@@ -140,7 +140,7 @@ public class LogonActivity extends AppCompatActivity {
                     if (!LogonActivity.this.isFinishing()) {
                         mDialog.dismiss();
                     }
-                    ToastUtils.showLong("注册成功，用户名是:" + myId.getText().toString() + "  快开始聊天吧");
+                    //ToastUtils.showLong("注册成功，用户名是:" + myId.getText().toString() + "  快开始聊天吧");
 
                 } catch (final HyphenateException e) {
                     e.printStackTrace();

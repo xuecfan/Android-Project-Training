@@ -1,5 +1,6 @@
 package com.example.chaofanteaching.InfoList;
 
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -16,13 +17,13 @@ import android.widget.RadioGroup;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 import android.widget.ZoomControls;
 import com.baidu.location.BDAbstractLocationListener;
 import com.baidu.location.BDLocation;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
-import com.baidu.location.Poi;
 import com.baidu.mapapi.CoordType;
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMap;
@@ -44,25 +45,15 @@ import com.baidu.mapapi.search.geocode.ReverseGeoCodeOption;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
 import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.R;
-import com.example.chaofanteaching.StreamChangeStrUtils;
 import com.example.chaofanteaching.utils.ToastUtils;
 import com.hyphenate.easeui.widget.EaseTitleBar;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpUriRequest;
-import org.apache.http.impl.client.DefaultHttpClient;
-
-import java.io.IOException;
-import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.util.List;
 
 public class AddInfoActivity extends AppCompatActivity {
     private SharedPreferences pre;
     private String a="";
-    private TextView latlng;
+    private TextView hourtext;
     private MapView mapView;
     private LocationClient locationClient;
     private LocationClientOption locationClientOption;
@@ -77,14 +68,12 @@ public class AddInfoActivity extends AppCompatActivity {
     private Spinner myspinner;
     private Spinner myspinner1;
     private Spinner myspinner2;
-    private Spinner myspinner3;
-    private Spinner myspinner4;
     private String sex;
     private String grade;
     private String subjcet;
     private String week;
-    private String hour;
-    private String min;
+    private int mHour;
+    private int mMin;
     protected EaseTitleBar titleBar;
     private Button add_finish;
     private ScrollView scrollView;
@@ -102,6 +91,26 @@ public class AddInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 onBackPressed();
+            }
+        });
+        hourtext=findViewById(R.id.hour_min);
+        hourtext.setText("8:00");
+        TimePickerDialog timePickerDialog=new TimePickerDialog(this,new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                mHour=hourOfDay;
+                mMin=minute;
+                if(mMin<10){
+                    hourtext.setText(mHour+":0"+mMin);
+                }else{
+                    hourtext.setText(mHour+":"+mMin);
+                }
+            }
+        },8,00,true);
+        hourtext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                timePickerDialog.show();
             }
         });
         baiduMap=mapView.getMap();
@@ -185,7 +194,6 @@ public class AddInfoActivity extends AppCompatActivity {
         inTel=findViewById(R.id.tel);
         inRequirement=findViewById(R.id.require);
         inlocation=findViewById(R.id.addmylocation);
-        latlng=findViewById(R.id.latlng);
         add_finish=findViewById(R.id.add_finish);
         radioGroup=findViewById(R.id.myradio);
         mapView = findViewById(R.id.bmapView);
@@ -219,28 +227,6 @@ public class AddInfoActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 week=parent.getItemAtPosition(position).toString();
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                Toast.makeText(getApplication(),"请选择时间",Toast.LENGTH_LONG).show();
-            }
-        });
-        myspinner3=findViewById(R.id.hourspinner);
-        myspinner3.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                hour=parent.getItemAtPosition(position).toString();
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                Toast.makeText(getApplication(),"请选择时间",Toast.LENGTH_LONG).show();
-            }
-        });
-        myspinner4=findViewById(R.id.minspinner);
-        myspinner4.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                min=parent.getItemAtPosition(position).toString();
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -282,31 +268,21 @@ public class AddInfoActivity extends AppCompatActivity {
         locationClient.registerLocationListener(new BDAbstractLocationListener() {
             @Override
             public void onReceiveLocation(BDLocation bdLocation) {
-                //获取定位详细数据
-                //获取地址信息
-                List<Poi> pois=bdLocation.getPoiList();
-                for (Poi p:pois){
-                    String name=p.getName();
-                    String paddr=p.getAddr();
-                    Log.i("myl","poi"+name+":"+paddr);
-                }
                 inlocation.setText(bdLocation.getAddrStr());
                 //获取经纬度
                 double lat=bdLocation.getLatitude();
                 double lng=bdLocation.getLongitude();
-                String locate= String.valueOf(lat+","+lng);
-                latlng=findViewById(R.id.latlng);
-                latlng.setText(locate);
                 add_finish.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String locate=latlng.getText().toString();
+                        String locate= String.valueOf(lat+","+lng);
                         String name=inName.getText().toString();
                         String ilong=inLong.getText().toString();
                         String pay=inPay.getText().toString();
                         String tel=inTel.getText().toString();
                         String require=inRequirement.getText().toString();
-                        dbKey(name,sex,grade,subjcet,week,hour,min,ilong,pay,tel,require,a,locate);
+                        String time=hourtext.getText().toString();
+                        dbKey(name,sex,grade,subjcet,week,time,ilong,pay,tel,require,a,locate);
                         finish();
                     }
                 });
@@ -337,15 +313,17 @@ public class AddInfoActivity extends AppCompatActivity {
         MapStatusUpdate msu= MapStatusUpdateFactory.zoomTo(16);
         baiduMap.setMapStatus(msu);
     }
-    private void dbKey(final String name, final String sex, final String grade, final String subject, final String week, final String hour, final String min, final String ilong, final String pay, final String tel, final String require,final String user,final String locate) {
+    private void dbKey(final String name, final String sex, final String grade, final String subject, final String week, final String hour, final String ilong, final String pay, final String tel, final String require,final String user,final String locate) {
         new Thread() {
             HttpURLConnection connection = null;
             @Override
             public void run() {
                 try {
-                    connection = HttpConnectionUtils.getConnection("AddInfoServlet?id=0&name="+name+"&sex="+sex+"&grade="+grade+"&subject="+subject+"&week="+week+"&hour="+hour+"&min="+min+"&len="+ilong+"&pay="+pay+"&tel="+tel+"&require="+require+"&user="+user+"&locate="+locate);
+                    connection = HttpConnectionUtils.getConnection("AddInfoServlet?id=0&name="+name+"&sex="+sex+"&grade="+grade+"&subject="+subject+"&week="+week+"&hour="+hour+"&len="+ilong+"&pay="+pay+"&tel="+tel+"&require="+require+"&user="+user+"&locate="+locate);
                     int code = connection.getResponseCode();
-                    if (code == 200) {
+                    if (code != 200) {
+                        ToastUtils.showLong("网络错误！请稍后再试");
+                    }else if(code==200){
                         ToastUtils.showLong("添加成功");
                     }
                 } catch (Exception e) {

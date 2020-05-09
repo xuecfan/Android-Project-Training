@@ -83,7 +83,7 @@ public class ParInfoActivity extends AppCompatActivity {
                     lat=s[8];
                     lng=s[9];
                     infoId = s[10];
-                    user=s[11];
+                    user=s[10];
                     break;
                 case 2:
                     String string2 = msg.obj.toString();

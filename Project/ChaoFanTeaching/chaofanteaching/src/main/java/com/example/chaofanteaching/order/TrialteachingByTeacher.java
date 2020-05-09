@@ -39,7 +39,7 @@ public class TrialteachingByTeacher extends AppCompatActivity {
     protected EaseTitleBar titleBar;
     private Spinner gradeSpinner;
     private Spinner subjectSpinner;
-    private EditText lengthtext;
+    private Spinner lengthSpinner;
     private EditText paytext;
     private EditText teltext;
     private EditText moretext;
@@ -59,6 +59,7 @@ public class TrialteachingByTeacher extends AppCompatActivity {
     private String objuser;
     private String grade;
     private String subject;
+    private String length;
     private Button btn_sub;
 
     @Override
@@ -143,11 +144,10 @@ public class TrialteachingByTeacher extends AppCompatActivity {
                 String date=datetext.getText().toString();
                 String time=timetext.getText().toString();
                 String location=loctext.getText().toString();
-                //String length=lengthtext.getText().toString();
                 String pay=paytext.getText().toString();
                 String tel=teltext.getText().toString();
                 String more=moretext.getText().toString();
-                submitOrder(user,objuser,grade,subject,date,time,location,"length",pay,tel,more);
+                submitOrder(user,objuser,grade,subject,date,time,location,length,pay,tel,more);
             }
         });
     }
@@ -156,11 +156,11 @@ public class TrialteachingByTeacher extends AppCompatActivity {
         info_title=findViewById(R.id.info_title);
         gradeSpinner=findViewById(R.id.gradespinner);
         subjectSpinner=findViewById(R.id.subjectspinner);
+        lengthSpinner=findViewById(R.id.lengthspinner);
         timetext=findViewById(R.id.time);
         datetext=findViewById(R.id.date);
         obj=findViewById(R.id.object);
         loctext=findViewById(R.id.textloc);
-        //lengthtext=findViewById(R.id.length);
         paytext=findViewById(R.id.pay);
         teltext=findViewById(R.id.tel);
         moretext=findViewById(R.id.more);
@@ -194,6 +194,16 @@ public class TrialteachingByTeacher extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 Toast.makeText(getApplication(),"请选择科目",Toast.LENGTH_LONG).show();
+            }
+        });
+        lengthSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                length=parent.getItemAtPosition(position).toString();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                Toast.makeText(getApplication(),"请选择时长",Toast.LENGTH_LONG).show();
             }
         });
     }

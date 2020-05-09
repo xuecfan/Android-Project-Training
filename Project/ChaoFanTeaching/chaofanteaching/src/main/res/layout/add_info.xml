@@ -202,33 +202,23 @@
                     android:layout_height="40dp"
                     android:entries="@array/week"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toLeftOf="@+id/hourspinner"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintHorizontal_bias="1">
+                    app:layout_constraintHorizontal_bias="0.38">
                 </Spinner>
-                <Spinner
-                    android:id="@+id/hourspinner"
-                    android:layout_width="90dp"
+                <TextView
+                    android:text="时间"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    android:id="@+id/hour_min"
+                    android:layout_width="wrap_content"
                     android:layout_height="40dp"
-                    android:entries="@array/hour"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toLeftOf="@+id/minspinner"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintHorizontal_bias="1">
-                </Spinner>
-                <Spinner
-                    android:id="@+id/minspinner"
-                    android:layout_width="90dp"
-                    android:layout_height="40dp"
-                    android:entries="@array/minute"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintHorizontal_bias="1">
-                </Spinner>
+                    app:layout_constraintHorizontal_bias="0.76" />
             </android.support.constraint.ConstraintLayout>
 
             <EditText
@@ -310,19 +300,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/require"
                 app:layout_constraintVertical_bias="0"/>
 
-            <TextView
-                android:id="@+id/latlng"
-                android:textColor="#ffffff"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=""
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0"
-                app:layout_constraintHorizontal_bias="1"/>
-
             <com.baidu.mapapi.map.MapView
                 android:id="@+id/bmapView"
                 android:layout_width="match_parent"
@@ -358,7 +335,5 @@
 
         </LinearLayout>
     </ScrollView>
-
-
 
 </android.support.constraint.ConstraintLayout>
