@@ -14,7 +14,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.chaofanteaching.ActivityCollector;
 import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.R;
@@ -23,7 +22,6 @@ import com.example.chaofanteaching.utils.ToastUtils;
 import com.hyphenate.EMError;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.exceptions.HyphenateException;
-
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 
@@ -136,7 +134,6 @@ public class LogonActivity extends AppCompatActivity {
             public void run() {
                 try {
                     EMClient.getInstance().createAccount(myId.getText().toString().trim(), myPW.getText().toString().trim());
-
                     if (!LogonActivity.this.isFinishing()) {
                         mDialog.dismiss();
                     }
@@ -176,15 +173,10 @@ public class LogonActivity extends AppCompatActivity {
                         default:
                             ToastUtils.showLong("ml_sign_up_failed  code: " + errorCode + "，message: " + message);
                             break;
-
                     }
-
-
                 }
             }
         }).start();
-
-
     }
     @Override
     protected void onDestroy(){

@@ -14,14 +14,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
-
 import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.InfoList.InfoDetailActivity;
 import com.example.chaofanteaching.InfoList.ParInfoActivity;
 import com.example.chaofanteaching.R;
 import com.example.chaofanteaching.StreamChangeStrUtils;
 import com.hyphenate.easeui.widget.EaseTitleBar;
-
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
@@ -29,8 +27,8 @@ import java.util.List;
 
 public class MyCollection extends AppCompatActivity {
 
-    private List<String> stars=new ArrayList<>();
-    private List<String> starsuser=new ArrayList<>();
+    private List<String> favoriteUsername=new ArrayList<>();
+    private List<String> favoriteUser=new ArrayList<>();
     protected EaseTitleBar titleBar;
     private ListView infolist;
     private ArrayAdapter adapter;
@@ -43,29 +41,42 @@ public class MyCollection extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.my_collection);
-        titleBar=findViewById(R.id.title_bar);
-        titleBar.setTitle("我的收藏");
-        titleBar.setLeftLayoutClickListener(new View.OnClickListener() {
+        setTitleBar();
+
+        handler = new Handler() {
             @Override
-            public void onClick(View v) {
-                onBackPressed();
+            public void handleMessage(android.os.Message msg) {
+                switch (msg.what) {
+                    case 1:
+                        String str = msg.obj.toString();
+                        if(str.isEmpty()){
+                            Toast.makeText(getApplicationContext(),"没有任何东西",Toast.LENGTH_SHORT).show();
+                        }else{
+                            String[] s = str.split(",");
+                            for (int i = 0; i < s.length; i+=2) {
+                                favoriteUsername.add(s[i]);
+                                favoriteUser.add(s[i+1]);
+                                adapter.notifyDataSetChanged();
+                            }
+                        }
+                        break;
+                }
             }
-        });
-        stars.clear();
+        };
+
         pre=getSharedPreferences("login", Context.MODE_PRIVATE);
         String role=pre.getString("role","");
-        Intent request=getIntent();
-        user=request.getStringExtra("user");
+        user=pre.getString("userName","");
         infolist=findViewById(R.id.infolist);
-        adapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,stars);
+        adapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,favoriteUsername);
         infolist.setAdapter(adapter);
         dbKey(user+"&op=scan");
         infolist.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
             @Override
             public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-                menu.setHeaderTitle("确定删除?");
-                menu.add(0,0,0,"删除");
-                menu.add(0,1,0,"取消");
+                menu.setHeaderTitle("是否取消收藏?");
+                menu.add(0,0,0,"是");
+                menu.add(0,1,0,"否");
                 delname= (String) infolist.getItemAtPosition(((AdapterView.AdapterContextMenuInfo) menuInfo).position);
             }
         });
@@ -73,8 +84,8 @@ public class MyCollection extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent();
-                intent.putExtra("user", starsuser.get(position));
-                intent.putExtra("name", stars.get(position));
+                intent.putExtra("user", favoriteUser.get(position));
+                intent.putExtra("name", favoriteUsername.get(position));
                 if(role.equals("11")){//role=11表示学生
                     intent.setClass(MyCollection.this,ParInfoActivity.class);
                 }else{
@@ -90,36 +101,26 @@ public class MyCollection extends AppCompatActivity {
         switch (item.getItemId()){
             case 0:
                 dbKey(user+"&op=del&delname="+delname);
-                Toast.makeText(this,"删除成功",Toast.LENGTH_SHORT).show();
+                favoriteUser.clear();
+                favoriteUsername.clear();
                 dbKey(user+"&op=scan");
                 break;
         }
         return super.onContextItemSelected(item);
     }
 
-    private void dbKey(final String user) {
-        starsuser.clear();
-        stars.clear();
-        handler = new Handler() {
+    public void setTitleBar(){
+        titleBar=findViewById(R.id.title_bar);
+        titleBar.setTitle("我的收藏");
+        titleBar.setLeftLayoutClickListener(new View.OnClickListener() {
             @Override
-            public void handleMessage(android.os.Message msg) {
-                switch (msg.what) {
-                    case 1:
-                        String str = msg.obj.toString();
-                        if(str.isEmpty()){
-                            Toast.makeText(getApplicationContext(),"没有任何东西",Toast.LENGTH_SHORT).show();
-                        }else{
-                            String[] s = str.split(",");
-                            for (int i = 0; i < s.length; i+=2) {
-                                starsuser.add(s[i]);
-                                stars.add(s[i+1]);
-                                adapter.notifyDataSetChanged();
-                            }
-                        }
-                        break;
-                }
+            public void onClick(View v) {
+                onBackPressed();
             }
-        };
+        });
+    }
+
+    private void dbKey(final String user) {
         new Thread() {
             HttpURLConnection connection = null;
             @Override
