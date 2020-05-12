@@ -3,7 +3,12 @@ package com.example.chaofanteaching;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
+
+import com.example.chaofanteaching.InfoList.InfoDetailActivity;
+import com.example.chaofanteaching.about.About;
+
 import cn.jpush.android.api.CustomMessage;
 import cn.jpush.android.api.NotificationMessage;
 import cn.jpush.android.service.JPushMessageReceiver;
@@ -22,6 +27,11 @@ public class MyReceiver extends JPushMessageReceiver {
         Log.i("111","msg"+msg);
         Log.i("111","extra"+extra);
         //收到的消息显示在页面上
+        if(title.equals("message")){
+            Intent intent=new Intent();
+            intent.setClass(context, About.class);
+            context.startActivity(intent);
+        }
     }
 
     //当打开通知消息时回调

@@ -217,20 +217,23 @@ public class My extends Fragment {
         Map<String,String> map4=new HashMap<>();
         Map<String,String> map5=new HashMap<>();
         Map<String,String> map6=new HashMap<>();
+        Map<String,String>map7=new HashMap<>();
         map.put("text","个人资料");
         map.put("img","person_data");
-        map1.put("text","我发布的");
-        map1.put("img","send");
-        map3.put("text","关于我们");
-        map3.put("img","authentication");
-        map2.put("text","我的客服");
-        map2.put("img","customer_service");
-        map4.put("text","关于软件");
-        map4.put("img","about");
-        map5.put("text","更多");
-        map5.put("img","plug");
-        map6.put("text","设置");
-        map6.put("img","setting");
+        map1.put("text","我的订单");
+        map1.put("img","order");
+        map2.put("text","我发布的");
+        map2.put("img","send");
+        map4.put("text","关于我们");
+        map4.put("img","authentication");
+        map3.put("text","我的客服");
+        map3.put("img","customer_service");
+        map5.put("text","关于软件");
+        map5.put("img","about");
+        map6.put("text","更多");
+        map6.put("img","plug");
+        map7.put("text","设置");
+        map7.put("img","setting");
         dataSource.add(map);
         dataSource.add(map1);
         dataSource.add(map2);
@@ -238,6 +241,7 @@ public class My extends Fragment {
         dataSource.add(map4);
         dataSource.add(map5);
         dataSource.add(map6);
+        dataSource.add(map7);
 
         adapter=new MyAdapter(getContext(),dataSource,R.layout.my_list);
         MyListView listView=view.findViewById(R.id.list);
@@ -257,25 +261,29 @@ public class My extends Fragment {
                             startActivity(i);
                             break;
                         case 1:
+
+                            break;
+                        case 2:
                             Intent intent=new Intent(getContext(), MyPublishActivity.class);
                             startActivity(intent);
                             break;
-                        case 2:
+                        case 3:
                             Intent intent3=new Intent(getContext(), Chatrobot.class);
                             startActivity(intent3);
                             break;
-                        case 3:
+                        case 4:
                             Intent intent4=new Intent(getContext(), AboutUs.class);
                             startActivity(intent4);
                             break;
-                        case 4:
+
+                        case 5:
                             Intent intent1=new Intent(getContext(), About.class);
                             startActivity(intent1);
                             break;
-                        case 5:
+                        case 6:
                             Toast.makeText(getContext(),"暂未开放，敬请期待", Toast.LENGTH_SHORT).show();
                             break;
-                        case 6:
+                        case 7:
                             Intent intent2=new Intent(getContext(), Setting.class);
                             startActivity(intent2);
                             break;
