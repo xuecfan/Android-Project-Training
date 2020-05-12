@@ -135,6 +135,7 @@ public class InfoDetailActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(InfoDetailActivity.this, TrialteachingByTeacher.class);
                 intent.putExtra("teacher",name);
+                intent.putExtra("user",user);
                 startActivity(intent);
             }
         });

@@ -57,6 +57,7 @@ public class TrialteachingByTeacher extends AppCompatActivity {
     private double lng;
     private String user;
     private String objuser;
+    private String objusername;
     private String grade;
     private String subject;
     private String length;
@@ -71,13 +72,13 @@ public class TrialteachingByTeacher extends AppCompatActivity {
         String role=pre.getString("role","");
         user=pre.getString("userName","");
         initView();
-        setTitie();
         getSpinner();
         Intent request=getIntent();
+        objuser=request.getStringExtra("user");
         if(role.equals("10")){//家长发起试讲
             info_title.setText("试讲老师：");
-            objuser=request.getStringExtra("teacher");
-            obj.setText(objuser);
+            objusername=request.getStringExtra("teacher");
+            obj.setText(objusername);
             String mylat= pre.getString("lat","");
             String mylng= pre.getString("lng","");
             geoCode(new LatLng(Double.parseDouble(mylat),Double.parseDouble(mylng)));
@@ -91,8 +92,8 @@ public class TrialteachingByTeacher extends AppCompatActivity {
                 }
             });
         }else{//老师发起试讲
-            objuser=request.getStringExtra("name");
-            obj.setText(objuser);
+            objusername=request.getStringExtra("name");
+            obj.setText(objusername);
             lat=Double.parseDouble(request.getStringExtra("lat"));
             lng=Double.parseDouble(request.getStringExtra("lng"));
             geoCode(new LatLng(lat,lng));
@@ -147,7 +148,7 @@ public class TrialteachingByTeacher extends AppCompatActivity {
                 String pay=paytext.getText().toString();
                 String tel=teltext.getText().toString();
                 String more=moretext.getText().toString();
-                submitOrder(user,objuser,grade,subject,date,time,location,length,pay,tel,more);
+                submitOrder(user,objusername,grade,subject,date,time,location,length,pay,tel,more);
             }
         });
     }
@@ -165,6 +166,7 @@ public class TrialteachingByTeacher extends AppCompatActivity {
         teltext=findViewById(R.id.tel);
         moretext=findViewById(R.id.more);
         btn_sub=findViewById(R.id.submit);
+        setTitie();
     }
     public void setTitie(){
         titleBar.setTitle("试讲信息");
@@ -243,16 +245,20 @@ public class TrialteachingByTeacher extends AppCompatActivity {
                 .radius(500));
         mCoder.destroy();
     }
-    public void submitOrder(String user,String objuser,String grade,String subject,String date,String time,String location,String length,String pay,String tel,String more){
+    public void submitOrder(String user,String objusername,String grade,String subject,String date,String time,String location,String length,String pay,String tel,String more){
         new Thread(){
             HttpURLConnection connection =null;
             public void run(){
                 try {
                     connection = HttpConnectionUtils
-                            .getConnection("SubmitOrder?user="+user+"&objuser="+objuser+"&grade="+grade+"&subject="+subject+"&date="+date+"&time="+time+"&location="+location+"&length="+length+"&pay="+pay+"&tel="+tel+"&more="+more);
+                            .getConnection("SubmitOrder?user="+user+"&objuser="+objuser+"&objusername="+objusername+"&grade="+grade+"&subject="+subject+"&date="+date+"&time="+time+"&location="+location+"&length="+length+"&pay="+pay+"&tel="+tel+"&more="+more);
                     int code = connection.getResponseCode();
                     if (code != 200){
-                        ToastUtils.showLong("提交失败！请稍后再试");
+                        ToastUtils.showLong("网络错误！请稍后再试");
+                    }else{
+                        Intent i=new Intent(TrialteachingByTeacher.this,SubSuccess.class);
+                        startActivity(i);
+                        finish();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

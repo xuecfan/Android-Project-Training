@@ -62,12 +62,11 @@ public class ParInfoActivity extends AppCompatActivity {
     private String name;
     private SharedPreferences pre;
     private String me;
-    private String infoId;
     private ImageView infopar_back;
 
     private Handler handler = new Handler() {
         @Override
-        public void handleMessage(android.os.Message msg) {
+        public void handleMessage(android.os.Message msg) {//马爸爸,男,初三,化学,星期六 9:30 2小时,50,178,男生,37.914853,114.463643,myl
             switch (msg.what) {
                 case 1:
                     String str = msg.obj.toString();
@@ -82,7 +81,6 @@ public class ParInfoActivity extends AppCompatActivity {
                     requiretext.setText(s[7]);
                     lat=s[8];
                     lng=s[9];
-                    infoId = s[10];
                     user=s[10];
                     break;
                 case 2:
@@ -131,6 +129,7 @@ public class ParInfoActivity extends AppCompatActivity {
                 intent.putExtra("lat",lat);
                 intent.putExtra("lng",lng);
                 intent.putExtra("name",name);
+                intent.putExtra("user",user);
                 startActivity(intent);
             }
         });

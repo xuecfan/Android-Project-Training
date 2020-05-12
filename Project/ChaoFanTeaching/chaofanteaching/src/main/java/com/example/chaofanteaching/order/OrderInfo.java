@@ -15,7 +15,7 @@ import com.hyphenate.easeui.widget.EaseTitleBar;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 
-public class ConfirmOrder extends AppCompatActivity {
+public class OrderInfo extends AppCompatActivity {
     protected EaseTitleBar titleBar;
     private TextView objuser;
     private TextView gradetext;
@@ -28,6 +28,7 @@ public class ConfirmOrder extends AppCompatActivity {
     private TextView teltext;
     private TextView moretext;
     private Button btn_commit;
+    private int id;
 
     private Handler handler = new Handler() {
         @Override
@@ -56,14 +57,13 @@ public class ConfirmOrder extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm_order);
         initView();
-        setTitie();
-        getInfo("LookOrder","objuser=");
-        btn_commit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
+//        getInfo("LookOrder","id="+id);
+//        btn_commit.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
     }
     public void initView(){
         titleBar=findViewById(R.id.title_bar);
@@ -78,9 +78,10 @@ public class ConfirmOrder extends AppCompatActivity {
         teltext=findViewById(R.id.tel);
         moretext=findViewById(R.id.more);
         btn_commit=findViewById(R.id.commit);
+        setTitie();
     }
     public void setTitie(){
-        titleBar.setTitle("试讲信息确认");
+        titleBar.setTitle("试讲信息");
         titleBar.setLeftLayoutClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

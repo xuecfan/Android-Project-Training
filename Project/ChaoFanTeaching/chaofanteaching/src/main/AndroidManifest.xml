@@ -38,7 +38,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".order.ConfirmOrder"></activity>
+        <activity android:name=".order.OrderList"></activity>
+        <activity android:name=".order.SubSuccess" />
+        <activity android:name=".order.OrderInfo" />
         <activity android:name=".comments.MyCommentsActivity" />
         <activity android:name=".comments.CommentingActivity" />
         <activity android:name=".order.TrialteachingByTeacher" />

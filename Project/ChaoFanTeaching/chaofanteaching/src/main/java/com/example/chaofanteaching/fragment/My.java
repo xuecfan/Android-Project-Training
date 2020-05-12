@@ -49,6 +49,8 @@ import com.example.chaofanteaching.myself.AboutUs;
 import com.example.chaofanteaching.myself.MyData;
 import com.example.chaofanteaching.myself.RenZheng;
 import com.example.chaofanteaching.myself.Setting;
+import com.example.chaofanteaching.order.OrderInfo;
+import com.example.chaofanteaching.order.OrderList;
 import com.example.chaofanteaching.robot.Chatrobot;
 import com.example.chaofanteaching.sign.LoginActivity;
 import com.hyphenate.easeui.widget.EaseTitleBar;
@@ -261,7 +263,8 @@ public class My extends Fragment {
                             startActivity(i);
                             break;
                         case 1:
-
+                            Intent intent0=new Intent(getContext(), OrderList.class);
+                            startActivity(intent0);
                             break;
                         case 2:
                             Intent intent=new Intent(getContext(), MyPublishActivity.class);
