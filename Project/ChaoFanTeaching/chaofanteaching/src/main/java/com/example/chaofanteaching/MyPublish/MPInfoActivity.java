@@ -1,6 +1,8 @@
 package com.example.chaofanteaching.MyPublish;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,6 +27,7 @@ public class MPInfoActivity extends AppCompatActivity {
     private EditText inTel;
     private EditText ipintroduce;
     private RadioGroup radioGroup;
+    private String role;
     private String sex;
     private String university;
     private String subject;
@@ -42,11 +45,14 @@ public class MPInfoActivity extends AppCompatActivity {
     private Button save;
     private Button del;
     protected EaseTitleBar titleBar;
+    private SharedPreferences pre;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mpinfo);
+        pre=getSharedPreferences("login", Context.MODE_PRIVATE);
+        role=pre.getString("role","");
         Intent request=getIntent();
         String name1=request.getStringExtra("name");
         titleBar=findViewById(R.id.title_bar);
@@ -93,7 +99,11 @@ public class MPInfoActivity extends AppCompatActivity {
         del.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dbKey("del",id);
+                if(role.equals("11")){//role=11表示学生
+                    dbKey("del",id);
+                }else{
+                    dbKey("del1",id);
+                }
                 Toast.makeText(getApplicationContext(),"删除成功",Toast.LENGTH_SHORT).show();
                 finish();
             }
@@ -173,7 +183,7 @@ public class MPInfoActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    connection = HttpConnectionUtils.getConnection("MyPublish?op="+op+"&key="+key);
+                    connection = HttpConnectionUtils.getConnection("MyPublish?op="+op+"&id="+key);
                     int code = connection.getResponseCode();
                     if (code != 200) {
                         Log.e("Error!","网络连接失败");

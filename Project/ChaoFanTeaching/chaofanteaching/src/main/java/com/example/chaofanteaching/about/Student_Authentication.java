@@ -59,6 +59,7 @@ public class Student_Authentication extends AppCompatActivity {
         a = pre.getString("userName", "");
         String b=pre.getString("role","");
         titleBar=findViewById(R.id.title_bar);
+        titleBar.setTitle("身份认证");
         student1 = findViewById(R.id.student1);
         student2 = findViewById(R.id.student2);
         front=findViewById(R.id.front);
