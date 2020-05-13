@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.example.chaofanteaching.InfoList.InfoDetailActivity;
 import com.example.chaofanteaching.about.About;
+import com.example.chaofanteaching.myself.RenZheng;
 
 import cn.jpush.android.api.CustomMessage;
 import cn.jpush.android.api.NotificationMessage;
@@ -27,27 +28,22 @@ public class MyReceiver extends JPushMessageReceiver {
         Log.i("111","msg"+msg);
         Log.i("111","extra"+extra);
         //收到的消息显示在页面上
-        if(title.equals("message")){
-            Intent intent=new Intent();
-            intent.setClass(context, About.class);
-            context.startActivity(intent);
-        }
+//        if(title.equals("message")){
+
+//        }
     }
 
     //当打开通知消息时回调
     @Override
     public void onNotifyMessageOpened(Context context, NotificationMessage notificationMessage) {
         super.onNotifyMessageOpened(context, notificationMessage);
-        if(notificationMessage.isRichPush){//如果是富媒体消息
-            //获取收到的富媒体消息的路径
-            String webPath=notificationMessage._webPagePath;
-            Log.i("111","富媒体消息存储路径："+webPath);
-        }else {
-            //普通通知消息
-            //获取通知消息的内容
-            String content=notificationMessage.notificationContent;
-            Log.i("111","通知内容："+content);
-        }
+        String content=notificationMessage.notificationContent;
+        String extras=notificationMessage.notificationExtras;
+
+        Intent i=new Intent(context,RenZheng.class);
+        i.putExtra("extras",extras);
+        i.putExtra("content",content);
+        context.startActivity(i);
 
     }
 
