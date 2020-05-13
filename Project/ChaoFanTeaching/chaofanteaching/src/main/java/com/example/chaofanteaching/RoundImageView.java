@@ -14,7 +14,7 @@ import android.graphics.drawable.NinePatchDrawable;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
-public class RoundImageView extends ImageView {
+public class RoundImageView extends android.support.v7.widget.AppCompatImageView {
     private int mBorderThickness = 0;
     private Context mContext;
     private int defaultColor = 0xFFFFFFFF;

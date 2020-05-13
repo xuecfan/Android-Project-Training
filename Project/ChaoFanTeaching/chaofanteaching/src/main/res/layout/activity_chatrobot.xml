@@ -2,7 +2,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/a"
     android:orientation="vertical" >
 
     <!-- 头部 -->
@@ -17,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="小乖"
+            android:text="我的克服"
             android:textColor="#ffffff"
             android:textSize="18sp" />
     </RelativeLayout>
@@ -28,13 +27,11 @@
         android:id="@+id/chat_bottom"
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/a" >
+        android:layout_alignParentBottom="true">
 
         <EditText
             android:id="@+id/chat_input_message"
             android:layout_width="280dp"
-            android:background="@drawable/round_yellow"
             android:layout_height="50dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="15dp"

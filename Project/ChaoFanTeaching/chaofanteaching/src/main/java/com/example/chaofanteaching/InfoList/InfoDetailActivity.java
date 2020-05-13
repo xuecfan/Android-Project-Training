@@ -65,7 +65,6 @@ public class InfoDetailActivity extends AppCompatActivity {
     private ConstraintLayout starLaylout;
     private String name;
     private String me;
-    private String infoId;
     private String data[] = {"老师教的很好，支持。",
             "讲的孩子都听不懂",
             "老师教的不错，大家可以请他哦",
@@ -89,8 +88,7 @@ public class InfoDetailActivity extends AppCompatActivity {
                     timetext.setText(s[7]);
                     pricetext.setText(s[8]);
                     introducetext.setText(s[10]);
-                    infoId = s[11];
-                    user=s[12];
+                    user=s[11];
                     break;
                 case 2:
                     String string2 = msg.obj.toString();
