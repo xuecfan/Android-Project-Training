@@ -27,10 +27,7 @@ public class MyReceiver extends JPushMessageReceiver {
         Log.i("111","自定义消息"+title);
         Log.i("111","msg"+msg);
         Log.i("111","extra"+extra);
-        //收到的消息显示在页面上
-//        if(title.equals("message")){
 
-//        }
     }
 
     //当打开通知消息时回调
@@ -41,6 +38,7 @@ public class MyReceiver extends JPushMessageReceiver {
         String extras=notificationMessage.notificationExtras;
 
         Intent i=new Intent(context,RenZheng.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK );
         i.putExtra("extras",extras);
         i.putExtra("content",content);
         context.startActivity(i);
