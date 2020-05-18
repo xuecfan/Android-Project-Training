@@ -9,6 +9,10 @@ import android.util.Log;
 import com.example.chaofanteaching.InfoList.InfoDetailActivity;
 import com.example.chaofanteaching.about.About;
 import com.example.chaofanteaching.myself.RenZheng;
+import com.example.chaofanteaching.order.OrderInfo;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import cn.jpush.android.api.CustomMessage;
 import cn.jpush.android.api.NotificationMessage;
@@ -36,14 +40,17 @@ public class MyReceiver extends JPushMessageReceiver {
         super.onNotifyMessageOpened(context, notificationMessage);
         String content=notificationMessage.notificationContent;
         String extras=notificationMessage.notificationExtras;
-
-        Intent i=new Intent(context,RenZheng.class);
-        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK );
-        i.putExtra("extras",extras);
-        i.putExtra("content",content);
-        context.startActivity(i);
-
+        try {
+            JSONObject jsonObject=new JSONObject(extras);
+            String id=jsonObject.getString("id");
+            Intent i=new Intent(context, OrderInfo.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK );
+            i.putExtra("id",id);
+            i.putExtra("content",content);
+            context.startActivity(i);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
-
 }
 

@@ -1,5 +1,6 @@
 package com.example.chaofanteaching.order;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
@@ -10,13 +11,14 @@ import android.widget.TextView;
 import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.R;
 import com.example.chaofanteaching.StreamChangeStrUtils;
+import com.example.chaofanteaching.utils.ToastUtils;
 import com.hyphenate.easeui.widget.EaseTitleBar;
-
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 
 public class OrderInfo extends AppCompatActivity {
     protected EaseTitleBar titleBar;
+    private TextView username;
     private TextView objuser;
     private TextView gradetext;
     private TextView subject;
@@ -34,19 +36,20 @@ public class OrderInfo extends AppCompatActivity {
         @Override
         public void handleMessage(android.os.Message msg) {
             switch (msg.what) {
-                case 1:
+                case 1://4,000,myl,马爸爸,初三,生物,2020-5-12,8:00,河北省石家庄市元氏县青银高速与红旗大街交汇处西南角碧桂园附近,30分钟,50,10086,无
                     String str = msg.obj.toString();
                     String[] s = str.split(",");
-                    objuser.setText(s[0]);
-                    gradetext.setText(s[1]);
-                    subject.setText(s[2]);
-                    datetext.setText(s[3]);
-                    timetext.setText(s[4]);
-                    loctext.setText(s[5]);
-                    lengthtext.setText(s[6]);
-                    paytext.setText(s[7]);
-                    teltext.setText(s[8]);
-                    moretext.setText(s[9]);
+                    username.setText(s[1]);
+                    objuser.setText(s[2]);
+                    gradetext.setText(s[4]);
+                    subject.setText(s[5]);
+                    datetext.setText(s[6]);
+                    timetext.setText(s[7]);
+                    loctext.setText(s[8]);
+                    lengthtext.setText(s[9]);
+                    paytext.setText(s[10]);
+                    teltext.setText(s[11]);
+                    moretext.setText(s[12]);
                     break;
             }
         }
@@ -55,18 +58,21 @@ public class OrderInfo extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_confirm_order);
+        setContentView(R.layout.order_info);
         initView();
-//        getInfo("LookOrder","id="+id);
-//        btn_commit.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
+        Intent request=getIntent();
+        id= Integer.parseInt(request.getStringExtra("id"));
+        getInfo("LookOrder","id="+id);
+        btn_commit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ToastUtils.showLong("确认");
+            }
+        });
     }
     public void initView(){
         titleBar=findViewById(R.id.title_bar);
+        username=findViewById(R.id.username);
         objuser=findViewById(R.id.object);
         gradetext=findViewById(R.id.grade);
         subject=findViewById(R.id.subject);
@@ -108,7 +114,6 @@ public class OrderInfo extends AppCompatActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
             }
         }.start();
     }

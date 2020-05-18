@@ -36,17 +36,53 @@
             android:focusable="true"
             android:focusableInTouchMode="true">
 
-            <EditText
-                android:id="@+id/name"
-                android:hint="姓名"
+<!--            <EditText-->
+<!--                android:id="@+id/name"-->
+<!--                android:hint="姓名"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:layout_marginLeft="10dp"-->
+<!--                android:layout_marginRight="10dp"-->
+<!--                android:background="@drawable/add_info_background_selector" />-->
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/titile0"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/add_info_background_selector" />
+                android:background="@drawable/add_info_background_selector">
+                <TextView
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:id="@+id/nametitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:text="名称："
+                    android:gravity="center"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintHorizontal_bias="0"/>
+                <EditText
+                    android:hint="张三"
+                    android:id="@+id/name"
+                    android:layout_width="270dp"
+                    android:layout_height="40dp"
+                    android:background="@null"
+                    app:layout_constraintLeft_toRightOf="@+id/nametitle"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintHorizontal_bias="0">
+                </EditText>
+            </android.support.constraint.ConstraintLayout>
 
             <android.support.constraint.ConstraintLayout
+                android:focusable="true"
                 android:id="@+id/sex"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"

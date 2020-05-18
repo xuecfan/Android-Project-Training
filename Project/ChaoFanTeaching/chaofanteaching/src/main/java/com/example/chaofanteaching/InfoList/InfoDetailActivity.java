@@ -31,7 +31,7 @@ import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.R;
 import com.example.chaofanteaching.StreamChangeStrUtils;
 import com.example.chaofanteaching.ChatActivity;
-import com.example.chaofanteaching.order.TrialteachingByTeacher;
+import com.example.chaofanteaching.order.SubmitOrder;
 import com.example.chaofanteaching.utils.ToastUtils;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMessage;
@@ -131,7 +131,7 @@ public class InfoDetailActivity extends AppCompatActivity {
         trial_teaching.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(InfoDetailActivity.this, TrialteachingByTeacher.class);
+                Intent intent = new Intent(InfoDetailActivity.this, SubmitOrder.class);
                 intent.putExtra("teacher",name);
                 intent.putExtra("user",user);
                 startActivity(intent);
@@ -186,10 +186,13 @@ public class InfoDetailActivity extends AppCompatActivity {
         name=request.getStringExtra("name");
         String user=request.getStringExtra("user");
         Bitmap bt = BitmapFactory.decodeFile(path +user+".png");//从Sd中找头像，转换成Bitmap
-        @SuppressWarnings("deprecation")
-        Drawable drawable = new BitmapDrawable(bt);//转换成drawable
-        img.setImageDrawable(drawable);
-
+        if(bt!=null){
+            @SuppressWarnings("deprecation")
+            Drawable drawable = new BitmapDrawable(bt);//转换成drawable
+            img.setImageDrawable(drawable);
+        }else{
+            img.setImageDrawable(getResources().getDrawable(R.drawable.tea));
+        }
         nametext=findViewById(R.id.name);
         sextext=findViewById(R.id.sex);
         universitytext=findViewById(R.id.university);

@@ -3,6 +3,7 @@ package com.example.chaofanteaching.MyPublish;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -64,6 +65,20 @@ public class MPInfoActivity extends AppCompatActivity {
             }
         });
         name=findViewById(R.id.name);
+        ConstraintLayout constraintLayout=findViewById(R.id.titile0);
+        name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus){
+                    ConstraintLayout constraintLayout=findViewById(R.id.titile0);
+                    constraintLayout.setBackground(getResources().getDrawable(R.drawable.edit_underline));
+                }else{
+                    constraintLayout.setBackground(getResources().getDrawable(R.drawable.edit_underline0));
+                }
+
+
+            }
+        });
         id=request.getStringExtra("id");
         name.setText(name1);
         getSpinner();
@@ -110,11 +125,13 @@ public class MPInfoActivity extends AppCompatActivity {
         });
     }
     private void getSpinner(){
+        ConstraintLayout schoolLayout=findViewById(R.id.schoolLayout);
         myspinner=findViewById(R.id.schoolspinner);
         myspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 university=parent.getItemAtPosition(position).toString();
+
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {

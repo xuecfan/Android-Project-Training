@@ -34,7 +34,7 @@ import java.net.HttpURLConnection;
 import java.util.Calendar;
 import java.util.List;
 
-public class TrialteachingByTeacher extends AppCompatActivity {
+public class SubmitOrder extends AppCompatActivity {
     private SharedPreferences pre;
     protected EaseTitleBar titleBar;
     private Spinner gradeSpinner;
@@ -85,7 +85,7 @@ public class TrialteachingByTeacher extends AppCompatActivity {
             loctext.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(TrialteachingByTeacher.this, Info_Map.class);
+                    Intent intent = new Intent(SubmitOrder.this, Info_Map.class);
                     intent.putExtra("lat",mylat);
                     intent.putExtra("lng",mylng);
                     startActivity(intent);
@@ -256,7 +256,7 @@ public class TrialteachingByTeacher extends AppCompatActivity {
                     if (code != 200){
                         ToastUtils.showLong("网络错误！请稍后再试");
                     }else{
-                        Intent i=new Intent(TrialteachingByTeacher.this,SubSuccess.class);
+                        Intent i=new Intent(SubmitOrder.this,SubSuccess.class);
                         startActivity(i);
                         finish();
                     }
