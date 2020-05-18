@@ -29,6 +29,7 @@ public class SubSuccess extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i=new Intent(SubSuccess.this,OrderInfo.class);
+                i.putExtra("id","4");
                 startActivity(i);
                 finish();
             }

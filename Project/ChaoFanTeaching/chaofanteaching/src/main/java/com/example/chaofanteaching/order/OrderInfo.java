@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.R;
 import com.example.chaofanteaching.StreamChangeStrUtils;
+import com.example.chaofanteaching.comments.CommentingActivity;
 import com.example.chaofanteaching.utils.ToastUtils;
 import com.hyphenate.easeui.widget.EaseTitleBar;
 import java.io.InputStream;
@@ -30,7 +31,9 @@ public class OrderInfo extends AppCompatActivity {
     private TextView teltext;
     private TextView moretext;
     private Button btn_commit;
+    private Button btn_toCommenting;
     private int id;
+    private String arr[];//存放username和objuser的数组
 
     private Handler handler = new Handler() {
         @Override
@@ -50,6 +53,8 @@ public class OrderInfo extends AppCompatActivity {
                     paytext.setText(s[10]);
                     teltext.setText(s[11]);
                     moretext.setText(s[12]);
+
+                    arr = new String[]{s[1], s[2]};
                     break;
             }
         }
@@ -69,6 +74,16 @@ public class OrderInfo extends AppCompatActivity {
                 ToastUtils.showLong("确认");
             }
         });
+
+        //评价按钮
+        btn_toCommenting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(OrderInfo.this, CommentingActivity.class);
+                intent.putExtra("user",arr);
+                startActivity(intent);
+            }
+        });
     }
     public void initView(){
         titleBar=findViewById(R.id.title_bar);
@@ -84,6 +99,7 @@ public class OrderInfo extends AppCompatActivity {
         teltext=findViewById(R.id.tel);
         moretext=findViewById(R.id.more);
         btn_commit=findViewById(R.id.commit);
+        btn_toCommenting=findViewById(R.id.ToCommentingBtn);
         setTitie();
     }
     public void setTitie(){

@@ -1,5 +1,8 @@
 package com.example.chaofanteaching.comments;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Message;
 import android.support.constraint.ConstraintLayout;
@@ -11,6 +14,7 @@ import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.R;
@@ -27,9 +31,10 @@ public class CommentingActivity extends AppCompatActivity {
     //标题栏
     private EaseTitleBar titleBar;
     private TextView publishButton;
-    //评论者和被评论者姓名
-    private TextView commentor1Name;
-    private TextView commentor2Name;
+    //评论者和被评论者姓名、评论内容
+    private TextView commenter1Id;
+    private TextView commenter2Id;
+    private TextView commentingContent;
 
     //评星条
     private TextView isOnTimeValue;
@@ -37,12 +42,30 @@ public class CommentingActivity extends AppCompatActivity {
     private TextView teachingQualityValue;
     private RatingBar teachingQualityRatingBar;
 
+//    String sql=id+"&name="+name2+"&sex="+sex+"&grade="+grade+"&subject="+subject+"&week="+week+"&time="+time+"&university="+university+"&price="+price+"&introduce="+introduce+"&college="+college+"&major="+major;
+
+    //获取全局变量
+    private SharedPreferences pre;
+    private String role;//用户角色
+    private String myid;//当前用户id
+
+    //从OrderInfo来的用户名数组
+    private String arr[];
+
     private Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
             switch(msg.what){
                 case 0:
-
+                    String string = msg.obj.toString();
+                    if (string.equals("1")){
+                        Toast.makeText(CommentingActivity.this, "发布成功", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(CommentingActivity.this,MyCommentsActivity.class);
+                        startActivity(intent);
+                    }else {
+                        Toast.makeText(CommentingActivity.this, "发布失败，请检查", Toast.LENGTH_SHORT).show();
+                    }
+                break;
             }
         }
     };
@@ -62,6 +85,20 @@ public class CommentingActivity extends AppCompatActivity {
         //评星条
         makeStar();
 
+
+        //接受从OrderInfo来的两个用户名
+        Intent intentFromOrderInfo = getIntent();
+        arr=intentFromOrderInfo.getStringArrayExtra("user");
+        //获得当前用户角色和id
+        pre=getSharedPreferences("login", Context.MODE_PRIVATE);
+        role=pre.getString("role","");//11是学生,10是家长
+        myid = pre.getString("userName","");
+
+        commenter1Id.setText(arr[0]);
+        commenter2Id.setText(arr[1]);
+        //Log.e("myl","sql="+sql);
+//        dbKey("edit",sql);
+
     }
 
     /**
@@ -70,8 +107,9 @@ public class CommentingActivity extends AppCompatActivity {
     public void initView(){
         titleBar=findViewById(R.id.commenting_titleBar);
 
-        commentor1Name = findViewById(R.id.commentor1_name);
-        commentor2Name = findViewById(R.id.commentor2_name);
+        commenter1Id = findViewById(R.id.commenter1_id);
+        commenter2Id = findViewById(R.id.commenter2_id);
+        commentingContent = findViewById(R.id.commenting_content_txt);
 
         isOnTimeValue = findViewById(R.id.is_on_time_value);
         isOnTimeRatingBar = findViewById(R.id.is_on_time_ratingBar);
@@ -103,7 +141,13 @@ public class CommentingActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         try {
-                            connection = HttpConnectionUtils.getConnection("Comment?id=0&");
+                            String option = "commenting";//操作
+                            connection = HttpConnectionUtils.getConnection(
+                                    "Comment?&option="+option
+                                    +"&commenter1Id"+commenter1Id+"&commenter2Id"+commenter2Id
+                                    +"&commentingContent"+commentingContent.getText()
+                                    +"&isOnTime"+isOnTimeRatingBar.getRating()
+                                    +"&teachingQuality"+teachingQualityRatingBar.getRating());
                             int code = connection.getResponseCode();
                             if (code == 200){
                                 InputStream inputStream = connection.getInputStream();
