@@ -38,16 +38,22 @@ public class MyReceiver extends JPushMessageReceiver {
     @Override
     public void onNotifyMessageOpened(Context context, NotificationMessage notificationMessage) {
         super.onNotifyMessageOpened(context, notificationMessage);
-        String content=notificationMessage.notificationContent;
         String extras=notificationMessage.notificationExtras;
         try {
             JSONObject jsonObject=new JSONObject(extras);
-            String id=jsonObject.getString("id");
-            Intent i=new Intent(context, OrderInfo.class);
-            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK );
-            i.putExtra("id",id);
-            i.putExtra("content",content);
-            context.startActivity(i);
+            String op=jsonObject.getString("op");
+            if(op.equals("order")){
+                String id=jsonObject.getString("id");
+                Intent i=new Intent(context, OrderInfo.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK );
+                i.putExtra("id",id);
+                context.startActivity(i);
+            }else if(op.equals("renzheng")){
+                Intent i=new Intent(context, RenZheng.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK );
+                context.startActivity(i);
+            }
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
