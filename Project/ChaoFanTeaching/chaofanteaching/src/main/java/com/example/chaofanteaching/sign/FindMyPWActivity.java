@@ -7,6 +7,7 @@ import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.R;
 import com.example.chaofanteaching.StreamChangeStrUtils;
+import com.example.chaofanteaching.comments.UtilHelpers;
 
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -113,6 +115,23 @@ public class FindMyPWActivity extends AppCompatActivity {
             }
         });
     }
+
+    /**
+     *点击editview外隐藏键盘
+     */
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event){
+        switch(event.getAction()){
+            case MotionEvent.ACTION_DOWN:
+                View view = getCurrentFocus();
+                UtilHelpers.hideKeyboard(event,view,FindMyPWActivity.this);
+                break;
+            default:
+                break;
+        }
+        return super.dispatchTouchEvent(event);
+    }
+
     private boolean emailStyle(String useremail){
         String[] arr = resources.getStringArray(R.array.emails);
         for (int i = 0;i < arr.length;i++){

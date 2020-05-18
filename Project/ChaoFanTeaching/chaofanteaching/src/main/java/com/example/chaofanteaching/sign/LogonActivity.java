@@ -9,6 +9,7 @@ import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -18,6 +19,7 @@ import com.example.chaofanteaching.ActivityCollector;
 import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.R;
 import com.example.chaofanteaching.StreamChangeStrUtils;
+import com.example.chaofanteaching.comments.UtilHelpers;
 import com.example.chaofanteaching.utils.ToastUtils;
 import com.hyphenate.EMError;
 import com.hyphenate.chat.EMClient;
@@ -121,6 +123,22 @@ public class LogonActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    /**
+     *点击editview外隐藏键盘
+     */
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event){
+        switch(event.getAction()){
+            case MotionEvent.ACTION_DOWN:
+                View view = getCurrentFocus();
+                UtilHelpers.hideKeyboard(event,view,LogonActivity.this);
+                break;
+            default:
+                break;
+        }
+        return super.dispatchTouchEvent(event);
     }
 
     //注册聊天服务器

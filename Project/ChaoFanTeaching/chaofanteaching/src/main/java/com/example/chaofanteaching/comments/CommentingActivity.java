@@ -5,6 +5,7 @@ import android.os.Message;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RatingBar;
@@ -157,5 +158,21 @@ public class CommentingActivity extends AppCompatActivity {
                 textView.setText("好评");
                 break;
         }
+    }
+
+    /**
+     * 点击editview外隐藏键盘
+     */
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event){
+        switch(event.getAction()){
+            case MotionEvent.ACTION_DOWN:
+                View view = getCurrentFocus();
+                UtilHelpers.hideKeyboard(event,view,CommentingActivity.this);
+                break;
+            default:
+                break;
+        }
+        return super.dispatchTouchEvent(event);
     }
 }

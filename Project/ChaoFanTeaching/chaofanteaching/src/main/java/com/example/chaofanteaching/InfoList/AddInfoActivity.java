@@ -45,6 +45,8 @@ import com.baidu.mapapi.search.geocode.ReverseGeoCodeOption;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
 import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.R;
+import com.example.chaofanteaching.comments.UtilHelpers;
+import com.example.chaofanteaching.sign.LoginActivity;
 import com.example.chaofanteaching.utils.ToastUtils;
 import com.hyphenate.easeui.widget.EaseTitleBar;
 import java.net.HttpURLConnection;
@@ -150,6 +152,23 @@ public class AddInfoActivity extends AppCompatActivity {
         });
         getSpinner();
     }
+
+    /**
+     *点击editview外隐藏键盘
+     */
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event){
+        switch(event.getAction()){
+            case MotionEvent.ACTION_DOWN:
+                View view = getCurrentFocus();
+                UtilHelpers.hideKeyboard(event,view, AddInfoActivity.this);
+                break;
+            default:
+                break;
+        }
+        return super.dispatchTouchEvent(event);
+    }
+
     public void geoCode(LatLng latLng){
         GeoCoder mCoder = GeoCoder.newInstance();
         OnGetGeoCoderResultListener listener = new OnGetGeoCoderResultListener() {
