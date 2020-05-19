@@ -1,11 +1,15 @@
 package com.example.chaofanteaching;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.location.LocationManager;
 import android.os.Handler;
+import android.provider.Settings;
 import android.support.v4.app.FragmentTabHost;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -56,6 +60,7 @@ public class All extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all);
         applyPermission();
+        openGPSSettings();
         locationOption();
         pre=getSharedPreferences("login",MODE_PRIVATE);
         ImageView main_image_center =  findViewById(R.id.main_image_center);
@@ -82,7 +87,6 @@ public class All extends AppCompatActivity {
         String user = pre.getString("userName", "");
         String role=pre.getString("role","");
         fragmentTabHost = findViewById(android.R.id.tabhost);
-
         fragmentTabHost.setup(this,
                 getSupportFragmentManager(),
                 android.R.id.tabcontent);
@@ -112,9 +116,6 @@ public class All extends AppCompatActivity {
                         null);
             }
         }
-
-
-
         TabHost.TabSpec tabSpec2 = fragmentTabHost.newTabSpec("tag2")
                 .setIndicator(getTabSpecView("tag2",R.drawable.message,"消息"));
 
@@ -205,17 +206,13 @@ public class All extends AppCompatActivity {
         //加载布局文件
         LayoutInflater layoutInflater = getLayoutInflater();
         View view = layoutInflater.inflate(R.layout.tabspec,null);
-
         //获取控件对象
         ImageView imageView = view.findViewById(R.id.iv_icon);
         imageView.setImageResource(imageResId);
-
         TextView textView = view.findViewById(R.id.tv_title);
         textView.setText(title);
-
         imageViewMap.put(tag,imageView);
         textViewMap.put(tag,textView);
-
         return view;
     }
 
@@ -242,7 +239,6 @@ public class All extends AppCompatActivity {
         }).run();
     }
 
-
     //实现按两次后退才退出
     Handler handler=new Handler(){
         @Override
@@ -261,6 +257,7 @@ public class All extends AppCompatActivity {
         }
         return super.onKeyDown(keyCode,event);
     }
+
     private void locationOption(){
         //1.创建定位服务客户端类的对象
         locationClient=new LocationClient(getApplicationContext());
@@ -269,18 +266,15 @@ public class All extends AppCompatActivity {
         //设置定位参数
         //打开GPS
         locationClientOption.setOpenGps(true);
-        //定位间隔时间
-        //locationClientOption.setScanSpan(1000);
-        //定位坐标系
         SDKInitializer.setCoordType(CoordType.GCJ02);
         //设置定位模式
         locationClientOption.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);
         //需要定位地址数据
-        locationClientOption.setIsNeedAddress(true);
+        locationClientOption.setIsNeedAddress(false);
         //需要地址描述
-        locationClientOption.setIsNeedLocationDescribe(true);
+        locationClientOption.setIsNeedLocationDescribe(false);
         //需要周边POI信息
-        locationClientOption.setIsNeedLocationPoiList(true);
+        locationClientOption.setIsNeedLocationPoiList(false);
         //3.将定位选项参数应用给定位服务客户端类的对象
         locationClient.setLocOption(locationClientOption);
         //4.开始定位
@@ -292,6 +286,10 @@ public class All extends AppCompatActivity {
                 //获取经纬度
                 double lat=bdLocation.getLatitude();
                 double lng=bdLocation.getLongitude();
+                if(bdLocation.getLocType()==62){
+                    locationClient.restart();
+                }
+                Log.e("myl","定位结果"+bdLocation.getLocType()+","+lat);
                 SharedPreferences sharedPreferences = getSharedPreferences("login", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString("lat", String.valueOf(lat));
@@ -301,16 +299,50 @@ public class All extends AppCompatActivity {
         });
     }
 
+    private void openGPSSettings() {
+        if (!checkGPSIsOpen()) {
+            //没有打开则弹出对话框
+            new AlertDialog.Builder(this)
+                    .setTitle("提示")
+                    .setMessage("请点击 '设置'-'定位服务' 打开定位功能")
+                    // 拒绝, 退出应用
+                    .setNegativeButton(R.string.cancel,
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            })
+                    .setPositiveButton(R.string.setting,
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    //跳转GPS设置界面
+                                    Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                                    startActivity(intent);
+                                }
+                            })
+                    .setCancelable(false)
+                    .show();
+        }
+    }
+
+    private boolean checkGPSIsOpen() {
+        boolean isOpen;
+        LocationManager locationManager = (LocationManager) this
+                .getSystemService(Context.LOCATION_SERVICE);
+        isOpen = locationManager.isProviderEnabled(android.location.LocationManager.GPS_PROVIDER);
+        return isOpen;
+    }
+
     private void exit(){
         if (isExit < 2){
             Toast.makeText(getApplicationContext(),R.string.Exit,Toast.LENGTH_SHORT).show();
-
             //利用handler延迟发送更改状态信息
             handler.sendEmptyMessageDelayed(0,2000);
         }else{
             //在程序退出之前重置isExit,使下次打开时isExit还为0
             handler.sendEmptyMessage(0);
-
             super.onBackPressed();
         }
     }

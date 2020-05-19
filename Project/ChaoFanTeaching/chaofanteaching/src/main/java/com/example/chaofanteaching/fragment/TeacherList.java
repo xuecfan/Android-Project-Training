@@ -60,23 +60,53 @@ public class TeacherList extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.list, container, false);
-        infoList.clear();
-        srl = view.findViewById(R.id.srl);
-        srl.setReboundDuration(1000);
-        srl.setOnRefreshListener(new OnRefreshListener() {
+        pre= getContext().getSharedPreferences("login", Context.MODE_PRIVATE);
+        a = pre.getString("userName", "");
+        refresh();
+        sort();
+        serach();
+        loadInfo();
+        jumpToDetail();
+        return view;
+    }
+
+    public void serach(){
+        editText=view.findViewById(R.id.input);
+        Drawable drawable=getResources().getDrawable(R.drawable.find);
+        drawable.setBounds(0,0,60,60);//第一0是距左边距离，第二0是距上边距离
+        editText.setCompoundDrawables(drawable,null,null,null);//只放左边
+        editText.setOnKeyListener(new View.OnKeyListener() {
             @Override
-            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-                srl.finishRefresh();
-                infoList.clear();
-                dbKey("serach","");
-                Toast.makeText(getContext(),
-                        "刷新完成",
-                        Toast.LENGTH_SHORT).show();
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                editText.setCursorVisible(true);
+                if (keyCode == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN) {
+                    String key=editText.getText().toString();
+                    dbKey("serach",key);
+                    editText.setCursorVisible(false);
+                }
+                return false;
             }
         });
+    }//搜索
+
+    public void sort(){
         sign=0;
         sign1=0;
         sign2=0;
+        Button btnadd = view.findViewById(R.id.add);
+        btnadd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LinearLayout sort=view.findViewById(R.id.sort);
+                if(sign2==0){
+                    sign2+=1;
+                    sort.setVisibility(View.VISIBLE);
+                }else{
+                    sign2-=1;
+                    sort.setVisibility(View.GONE);
+                }
+            }
+        });
         def=view.findViewById(R.id.def);
         dis=view.findViewById(R.id.dis);
         pri=view.findViewById(R.id.pri);
@@ -148,30 +178,18 @@ public class TeacherList extends Fragment {
                 dbKey("sortexp","");
             }
         });
+    }//排序
 
+    public void loadInfo(){
+        infoList.clear();
         infolist = view.findViewById(R.id.infolist);
         infoAdapter = new InfoAdapter(this.getContext(), infoList, R.layout.info_item);
         infolist.setAdapter(infoAdapter);
         dbKey("serach","");
         infoAdapter.notifyDataSetChanged();
-        editText=view.findViewById(R.id.input);
-        Drawable drawable=getResources().getDrawable(R.drawable.find);
-        drawable.setBounds(0,0,60,60);//第一0是距左边距离，第二0是距上边距离
-        editText.setCompoundDrawables(drawable,null,null,null);//只放左边
-        editText.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                editText.setCursorVisible(true);
-                if (keyCode == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN) {
-                    String key=editText.getText().toString();
-                    dbKey("serach",key);
-                    editText.setCursorVisible(false);
-                }
-                return false;
-            }
-        });
-        pre= getContext().getSharedPreferences("login", Context.MODE_PRIVATE);
-        a = pre.getString("userName", "");
+    }//加载信息
+
+    public void jumpToDetail(){
         infolist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -188,22 +206,23 @@ public class TeacherList extends Fragment {
                 }
             }
         });
-        Button btnadd = view.findViewById(R.id.add);
-        btnadd.setOnClickListener(new View.OnClickListener() {
+    }//跳转到详情
+
+    public void refresh(){
+        srl = view.findViewById(R.id.srl);
+        srl.setReboundDuration(1000);
+        srl.setOnRefreshListener(new OnRefreshListener() {
             @Override
-            public void onClick(View v) {
-                LinearLayout sort=view.findViewById(R.id.sort);
-                if(sign2==0){
-                    sign2+=1;
-                    sort.setVisibility(View.VISIBLE);
-                }else{
-                    sign2-=1;
-                    sort.setVisibility(View.GONE);
-                }
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                srl.finishRefresh();
+                infoList.clear();
+                dbKey("serach","");
+                Toast.makeText(getContext(),
+                        "刷新完成",
+                        Toast.LENGTH_SHORT).show();
             }
         });
-        return view;
-    }
+    }//刷新
 
     private void dbKey(final String op,final String key) {
         infoList.clear();
@@ -250,5 +269,5 @@ public class TeacherList extends Fragment {
                 }
             }
         }.start();
-    }
+    }//查询数据库
 }

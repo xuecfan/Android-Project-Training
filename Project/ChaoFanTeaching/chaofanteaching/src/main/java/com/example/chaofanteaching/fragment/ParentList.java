@@ -11,7 +11,6 @@ import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,7 +22,6 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.utils.DistanceUtil;
 import com.example.chaofanteaching.HttpConnectionUtils;
@@ -36,11 +34,11 @@ import com.example.chaofanteaching.sign.LoginActivity;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
-
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
 
+//展示家长列表
 public class ParentList extends Fragment {
     private java.util.List<Info> infoList = new ArrayList<>();
     private View view;
@@ -49,7 +47,7 @@ public class ParentList extends Fragment {
     private ParInfoAdapter parInfoAdapter;
     private EditText editText;
     private SharedPreferences pre;
-    private String a="";
+    private String a;
     private SmartRefreshLayout srl;
     private TextView def;
     private TextView dis;
@@ -61,12 +59,70 @@ public class ParentList extends Fragment {
     private String lat;
     private String lng;
 
-    //展示家长列表
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.list, container, false);
+        pre= getContext().getSharedPreferences("login", Context.MODE_PRIVATE);
+        a = pre.getString("userName", "");
+        lat=pre.getString("lat","");
+        lng=pre.getString("lng","");
+        refresh();
+        sort();
+        serach();
+        loadInfo();
+        jumpToDetail();
+        return view;
+    }
+
+    public void loadInfo(){
+        infoList.clear();
+        infolist = view.findViewById(R.id.infolist);
+        parInfoAdapter = new ParInfoAdapter(this.getContext(), infoList, R.layout.info_item1);
+        infolist.setAdapter(parInfoAdapter);
+        dbKey("serach1","");
+        parInfoAdapter.notifyDataSetChanged();
+    }//加载信息
+
+    public void jumpToDetail(){//跳转到详情页
+        infolist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (a.equals("")) {
+                    Toast.makeText(getContext(),"请您先登录", Toast.LENGTH_SHORT).show();
+                    Intent i=new Intent(getContext(), LoginActivity.class);
+                    startActivity(i);
+                }else{
+                    Intent intent = new Intent();
+                    intent.putExtra("name", infoList.get(position).getName());
+                    intent.putExtra("user",infoList.get(position).getUser());
+                    intent.setClass(getActivity(), ParInfoActivity.class);
+                    startActivity(intent);
+                }
+            }
+        });
+    }
+
+    public void serach(){
+        editText=view.findViewById(R.id.input);
+        Drawable drawable=getResources().getDrawable(R.drawable.find);
+        drawable.setBounds(0,0,60,60);//第一0是距左边距离，第二0是距上边距离
+        editText.setCompoundDrawables(drawable,null,null,null);//只放左边
+        editText.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                editText.setCursorVisible(true);
+                if (keyCode == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN) {
+                    String key=editText.getText().toString();
+                    dbKey("serach1",key);
+                    editText.setCursorVisible(false);
+                }
+                return false;
+            }
+        });
+    }//搜索
+
+    public void refresh(){
         srl = view.findViewById(R.id.srl);
         srl.setReboundDuration(1000);
         srl.setOnRefreshListener(new OnRefreshListener() {
@@ -80,6 +136,9 @@ public class ParentList extends Fragment {
                         Toast.LENGTH_SHORT).show();
             }
         });
+    }//刷新
+
+    public void sort() {
         sign=0;
         sign1=0;
         sign2=0;
@@ -154,48 +213,6 @@ public class ParentList extends Fragment {
                 pri.setCompoundDrawables(null,null,null,null);
             }
         });
-        infoList.clear();
-        infolist = view.findViewById(R.id.infolist);
-        parInfoAdapter = new ParInfoAdapter(this.getContext(), infoList, R.layout.info_item1);
-        infolist.setAdapter(parInfoAdapter);
-        dbKey("serach1","");
-        parInfoAdapter.notifyDataSetChanged();
-        editText=view.findViewById(R.id.input);
-        Drawable drawable=getResources().getDrawable(R.drawable.find);
-        drawable.setBounds(0,0,60,60);//第一0是距左边距离，第二0是距上边距离
-        editText.setCompoundDrawables(drawable,null,null,null);//只放左边
-        editText.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                editText.setCursorVisible(true);
-                if (keyCode == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN) {
-                    String key=editText.getText().toString();
-                    dbKey("serach1",key);
-                    editText.setCursorVisible(false);
-                }
-                return false;
-            }
-        });
-        pre= getContext().getSharedPreferences("login", Context.MODE_PRIVATE);
-        a = pre.getString("userName", "");
-        lat=pre.getString("lat","");
-        lng=pre.getString("lng","");
-        infolist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (a.equals("")) {
-                    Toast.makeText(getContext(),"请您先登录", Toast.LENGTH_SHORT).show();
-                    Intent i=new Intent(getContext(), LoginActivity.class);
-                    startActivity(i);
-                }else{
-                    Intent intent = new Intent();
-                    intent.putExtra("name", infoList.get(position).getName());
-                    intent.putExtra("user",infoList.get(position).getUser());
-                    intent.setClass(getActivity(), ParInfoActivity.class);
-                    startActivity(intent);
-                }
-            }
-        });
         Button btnadd = view.findViewById(R.id.add);
         btnadd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -210,17 +227,16 @@ public class ParentList extends Fragment {
                 }
             }
         });
-        return view;
-    }
+    }//排序
 
-    public String showDisdance(double mylat, double mylng,double lat, double lng){
+    public String showDisdance(double mylat, double mylng, double lat, double lng){
         int dis=(int) DistanceUtil. getDistance(new LatLng(mylat,mylng),new LatLng(lat,lng));
         if(dis<1000){
             return dis+"m";
         }else {
             return dis/1000+"km";
         }
-    }
+    }//计算距离
 
     private void dbKey(final String op,final String key) {
         infoList.clear();
@@ -267,5 +283,5 @@ public class ParentList extends Fragment {
                 }
             }
         }.start();
-    }
+    }//查询数据库
 }

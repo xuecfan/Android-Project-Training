@@ -16,7 +16,8 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- 读取手机状态 -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" /> <!-- 唤醒锁屏 -->
     <uses-permission android:name="android.permission.WAKE_LOCK" /> <!-- 写入外部存储 -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 访问精确定位 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/><!-- 访问精确定位 -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- 修改音频设置 -->
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" /> <!-- 允许读写系统设置项 使用设置时需要 -->
     <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" /> <!-- 访问GMail账户列表 -->
