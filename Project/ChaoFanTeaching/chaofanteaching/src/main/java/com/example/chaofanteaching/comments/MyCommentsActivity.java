@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.chaofanteaching.InfoList.InfoAdapter;
 import com.example.chaofanteaching.R;
 import com.example.chaofanteaching.comments.fragments.LeftFragment;
 import com.example.chaofanteaching.comments.fragments.RightFragment;
@@ -16,6 +17,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.ListView;
 
 
 import java.util.ArrayList;
@@ -32,6 +34,8 @@ public class MyCommentsActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private List<Fragment> fragments;
 
+    private String[] arr = new String[]{"000","myl"};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +47,6 @@ public class MyCommentsActivity extends AppCompatActivity {
         setTitleBar();
         //初始化viewPager
         initViewPager();
-
     }
 
     /**
@@ -99,6 +102,7 @@ public class MyCommentsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view){
                 Intent intent = new Intent(getApplicationContext(), CommentingActivity.class);
+                intent.putExtra("user",arr);
                 startActivity(intent);
             }
         });

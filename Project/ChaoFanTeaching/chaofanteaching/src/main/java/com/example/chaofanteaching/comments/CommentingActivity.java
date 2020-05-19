@@ -62,6 +62,7 @@ public class CommentingActivity extends AppCompatActivity {
                         Toast.makeText(CommentingActivity.this, "发布成功", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(CommentingActivity.this,MyCommentsActivity.class);
                         startActivity(intent);
+                        finish();
                     }else {
                         Toast.makeText(CommentingActivity.this, "发布失败，请检查", Toast.LENGTH_SHORT).show();
                     }
@@ -144,10 +145,10 @@ public class CommentingActivity extends AppCompatActivity {
                             String option = "commenting";//操作
                             connection = HttpConnectionUtils.getConnection(
                                     "Comment?&option="+option
-                                    +"&commenter1Id"+commenter1Id+"&commenter2Id"+commenter2Id
-                                    +"&commentingContent"+commentingContent.getText()
-                                    +"&isOnTime"+isOnTimeRatingBar.getRating()
-                                    +"&teachingQuality"+teachingQualityRatingBar.getRating());
+                                    +"&commenter1Id="+commenter1Id.getText()+"&commenter2Id="+commenter2Id.getText()
+                                    +"&commentingContent="+commentingContent.getText()
+                                    +"&isOnTime="+isOnTimeRatingBar.getRating()
+                                    +"&teachingQuality="+teachingQualityRatingBar.getRating());
                             int code = connection.getResponseCode();
                             if (code == 200){
                                 InputStream inputStream = connection.getInputStream();

@@ -2,14 +2,24 @@ package com.example.chaofanteaching.comments.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.example.chaofanteaching.HttpConnectionUtils;
+import com.example.chaofanteaching.InfoList.Info;
+import com.example.chaofanteaching.InfoList.InfoAdapter;
 import com.example.chaofanteaching.R;
+import com.example.chaofanteaching.StreamChangeStrUtils;
 
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -27,6 +37,12 @@ public class RightFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    //
+    private java.util.List<Info> infoList = new ArrayList<>();
+//    private ListView infolist;
+    private InfoAdapter infoAdapter;
+    private Handler handler;
 
     private List<Comment> mData = null;
     private Context mContext;
@@ -71,15 +87,67 @@ public class RightFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_right, container, false);
         mContext = this.getContext();
         list_comment = (ListView) view.findViewById(R.id.right_list);
-        mData = new LinkedList<Comment>();
-        mData.add(new Comment("teacher","teacher","teacher","teacher","02-11","教的真好",1,2));
-        mData.add(new Comment("teacher","teacher","teacher","teacher","02-11","教的真好",1,2));
-        mData.add(new Comment("teacher","teacher","teacher","teacher","02-11","教的真好",1,2));
-        mData.add(new Comment("teacher","teacher","teacher","teacher","02-11","教的真好",1,2));
 
-        commentAdapter = new CommentAdapter((LinkedList<Comment>) mData,mContext);
-        list_comment.setAdapter(commentAdapter);
+
+        infoAdapter = new InfoAdapter(this.getContext(), infoList, R.layout.info_item);
+        list_comment.setAdapter(infoAdapter);
+        dbKey("serach","");
+
+//        mData = new LinkedList<Comment>();
+//        mData.add(new Comment("teacher","teacher","teacher","teacher","02-11","教的真好",1,2));
+//        mData.add(new Comment("teacher","teacher","teacher","teacher","02-11","教的真好",1,2));
+//        mData.add(new Comment("teacher","teacher","teacher","teacher","02-11","教的真好",1,2));
+//        mData.add(new Comment("teacher","teacher","teacher","teacher","02-11","教的真好",1,2));
+//
+//        commentAdapter = new CommentAdapter((LinkedList<Comment>) mData,mContext);
+//        list_comment.setAdapter(commentAdapter);
 
         return view;
+    }
+    private void dbKey(final String op,final String key) {
+        infoList.clear();
+        handler = new Handler() {
+            @Override
+            public void handleMessage(android.os.Message msg) {
+                switch (msg.what) {
+                    case 1:
+                        Info scanInfo;
+                        String str = msg.obj.toString();
+                        if(str.isEmpty()){
+                            Toast.makeText(getContext(),"没有搜到任何东西",Toast.LENGTH_LONG).show();
+                        }else{
+                            String[] s = str.split(";");
+                            for (int i = 0; i < s.length; i++) {
+                                String[] r = s[i].split(",");
+                                scanInfo = new Info(r[0], r[1], r[2], "擅长"+r[3],r[4]+"元/小时",r[5],r[6]);
+                                infoList.add(scanInfo);
+                                infoAdapter.notifyDataSetChanged();
+                            }
+                        }
+                        break;
+                }
+            }
+        };
+        new Thread() {
+            HttpURLConnection connection = null;
+
+            @Override
+            public void run() {
+                try {
+                    connection = HttpConnectionUtils.getConnection("ListInfoServlet?op="+op+"&key="+key);
+                    int code = connection.getResponseCode();
+                    if (code == 200) {
+                        InputStream inputStream = connection.getInputStream();
+                        String str = StreamChangeStrUtils.toChange(inputStream);
+                        android.os.Message message = Message.obtain();
+                        message.obj = str;
+                        message.what = 1;
+                        handler.sendMessage(message);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
     }
 }
