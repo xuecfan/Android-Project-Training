@@ -27,7 +27,6 @@ import android.widget.Toast;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.utils.DistanceUtil;
 import com.example.chaofanteaching.HttpConnectionUtils;
-import com.example.chaofanteaching.InfoList.AddStuInfoActivity;
 import com.example.chaofanteaching.InfoList.Info;
 import com.example.chaofanteaching.InfoList.ParInfoActivity;
 import com.example.chaofanteaching.InfoList.ParInfoAdapter;
@@ -42,7 +41,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
 
-public class StudentList extends Fragment {
+public class ParentList extends Fragment {
     private java.util.List<Info> infoList = new ArrayList<>();
     private View view;
     private Handler handler;

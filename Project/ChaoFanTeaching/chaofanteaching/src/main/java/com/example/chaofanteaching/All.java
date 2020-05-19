@@ -26,7 +26,7 @@ import com.example.chaofanteaching.InfoList.AddInfoActivity;
 import com.example.chaofanteaching.InfoList.AddStuInfoActivity;
 import com.example.chaofanteaching.fragment.Blank;
 import com.example.chaofanteaching.fragment.TeacherList;
-import com.example.chaofanteaching.fragment.StudentList;
+import com.example.chaofanteaching.fragment.ParentList;
 import com.example.chaofanteaching.fragment.Message;
 import com.example.chaofanteaching.fragment.My;
 import com.example.chaofanteaching.fragment.White;
@@ -91,7 +91,7 @@ public class All extends AppCompatActivity {
                     null);
         }else if(role.equals("11")){
             fragmentTabHost.addTab(tabSpec1,
-                    StudentList.class,
+                    ParentList.class,
                     null);
         }
         }else {
@@ -101,7 +101,7 @@ public class All extends AppCompatActivity {
                         null);
             }else if(a==1){
                 fragmentTabHost.addTab(tabSpec1,
-                        StudentList.class,
+                        ParentList.class,
                         null);
             }
         }
