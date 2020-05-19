@@ -65,33 +65,33 @@ public class MPInfoActivity extends AppCompatActivity {
             }
         });
         name=findViewById(R.id.name);
-        ConstraintLayout constraintLayout=findViewById(R.id.titile0);
-        name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(hasFocus){
-                    ConstraintLayout constraintLayout=findViewById(R.id.titile0);
-                    constraintLayout.setBackground(getResources().getDrawable(R.drawable.edit_underline));
-                }else{
-                    constraintLayout.setBackground(getResources().getDrawable(R.drawable.edit_underline0));
-                }
-
-
-            }
-        });
+//        ConstraintLayout constraintLayout=findViewById(R.id.titile0);
+//        name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//            @Override
+//            public void onFocusChange(View v, boolean hasFocus) {
+//                if(hasFocus){
+//                    ConstraintLayout constraintLayout=findViewById(R.id.titile0);
+//                    constraintLayout.setBackground(getResources().getDrawable(R.drawable.edit_underline));
+//                }else{
+//                    constraintLayout.setBackground(getResources().getDrawable(R.drawable.edit_underline0));
+//                }
+//
+//
+//            }
+//        });
         id=request.getStringExtra("id");
         name.setText(name1);
-        getSpinner();
+        //getSpinner();
         save=findViewById(R.id.saveinfo);
         del=findViewById(R.id.delinfo);
-        radioGroup=findViewById(R.id.myradio);
-        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                RadioButton radioButton = (RadioButton)findViewById(radioGroup.getCheckedRadioButtonId());
-                sex=radioButton.getText().toString();
-            }
-        });
+//        radioGroup=findViewById(R.id.myradio);
+//        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(RadioGroup group, int checkedId) {
+//                RadioButton radioButton = (RadioButton)findViewById(radioGroup.getCheckedRadioButtonId());
+//                sex=radioButton.getText().toString();
+//            }
+//        });
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

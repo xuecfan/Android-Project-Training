@@ -8,7 +8,6 @@ import android.os.Handler;
 import android.support.v4.app.FragmentTabHost;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,27 +15,18 @@ import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ZoomControls;
 
 import com.baidu.location.BDAbstractLocationListener;
 import com.baidu.location.BDLocation;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
-import com.baidu.location.Poi;
 import com.baidu.mapapi.CoordType;
 import com.baidu.mapapi.SDKInitializer;
-import com.baidu.mapapi.map.BitmapDescriptor;
-import com.baidu.mapapi.map.BitmapDescriptorFactory;
-import com.baidu.mapapi.map.MapStatusUpdate;
-import com.baidu.mapapi.map.MapStatusUpdateFactory;
-import com.baidu.mapapi.map.MyLocationConfiguration;
-import com.baidu.mapapi.map.MyLocationData;
-import com.baidu.mapapi.model.LatLng;
 import com.example.chaofanteaching.InfoList.AddInfoActivity;
 import com.example.chaofanteaching.InfoList.AddStuInfoActivity;
 import com.example.chaofanteaching.fragment.Blank;
-import com.example.chaofanteaching.fragment.List;
-import com.example.chaofanteaching.fragment.List1;
+import com.example.chaofanteaching.fragment.TeacherList;
+import com.example.chaofanteaching.fragment.StudentList;
 import com.example.chaofanteaching.fragment.Message;
 import com.example.chaofanteaching.fragment.My;
 import com.example.chaofanteaching.fragment.White;
@@ -97,21 +87,21 @@ public class All extends AppCompatActivity {
         if(!role.equals("")){
         if(role.equals("10")){
             fragmentTabHost.addTab(tabSpec1,
-                    List.class,
+                    TeacherList.class,
                     null);
         }else if(role.equals("11")){
             fragmentTabHost.addTab(tabSpec1,
-                    List1.class,
+                    StudentList.class,
                     null);
         }
         }else {
             if(a==0){
                 fragmentTabHost.addTab(tabSpec1,
-                        List.class,
+                        TeacherList.class,
                         null);
             }else if(a==1){
                 fragmentTabHost.addTab(tabSpec1,
-                        List1.class,
+                        StudentList.class,
                         null);
             }
         }
@@ -272,7 +262,6 @@ public class All extends AppCompatActivity {
                 //获取经纬度
                 double lat=bdLocation.getLatitude();
                 double lng=bdLocation.getLongitude();
-                String locate= String.valueOf(lat+","+lng);
                 SharedPreferences sharedPreferences = getSharedPreferences("login", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString("lat", String.valueOf(lat));

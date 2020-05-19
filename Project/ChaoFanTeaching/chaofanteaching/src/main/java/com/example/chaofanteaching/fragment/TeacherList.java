@@ -37,7 +37,7 @@ import java.net.HttpURLConnection;
 import java.util.ArrayList;
 
 //展示老师列表
-public class List extends Fragment {
+public class TeacherList extends Fragment {
 
     private java.util.List<Info> infoList = new ArrayList<>();
     private View view;

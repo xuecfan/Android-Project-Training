@@ -11,6 +11,7 @@ import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,9 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.utils.DistanceUtil;
 import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.InfoList.AddStuInfoActivity;
 import com.example.chaofanteaching.InfoList.Info;
@@ -38,7 +42,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
 
-public class List1 extends Fragment {
+public class StudentList extends Fragment {
     private java.util.List<Info> infoList = new ArrayList<>();
     private View view;
     private Handler handler;
@@ -55,6 +59,8 @@ public class List1 extends Fragment {
     private int sign;
     private int sign1;
     private int sign2;
+    private String lat;
+    private String lng;
 
     //展示家长列表
 
@@ -110,14 +116,12 @@ public class List1 extends Fragment {
                 if(sign==0){
                     sign+=1;
                     dis.setCompoundDrawables(null,null,up,null);
-                    dbKey("updis","");
                 }else{
                     sign-=1;
                     dis.setCompoundDrawables(null,null,down,null);
-                    dbKey("downdis","");
                 }
                 pri.setCompoundDrawables(null,null,null,null);
-                infoList.clear();
+                parInfoAdapter.notifyDataSetChanged();
             }
         });
         pri.setOnClickListener(new View.OnClickListener() {
@@ -175,6 +179,8 @@ public class List1 extends Fragment {
         });
         pre= getContext().getSharedPreferences("login", Context.MODE_PRIVATE);
         a = pre.getString("userName", "");
+        lat=pre.getString("lat","");
+        lng=pre.getString("lng","");
         infolist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -208,6 +214,15 @@ public class List1 extends Fragment {
         return view;
     }
 
+    public String showDisdance(double mylat, double mylng,double lat, double lng){
+        int dis=(int) DistanceUtil. getDistance(new LatLng(mylat,mylng),new LatLng(lat,lng));
+        if(dis<1000){
+            return dis+"m";
+        }else {
+            return dis/1000+"km";
+        }
+    }
+
     private void dbKey(final String op,final String key) {
         infoList.clear();
         handler = new Handler() {
@@ -223,7 +238,8 @@ public class List1 extends Fragment {
                             String[] s = str.split(";");
                             for (int i = 0; i < s.length; i++) {
                                 String[] r = s[i].split(",");
-                                scanInfo = new Info(r[0], r[1], r[2], r[3]+"元/小时",r[4],r[5],r[6]);
+                                String dis=showDisdance(Double.parseDouble(lat),Double.parseDouble(lng),Double.parseDouble(r[5]),Double.parseDouble(r[6]));
+                                scanInfo = new Info(r[0], r[1], r[2], r[3]+"元/小时",r[4],dis,r[6]);
                                 infoList.add(scanInfo);
                                 parInfoAdapter.notifyDataSetChanged();
                             }
