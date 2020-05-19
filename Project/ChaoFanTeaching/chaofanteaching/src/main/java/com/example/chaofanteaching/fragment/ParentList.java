@@ -238,7 +238,7 @@ public class ParentList extends Fragment {
                             for (int i = 0; i < s.length; i++) {
                                 String[] r = s[i].split(",");
                                 String dis=showDisdance(Double.parseDouble(lat),Double.parseDouble(lng),Double.parseDouble(r[5]),Double.parseDouble(r[6]));
-                                scanInfo = new Info(r[0], r[1], r[2], r[3]+"元/小时",r[4],dis,r[6]);
+                                scanInfo = new Info(r[0], r[1], r[2], r[3]+"元/小时",r[4],dis,r[7]);
                                 infoList.add(scanInfo);
                                 parInfoAdapter.notifyDataSetChanged();
                             }

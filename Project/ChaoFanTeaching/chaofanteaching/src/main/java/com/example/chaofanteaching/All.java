@@ -1,5 +1,6 @@
 package com.example.chaofanteaching;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,6 +9,7 @@ import android.os.Handler;
 import android.support.v4.app.FragmentTabHost;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,9 +32,12 @@ import com.example.chaofanteaching.fragment.ParentList;
 import com.example.chaofanteaching.fragment.Message;
 import com.example.chaofanteaching.fragment.My;
 import com.example.chaofanteaching.fragment.White;
+import com.example.chaofanteaching.sign.ChooseIdentityActivity;
 import com.example.chaofanteaching.sign.LoginActivity;
 import java.util.HashMap;
 import java.util.Map;
+
+import ru.alexbykov.nopermission.PermissionHelper;
 
 public class All extends AppCompatActivity {
 
@@ -43,12 +48,14 @@ public class All extends AppCompatActivity {
     private Map<String, TextView> textViewMap = new HashMap<>();
     private FragmentTabHost fragmentTabHost;
     private SharedPreferences pre;
+    private PermissionHelper permissionHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         SDKInitializer.initialize(getApplicationContext());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all);
+        applyPermission();
         locationOption();
         pre=getSharedPreferences("login",MODE_PRIVATE);
         ImageView main_image_center =  findViewById(R.id.main_image_center);
@@ -210,6 +217,29 @@ public class All extends AppCompatActivity {
         textViewMap.put(tag,textView);
 
         return view;
+    }
+
+    public void applyPermission(){
+        String[]PermissionString={
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.CAMERA,
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.RECORD_AUDIO,
+        };
+        permissionHelper=new PermissionHelper(this);
+        permissionHelper.check(PermissionString).onDenied(new Runnable() {
+            @Override
+            public void run() {
+                All.this.finish();
+                Log.i("permisson","拒绝权限");
+            }
+        }).onSuccess(new Runnable() {
+            @Override
+            public void run() {
+                Log.i("permisson","允许权限");
+            }
+        }).run();
     }
 
 

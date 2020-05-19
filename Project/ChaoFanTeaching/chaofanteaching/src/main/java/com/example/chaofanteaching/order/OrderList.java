@@ -53,11 +53,11 @@ public class OrderList extends AppCompatActivity {
     }
 
     public void initView(){
-        setTitie();
-        initViewPager();
         viewPager=findViewById(R.id.viewPager);
         tabLayout=findViewById(R.id.tabLayout);
         titleBar=findViewById(R.id.title_bar);
+        setTitie();
+        initViewPager();
     }
     public void setTitie(){
         titleBar.setTitle("订单列表");
