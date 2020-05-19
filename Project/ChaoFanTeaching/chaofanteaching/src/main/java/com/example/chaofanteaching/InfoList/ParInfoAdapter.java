@@ -15,6 +15,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.chaofanteaching.R;
 
 import java.io.FileOutputStream;
@@ -136,16 +139,20 @@ public class ParInfoAdapter extends BaseAdapter{
     private void initView() {
 
         //初始化控件
-        Bitmap bt = BitmapFactory.decodeFile(path + infoList.get(pos).getUser()+".png");//从Sd中找头像，转换成Bitmap
-        if (bt != null) {
-            @SuppressWarnings("deprecation")
-            Drawable drawable = new BitmapDrawable(bt);//转换成drawable
-            drawable.setBounds(0,0,150,150);
-            header.setImageDrawable(drawable);
-        } else {
-            //如果SD里面没有则需要从服务器取头像，取回来的头像再保存在SD中
-            asyncdownop();
+//        Bitmap bt = BitmapFactory.decodeFile(path + infoList.get(pos).getUser()+".png");//从Sd中找头像，转换成Bitmap
+//        if (bt != null) {
+//            @SuppressWarnings("deprecation")
+//            Drawable drawable = new BitmapDrawable(bt);//转换成drawable
+//            drawable.setBounds(0,0,150,150);
+//            header.setImageDrawable(drawable);
+//        } else {
+//            //如果SD里面没有则需要从服务器取头像，取回来的头像再保存在SD中
+//            asyncdownop();
+//
+//        }
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.error(R.drawable.boy).diskCacheStrategy(DiskCacheStrategy.NONE);
 
-        }
+        Glide.with(context.getApplicationContext()).load("http://39.107.42.87:8080/ChaoFanTeaching/img/"+infoList.get(pos).getUser()+".png").apply(requestOptions).into(header);
     }
 }

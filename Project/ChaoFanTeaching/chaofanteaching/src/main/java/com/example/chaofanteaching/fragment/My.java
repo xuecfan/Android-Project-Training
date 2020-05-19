@@ -32,6 +32,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.chaofanteaching.All;
 import com.example.chaofanteaching.BottomPopupOption;
 import com.example.chaofanteaching.HttpConnectionUtils;
@@ -353,53 +356,57 @@ public class My extends Fragment {
         return view;
     }
 
-    private void asyncdownop() {
-        new Thread(){
-            @Override
-            public void run() {
-                try {
-                    downimg();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                android.os.Message msg= Message.obtain();
-                msg.what=1;
-                handler.sendMessage(msg);
-            }
-        }.start();
-    }
-
-    private void downimg() throws IOException {
-        String fileName = path + a+".png";// 图片名字
-        Request request=new Request.Builder().url("http://39.107.42.87:8080/ChaoFanTeaching/DownImg?name="+a).build();
-        Call call=okHttpClient.newCall(request);
-        Response response=call.execute();
-        Log.i("photo", String.valueOf(response.body().byteStream()));
-        InputStream in=response.body().byteStream();
-        FileOutputStream out=new FileOutputStream(fileName);
-        byte[] bytes=new byte[1024];
-        int n=-1;
-        while ((n=in.read(bytes))!=-1){
-            out.write(bytes,0,n);
-            out.flush();
-        }
-        in.close();
-        out.close();
-    }
+//    private void asyncdownop() {
+//        new Thread(){
+//            @Override
+//            public void run() {
+//                try {
+//                    downimg();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//                android.os.Message msg= Message.obtain();
+//                msg.what=1;
+//                handler.sendMessage(msg);
+//            }
+//        }.start();
+//    }
+//
+//    private void downimg() throws IOException {
+//        String fileName = path + a+".png";// 图片名字
+//        Request request=new Request.Builder().url("http://39.107.42.87:8080/ChaoFanTeaching/DownImg?name="+a).build();
+//        Call call=okHttpClient.newCall(request);
+//        Response response=call.execute();
+//        Log.i("photo", String.valueOf(response.body().byteStream()));
+//        InputStream in=response.body().byteStream();
+//        FileOutputStream out=new FileOutputStream(fileName);
+//        byte[] bytes=new byte[1024];
+//        int n=-1;
+//        while ((n=in.read(bytes))!=-1){
+//            out.write(bytes,0,n);
+//            out.flush();
+//        }
+//        in.close();
+//        out.close();
+//    }
 
     private void initView() {
 
         //初始化控件
-        Bitmap bt = BitmapFactory.decodeFile(path + a+".png");//从Sd中找头像，转换成Bitmap
-        if (bt != null) {
-            @SuppressWarnings("deprecation")
-            Drawable drawable = new BitmapDrawable(bt);//转换成drawable
-            image.setImageDrawable(drawable);
-        } else {
-            //如果SD里面没有则需要从服务器取头像，取回来的头像再保存在SD中
-            asyncdownop();
+//        Bitmap bt = BitmapFactory.decodeFile(path + a+".png");//从Sd中找头像，转换成Bitmap
+//        if (bt != null) {
+//            @SuppressWarnings("deprecation")
+//            Drawable drawable = new BitmapDrawable(bt);//转换成drawable
+//            image.setImageDrawable(drawable);
+//        } else {
+//            //如果SD里面没有则需要从服务器取头像，取回来的头像再保存在SD中
+//            asyncdownop();
+//
+//        }
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.error(R.drawable.boy).diskCacheStrategy(DiskCacheStrategy.NONE);
 
-        }
+        Glide.with(getActivity()).load("http://39.107.42.87:8080/ChaoFanTeaching/img/"+a+".png").apply(requestOptions).into(image);
     }
 
     /*

@@ -15,6 +15,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.R;
 
@@ -126,52 +129,56 @@ public class InfoAdapter extends BaseAdapter{
         viewHolder.infoexp.setText(infoList.get(position).getExperience());
         return convertView;
     }
-    private void asyncdownop() {
-        new Thread(){
-            @Override
-            public void run() {
-                try {
-                    downimg();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                android.os.Message msg= Message.obtain();
-                msg.what=1;
-                handler.sendMessage(msg);
-            }
-        }.start();
-    }
-
-    private void downimg() throws IOException {
-        OkHttpClient okHttpClient=new OkHttpClient();
-        String fileName = path +infoList.get(pos).getUser()+".png";// 图片名字
-        Request request=new Request.Builder().url("http://175.24.102.160:8080/ChaoFanTeaching/DownImg?name="+infoList.get(pos).getUser()).build();
-        Call call=okHttpClient.newCall(request);
-        Response response=call.execute();
-        Log.i("photo", String.valueOf(response.body().byteStream()));
-        InputStream in=response.body().byteStream();
-        FileOutputStream out=new FileOutputStream(fileName);
-        byte[] bytes=new byte[1024];
-        int n=-1;
-        while ((n=in.read(bytes))!=-1){
-            out.write(bytes,0,n);
-            out.flush();
-        }
-        in.close();
-        out.close();
-    }
+//    private void asyncdownop() {
+//        new Thread(){
+//            @Override
+//            public void run() {
+//                try {
+//                    downimg();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//                android.os.Message msg= Message.obtain();
+//                msg.what=1;
+//                handler.sendMessage(msg);
+//            }
+//        }.start();
+//    }
+//
+//    private void downimg() throws IOException {
+//        OkHttpClient okHttpClient=new OkHttpClient();
+//        String fileName = path +infoList.get(pos).getUser()+".png";// 图片名字
+//        Request request=new Request.Builder().url("http://175.24.102.160:8080/ChaoFanTeaching/DownImg?name="+infoList.get(pos).getUser()).build();
+//        Call call=okHttpClient.newCall(request);
+//        Response response=call.execute();
+//        Log.i("photo", String.valueOf(response.body().byteStream()));
+//        InputStream in=response.body().byteStream();
+//        FileOutputStream out=new FileOutputStream(fileName);
+//        byte[] bytes=new byte[1024];
+//        int n=-1;
+//        while ((n=in.read(bytes))!=-1){
+//            out.write(bytes,0,n);
+//            out.flush();
+//        }
+//        in.close();
+//        out.close();
+//    }
 
     private void initView() {
         //初始化控件
-        Bitmap bt = BitmapFactory.decodeFile(path + infoList.get(pos).getUser()+".png");//从Sd中找头像，转换成Bitmap
-        if (bt != null) {
-            @SuppressWarnings("deprecation")
-            Drawable drawable = new BitmapDrawable(bt);//转换成drawable
-            header.setImageDrawable(drawable);
-        } else {
-            //如果SD里面没有则需要从服务器取头像，取回来的头像再保存在SD中
-            asyncdownop();
+//        Bitmap bt = BitmapFactory.decodeFile(path + infoList.get(pos).getUser()+".png");//从Sd中找头像，转换成Bitmap
+//        if (bt != null) {
+//            @SuppressWarnings("deprecation")
+//            Drawable drawable = new BitmapDrawable(bt);//转换成drawable
+//            header.setImageDrawable(drawable);
+//        } else {
+//            //如果SD里面没有则需要从服务器取头像，取回来的头像再保存在SD中
+//            asyncdownop();
+//
+//        }
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.error(R.drawable.boy1).diskCacheStrategy(DiskCacheStrategy.NONE);
 
-        }
+        Glide.with(context.getApplicationContext()).load("http://39.107.42.87:8080/ChaoFanTeaching/img/"+infoList.get(pos).getUser()+".png").apply(requestOptions).into(header);
     }
 }
