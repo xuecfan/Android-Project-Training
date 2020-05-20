@@ -53,7 +53,6 @@ public class OrderInfo extends AppCompatActivity {
                     paytext.setText(s[10]);
                     teltext.setText(s[11]);
                     moretext.setText(s[12]);
-
                     arr = new String[]{s[1], s[2]};
                     break;
             }

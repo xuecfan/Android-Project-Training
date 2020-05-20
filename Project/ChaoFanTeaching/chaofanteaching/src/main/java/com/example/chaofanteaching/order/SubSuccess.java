@@ -3,6 +3,7 @@ package com.example.chaofanteaching.order;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -25,11 +26,15 @@ public class SubSuccess extends AppCompatActivity {
                 onBackPressed();
             }
         });
+        Intent request=getIntent();
+        String id=request.getStringExtra("id");
+        Log.e("myl",id);
         look_order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent request=getIntent();
                 Intent i=new Intent(SubSuccess.this,OrderInfo.class);
-                i.putExtra("id","4");
+                i.putExtra("id",id);
                 startActivity(i);
                 finish();
             }

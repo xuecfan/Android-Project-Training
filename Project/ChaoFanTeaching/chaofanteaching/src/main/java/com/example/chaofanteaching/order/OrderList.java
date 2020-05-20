@@ -12,6 +12,8 @@ import com.example.chaofanteaching.R;
 import com.example.chaofanteaching.comments.MyAdapter;
 import com.example.chaofanteaching.comments.fragments.LeftFragment;
 import com.example.chaofanteaching.comments.fragments.RightFragment;
+import com.example.chaofanteaching.fragment.ParentList;
+import com.example.chaofanteaching.fragment.TeacherList;
 import com.hyphenate.easeui.widget.EaseTitleBar;
 
 import java.util.ArrayList;
@@ -34,8 +36,10 @@ public class OrderList extends AppCompatActivity {
         //创建List集合
         fragments = new ArrayList<>();
         //添加到fragments集合里
-        fragments.add(new LeftFragment());
-        fragments.add(new RightFragment());
+        fragments.add(new AllOrder());
+        fragments.add(new TeacherList());
+        fragments.add(new ParentList());
+        fragments.add(new TeacherList());
         //创建适配器
         MyAdapter adapter = new MyAdapter(getSupportFragmentManager());
         //把fragment添加到adapter
@@ -45,11 +49,15 @@ public class OrderList extends AppCompatActivity {
         //tabLayouut有几个创建几个
         tabLayout.addTab(tabLayout.newTab());
         tabLayout.addTab(tabLayout.newTab());
+        tabLayout.addTab(tabLayout.newTab());
+        tabLayout.addTab(tabLayout.newTab());
         //使tabLayout和viewPager  关联同步一下
         tabLayout.setupWithViewPager(viewPager);
         //设置创建的名字  万物从0开始
-        tabLayout.getTabAt(0).setText("未完成");
-        tabLayout.getTabAt(1).setText("已完成");
+        tabLayout.getTabAt(0).setText("全部");
+        tabLayout.getTabAt(1).setText("待确认");
+        tabLayout.getTabAt(2).setText("进行中");
+        tabLayout.getTabAt(3).setText("待评价");
     }
 
     public void initView(){
@@ -60,7 +68,7 @@ public class OrderList extends AppCompatActivity {
         initViewPager();
     }
     public void setTitie(){
-        titleBar.setTitle("订单列表");
+        titleBar.setTitle("我的订单");
         titleBar.setLeftLayoutClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

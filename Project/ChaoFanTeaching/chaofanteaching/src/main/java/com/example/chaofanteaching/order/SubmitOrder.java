@@ -33,6 +33,7 @@ import com.hyphenate.easeui.widget.EaseTitleBar;
 import java.net.HttpURLConnection;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Random;
 
 public class SubmitOrder extends AppCompatActivity {
     private SharedPreferences pre;
@@ -48,10 +49,13 @@ public class SubmitOrder extends AppCompatActivity {
     private TextView datetext;
     private TextView timetext;
     private TextView loctext;
+    private int id;
     private int mYear;
     private int mMonth;
     private int mDay;
     private int mHour;
+    private String H;
+    private String M;
     private int mMin;
     private double lat;
     private double lng;
@@ -102,6 +106,23 @@ public class SubmitOrder extends AppCompatActivity {
         mYear = ca.get(Calendar.YEAR);
         mMonth = ca.get(Calendar.MONTH)+1;
         mDay = ca.get(Calendar.DAY_OF_MONTH);
+        int h=ca.get(Calendar.HOUR_OF_DAY);
+        int m=ca.get(Calendar.MINUTE);
+        if(h<10){
+            H="0"+h;
+        }else{
+            H=String.valueOf(h);
+        }
+        if(m<10){
+            M="0"+m;
+        }else{
+            M=String.valueOf(m);
+        }
+        Random random=new Random();
+        int temp_num=random.nextInt(100);
+        String temp=mYear+mMonth+mDay+H+M+(temp_num);
+        id=Integer.parseInt(temp);
+        Log.e("myl","id="+id);
         datetext.setText(mYear+"-"+mMonth+"-"+mDay);
         timetext.setText("8:00");
         DatePickerDialog datePickerDialog = new DatePickerDialog(this,
@@ -148,7 +169,7 @@ public class SubmitOrder extends AppCompatActivity {
                 String pay=paytext.getText().toString();
                 String tel=teltext.getText().toString();
                 String more=moretext.getText().toString();
-                submitOrder(user,objusername,grade,subject,date,time,location,length,pay,tel,more);
+                submitOrder(id,user,objusername,grade,subject,date,time,location,length,pay,tel,more);
             }
         });
     }
@@ -245,18 +266,19 @@ public class SubmitOrder extends AppCompatActivity {
                 .radius(500));
         mCoder.destroy();
     }
-    public void submitOrder(String user,String objusername,String grade,String subject,String date,String time,String location,String length,String pay,String tel,String more){
+    public void submitOrder(int id,String user,String objusername,String grade,String subject,String date,String time,String location,String length,String pay,String tel,String more){
         new Thread(){
             HttpURLConnection connection =null;
             public void run(){
                 try {
                     connection = HttpConnectionUtils
-                            .getConnection("SubmitOrder?user="+user+"&objuser="+objuser+"&objusername="+objusername+"&grade="+grade+"&subject="+subject+"&date="+date+"&time="+time+"&location="+location+"&length="+length+"&pay="+pay+"&tel="+tel+"&more="+more);
+                            .getConnection("SubmitOrder?user="+user+"&id="+id+"&objuser="+objuser+"&objusername="+objusername+"&grade="+grade+"&subject="+subject+"&date="+date+"&time="+time+"&location="+location+"&length="+length+"&pay="+pay+"&tel="+tel+"&more="+more);
                     int code = connection.getResponseCode();
                     if (code != 200){
                         ToastUtils.showLong("网络错误！请稍后再试");
                     }else{
                         Intent i=new Intent(SubmitOrder.this,SubSuccess.class);
+                        i.putExtra("id",String.valueOf(id));
                         startActivity(i);
                         finish();
                     }

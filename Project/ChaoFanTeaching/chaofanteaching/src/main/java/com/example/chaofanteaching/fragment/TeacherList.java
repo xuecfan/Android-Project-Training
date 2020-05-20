@@ -35,11 +35,12 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
+import java.util.List;
 
 //展示老师列表
 public class TeacherList extends Fragment {
 
-    private java.util.List<Info> infoList = new ArrayList<>();
+    private List<Info> infoList = new ArrayList<>();
     private View view;
     private Handler handler;
     private ListView infolist;
