@@ -11,6 +11,7 @@ import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,12 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.baidu.location.BDAbstractLocationListener;
+import com.baidu.location.BDLocation;
+import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
+import com.baidu.mapapi.CoordType;
+import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.utils.DistanceUtil;
 import com.example.chaofanteaching.HttpConnectionUtils;
@@ -40,6 +47,8 @@ import java.util.ArrayList;
 
 //展示家长列表
 public class ParentList extends Fragment {
+    private LocationClient locationClient;
+    private LocationClientOption locationClientOption;
     private java.util.List<Info> infoList = new ArrayList<>();
     private View view;
     private Handler handler;
@@ -56,8 +65,8 @@ public class ParentList extends Fragment {
     private int sign;
     private int sign1;
     private int sign2;
-    private String lat;
-    private String lng;
+    private double lat;
+    private double lng;
 
     @Nullable
     @Override
@@ -65,19 +74,76 @@ public class ParentList extends Fragment {
         view = inflater.inflate(R.layout.list, container, false);
         pre= getContext().getSharedPreferences("login", Context.MODE_PRIVATE);
         a = pre.getString("userName", "");
-        lat=pre.getString("lat","");
-        lng=pre.getString("lng","");
+        locationOption();
+        loadInfo();
         refresh();
         sort();
         serach();
-        loadInfo();
         jumpToDetail();
+        handler = new Handler() {
+            @Override
+            public void handleMessage(android.os.Message msg) {
+                switch (msg.what) {
+                    case 1:
+                        Info scanInfo;
+                        String str = msg.obj.toString();
+                        if(str.isEmpty()){
+                            Toast.makeText(getContext(),"没有搜到任何东西",Toast.LENGTH_LONG).show();
+                        }else{
+                            String[] s = str.split(";");
+                            for (int i = 0; i < s.length; i++) {
+                                String[] r = s[i].split(",");
+                                Log.e("myl","dis"+showDisdance(lat,lng,Double.parseDouble(r[5]),Double.parseDouble(r[6]))+lat);
+                                scanInfo = new Info(r[0], r[1], r[2], r[3]+"元/小时",r[4],showDisdance(lat,lng,Double.parseDouble(r[5]),Double.parseDouble(r[6])),r[7]);
+                                infoList.add(scanInfo);
+                                parInfoAdapter.notifyDataSetChanged();
+                            }
+                        }
+                        break;
+                }
+            }
+        };
         return view;
     }
 
+    private void locationOption(){
+        //1.创建定位服务客户端类的对象
+        locationClient=new LocationClient(getContext());
+        //2.创建定位客户端选项类的对象，并设置参数
+        locationClientOption=new LocationClientOption();
+        //打开GPS
+        locationClientOption.setOpenGps(true);
+        SDKInitializer.setCoordType(CoordType.GCJ02);
+        //设置定位模式
+        locationClientOption.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);
+        //需要定位地址数据
+        locationClientOption.setIsNeedAddress(false);
+        //需要地址描述
+        locationClientOption.setIsNeedLocationDescribe(false);
+        //需要周边POI信息
+        locationClientOption.setIsNeedLocationPoiList(false);
+        //3.将定位选项参数应用给定位服务客户端类的对象
+        locationClient.setLocOption(locationClientOption);
+        //4.开始定位
+        locationClient.start();
+        //5.给定位客户端类的对象注册定位监听器
+        locationClient.registerLocationListener(new BDAbstractLocationListener() {
+            @Override
+            public void onReceiveLocation(BDLocation bdLocation) {
+                //获取经纬度
+                lat=bdLocation.getLatitude();
+                lng=bdLocation.getLongitude();
+                if(bdLocation.getLocType()==62){
+                    locationClient.restart();
+                }
+                Log.e("myl","定位结果"+bdLocation.getLocType()+","+lat);
+            }
+        });
+    }//获取定位
+
     public void loadInfo(){
+        infolist=view.findViewById(R.id.infolist);
         infoList.clear();
-        infolist = view.findViewById(R.id.infolist);
         parInfoAdapter = new ParInfoAdapter(this.getContext(), infoList, R.layout.info_item1);
         infolist.setAdapter(parInfoAdapter);
         dbKey("serach1","");
@@ -115,7 +181,7 @@ public class ParentList extends Fragment {
                 if (keyCode == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN) {
                     String key=editText.getText().toString();
                     dbKey("serach1",key);
-                    editText.setCursorVisible(false);
+                    editText.setCursorVisible(true);
                 }
                 return false;
             }
@@ -240,29 +306,6 @@ public class ParentList extends Fragment {
 
     private void dbKey(final String op,final String key) {
         infoList.clear();
-        handler = new Handler() {
-            @Override
-            public void handleMessage(android.os.Message msg) {
-                switch (msg.what) {
-                    case 1:
-                        Info scanInfo;
-                        String str = msg.obj.toString();
-                        if(str.isEmpty()){
-                            Toast.makeText(getContext(),"没有搜到任何东西",Toast.LENGTH_LONG).show();
-                        }else{
-                            String[] s = str.split(";");
-                            for (int i = 0; i < s.length; i++) {
-                                String[] r = s[i].split(",");
-                                String dis=showDisdance(Double.parseDouble(lat),Double.parseDouble(lng),Double.parseDouble(r[5]),Double.parseDouble(r[6]));
-                                scanInfo = new Info(r[0], r[1], r[2], r[3]+"元/小时",r[4],dis,r[7]);
-                                infoList.add(scanInfo);
-                                parInfoAdapter.notifyDataSetChanged();
-                            }
-                        }
-                        break;
-                }
-            }
-        };
         new Thread() {
             HttpURLConnection connection = null;
             @Override

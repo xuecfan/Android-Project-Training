@@ -45,8 +45,6 @@ import ru.alexbykov.nopermission.PermissionHelper;
 
 public class All extends AppCompatActivity {
 
-    private LocationClient locationClient;
-    private LocationClientOption locationClientOption;
     private static int isExit = 0;
     private Map<String, ImageView> imageViewMap = new HashMap<>();
     private Map<String, TextView> textViewMap = new HashMap<>();
@@ -59,10 +57,9 @@ public class All extends AppCompatActivity {
         SDKInitializer.initialize(getApplicationContext());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all);
+        pre=getSharedPreferences("login",MODE_PRIVATE);
         applyPermission();
         openGPSSettings();
-        locationOption();
-        pre=getSharedPreferences("login",MODE_PRIVATE);
         ImageView main_image_center =  findViewById(R.id.main_image_center);
         main_image_center.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -256,47 +253,6 @@ public class All extends AppCompatActivity {
             return false;
         }
         return super.onKeyDown(keyCode,event);
-    }
-
-    private void locationOption(){
-        //1.创建定位服务客户端类的对象
-        locationClient=new LocationClient(getApplicationContext());
-        //2.创建定位客户端选项类的对象，并设置参数
-        locationClientOption=new LocationClientOption();
-        //设置定位参数
-        //打开GPS
-        locationClientOption.setOpenGps(true);
-        SDKInitializer.setCoordType(CoordType.GCJ02);
-        //设置定位模式
-        locationClientOption.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);
-        //需要定位地址数据
-        locationClientOption.setIsNeedAddress(false);
-        //需要地址描述
-        locationClientOption.setIsNeedLocationDescribe(false);
-        //需要周边POI信息
-        locationClientOption.setIsNeedLocationPoiList(false);
-        //3.将定位选项参数应用给定位服务客户端类的对象
-        locationClient.setLocOption(locationClientOption);
-        //4.开始定位
-        locationClient.start();
-        //5.给定位客户端类的对象注册定位监听器
-        locationClient.registerLocationListener(new BDAbstractLocationListener() {
-            @Override
-            public void onReceiveLocation(BDLocation bdLocation) {
-                //获取经纬度
-                double lat=bdLocation.getLatitude();
-                double lng=bdLocation.getLongitude();
-                if(bdLocation.getLocType()==62){
-                    locationClient.restart();
-                }
-                Log.e("myl","定位结果"+bdLocation.getLocType()+","+lat);
-                SharedPreferences sharedPreferences = getSharedPreferences("login", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("lat", String.valueOf(lat));
-                editor.putString("lng", String.valueOf(lng));
-                editor.apply();
-            }
-        });
     }
 
     private void openGPSSettings() {

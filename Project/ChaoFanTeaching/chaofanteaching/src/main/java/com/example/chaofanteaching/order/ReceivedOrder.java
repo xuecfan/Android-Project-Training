@@ -46,8 +46,6 @@ public class ReceivedOrder extends Fragment {
     public void loadInfo(){
         orderList.clear();
         orderlist=view.findViewById(R.id.orderlist);
-        orderList.add(new Order(12345,"待确认","myl","50元/小时","2020-05-20-14:30"));
-        orderList.add(new Order(12346,"已完成","000","50元/小时","2020-05-20-14:30"));
         orderAdapter = new OrderAdapter(this.getContext(), orderList,R.layout.order_list_item);
         orderlist.setAdapter(orderAdapter);
         DbOrder(user);

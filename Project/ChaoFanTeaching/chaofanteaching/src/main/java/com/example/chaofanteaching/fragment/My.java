@@ -391,21 +391,8 @@ public class My extends Fragment {
 //    }
 
     private void initView() {
-
-        //初始化控件
-//        Bitmap bt = BitmapFactory.decodeFile(path + a+".png");//从Sd中找头像，转换成Bitmap
-//        if (bt != null) {
-//            @SuppressWarnings("deprecation")
-//            Drawable drawable = new BitmapDrawable(bt);//转换成drawable
-//            image.setImageDrawable(drawable);
-//        } else {
-//            //如果SD里面没有则需要从服务器取头像，取回来的头像再保存在SD中
-//            asyncdownop();
-//
-//        }
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.error(R.drawable.boy).diskCacheStrategy(DiskCacheStrategy.NONE);
-
         Glide.with(getActivity()).load("http://39.107.42.87:8080/ChaoFanTeaching/img/"+a+".png").apply(requestOptions).into(image);
     }
 
@@ -427,10 +414,8 @@ public class My extends Fragment {
         intent.putExtra("outputFormat", "JPEG");// 图片格式
         intent.putExtra("noFaceDetection", true);// 取消人脸识别
         intent.putExtra("return-data", true);
-
         uritempFile = Uri.parse("file://" + "/" + Environment.getExternalStorageDirectory().getPath() + "/" + a + ".png");
         intent.putExtra(MediaStore.EXTRA_OUTPUT, uritempFile);
-
         // 开启一个带有返回值的Activity，请求码为PHOTO_REQUEST_CUT
         startActivityForResult(intent, PHOTO_REQUEST_CUT);
     }
@@ -438,7 +423,6 @@ public class My extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if(requestCode == 8888 ) {
             //获取系统摄像头拍照的结果
             bitmap = data.getParcelableExtra("data");
@@ -469,7 +453,6 @@ public class My extends Fragment {
             }
         super.onActivityResult(requestCode, resultCode, data);
     }
-
 
     private void setPicToView(Bitmap mBitmap){
         String sdStatus = Environment.getExternalStorageState();
@@ -517,7 +500,6 @@ public class My extends Fragment {
         }
     }
 
-
     private void look(){
         new Thread() {
             HttpURLConnection connection = null;
@@ -540,8 +522,6 @@ public class My extends Fragment {
             }
         }.start();
     }
-
-
 
     private void renzheng(){
         new Thread() {

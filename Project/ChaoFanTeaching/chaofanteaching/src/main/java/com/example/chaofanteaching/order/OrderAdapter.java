@@ -1,15 +1,17 @@
 package com.example.chaofanteaching.order;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.chaofanteaching.R;
 import com.example.chaofanteaching.utils.ToastUtils;
 
@@ -20,6 +22,7 @@ public class OrderAdapter extends BaseAdapter {
     private List<Order> orderList;
     private int itemLayoutId;
     private Context context;
+    private ImageView header;
 
     public OrderAdapter(Context context, List<Order> orderList, int itemLayoutId){
         this.context = context;
@@ -76,12 +79,13 @@ public class OrderAdapter extends BaseAdapter {
         }else{
             viewHolder= (ViewHolder) convertView.getTag();
         }
+        header=convertView.findViewById(R.id.header);
+        initView();
         viewHolder.id.setText("订单编号："+orderList.get(position).getId());
         viewHolder.status.setText(orderList.get(position).getStatus());
-        viewHolder.user.setText(orderList.get(position).getUser());
-        viewHolder.price.setText(orderList.get(position).getPrice());
+        viewHolder.user.setText("用户："+orderList.get(position).getUser());
+        viewHolder.price.setText("￥"+orderList.get(position).getPrice());
         viewHolder.time.setText(orderList.get(position).getTime());
-        viewHolder.btn.setText("123");
         viewHolder.btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,5 +93,10 @@ public class OrderAdapter extends BaseAdapter {
             }
         });
         return convertView;
+    }
+    private void initView() {
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.error(R.drawable.tea).diskCacheStrategy(DiskCacheStrategy.NONE);
+        Glide.with(context.getApplicationContext()).load("http://39.107.42.87:8080/ChaoFanTeaching/img/"+orderList.get(position).getUser()+".png").apply(requestOptions).into(header);
     }
 }
