@@ -26,6 +26,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.chaofanteaching.HttpConnectionUtils;
 
 import com.example.chaofanteaching.R;
@@ -185,14 +188,17 @@ public class InfoDetailActivity extends AppCompatActivity {
         Intent request=getIntent();
         name=request.getStringExtra("name");
         String user=request.getStringExtra("user");
-        Bitmap bt = BitmapFactory.decodeFile(path +user+".png");//从Sd中找头像，转换成Bitmap
-        if(bt!=null){
-            @SuppressWarnings("deprecation")
-            Drawable drawable = new BitmapDrawable(bt);//转换成drawable
-            img.setImageDrawable(drawable);
-        }else{
-            img.setImageDrawable(getResources().getDrawable(R.drawable.tea));
-        }
+//        Bitmap bt = BitmapFactory.decodeFile(path +user+".png");//从Sd中找头像，转换成Bitmap
+//        if(bt!=null){
+//            @SuppressWarnings("deprecation")
+//            Drawable drawable = new BitmapDrawable(bt);//转换成drawable
+//            img.setImageDrawable(drawable);
+//        }else{
+//            img.setImageDrawable(getResources().getDrawable(R.drawable.tea));
+//        }
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.error(R.drawable.tea).diskCacheStrategy(DiskCacheStrategy.NONE);
+        Glide.with(getApplicationContext()).load("http://39.107.42.87:8080/ChaoFanTeaching/img/"+user+".png").apply(requestOptions).into(img);
         nametext=findViewById(R.id.name);
         sextext=findViewById(R.id.sex);
         universitytext=findViewById(R.id.university);

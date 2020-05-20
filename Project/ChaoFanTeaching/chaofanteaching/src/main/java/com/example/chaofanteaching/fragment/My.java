@@ -225,7 +225,7 @@ public class My extends Fragment {
         Map<String,String>map7=new HashMap<>();
         map.put("text","个人资料");
         map.put("img","person_data");
-        map1.put("text","我的订单");
+        map1.put("text","我的试讲");
         map1.put("img","order");
         map2.put("text","我发布的");
         map2.put("img","send");

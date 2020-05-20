@@ -151,7 +151,7 @@ public class ParInfoAdapter extends BaseAdapter{
 //
 //        }
         RequestOptions requestOptions = new RequestOptions();
-        requestOptions.error(R.drawable.boy).diskCacheStrategy(DiskCacheStrategy.NONE);
+        requestOptions.error(R.drawable.boy1).diskCacheStrategy(DiskCacheStrategy.NONE);
 
         Glide.with(context.getApplicationContext()).load("http://39.107.42.87:8080/ChaoFanTeaching/img/"+infoList.get(pos).getUser()+".png").apply(requestOptions).into(header);
     }
