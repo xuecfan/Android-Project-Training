@@ -42,6 +42,7 @@ public class OrderInfo extends AppCompatActivity {
                 case 1://4,000,myl,马爸爸,初三,生物,2020-5-12,8:00,河北省石家庄市元氏县青银高速与红旗大街交汇处西南角碧桂园附近,30分钟,50,10086,无
                     String str = msg.obj.toString();
                     String[] s = str.split(",");
+                    if(s.length>=13)
                     username.setText(s[1]);
                     objuser.setText(s[2]);
                     gradetext.setText(s[4]);
@@ -79,6 +80,7 @@ public class OrderInfo extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(OrderInfo.this, CommentingActivity.class);
+                intent.putExtra("id",id);
                 intent.putExtra("user",arr);
                 startActivity(intent);
             }
