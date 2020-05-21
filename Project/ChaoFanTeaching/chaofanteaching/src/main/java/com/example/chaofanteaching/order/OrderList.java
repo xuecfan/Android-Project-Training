@@ -1,20 +1,14 @@
 package com.example.chaofanteaching.order;
 
-import android.content.SharedPreferences;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.LinearLayout;
-
 import com.example.chaofanteaching.R;
 import com.example.chaofanteaching.comments.MyAdapter;
-import com.example.chaofanteaching.fragment.TeacherList;
 import com.hyphenate.easeui.widget.EaseTitleBar;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,7 +56,6 @@ public class OrderList extends AppCompatActivity {
         titleBar=findViewById(R.id.title_bar);
         setTitie();
         initViewPager();
-        //divider();
     }
     public void setTitie(){
         titleBar.setTitle("我的试讲");
@@ -72,11 +65,5 @@ public class OrderList extends AppCompatActivity {
                 onBackPressed();
             }
         });
-    }
-    public void divider(){
-        LinearLayout linearLayout = (LinearLayout) tabLayout.getChildAt(0);
-        linearLayout.setShowDividers(LinearLayout.SHOW_DIVIDER_MIDDLE);
-        linearLayout.setDividerDrawable(ContextCompat.getDrawable(this,
-                R.drawable.tablayout));
     }
 }

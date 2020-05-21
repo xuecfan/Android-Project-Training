@@ -43,7 +43,9 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 //展示家长列表
 public class ParentList extends Fragment {
@@ -80,29 +82,6 @@ public class ParentList extends Fragment {
         sort();
         serach();
         jumpToDetail();
-        handler = new Handler() {
-            @Override
-            public void handleMessage(android.os.Message msg) {
-                switch (msg.what) {
-                    case 1:
-                        Info scanInfo;
-                        String str = msg.obj.toString();
-                        if(str.isEmpty()){
-                            Toast.makeText(getContext(),"没有搜到任何东西",Toast.LENGTH_LONG).show();
-                        }else{
-                            String[] s = str.split(";");
-                            for (int i = 0; i < s.length; i++) {
-                                String[] r = s[i].split(",");
-                                Log.e("myl","dis"+showDisdance(lat,lng,Double.parseDouble(r[5]),Double.parseDouble(r[6]))+lat);
-                                scanInfo = new Info(r[0], r[1], r[2], r[3]+"元/小时",r[4],showDisdance(lat,lng,Double.parseDouble(r[5]),Double.parseDouble(r[6])),r[7]);
-                                infoList.add(scanInfo);
-                                parInfoAdapter.notifyDataSetChanged();
-                            }
-                        }
-                        break;
-                }
-            }
-        };
         return view;
     }
 
@@ -116,12 +95,6 @@ public class ParentList extends Fragment {
         SDKInitializer.setCoordType(CoordType.GCJ02);
         //设置定位模式
         locationClientOption.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);
-        //需要定位地址数据
-        locationClientOption.setIsNeedAddress(false);
-        //需要地址描述
-        locationClientOption.setIsNeedLocationDescribe(false);
-        //需要周边POI信息
-        locationClientOption.setIsNeedLocationPoiList(false);
         //3.将定位选项参数应用给定位服务客户端类的对象
         locationClient.setLocOption(locationClientOption);
         //4.开始定位
@@ -306,17 +279,42 @@ public class ParentList extends Fragment {
 
     private void dbKey(final String op,final String key) {
         infoList.clear();
+        handler = new Handler() {
+            @Override
+            public void handleMessage(android.os.Message msg) {
+                switch (msg.what) {
+                    case 1:
+                        Info scanInfo;
+                        String str = msg.obj.toString();
+                        if(str.isEmpty()){
+                            Toast.makeText(getContext(),"这里空空如也",Toast.LENGTH_LONG).show();
+                        }else{
+                            String[] s = str.split(";");
+                            for (int i = 0; i < s.length; i++) {
+                                String[] r = s[i].split(",");
+                                scanInfo = new Info(r[0], r[1], r[2], r[3]+"元/小时",r[4],showDisdance(lat,lng,Double.parseDouble(r[5]),Double.parseDouble(r[6])),r[7]);
+                                infoList.add(scanInfo);
+                                parInfoAdapter.notifyDataSetChanged();
+                            }
+                        }
+                        break;
+                }
+            }
+        };
         new Thread() {
             HttpURLConnection connection = null;
             @Override
             public void run() {
                 try {
+                    if(lat==0.0){
+                        Thread.sleep(350);//延迟350ms用于百度地图定位
+                    }
                     connection = HttpConnectionUtils.getConnection("ListInfoServlet?op="+op+"&key="+key);
                     int code = connection.getResponseCode();
                     if (code == 200) {
                         InputStream inputStream = connection.getInputStream();
                         String str = StreamChangeStrUtils.toChange(inputStream);
-                        android.os.Message message = Message.obtain();
+                        Message message = Message.obtain();
                         message.obj = str;
                         message.what = 1;
                         handler.sendMessage(message);

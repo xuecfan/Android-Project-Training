@@ -133,22 +133,19 @@ public class LoginActivity extends AppCompatActivity {
         mDialog = new ProgressDialog(this);
         mDialog.setMessage("正在登陆请稍后......");
         mDialog.show();
-
         EMClient.getInstance().login(myId.getText().toString(), myPW.getText().toString(), new EMCallBack() {
             @Override
             public void onSuccess() {
                 if (!LoginActivity.this.isFinishing()) {
                     mDialog.dismiss();
                 }
-
                 // 加载所有群组到内存，如果使用了群组的话
 //                EMClient.getInstance().groupManager().loadAllGroups();
                 // 加载所有会话到内存
                 EMClient.getInstance().chatManager().loadAllConversations();
-                ToastUtils.showLong("登录成功");
+                //ToastUtils.showLong("登录成功");
                 //ECMainActivity.show(LoginActivity.this);
                 finish();
-
             }
 
             @Override
@@ -189,17 +186,12 @@ public class LoginActivity extends AppCompatActivity {
                             case EMError.USER_ALREADY_LOGIN:
                                 ToastUtils.showLong("用户已登录！ code: " + i + "，message: " + s);
                                 break;
-
                         }
                     }
                 });
-
-
             }
-
             @Override
             public void onProgress(int i, String s) {
-
             }
         });
     }
@@ -225,11 +217,6 @@ public class LoginActivity extends AppCompatActivity {
                     case 1:
                         String string = message.obj.toString();
                         System.out.println("从服务器传来的servlet页面数字："+string);
-//                        if(string.equals("10")){
-//                            EventBus.getDefault().post("parent");
-//                        }else{
-//                            EventBus.getDefault().post("teacher");
-//                        }
                         if (string.equals("10") || string.equals("11")){
                             SharedPreferences sharedPreferences = getSharedPreferences("login", Context.MODE_PRIVATE);
                             SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -283,5 +270,4 @@ public class LoginActivity extends AppCompatActivity {
             }
         }.start();
     }
-
 }
