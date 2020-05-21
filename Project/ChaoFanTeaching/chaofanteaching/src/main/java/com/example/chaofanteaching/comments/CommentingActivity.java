@@ -5,14 +5,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Message;
-import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.RatingBar;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,8 +18,6 @@ import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.R;
 import com.example.chaofanteaching.StreamChangeStrUtils;
 import com.hyphenate.easeui.widget.EaseTitleBar;
-
-import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -32,8 +28,8 @@ public class CommentingActivity extends AppCompatActivity {
     private EaseTitleBar titleBar;
     private TextView publishButton;
     //评论者和被评论者姓名、评论内容
-    private TextView commenter1Id;
-    private TextView commenter2Id;
+    private TextView teacher;
+    private TextView parent;
     private TextView commentingContent;
 
     //评星条
@@ -49,8 +45,9 @@ public class CommentingActivity extends AppCompatActivity {
     private String role;//用户角色
     private String myid;//当前用户id
 
-    //从OrderInfo来的用户名数组
+    //从OrderInfo来的用户名数组和订单id
     private String arr[];
+    private int messageId;
 
     private Handler handler = new Handler(){
         @Override
@@ -87,16 +84,19 @@ public class CommentingActivity extends AppCompatActivity {
         makeStar();
 
 
-        //接受从OrderInfo来的两个用户名
+        //接受从OrderInfo来的两个用户名和订单id
         Intent intentFromOrderInfo = getIntent();
         arr=intentFromOrderInfo.getStringArrayExtra("user");
+        messageId =intentFromOrderInfo.getIntExtra("id",0);
+//        System.out.println("messageId");
+//        System.out.println(messageId);
         //获得当前用户角色和id
         pre=getSharedPreferences("login", Context.MODE_PRIVATE);
-        role=pre.getString("role","");//11是学生,10是家长
+        role=pre.getString("role","");//11是老师,10是家长
         myid = pre.getString("userName","");
 
-        commenter1Id.setText(arr[0]);
-        commenter2Id.setText(arr[1]);
+        teacher.setText(arr[0]);
+        parent.setText(arr[1]);
         //Log.e("myl","sql="+sql);
 //        dbKey("edit",sql);
 
@@ -108,8 +108,8 @@ public class CommentingActivity extends AppCompatActivity {
     public void initView(){
         titleBar=findViewById(R.id.commenting_titleBar);
 
-        commenter1Id = findViewById(R.id.commenter1_id);
-        commenter2Id = findViewById(R.id.commenter2_id);
+        teacher = findViewById(R.id.commenter1_id);
+        parent = findViewById(R.id.commenter2_id);
         commentingContent = findViewById(R.id.commenting_content_txt);
 
         isOnTimeValue = findViewById(R.id.is_on_time_value);
@@ -145,10 +145,11 @@ public class CommentingActivity extends AppCompatActivity {
                             String option = "commenting";//操作
                             connection = HttpConnectionUtils.getConnection(
                                     "Comment?&option="+option
-                                    +"&commenter1Id="+commenter1Id.getText()+"&commenter2Id="+commenter2Id.getText()
+                                    +"&commenter1Id="+ teacher.getText()+"&commenter2Id="+ parent.getText()
                                     +"&commentingContent="+commentingContent.getText()
                                     +"&isOnTime="+isOnTimeRatingBar.getRating()
-                                    +"&teachingQuality="+teachingQualityRatingBar.getRating());
+                                    +"&teachingQuality="+teachingQualityRatingBar.getRating()
+                                            +"&messageId="+messageId);
                             int code = connection.getResponseCode();
                             if (code == 200){
                                 InputStream inputStream = connection.getInputStream();

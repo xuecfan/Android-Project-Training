@@ -71,8 +71,8 @@ public class MyCommentsActivity extends AppCompatActivity {
         //使tabLayout和viewPager  关联同步一下
         tabLayout.setupWithViewPager(viewPager);
         //设置创建的名字  万物从0开始
-        tabLayout.getTabAt(0).setText("待评价");
-        tabLayout.getTabAt(1).setText("已评价");
+        tabLayout.getTabAt(0).setText("我发出的");
+        tabLayout.getTabAt(1).setText("我收到的");
     }
 
 

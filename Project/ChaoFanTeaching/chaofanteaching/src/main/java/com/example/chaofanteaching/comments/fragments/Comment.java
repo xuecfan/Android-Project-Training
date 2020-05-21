@@ -4,68 +4,67 @@ package com.example.chaofanteaching.comments.fragments;
  * 评论实体类
  */
 public class Comment {
-    private String teacherId;
-    private String parentId;
-    private String teacherName;
-    private String parentName;
-    private String date;//评论日期
+    private String user;
+    private String objUser;
+//    private String teacherName;
+//    private String parentName;
+//    private String date;//评论日期
     private String content;//评论内容
-    private int isOnTime;//是否准时
-    private int teachingQuality;//教学质量
+    private String isOnTime;//是否准时
+    private String teachingQuality;//教学质量
+//    private int who;//判断是谁发的评论，0家长，1老师
 
     public Comment() {
     }
 
-    public Comment(String teacherId, String parentId, String teacherName, String parentName, String date, String content, int isOnTime, int teachingQuality) {
-        this.teacherId = teacherId;
-        this.parentId = parentId;
-        this.teacherName = teacherName;
-        this.parentName = parentName;
-        this.date = date;
+    public Comment(String user, String objUser, String content, String isOnTime, String teachingQuality) {
+        this.user = user;
+        this.objUser = objUser;
         this.content = content;
         this.isOnTime = isOnTime;
         this.teachingQuality = teachingQuality;
     }
 
-    public String getTeacherId() {
-        return teacherId;
+
+    public String getUser() {
+        return user;
     }
 
-    public void setTeacherId(String teacherId) {
-        this.teacherId = teacherId;
+    public void setUser(String user) {
+        this.user = user;
     }
 
-    public String getParentId() {
-        return parentId;
+    public String getObjUser() {
+        return objUser;
     }
 
-    public void setParentId(String parentId) {
-        this.parentId = parentId;
+    public void setObjUser(String objUser) {
+        this.objUser = objUser;
     }
 
-    public String getTeacherName() {
-        return teacherName;
-    }
+//    public String getTeacherName() {
+//        return teacherName;
+//    }
+//
+//    public void setTeacherName(String teacherName) {
+//        this.teacherName = teacherName;
+//    }
+//
+//    public String getParentName() {
+//        return parentName;
+//    }
+//
+//    public void setParentName(String parentName) {
+//        this.parentName = parentName;
+//    }
 
-    public void setTeacherName(String teacherName) {
-        this.teacherName = teacherName;
-    }
-
-    public String getParentName() {
-        return parentName;
-    }
-
-    public void setParentName(String parentName) {
-        this.parentName = parentName;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
+//    public String getDate() {
+//        return date;
+//    }
+//
+//    public void setDate(String date) {
+//        this.date = date;
+//    }
 
     public String getContent() {
         return content;
@@ -75,19 +74,27 @@ public class Comment {
         this.content = content;
     }
 
-    public int getIsOnTime() {
+    public String getIsOnTime() {
         return isOnTime;
     }
 
-    public void setIsOnTime(int isOnTime) {
+    public void setIsOnTime(String isOnTime) {
         this.isOnTime = isOnTime;
     }
 
-    public int getTeachingQuality() {
+    public String getTeachingQuality() {
         return teachingQuality;
     }
 
-    public void setTeachingQuality(int teachingQuality) {
+    public void setTeachingQuality(String teachingQuality) {
         this.teachingQuality = teachingQuality;
     }
+
+//    public int getWho() {
+//        return who;
+//    }
+//
+//    public void setWho(int who) {
+//        this.who = who;
+//    }
 }

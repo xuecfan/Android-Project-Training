@@ -4,32 +4,56 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-        android:id="@+id/comment_name"
-        android:text="老师姓名"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <com.example.chaofanteaching.RoundImageView
+        android:id="@+id/u_image"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/pingjia"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintVertical_bias="0"/>
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintHorizontal_bias="0"/>
     <TextView
-        android:id="@+id/comment_date"
-        android:text="05-11"
-        android:layout_width="match_parent"
+        android:id="@+id/u_id"
+        android:text="张三"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/comment_name"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/u_image"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintVertical_bias="0"/>
+    <TextView
+        android:id="@+id/comment_is_on_time"
+        android:text="3.0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/u_id"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintVertical_bias="0"/>
+    <TextView
+        android:id="@+id/comment_teach_quality"
+        android:text="3.0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/comment_is_on_time"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintVertical_bias="0"/>
     <TextView
         android:id="@+id/comment_content"
         android:text="评价内容"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/comment_date"
+        app:layout_constraintTop_toBottomOf="@+id/comment_is_on_time"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
