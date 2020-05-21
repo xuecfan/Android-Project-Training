@@ -195,13 +195,19 @@ public class CommentingActivity extends AppCompatActivity {
     public void judgeR(int r , TextView textView){
         switch(r){
             case 1:
-                textView.setText("差评");
+                textView.setText("很差");
                 break;
             case 2:
-                textView.setText("一般");
+                textView.setText("差");
                 break;
             case 3:
-                textView.setText("好评");
+                textView.setText("一般");
+                break;
+            case 4:
+                textView.setText("好");
+                break;
+            case 5:
+                textView.setText("很好");
                 break;
         }
     }
