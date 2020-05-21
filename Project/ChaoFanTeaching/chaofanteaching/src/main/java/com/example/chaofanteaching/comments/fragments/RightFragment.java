@@ -46,7 +46,7 @@ public class RightFragment extends Fragment {
 
     private List<Comment> mData = null;
     private Context mContext;
-    private CommentAdapter commentAdapter = null;
+    private CommentAdapter commentAdapter;
     private ListView list_comment;
 
     //获取全局变量
@@ -114,52 +114,6 @@ public class RightFragment extends Fragment {
 
         return view;
     }
-//    private void dbKey(final String op,final String key) {
-//        infoList.clear();
-//        handler = new Handler() {
-//            @Override
-//            public void handleMessage(android.os.Message msg) {
-//                switch (msg.what) {
-//                    case 1:
-//                        Info scanInfo;
-//                        String str = msg.obj.toString();
-//                        if(str.isEmpty()){
-//                            Toast.makeText(getContext(),"没有搜到任何东西",Toast.LENGTH_LONG).show();
-//                        }else{
-//                            String[] s = str.split(";");
-//                            for (int i = 0; i < s.length; i++) {
-//                                String[] r = s[i].split(",");
-//                                scanInfo = new Info(r[0], r[1], r[2], "擅长"+r[3],r[4]+"元/小时",r[5],r[6]);
-//                                infoList.add(scanInfo);
-//                                infoAdapter.notifyDataSetChanged();
-//                            }
-//                        }
-//                        break;
-//                }
-//            }
-//        };
-//        new Thread() {
-//            HttpURLConnection connection = null;
-//
-//            @Override
-//            public void run() {
-//                try {
-//                    connection = HttpConnectionUtils.getConnection("ListInfoServlet?op="+op+"&key="+key);
-//                    int code = connection.getResponseCode();
-//                    if (code == 200) {
-//                        InputStream inputStream = connection.getInputStream();
-//                        String str = StreamChangeStrUtils.toChange(inputStream);
-//                        android.os.Message message = Message.obtain();
-//                        message.obj = str;
-//                        message.what = 1;
-//                        handler.sendMessage(message);
-//                    }
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }.start();
-//    }
 
     /**
      * 根据当前用户id查询我收到的评价
@@ -184,7 +138,7 @@ public class RightFragment extends Fragment {
                                 String[] r = s[i].split(",");
                                 scanInfo = new Comment(r[0], r[1], r[2], r[3],r[4]);
                                 commentList.add(scanInfo);
-//                                CommentAdapter.notifyDataSetChanged();
+                                commentAdapter.notifyDataSetChanged();
                             }
                         }
                         break;

@@ -4,14 +4,21 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.R;
+import com.example.chaofanteaching.StreamChangeStrUtils;
 
+import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,19 +90,72 @@ public class LeftFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-//        View view = inflater.inflate(R.layout.fragment_right, container, false);
-//        mContext = this.getContext();
-//        list_comment = (ListView) view.findViewById(R.id.right_list);
-//
-//
-//        commentAdapter = new CommentAdapter(commentList,this.getContext());
-//        list_comment.setAdapter(commentAdapter);
-//        //获得当前用户角色和id
-//        pre=getActivity().getSharedPreferences("login", Context.MODE_PRIVATE);
-//        role=pre.getString("role","");//11是老师,10是家长
-//        myid = pre.getString("userName","");
-//
-//        dbKey(myid);
-        return inflater.inflate(R.layout.fragment_left, container, false);
+        View view = inflater.inflate(R.layout.fragment_left, container, false);
+        mContext = this.getContext();
+        list_comment = (ListView) view.findViewById(R.id.left_list);
+
+
+        commentAdapter = new CommentAdapter(commentList,this.getContext());
+        list_comment.setAdapter(commentAdapter);
+        //获得当前用户角色和id
+        pre=getActivity().getSharedPreferences("login", Context.MODE_PRIVATE);
+        role=pre.getString("role","");//11是老师,10是家长
+        myid = pre.getString("userName","");
+
+        dbKey(myid);
+        return view;
+    }
+
+    /**
+     * 根据当前用户id查询我收到的评价
+     * @param key
+     */
+    private void dbKey(final String key) {
+        commentList.clear();
+        handler = new Handler() {
+            @Override
+            public void handleMessage(android.os.Message msg) {
+                switch (msg.what) {
+                    case 1:
+                        Comment scanInfo;
+                        String str = msg.obj.toString();
+                        Log.e("str",str+"xuexuexue");
+                        if(str.equals("")){
+
+                            Toast.makeText(getContext(),"没有搜到任何东西",Toast.LENGTH_LONG).show();
+                        }else{
+                            String[] s = str.split(";");
+                            for (int i = 0; i < s.length; i++) {
+                                String[] r = s[i].split(",");
+                                scanInfo = new Comment(r[0], r[1], r[2], r[3],r[4]);
+                                commentList.add(scanInfo);
+                                commentAdapter.notifyDataSetChanged();
+                            }
+                        }
+                        break;
+                }
+            }
+        };
+        new Thread() {
+            HttpURLConnection connection = null;
+
+            @Override
+            public void run() {
+                try {
+                    connection = HttpConnectionUtils.getConnection("userComment?user="+key);
+                    int code = connection.getResponseCode();
+                    if (code == 200) {
+                        InputStream inputStream = connection.getInputStream();
+                        String str = StreamChangeStrUtils.toChange(inputStream);
+                        android.os.Message message = Message.obtain();
+                        message.obj = str;
+                        message.what = 1;
+                        handler.sendMessage(message);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
     }
 }
