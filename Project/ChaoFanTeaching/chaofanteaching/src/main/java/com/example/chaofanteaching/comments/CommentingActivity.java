@@ -38,8 +38,6 @@ public class CommentingActivity extends AppCompatActivity {
     private TextView teachingQualityValue;
     private RatingBar teachingQualityRatingBar;
 
-//    String sql=id+"&name="+name2+"&sex="+sex+"&grade="+grade+"&subject="+subject+"&week="+week+"&time="+time+"&university="+university+"&price="+price+"&introduce="+introduce+"&college="+college+"&major="+major;
-
     //获取全局变量
     private SharedPreferences pre;
     private String role;//用户角色
@@ -83,23 +81,17 @@ public class CommentingActivity extends AppCompatActivity {
         //评星条
         makeStar();
 
-
         //接受从OrderInfo来的两个用户名和订单id
         Intent intentFromOrderInfo = getIntent();
         arr=intentFromOrderInfo.getStringArrayExtra("user");
         messageId =intentFromOrderInfo.getIntExtra("id",0);
-//        System.out.println("messageId");
-//        System.out.println(messageId);
         //获得当前用户角色和id
         pre=getSharedPreferences("login", Context.MODE_PRIVATE);
         role=pre.getString("role","");//11是老师,10是家长
         myid = pre.getString("userName","");
-
+        //设置老师学生id
         teacher.setText(arr[0]);
         parent.setText(arr[1]);
-        //Log.e("myl","sql="+sql);
-//        dbKey("edit",sql);
-
     }
 
     /**

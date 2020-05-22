@@ -6,13 +6,10 @@ package com.example.chaofanteaching.comments.fragments;
 public class Comment {
     private String user;
     private String objUser;
-//    private String teacherName;
-//    private String parentName;
 //    private String date;//评论日期
     private String content;//评论内容
     private String isOnTime;//是否准时
     private String teachingQuality;//教学质量
-//    private int who;//判断是谁发的评论，0家长，1老师
 
     public Comment() {
     }
@@ -42,30 +39,6 @@ public class Comment {
         this.objUser = objUser;
     }
 
-//    public String getTeacherName() {
-//        return teacherName;
-//    }
-//
-//    public void setTeacherName(String teacherName) {
-//        this.teacherName = teacherName;
-//    }
-//
-//    public String getParentName() {
-//        return parentName;
-//    }
-//
-//    public void setParentName(String parentName) {
-//        this.parentName = parentName;
-//    }
-
-//    public String getDate() {
-//        return date;
-//    }
-//
-//    public void setDate(String date) {
-//        this.date = date;
-//    }
-
     public String getContent() {
         return content;
     }
@@ -89,12 +62,4 @@ public class Comment {
     public void setTeachingQuality(String teachingQuality) {
         this.teachingQuality = teachingQuality;
     }
-
-//    public int getWho() {
-//        return who;
-//    }
-//
-//    public void setWho(int who) {
-//        this.who = who;
-//    }
 }

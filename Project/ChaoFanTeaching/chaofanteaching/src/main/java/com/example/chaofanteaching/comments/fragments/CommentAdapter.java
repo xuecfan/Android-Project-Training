@@ -36,26 +36,13 @@ import okhttp3.Response;
 public class CommentAdapter extends BaseAdapter {
 
     private Context mContext;
-    private int pos;//从getView中获取的position
-    private ImageView uImage;//从getView中获取的ImageView
-    private static String path = "/storage/emulated/0/";// sd路径
     private List<Comment> CommentList;
 
     //获取全局变量
     private SharedPreferences pre;
-    private String role;//用户角色
     private String myid;//当前用户id
-    private Handler handler = new Handler(){
-        @Override
-        public void handleMessage(Message message){
-            switch (message.what){
-                case 1:
-                    Log.i("file","..");
-                    break;
-            }
-        }
-};
 
+    ViewHolder viewHolder = null;
 
     public CommentAdapter(List<Comment> CommentList, Context mContext) {
         this.CommentList = CommentList;
@@ -91,15 +78,12 @@ public class CommentAdapter extends BaseAdapter {
     public View getView(int position, View view, ViewGroup viewGroup) {
         //获得当前用户角色和id
         pre=mContext.getSharedPreferences("login", Context.MODE_PRIVATE);
-        role=pre.getString("role","");//11是老师,10是家长
         myid = pre.getString("userName","");
-
-        ViewHolder viewHolder = null;
+        //判断view是否存在，不存在就创建，否则复用
         if (view == null){
             view = LayoutInflater.from(mContext)
                     .inflate(R.layout.comment_list_item,viewGroup,
                             false);
-
             viewHolder = new ViewHolder();
             viewHolder.uImage = view.findViewById(R.id.u_image);
             viewHolder.listItem = view.findViewById(R.id.comment_item);
@@ -112,26 +96,40 @@ public class CommentAdapter extends BaseAdapter {
         }else{
             viewHolder = (ViewHolder) view.getTag();
         }
-        pos = position;
-        uImage = view.findViewById(R.id.u_image);
 
-        initView();//头像
+        initView(position);//头像
 
+        return view;
+    }
 
-//        Log.e("myid:","1"+myid);
+    /**
+     * 初始化view
+     * @param position
+     */
+    private void initView(int position) {
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.error(R.drawable.tea).diskCacheStrategy(DiskCacheStrategy.NONE);
 
+        //判断显示谁的头像
         if (myid.equals(CommentList.get(position).getUser())){//我发出的，显示objUser
-            viewHolder.uId.setText(CommentList.get(position).getObjUser());
-//            Log.e("objUser:","3"+CommentList.get(position).getObjUser());
+            Glide.with(mContext.getApplicationContext()).load(
+                    "http://39.107.42.87:8080/ChaoFanTeaching/img/"
+                            +CommentList.get(position).getObjUser()
+                            +".png")
+                    .apply(requestOptions).into(viewHolder.uImage);//头像
+            viewHolder.uId.setText(CommentList.get(position).getObjUser());//用户名
         }else {//我收到的，显示user
-            viewHolder.uId.setText(CommentList.get(position).getUser());
-//            Log.e("user:","2"+CommentList.get(position).getUser());
+            Glide.with(mContext.getApplicationContext()).load(
+                    "http://39.107.42.87:8080/ChaoFanTeaching/img/"
+                            +CommentList.get(position).getUser()
+                            +".png")
+                    .apply(requestOptions).into(viewHolder.uImage);//头像
+            viewHolder.uId.setText(CommentList.get(position).getUser());//用户名
         }
-//        viewHolder.uId.setText(CommentList.get(position).getObjUser());
-//        Display display =
         viewHolder.commentIsOnTime.setRating(Float.parseFloat(CommentList.get(position).getIsOnTime()));
         viewHolder.commentTeachQuality.setRating(Float.parseFloat(CommentList.get(position).getTeachingQuality()));
         viewHolder.commentContent.setText(CommentList.get(position).getContent());
+
         //设置content宽度
         ViewTreeObserver vto2 = viewHolder.listItem.getViewTreeObserver();
         ViewHolder finalViewHolder = viewHolder;
@@ -142,36 +140,5 @@ public class CommentAdapter extends BaseAdapter {
                 finalViewHolder.commentContent.setWidth(finalViewHolder.listItem.getWidth()-260);
             }
         });
-//        viewHolder.commentContent.setText(String.valueOf(viewHolder.listItem.getViewWidget(view).getWidth()));
-//        viewHolder.commentContent.setWidth(view.getWidth()-);
-
-        return view;
     }
-
-    private void initView() {
-
-        RequestOptions requestOptions = new RequestOptions();
-        requestOptions.error(R.drawable.tea).diskCacheStrategy(DiskCacheStrategy.NONE);
-
-        Log.e("myid:","1"+myid);
-        Log.e("objUser:","3"+CommentList.get(pos).getObjUser());
-        Log.e("user:","2"+CommentList.get(pos).getUser());
-
-        //判断显示谁的头像
-        if (myid.equals(CommentList.get(pos).getUser())){//我发出的，显示objUser
-            Glide.with(mContext.getApplicationContext()).load(
-                    "http://39.107.42.87:8080/ChaoFanTeaching/img/"
-                            +CommentList.get(pos).getObjUser()
-                            +".png")
-                    .apply(requestOptions).into(uImage);
-        }else {//我收到的，显示user
-            Glide.with(mContext.getApplicationContext()).load(
-                    "http://39.107.42.87:8080/ChaoFanTeaching/img/"
-                            +CommentList.get(pos).getUser()
-                            +".png")
-                    .apply(requestOptions).into(uImage);
-        }
-
-    }
-
 }
