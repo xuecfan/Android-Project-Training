@@ -41,6 +41,7 @@ public class CommentAdapter extends BaseAdapter {
     //获取全局变量
     private SharedPreferences pre;
     private String myid;//当前用户id
+    private String role;//当前用户角色
 
     private ViewHolder viewHolder = null;
 
@@ -72,6 +73,8 @@ public class CommentAdapter extends BaseAdapter {
         RatingBar commentIsOnTime;
         RatingBar commentTeachQuality;
         TextView commentContent;
+        TextView commentIsOnTimeTxt;
+        TextView commentTeachQualityTxt;
     }
 
     @Override
@@ -79,6 +82,7 @@ public class CommentAdapter extends BaseAdapter {
         //获得当前用户角色和id
         pre=mContext.getSharedPreferences("login", Context.MODE_PRIVATE);
         myid = pre.getString("userName","");
+        role = pre.getString("role","");//11是老师,10是家长
         //判断view是否存在，不存在就创建，否则复用
         if (view == null){
             view = LayoutInflater.from(mContext)
@@ -91,6 +95,8 @@ public class CommentAdapter extends BaseAdapter {
             viewHolder.commentIsOnTime = view.findViewById(R.id.comment_is_on_time);
             viewHolder.commentTeachQuality = view.findViewById(R.id.comment_teach_quality);
             viewHolder.commentContent = view.findViewById(R.id.comment_content);
+            viewHolder.commentIsOnTimeTxt = view.findViewById(R.id.comment_is_on_time_txt);
+            viewHolder.commentTeachQualityTxt = view.findViewById(R.id.comment_teach_quality_txt);
 
             view.setTag(viewHolder);
         }else{
@@ -118,6 +124,15 @@ public class CommentAdapter extends BaseAdapter {
                             +".png")
                     .apply(requestOptions).into(viewHolder.uImage);//头像
             viewHolder.uId.setText(CommentList.get(position).getObjUser());//用户名
+            if(role.equals("10")){
+                viewHolder.commentIsOnTime.setRating(Float.parseFloat(CommentList.get(position).getIsOnTime()));
+                viewHolder.commentTeachQuality.setRating(Float.parseFloat(CommentList.get(position).getTeachingQuality()));
+            }else {
+                viewHolder.commentIsOnTimeTxt.setVisibility(View.GONE);
+                viewHolder.commentIsOnTime.setVisibility(View.GONE);
+                viewHolder.commentTeachQualityTxt.setVisibility(View.GONE);
+                viewHolder.commentTeachQuality.setVisibility(View.GONE);
+            }
         }else {//我收到的，显示user
             Glide.with(mContext.getApplicationContext()).load(
                     "http://39.107.42.87:8080/ChaoFanTeaching/img/"
@@ -125,9 +140,18 @@ public class CommentAdapter extends BaseAdapter {
                             +".png")
                     .apply(requestOptions).into(viewHolder.uImage);//头像
             viewHolder.uId.setText(CommentList.get(position).getUser());//用户名
+            if(role.equals("10")){
+                viewHolder.commentIsOnTimeTxt.setVisibility(View.GONE);
+                viewHolder.commentIsOnTime.setVisibility(View.GONE);
+                viewHolder.commentTeachQualityTxt.setVisibility(View.GONE);
+                viewHolder.commentTeachQuality.setVisibility(View.GONE);
+
+            }else {
+                viewHolder.commentIsOnTime.setRating(Float.parseFloat(CommentList.get(position).getIsOnTime()));
+                viewHolder.commentTeachQuality.setRating(Float.parseFloat(CommentList.get(position).getTeachingQuality()));
+            }
         }
-        viewHolder.commentIsOnTime.setRating(Float.parseFloat(CommentList.get(position).getIsOnTime()));
-        viewHolder.commentTeachQuality.setRating(Float.parseFloat(CommentList.get(position).getTeachingQuality()));
+
         viewHolder.commentContent.setText(CommentList.get(position).getContent());
 
         //设置content宽度

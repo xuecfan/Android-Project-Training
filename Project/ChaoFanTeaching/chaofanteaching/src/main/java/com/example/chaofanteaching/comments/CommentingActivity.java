@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Message;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -37,6 +38,8 @@ public class CommentingActivity extends AppCompatActivity {
     private RatingBar isOnTimeRatingBar;
     private TextView teachingQualityValue;
     private RatingBar teachingQualityRatingBar;
+    private ConstraintLayout isOnTimeLayout;
+    private ConstraintLayout teachingQualityLayout;
 
     //获取全局变量
     private SharedPreferences pre;
@@ -78,8 +81,7 @@ public class CommentingActivity extends AppCompatActivity {
         initView();
         //标题栏
         setTitleBar();
-        //评星条
-        makeStar();
+
 
         //接受从OrderInfo来的两个用户名和订单id
         Intent intentFromOrderInfo = getIntent();
@@ -89,22 +91,27 @@ public class CommentingActivity extends AppCompatActivity {
         pre=getSharedPreferences("login", Context.MODE_PRIVATE);
         role=pre.getString("role","");//11是老师,10是家长
         myid = pre.getString("userName","");
-        if (role.equals(11)){//当前用户是老师
+        if (role.equals("11")){//当前用户是老师
             if (arr[0].equals(myid)){//arr[0]是老师
                 teacher.setText(arr[0]);
                 parent.setText(arr[1]);
-            }else if (arr[1].equals(myid)){
+            }else {
                 teacher.setText(arr[1]);
                 parent.setText(arr[0]);
             }
-        }else if (role.equals(10)){//当前用户是家长
+            //隐藏评星条
+            isOnTimeLayout.setVisibility(View.GONE);
+            teachingQualityLayout.setVisibility(View.GONE);
+        }else if (role.equals("10")){//当前用户是家长
             if (arr[0].equals(myid)){//arr[0]是家长
                 teacher.setText(arr[1]);
                 parent.setText(arr[0]);
-            }else if (arr[1].equals(myid)){
+            }else {
                 teacher.setText(arr[0]);
                 parent.setText(arr[1]);
             }
+            //评星条
+            makeStar();
         }
     }
 
@@ -122,6 +129,8 @@ public class CommentingActivity extends AppCompatActivity {
         isOnTimeRatingBar = findViewById(R.id.is_on_time_ratingBar);
         teachingQualityValue = findViewById(R.id.teaching_quality_value);
         teachingQualityRatingBar = findViewById(R.id.teaching_quality_ratingBar);
+        isOnTimeLayout = findViewById(R.id.is_on_time_layout);
+        teachingQualityLayout = findViewById(R.id.teaching_quality_layout);
 
         publishButton = findViewById(R.id.publish_button);
     }
@@ -142,6 +151,9 @@ public class CommentingActivity extends AppCompatActivity {
         publishButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
+                if (commentingContent.getText().equals("")){
+                    commentingContent.setText("该用户没有填写评价");
+                }
                 new Thread(){
                     HttpURLConnection connection = null;
 
@@ -177,7 +189,7 @@ public class CommentingActivity extends AppCompatActivity {
     }
 
     /**
-     * 评星条
+     * 监控评星条是否改变
      */
     public void makeStar(){
         isOnTimeRatingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener(){
