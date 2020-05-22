@@ -28,13 +28,9 @@ import java.util.List;
  */
 public class MyCommentsActivity extends AppCompatActivity {
     private EaseTitleBar titleBar;
-
     private ViewPager viewPager;
     private TabLayout tabLayout;
-    private DrawerLayout drawerLayout;
     private List<Fragment> fragments;
-
-    private String[] arr = new String[]{"000","myl"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,9 +77,8 @@ public class MyCommentsActivity extends AppCompatActivity {
      */
     public void initView(){
         titleBar = findViewById(R.id.myComments_titleBar);
-
-        viewPager = (ViewPager) findViewById(R.id.viewPager);
-        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
+        viewPager = findViewById(R.id.viewPager);
+        tabLayout = findViewById(R.id.tabLayout);
     }
 
     /**
@@ -95,15 +90,6 @@ public class MyCommentsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 onBackPressed();
-            }
-        });
-        titleBar.setRightImageResource(R.drawable.ease_mm_title_remove);
-        titleBar.setRightLayoutClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                Intent intent = new Intent(getApplicationContext(), CommentingActivity.class);
-                intent.putExtra("user",arr);
-                startActivity(intent);
             }
         });
     }

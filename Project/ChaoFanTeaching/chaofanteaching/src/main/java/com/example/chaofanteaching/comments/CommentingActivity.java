@@ -89,9 +89,23 @@ public class CommentingActivity extends AppCompatActivity {
         pre=getSharedPreferences("login", Context.MODE_PRIVATE);
         role=pre.getString("role","");//11是老师,10是家长
         myid = pre.getString("userName","");
-        //设置老师学生id
-        teacher.setText(arr[0]);
-        parent.setText(arr[1]);
+        if (role.equals(11)){//当前用户是老师
+            if (arr[0].equals(myid)){//arr[0]是老师
+                teacher.setText(arr[0]);
+                parent.setText(arr[1]);
+            }else if (arr[1].equals(myid)){
+                teacher.setText(arr[1]);
+                parent.setText(arr[0]);
+            }
+        }else if (role.equals(10)){//当前用户是家长
+            if (arr[0].equals(myid)){//arr[0]是家长
+                teacher.setText(arr[1]);
+                parent.setText(arr[0]);
+            }else if (arr[1].equals(myid)){
+                teacher.setText(arr[0]);
+                parent.setText(arr[1]);
+            }
+        }
     }
 
     /**

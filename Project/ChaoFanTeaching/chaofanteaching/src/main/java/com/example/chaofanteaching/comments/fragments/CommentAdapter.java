@@ -42,7 +42,7 @@ public class CommentAdapter extends BaseAdapter {
     private SharedPreferences pre;
     private String myid;//当前用户id
 
-    ViewHolder viewHolder = null;
+    private ViewHolder viewHolder = null;
 
     public CommentAdapter(List<Comment> CommentList, Context mContext) {
         this.CommentList = CommentList;
