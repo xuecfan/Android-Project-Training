@@ -1,6 +1,8 @@
 package com.example.chaofanteaching.order;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Message;
 import android.view.LayoutInflater;
@@ -18,11 +20,14 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.R;
 import com.example.chaofanteaching.StreamChangeStrUtils;
+import com.example.chaofanteaching.comments.CommentingActivity;
 import com.example.chaofanteaching.utils.ToastUtils;
 
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.util.List;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class OrderAdapter extends BaseAdapter {
     private int position;
@@ -30,6 +35,9 @@ public class OrderAdapter extends BaseAdapter {
     private int itemLayoutId;
     private Context context;
     private ImageView header;
+    private String user;
+    private String arr[];//存放username和objuser的数组
+    private SharedPreferences pre;
 
     public OrderAdapter(Context context, List<Order> orderList, int itemLayoutId){
         this.context = context;
@@ -88,16 +96,48 @@ public class OrderAdapter extends BaseAdapter {
         }
         header=convertView.findViewById(R.id.header);
         initView();
+        String status=orderList.get(position).getStatus();
         viewHolder.id.setText("订单编号："+orderList.get(position).getId());
-        viewHolder.status.setText(orderList.get(position).getStatus());
+        viewHolder.status.setText(status);
         viewHolder.user.setText("用户："+orderList.get(position).getUser());
         viewHolder.price.setText("￥"+orderList.get(position).getPrice());
         viewHolder.time.setText(orderList.get(position).getTime());
+        switch (status){
+            case "待评价":
+                viewHolder.btn.setText("评价");
+                break;
+            case "已完成":
+                viewHolder.btn.setText("删除订单");
+                break;
+            default:
+                viewHolder.btn.setText("取消试讲");
+        }
         viewHolder.btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DbOrder(orderList.get(position).getId());
-                notifyDataSetChanged();
+                switch (status){
+                    case "待评价":
+                        viewHolder.btn.setText("评价");
+                        pre=context.getSharedPreferences("login",MODE_PRIVATE);
+                        user=pre.getString("userName","");
+                        arr = new String[]{user, orderList.get(position).getUser()};
+                        Intent intent=new Intent(context, CommentingActivity.class);
+                        intent.putExtra("id",orderList.get(position).getId());
+                        intent.putExtra("user",arr);
+                        context.startActivity(intent);
+                        ToastUtils.showLong("去评价");
+                        break;
+                    case "已完成":
+                        DbOrder(orderList.get(position).getId());
+                        notifyDataSetChanged();
+                        break;
+                    default:
+                        DbOrder(orderList.get(position).getId());
+                        notifyDataSetChanged();
+                        break;
+                }
+//                DbOrder(orderList.get(position).getId());
+//                notifyDataSetChanged();
             }
         });
         return convertView;

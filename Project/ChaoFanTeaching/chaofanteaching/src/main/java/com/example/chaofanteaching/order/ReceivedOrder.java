@@ -83,7 +83,7 @@ public class ReceivedOrder extends Fragment {
                         Order order;
                         String str = msg.obj.toString();
                         if(str.isEmpty()){
-                            Toast.makeText(getContext(),"这里空空如也",Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getContext(),"这里空空如也",Toast.LENGTH_SHORT).show();
                         }else{
                             String[] s = str.split(";");
                             for (int i = 0; i < s.length; i++) {
