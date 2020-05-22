@@ -10,7 +10,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.chaofanteaching.HttpConnectionUtils;
@@ -53,6 +56,9 @@ public class RightFragment extends Fragment {
     private SharedPreferences pre;
     private String role;//用户角色
     private String myid;//当前用户id
+    //列表无内容显示内容
+    private ImageView findNothingImg;
+    private TextView findNothingTxt;
 
     public RightFragment() {
         // Required empty public constructor
@@ -92,7 +98,8 @@ public class RightFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_right, container, false);
         mContext = this.getContext();
         list_comment = (ListView) view.findViewById(R.id.right_list);
-
+        findNothingImg = view.findViewById(R.id.frag_find_nothing_img);
+        findNothingTxt = view.findViewById(R.id.frag_find_nothing_txt);
 
         commentAdapter = new CommentAdapter(commentList,this.getContext());
         list_comment.setAdapter(commentAdapter);
@@ -130,8 +137,8 @@ public class RightFragment extends Fragment {
                         String str = msg.obj.toString();
                         Log.e("str",str+"xuexuexue");
                         if(str.equals("")){
-
-                            Toast.makeText(getContext(),"没有搜到任何东西",Toast.LENGTH_LONG).show();
+                            findNothingImg.setImageResource(R.drawable.find_nothing);
+                            findNothingTxt.setText("没有搜到任何东西");
                         }else{
                             String[] s = str.split(";");
                             for (int i = 0; i < s.length; i++) {
