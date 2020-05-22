@@ -17,6 +17,8 @@ import android.widget.Toast;
 import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.R;
 import com.example.chaofanteaching.StreamChangeStrUtils;
+import com.example.chaofanteaching.utils.ToastUtils;
+
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
@@ -42,6 +44,14 @@ public class SentOrder extends Fragment {
         jumpToDetail();
         return view;
     }
+
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            ToastUtils.showShort("发出");
+        }
+    }
+
     public void loadInfo(){
         orderList.clear();
         orderlist=view.findViewById(R.id.orderlist);

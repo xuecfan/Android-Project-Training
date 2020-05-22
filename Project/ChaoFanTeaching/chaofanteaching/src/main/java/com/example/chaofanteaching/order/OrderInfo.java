@@ -1,10 +1,13 @@
 package com.example.chaofanteaching.order;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -19,6 +22,7 @@ import java.net.HttpURLConnection;
 
 public class OrderInfo extends AppCompatActivity {
     protected EaseTitleBar titleBar;
+    private SharedPreferences pre;
     private TextView username;
     private TextView objuser;
     private TextView gradetext;
@@ -30,9 +34,11 @@ public class OrderInfo extends AppCompatActivity {
     private TextView paytext;
     private TextView teltext;
     private TextView moretext;
+    private TextView statustext;
     private Button btn_commit;
     private Button btn_toCommenting;
     private int id;
+    private String user;
     private String arr[];//存放username和objuser的数组
 
     private Handler handler = new Handler() {
@@ -42,7 +48,17 @@ public class OrderInfo extends AppCompatActivity {
                 case 1://4,000,myl,马爸爸,初三,生物,2020-5-12,8:00,河北省石家庄市元氏县青银高速与红旗大街交汇处西南角碧桂园附近,30分钟,50,10086,无
                     String str = msg.obj.toString();
                     String[] s = str.split(",");
-                    if(s.length>=13)
+                    if(user.equals(s[1])){
+                        btn_commit.setText("等待对方确认");
+                    }else {
+                        btn_commit.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                getInfo("editOrder","id="+id);
+                                ToastUtils.showShort("确认");
+                            }
+                        });
+                    }
                     username.setText(s[1]);
                     objuser.setText(s[2]);
                     gradetext.setText(s[4]);
@@ -54,6 +70,7 @@ public class OrderInfo extends AppCompatActivity {
                     paytext.setText(s[10]);
                     teltext.setText(s[11]);
                     moretext.setText(s[12]);
+                    statustext.setText(s[13]);
                     arr = new String[]{s[1], s[2]};
                     break;
             }
@@ -68,13 +85,8 @@ public class OrderInfo extends AppCompatActivity {
         Intent request=getIntent();
         id= Integer.parseInt(request.getStringExtra("id"));
         getInfo("LookOrder","id="+id);
-        btn_commit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ToastUtils.showLong("确认");
-            }
-        });
-
+        pre=getSharedPreferences("login", Context.MODE_PRIVATE);
+        user=pre.getString("userName", "");
         //评价按钮
         btn_toCommenting.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,6 +111,7 @@ public class OrderInfo extends AppCompatActivity {
         paytext=findViewById(R.id.pay);
         teltext=findViewById(R.id.tel);
         moretext=findViewById(R.id.more);
+        statustext=findViewById(R.id.status);
         btn_commit=findViewById(R.id.commit);
         btn_toCommenting=findViewById(R.id.ToCommentingBtn);
         setTitie();

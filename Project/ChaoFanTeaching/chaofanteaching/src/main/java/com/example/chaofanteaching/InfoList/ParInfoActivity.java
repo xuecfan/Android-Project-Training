@@ -16,6 +16,7 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -24,6 +25,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.baidu.location.BDAbstractLocationListener;
+import com.baidu.location.BDLocation;
+import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
+import com.baidu.mapapi.CoordType;
+import com.baidu.mapapi.SDKInitializer;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
@@ -44,7 +51,7 @@ import gdut.bsx.share2.ShareContentType;
 
 
 public class ParInfoActivity extends AppCompatActivity {
-    private static String path = "/storage/emulated/0/";// sd路径
+
     private String user;
     private String lat;
     private String lng;
@@ -155,9 +162,6 @@ public class ParInfoActivity extends AppCompatActivity {
                         .shareBySystem();
             }
         });
-
-
-
         img=findViewById(R.id.img);
         sendbtn=findViewById(R.id.send);
         sendbtn.setOnClickListener(new View.OnClickListener() {
@@ -169,14 +173,6 @@ public class ParInfoActivity extends AppCompatActivity {
         Intent request=getIntent();
         name=request.getStringExtra("name");
         String user=request.getStringExtra("user");
-//        Bitmap bt = BitmapFactory.decodeFile(path +user+".png");//从Sd中找头像，转换成Bitmap
-//        if(bt!=null){
-//            @SuppressWarnings("deprecation")
-//            Drawable drawable = new BitmapDrawable(bt);//转换成drawable
-//            img.setImageDrawable(drawable);
-//        }else{
-//            img.setImageDrawable(getResources().getDrawable(R.drawable.boy1));
-//        }
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.error(R.drawable.boy1).diskCacheStrategy(DiskCacheStrategy.NONE);
         Glide.with(getApplicationContext()).load("http://39.107.42.87:8080/ChaoFanTeaching/img/"+user+".png").apply(requestOptions).into(img);
@@ -222,9 +218,10 @@ public class ParInfoActivity extends AppCompatActivity {
             }
         });
     }
+
     //发起聊天
     public void chatIn() {
-        String name = user;
+        //String name = user;
         String myName = EMClient.getInstance().getCurrentUser();
         if (!TextUtils.isEmpty(name)) {
             if (name.equals(myName)) {

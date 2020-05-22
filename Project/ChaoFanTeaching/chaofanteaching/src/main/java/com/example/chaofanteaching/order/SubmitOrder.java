@@ -85,7 +85,7 @@ public class SubmitOrder extends AppCompatActivity {
             obj.setText(objusername);
             String mylat= pre.getString("lat","");
             String mylng= pre.getString("lng","");
-            geoCode(new LatLng(Double.parseDouble(mylat),Double.parseDouble(mylng)));
+            //geoCode(new LatLng(Double.parseDouble(mylat),Double.parseDouble(mylng)));
             loctext.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

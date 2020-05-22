@@ -1,6 +1,8 @@
 package com.example.chaofanteaching.order;
 
 import android.content.Context;
+import android.os.Handler;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,13 +10,18 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.R;
+import com.example.chaofanteaching.StreamChangeStrUtils;
 import com.example.chaofanteaching.utils.ToastUtils;
 
+import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.util.List;
 
 public class OrderAdapter extends BaseAdapter {
@@ -89,7 +96,8 @@ public class OrderAdapter extends BaseAdapter {
         viewHolder.btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastUtils.showLong("点击按钮");
+                DbOrder(orderList.get(position).getId());
+                notifyDataSetChanged();
             }
         });
         return convertView;
@@ -99,4 +107,22 @@ public class OrderAdapter extends BaseAdapter {
         requestOptions.error(R.drawable.tea).diskCacheStrategy(DiskCacheStrategy.NONE);
         Glide.with(context.getApplicationContext()).load("http://39.107.42.87:8080/ChaoFanTeaching/img/"+orderList.get(position).getUser()+".png").apply(requestOptions).into(header);
     }
+
+    public void DbOrder(int id){
+        new Thread() {
+            HttpURLConnection connection = null;
+            @Override
+            public void run() {
+                try {
+                    connection = HttpConnectionUtils.getConnection("deleteOrder?id="+id);
+                    int code = connection.getResponseCode();
+                    if(code!=200){
+                        ToastUtils.showLong("网络错误！请稍后再试");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+    }//查询数据库
 }
