@@ -46,12 +46,12 @@ public class SentOrder extends Fragment {
         return view;
     }
 
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser) {
-            ToastUtils.showShort("发出");
-        }
-    }
+//    public void setUserVisibleHint(boolean isVisibleToUser) {
+//        super.setUserVisibleHint(isVisibleToUser);
+//        if (isVisibleToUser) {
+//            ToastUtils.showShort("发出");
+//        }
+//    }
 
     public void loadInfo(){
         orderList.clear();

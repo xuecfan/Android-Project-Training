@@ -45,12 +45,12 @@ public class ReceivedOrder extends Fragment {
         return view;
     }
 
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser) {
-            ToastUtils.showShort("收到");
-        }
-    }
+//    public void setUserVisibleHint(boolean isVisibleToUser) {
+//        super.setUserVisibleHint(isVisibleToUser);
+//        if (isVisibleToUser) {
+//            ToastUtils.showShort("收到");
+//        }
+//    }
 
     public void loadInfo(){
         orderList.clear();

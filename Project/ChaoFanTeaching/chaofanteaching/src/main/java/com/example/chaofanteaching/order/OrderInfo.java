@@ -36,6 +36,7 @@ public class OrderInfo extends AppCompatActivity {
     private TextView moretext;
     private TextView statustext;
     private Button btn_commit;
+    private Button btn_finish;
     private Button btn_toCommenting;
     private int id;
     private String user;
@@ -48,16 +49,25 @@ public class OrderInfo extends AppCompatActivity {
                 case 1://4,000,myl,马爸爸,初三,生物,2020-5-12,8:00,河北省石家庄市元氏县青银高速与红旗大街交汇处西南角碧桂园附近,30分钟,50,10086,无
                     String str = msg.obj.toString();
                     String[] s = str.split(",");
-                    if(user.equals(s[1])){
-                        btn_commit.setText("等待对方确认");
-                    }else {
+                    if(user.equals(s[2]) && s[13].equals("待确认")){
                         btn_commit.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 getInfo("editOrder","id="+id);
-                                ToastUtils.showShort("确认");
                             }
                         });
+                    }else {
+                        btn_commit.setVisibility(View.GONE);
+                    }
+                    if(s[13].equals("进行中")){
+                        btn_finish.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                ToastUtils.showShort("试讲已完成");
+                            }
+                        });
+                    }else{
+                        btn_finish.setVisibility(View.GONE);
                     }
                     username.setText(s[1]);
                     objuser.setText(s[2]);
@@ -67,7 +77,7 @@ public class OrderInfo extends AppCompatActivity {
                     timetext.setText(s[7]);
                     loctext.setText(s[8]);
                     lengthtext.setText(s[9]);
-                    paytext.setText(s[10]);
+                    paytext.setText(s[10]+"元");
                     teltext.setText(s[11]);
                     moretext.setText(s[12]);
                     statustext.setText(s[13]);
@@ -87,16 +97,17 @@ public class OrderInfo extends AppCompatActivity {
         getInfo("LookOrder","id="+id);
         pre=getSharedPreferences("login", Context.MODE_PRIVATE);
         user=pre.getString("userName", "");
+
         //评价按钮
-        btn_toCommenting.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(OrderInfo.this, CommentingActivity.class);
-                intent.putExtra("id",id);
-                intent.putExtra("user",arr);
-                startActivity(intent);
-            }
-        });
+//        btn_toCommenting.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(OrderInfo.this, CommentingActivity.class);
+//                intent.putExtra("id",id);
+//                intent.putExtra("user",arr);
+//                startActivity(intent);
+//            }
+//        });
     }
     public void initView(){
         titleBar=findViewById(R.id.title_bar);
@@ -113,7 +124,8 @@ public class OrderInfo extends AppCompatActivity {
         moretext=findViewById(R.id.more);
         statustext=findViewById(R.id.status);
         btn_commit=findViewById(R.id.commit);
-        btn_toCommenting=findViewById(R.id.ToCommentingBtn);
+        btn_finish=findViewById(R.id.finish);
+        //btn_toCommenting=findViewById(R.id.ToCommentingBtn);
         setTitie();
     }
     public void setTitie(){

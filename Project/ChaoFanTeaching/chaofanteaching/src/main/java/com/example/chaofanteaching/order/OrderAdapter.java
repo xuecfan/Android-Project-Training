@@ -3,8 +3,6 @@ package com.example.chaofanteaching.order;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Handler;
-import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,18 +10,13 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.R;
-import com.example.chaofanteaching.StreamChangeStrUtils;
 import com.example.chaofanteaching.comments.CommentingActivity;
 import com.example.chaofanteaching.utils.ToastUtils;
-
-import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.util.List;
 
@@ -136,8 +129,6 @@ public class OrderAdapter extends BaseAdapter {
                         notifyDataSetChanged();
                         break;
                 }
-//                DbOrder(orderList.get(position).getId());
-//                notifyDataSetChanged();
             }
         });
         return convertView;

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -41,7 +40,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/add_info_background_selector"
+                android:background="@drawable/edit_underline0"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -88,7 +87,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/add_info_background_selector"
+                android:background="@drawable/edit_underline0"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -137,7 +136,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/add_info_background_selector"
+                android:background="@drawable/edit_underline0"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -186,7 +185,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/add_info_background_selector"
+                android:background="@drawable/edit_underline0"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -200,6 +199,7 @@
                     android:minHeight="40dp"
                     android:text="试讲地点："
                     android:textSize="18dp"
+                    android:gravity="center"
                     app:layout_constraintVertical_bias="0"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
@@ -229,7 +229,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/add_info_background_selector"
+                android:background="@drawable/edit_underline0"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -265,23 +265,41 @@
 
             </android.support.constraint.ConstraintLayout>
 
+            <TextView
+                android:id="@+id/titile_pay"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="*试讲费用（元）"/>
+
             <EditText
                 android:id="@+id/pay"
-                android:hint="试讲费用（元/小时）"
+                android:hint="试讲费用"
                 android:inputType="number"
                 android:digits="1234567890"
+                android:imeOptions="actionNext"
+                android:nextFocusForward="@+id/tel"
                 android:maxLength="3"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/add_info_background_selector"
+                android:background="@drawable/edittext_background_selector"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/time"
                 app:layout_constraintVertical_bias="0"/>
+
+            <TextView
+                android:id="@+id/titile_tel"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="*联系方式（建议使用电话号码）"/>
 
             <EditText
                 android:id="@+id/tel"
@@ -289,28 +307,38 @@
                 android:maxLength="11"
                 android:inputType="number"
                 android:digits="1234567890"
+                android:imeOptions="actionNext"
+                android:nextFocusForward="@+id/more"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/add_info_background_selector"
+                android:background="@drawable/edittext_background_selector"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pay"
                 app:layout_constraintVertical_bias="0"/>
 
+            <TextView
+                android:id="@+id/titile_more"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="备注"/>
+
             <EditText
                 android:id="@+id/more"
                 android:hint="备注"
                 android:minLines="2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/add_info_background_selector"
+                android:background="@drawable/edittext_background_selector"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"

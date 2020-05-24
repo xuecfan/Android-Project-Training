@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -41,6 +42,9 @@ public class SubmitOrder extends AppCompatActivity {
     private Spinner gradeSpinner;
     private Spinner subjectSpinner;
     private Spinner lengthSpinner;
+    private TextView title_pay;
+    private TextView title_tel;
+    private TextView title_more;
     private EditText paytext;
     private EditText teltext;
     private EditText moretext;
@@ -160,6 +164,30 @@ public class SubmitOrder extends AppCompatActivity {
                 timePickerDialog.show();
             }
         });
+        paytext.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                title_pay.setTextColor(Color.parseColor("#D8900A"));
+                title_tel.setTextColor(0x8A000000);
+                title_more.setTextColor(0x8A000000);
+            }
+        });
+        teltext.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                title_pay.setTextColor(0x8A000000);
+                title_tel.setTextColor(Color.parseColor("#D8900A"));
+                title_more.setTextColor(0x8A000000);
+            }
+        });
+        moretext.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                title_pay.setTextColor(0x8A000000);
+                title_tel.setTextColor(0x8A000000);
+                title_more.setTextColor(Color.parseColor("#D8900A"));
+            }
+        });
         btn_sub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -183,8 +211,11 @@ public class SubmitOrder extends AppCompatActivity {
         datetext=findViewById(R.id.date);
         obj=findViewById(R.id.object);
         loctext=findViewById(R.id.textloc);
+        title_pay=findViewById(R.id.titile_pay);
         paytext=findViewById(R.id.pay);
+        title_tel=findViewById(R.id.titile_tel);
         teltext=findViewById(R.id.tel);
+        title_more=findViewById(R.id.titile_more);
         moretext=findViewById(R.id.more);
         btn_sub=findViewById(R.id.submit);
         setTitie();
