@@ -154,6 +154,14 @@ public class CommentingActivity extends AppCompatActivity {
                 if (commentingContent.getText().equals("")){
                     commentingContent.setText("该用户没有填写评价");
                 }
+                CharSequence user,objUser;
+                if (role.equals("11")){//11是老师,10是家长
+                    user = teacher.getText();
+                    objUser = parent.getText();
+                }else {
+                    user = parent.getText();
+                    objUser = teacher.getText();
+                }
                 new Thread(){
                     HttpURLConnection connection = null;
 
@@ -163,7 +171,7 @@ public class CommentingActivity extends AppCompatActivity {
                             String option = "commenting";//操作
                             connection = HttpConnectionUtils.getConnection(
                                     "Comment?&option="+option
-                                    +"&commenter1Id="+ teacher.getText()+"&commenter2Id="+ parent.getText()
+                                    +"&commenter1Id="+ user +"&commenter2Id="+ objUser
                                     +"&commentingContent="+commentingContent.getText()
                                     +"&isOnTime="+isOnTimeRatingBar.getRating()
                                     +"&teachingQuality="+teachingQualityRatingBar.getRating()
