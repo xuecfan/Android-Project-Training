@@ -20,7 +20,8 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:id="@+id/tabLayout"
-        app:tabTextAppearance="@android:style/TextAppearance.Holo.Large"/>
+        hyphenate:tabSelectedTextColor="#D8900A"
+        app:tabTextAppearance="@android:style/TextAppearance.Holo.Medium"/>
 
     <android.support.v4.view.ViewPager
         android:layout_width="match_parent"

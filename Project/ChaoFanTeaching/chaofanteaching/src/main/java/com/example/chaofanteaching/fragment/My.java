@@ -220,7 +220,6 @@ public class My extends Fragment {
         Map<String,String> map2=new HashMap<>();
         Map<String,String> map3=new HashMap<>();
         Map<String,String> map4=new HashMap<>();
-        Map<String,String> map5=new HashMap<>();
         Map<String,String> map6=new HashMap<>();
         Map<String,String>map7=new HashMap<>();
         map.put("text","个人资料");
@@ -233,8 +232,6 @@ public class My extends Fragment {
         map4.put("img","authentication");
         map3.put("text","我的客服");
         map3.put("img","customer_service");
-        map5.put("text","关于软件");
-        map5.put("img","about");
         map6.put("text","更多");
         map6.put("img","plug");
         map7.put("text","设置");
@@ -244,7 +241,6 @@ public class My extends Fragment {
         dataSource.add(map2);
         dataSource.add(map3);
         dataSource.add(map4);
-        dataSource.add(map5);
         dataSource.add(map6);
         dataSource.add(map7);
 
@@ -281,15 +277,10 @@ public class My extends Fragment {
                             Intent intent4=new Intent(getContext(), AboutUs.class);
                             startActivity(intent4);
                             break;
-
                         case 5:
-                            Intent intent1=new Intent(getContext(), About.class);
-                            startActivity(intent1);
-                            break;
-                        case 6:
                             Toast.makeText(getContext(),"暂未开放，敬请期待", Toast.LENGTH_SHORT).show();
                             break;
-                        case 7:
+                        case 6:
                             Intent intent2=new Intent(getContext(), Setting.class);
                             startActivity(intent2);
                             break;
