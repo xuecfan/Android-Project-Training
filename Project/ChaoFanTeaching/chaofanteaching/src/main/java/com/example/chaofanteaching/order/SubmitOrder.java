@@ -39,6 +39,7 @@ import java.util.Random;
 
 public class SubmitOrder extends AppCompatActivity {
     private SharedPreferences pre;
+    private SharedPreferences pre1;
     protected EaseTitleBar titleBar;
     private Spinner gradeSpinner;
     private Spinner subjectSpinner;
@@ -78,6 +79,7 @@ public class SubmitOrder extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trialteaching);
         pre=getSharedPreferences("login",MODE_PRIVATE);
+        pre1= getSharedPreferences("data",MODE_PRIVATE);
         String role=pre.getString("role","");
         user=pre.getString("userName","");
         initView();
@@ -90,7 +92,17 @@ public class SubmitOrder extends AppCompatActivity {
             obj.setText(objusername);
             String mylat= pre.getString("lat","");
             String mylng= pre.getString("lng","");
+            String address=pre1.getString("addressContent","");
+            loctext.setText(address);
             //geoCode(new LatLng(Double.parseDouble(mylat),Double.parseDouble(mylng)));
+        }else{//老师发起试讲
+            objusername=request.getStringExtra("name");
+            obj.setText(objusername);
+            String mylat=request.getStringExtra("lat");
+            String mylng=request.getStringExtra("lng");
+            lat=Double.parseDouble(mylat);
+            lng=Double.parseDouble(mylng);
+            geoCode(new LatLng(lat,lng));
             loctext.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -100,12 +112,6 @@ public class SubmitOrder extends AppCompatActivity {
                     startActivity(intent);
                 }
             });
-        }else{//老师发起试讲
-            objusername=request.getStringExtra("name");
-            obj.setText(objusername);
-            lat=Double.parseDouble(request.getStringExtra("lat"));
-            lng=Double.parseDouble(request.getStringExtra("lng"));
-            geoCode(new LatLng(lat,lng));
         }
         Calendar ca = Calendar.getInstance();
         mYear = ca.get(Calendar.YEAR);
@@ -168,6 +174,11 @@ public class SubmitOrder extends AppCompatActivity {
         paytext.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
+                Drawable money=getResources().getDrawable(R.drawable.money1);
+                money.setBounds(0,0,60,60);
+                paytext.setCompoundDrawables(null,null,money,null);
+                teltext.setCompoundDrawables(null,null,null,null);
+                moretext.setCompoundDrawables(null,null,null,null);
                 title_pay.setTextColor(Color.parseColor("#D8900A"));
                 title_tel.setTextColor(0x8A000000);
                 title_more.setTextColor(0x8A000000);
@@ -176,6 +187,11 @@ public class SubmitOrder extends AppCompatActivity {
         teltext.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
+                Drawable tel=getResources().getDrawable(R.drawable.tel);
+                tel.setBounds(0,0,70,70);
+                teltext.setCompoundDrawables(null,null,tel,null);
+                paytext.setCompoundDrawables(null,null,null,null);
+                moretext.setCompoundDrawables(null,null,null,null);
                 title_pay.setTextColor(0x8A000000);
                 title_tel.setTextColor(Color.parseColor("#D8900A"));
                 title_more.setTextColor(0x8A000000);
@@ -184,9 +200,14 @@ public class SubmitOrder extends AppCompatActivity {
         moretext.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
+                Drawable more=getResources().getDrawable(R.drawable.more);
+                more.setBounds(0,0,60,60);
                 title_pay.setTextColor(0x8A000000);
                 title_tel.setTextColor(0x8A000000);
                 title_more.setTextColor(Color.parseColor("#D8900A"));
+                moretext.setCompoundDrawables(null,null,more,null);
+                paytext.setCompoundDrawables(null,null,null,null);
+                teltext.setCompoundDrawables(null,null,null,null);
             }
         });
         btn_sub.setOnClickListener(new View.OnClickListener() {

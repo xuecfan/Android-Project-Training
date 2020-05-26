@@ -54,6 +54,7 @@ public class OrderInfo extends AppCompatActivity {
                             @Override
                             public void onClick(View v) {
                                 getInfo("editOrder","id="+id);
+                                onCreate(null);
                             }
                         });
                     }else {
@@ -63,7 +64,8 @@ public class OrderInfo extends AppCompatActivity {
                         btn_finish.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                ToastUtils.showShort("试讲已完成");
+                                getInfo("edit1Order","id="+id);
+                                onCreate(null);
                             }
                         });
                     }else{

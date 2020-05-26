@@ -36,9 +36,21 @@
             android:paddingBottom="70dp"
             android:focusable="true"
             android:focusableInTouchMode="true">
-            <EditText
-                android:id="@+id/name"
-                android:hint="姓名"
+<!--            <EditText-->
+<!--                android:id="@+id/name"-->
+<!--                android:hint="姓名"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:layout_marginLeft="10dp"-->
+<!--                android:layout_marginRight="10dp"-->
+<!--                android:background="@drawable/add_info_background_selector"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintLeft_toLeftOf="parent"-->
+<!--                app:layout_constraintRight_toRightOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/title_bar"-->
+<!--                app:layout_constraintVertical_bias="0" />-->
+            <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="10dp"
@@ -48,8 +60,33 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/title_bar"
-                app:layout_constraintVertical_bias="0" />
+                app:layout_constraintTop_toBottomOf="@+id/sex"
+                app:layout_constraintVertical_bias="0">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:text="用户："
+                    android:gravity="center"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintHorizontal_bias="0"/>
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"
+                    android:gravity="center"
+                    android:text="用户名"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintHorizontal_bias="1">
+                </TextView>
+            </android.support.constraint.ConstraintLayout>
 
             <android.support.constraint.ConstraintLayout
                 android:id="@+id/sex"
@@ -96,42 +133,6 @@
                         android:layout_height="wrap_content"
                         android:text="女"/>
                 </RadioGroup>
-            </android.support.constraint.ConstraintLayout>
-
-            <android.support.constraint.ConstraintLayout
-                android:id="@+id/expLayout"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/add_info_background_selector"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/sex"
-                app:layout_constraintVertical_bias="0">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:text="经验："
-                    android:gravity="center"
-                    android:textSize="18sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintHorizontal_bias="0"/>
-                <Spinner
-                    android:id="@+id/expspinner"
-                    android:layout_width="200dp"
-                    android:layout_height="40dp"
-                    android:entries="@array/exp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintHorizontal_bias="1"></Spinner>
             </android.support.constraint.ConstraintLayout>
 
             <android.support.constraint.ConstraintLayout
@@ -205,6 +206,13 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintHorizontal_bias="1"></Spinner>
             </android.support.constraint.ConstraintLayout>
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="*专业"/>
 
             <EditText
                 android:id="@+id/major"
@@ -339,9 +347,52 @@
                     app:layout_constraintHorizontal_bias="1"></Spinner>
             </android.support.constraint.ConstraintLayout>
 
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/expLayout"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/add_info_background_selector"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/sex"
+                app:layout_constraintVertical_bias="0">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:text="家教经验："
+                    android:gravity="center"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintHorizontal_bias="0"/>
+                <Spinner
+                    android:id="@+id/expspinner"
+                    android:layout_width="200dp"
+                    android:layout_height="40dp"
+                    android:entries="@array/exp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintHorizontal_bias="1"></Spinner>
+            </android.support.constraint.ConstraintLayout>
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="*家教费用（元/小时）"/>
+
             <EditText
                 android:id="@+id/pay"
-                android:hint="酬劳（元/小时）"
+                android:hint="家教费用"
                 android:inputType="number"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -355,9 +406,16 @@
                 app:layout_constraintTop_toBottomOf="@+id/freetimeLayout"
                 app:layout_constraintVertical_bias="0"/>
 
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="*联系电话"/>
+
             <EditText
                 android:id="@+id/tel"
-                android:hint="电话"
+                android:hint="联系电话"
                 android:inputType="number"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -370,6 +428,13 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pay"
                 app:layout_constraintVertical_bias="0"/>
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="*自我介绍"/>
 
             <EditText
                 android:id="@+id/require"

@@ -54,13 +54,14 @@ import java.util.List;
 
 public class AddInfoActivity extends AppCompatActivity {
     private SharedPreferences pre;
+    private SharedPreferences pre1;
     private String a="";
     private TextView hourtext;
     private MapView mapView;
     private LocationClient locationClient;
     private LocationClientOption locationClientOption;
     private BaiduMap baiduMap;
-    private EditText inName;
+    private TextView inName;
     private EditText inLong;
     private EditText inPay;
     private EditText inTel;
@@ -70,10 +71,14 @@ public class AddInfoActivity extends AppCompatActivity {
     private Spinner myspinner;
     private Spinner myspinner1;
     private Spinner myspinner2;
+    private String name;
     private String sex;
     private String grade;
     private String subjcet;
     private String week;
+    private String address;
+    private String mylat;
+    private String mylng;
     private int mHour;
     private int mMin;
     protected EaseTitleBar titleBar;
@@ -87,14 +92,16 @@ public class AddInfoActivity extends AppCompatActivity {
         setContentView(R.layout.add_info);
         initView();
         pre= getSharedPreferences("login", Context.MODE_PRIVATE);
+        pre1= getSharedPreferences("data", Context.MODE_PRIVATE);
         a = pre.getString("userName", "");
-        titleBar.setTitle("添加信息");
-        titleBar.setLeftLayoutClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+        name=pre1.getString("nameContent","");
+        address=pre1.getString("addressContent","");
+        mylat=pre1.getString("mylat","114.53952");
+        mylng=pre1.getString("mylng","38.03647");
+        showLocOnMap(Double.parseDouble(mylat),Double.parseDouble(mylng));
+        inName.setText(name);
+        inlocation.setText(address);
+
         hourtext=findViewById(R.id.hour_min);
         hourtext.setText("8:00");
         TimePickerDialog timePickerDialog=new TimePickerDialog(this,new TimePickerDialog.OnTimeSetListener() {
@@ -115,8 +122,7 @@ public class AddInfoActivity extends AppCompatActivity {
                 timePickerDialog.show();
             }
         });
-        baiduMap=mapView.getMap();
-        baiduMap.setMyLocationEnabled(true);
+
         baiduMap.setOnMapTouchListener(new BaiduMap.OnMapTouchListener() {//解决scroll和map冲突
             @Override
             public void onTouch(MotionEvent motionEvent) {
@@ -137,10 +143,10 @@ public class AddInfoActivity extends AppCompatActivity {
             @Override
             public void onMapPoiClick(MapPoi mapPoi) {
                 showLocOnMap(mapPoi.getPosition().latitude,mapPoi.getPosition().longitude);
-                inlocation.setText(mapPoi.getName());
+                inlocation.setText(mapPoi.getName()+"附近");
             }
         });
-        locationOption();//定位
+        //locationOption();//定位
         hidelogo();//隐藏logo
         zoomlevel();//改变比列尺
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -186,10 +192,6 @@ public class AddInfoActivity extends AppCompatActivity {
                     String address = reverseGeoCodeResult.getAddress();
                     List<PoiInfo> pois=reverseGeoCodeResult.getPoiList();
                     if(pois!=null){
-                        for(PoiInfo p:pois){
-                            Log.i("poi",p.getName());
-                            Log.i("poi",p.getAddress());
-                        }
                         inlocation.setText(pois.get(0).getAddress()+pois.get(0).getName());
                     }else{
                         inlocation.setText(address);
@@ -217,6 +219,15 @@ public class AddInfoActivity extends AppCompatActivity {
         radioGroup=findViewById(R.id.myradio);
         mapView = findViewById(R.id.bmapView);
         titleBar=findViewById(R.id.title_bar);
+        titleBar.setTitle("添加信息");
+        titleBar.setLeftLayoutClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+        baiduMap=mapView.getMap();
+        baiduMap.setMyLocationEnabled(true);
     }
     private void getSpinner(){
         myspinner=findViewById(R.id.gradespinner);
@@ -287,7 +298,7 @@ public class AddInfoActivity extends AppCompatActivity {
         locationClient.registerLocationListener(new BDAbstractLocationListener() {
             @Override
             public void onReceiveLocation(BDLocation bdLocation) {
-                inlocation.setText(bdLocation.getAddrStr());
+                //inlocation.setText(bdLocation.getAddrStr());
                 //获取经纬度
                 double lat=bdLocation.getLatitude();
                 double lng=bdLocation.getLongitude();
@@ -295,7 +306,7 @@ public class AddInfoActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         String locate= String.valueOf(lat+","+lng);
-                        String name=inName.getText().toString();
+                        //String name=inName.getText().toString();
                         String ilong=inLong.getText().toString();
                         String pay=inPay.getText().toString();
                         String tel=inTel.getText().toString();

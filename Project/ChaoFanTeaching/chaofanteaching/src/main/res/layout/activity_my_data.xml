@@ -249,7 +249,7 @@
             android:layout_height="26dp"
             android:text=""
             android:textSize="20dp"
-            android:maxEms="6"
+            android:maxEms="11"
             android:ellipsize="end"
             android:singleLine="true"
             android:id="@+id/address_content"

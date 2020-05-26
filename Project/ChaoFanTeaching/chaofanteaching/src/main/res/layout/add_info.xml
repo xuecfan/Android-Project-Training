@@ -36,15 +36,8 @@
             android:paddingBottom="70dp"
             android:focusable="true"
             android:focusableInTouchMode="true">
-            <TextView
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="姓名"/>
-            <EditText
-                android:id="@+id/name"
-                android:hint="姓名"
+
+            <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="10dp"
@@ -54,8 +47,33 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/title_bar"
-                app:layout_constraintVertical_bias="0"/>
+                app:layout_constraintTop_toBottomOf="@+id/sex"
+                app:layout_constraintVertical_bias="0">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:text="用户："
+                    android:gravity="center"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintHorizontal_bias="0"/>
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"
+                    android:gravity="center"
+                    android:text="用户名"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintHorizontal_bias="1">
+                </TextView>
+            </android.support.constraint.ConstraintLayout>
 
             <android.support.constraint.ConstraintLayout
                 android:id="@+id/sex"
@@ -86,6 +104,7 @@
                     android:id="@+id/myradio"
                     android:gravity="center"
                     android:orientation="horizontal"
+                    android:layout_marginRight="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -176,6 +195,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintHorizontal_bias="1">
                 </Spinner>
+
             </android.support.constraint.ConstraintLayout>
 
             <android.support.constraint.ConstraintLayout
@@ -225,11 +245,31 @@
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintHorizontal_bias="0.76" />
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/clock"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintHorizontal_bias="0.85"/>
             </android.support.constraint.ConstraintLayout>
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="*补课时长（小时）"/>
 
             <EditText
                 android:id="@+id/time"
-                android:hint="时长（小时）"
+                android:hint="补课时长"
+                android:inputType="number"
+                android:digits="1234567890"
+                android:imeOptions="actionNext"
+                android:maxLength="1"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="10dp"
@@ -242,9 +282,20 @@
                 app:layout_constraintTop_toBottomOf="@+id/timeLayout"
                 app:layout_constraintVertical_bias="0"/>
 
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="*课时费用（元/小时）"/>
+
             <EditText
                 android:id="@+id/pay"
-                android:hint="酬劳（元/小时）"
+                android:hint="课时费用"
+                android:inputType="number"
+                android:digits="1234567890"
+                android:imeOptions="actionNext"
+                android:maxLength="3"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="10dp"
@@ -257,10 +308,21 @@
                 app:layout_constraintTop_toBottomOf="@+id/time"
                 app:layout_constraintVertical_bias="0"/>
 
+            <TextView
+                android:id="@+id/titile_tel"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="*联系电话"/>
 
             <EditText
                 android:id="@+id/tel"
-                android:hint="电话"
+                android:hint="联系电话"
+                android:inputType="number"
+                android:digits="1234567890"
+                android:imeOptions="actionNext"
+                android:maxLength="11"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="10dp"
@@ -273,11 +335,18 @@
                 app:layout_constraintTop_toBottomOf="@+id/pay"
                 app:layout_constraintVertical_bias="0"/>
 
+            <TextView
+                android:id="@+id/titile_more"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="要求（性别、专业等）"/>
 
             <EditText
                 android:id="@+id/require"
                 android:minLines="@string/add_info_minLines"
-                android:hint="要求（性别、学院等）"
+                android:hint="要求"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -290,10 +359,16 @@
                 app:layout_constraintTop_toBottomOf="@+id/tel"
                 app:layout_constraintVertical_bias="0"/>
 
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="*位置"/>
+
             <EditText
                 android:id="@+id/addmylocation"
                 android:minLines="@string/add_info_minLines"
-                android:hint="所在位置"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"

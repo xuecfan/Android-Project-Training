@@ -101,7 +101,8 @@
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".sign.RePWActivity" />
         <activity android:name=".InfoList.ParInfoActivity" />
-        <activity android:name=".InfoList.AddStuInfoActivity" />
+        <activity android:name=".InfoList.AddStuInfoActivity"
+            android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -114,7 +115,8 @@
             android:label="@string/title_activity_info_detail" />
         <activity
             android:name=".InfoList.AddInfoActivity"
-            android:label="@string/title_activity_add_info" />
+            android:label="@string/title_activity_add_info"
+            android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".myself.MyData" />
         <activity android:name=".myself.NameDetail" />
         <activity android:name=".myself.PhoneDetail" />
