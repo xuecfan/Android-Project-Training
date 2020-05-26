@@ -80,6 +80,7 @@ public class AddInfoActivity extends AppCompatActivity {
     private String address;
     private String mylat;
     private String mylng;
+    private String locate;
     private int mHour;
     private int mMin;
     protected EaseTitleBar titleBar;
@@ -100,6 +101,7 @@ public class AddInfoActivity extends AppCompatActivity {
         address=pre1.getString("addressContent","");
         mylat=pre1.getString("mylat","114.53952");
         mylng=pre1.getString("mylng","38.03647");
+        locate=mylat+","+mylng;
         showLocOnMap(Double.parseDouble(mylat),Double.parseDouble(mylng));
         inName.setText(name);
         inlocation.setText(address);
@@ -163,6 +165,18 @@ public class AddInfoActivity extends AppCompatActivity {
             }
         });
         getSpinner();
+        add_finish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String ilong=inLong.getText().toString();
+                String pay=inPay.getText().toString();
+                String tel=inTel.getText().toString();
+                String require=inRequirement.getText().toString();
+                String time=hourtext.getText().toString();
+                dbKey(name,sex,grade,subjcet,week,time,ilong,pay,tel,require,a,locate);
+                finish();
+            }
+        });
     }
 
     /**
@@ -309,20 +323,7 @@ public class AddInfoActivity extends AppCompatActivity {
                 //获取经纬度
                 double lat=bdLocation.getLatitude();
                 double lng=bdLocation.getLongitude();
-                add_finish.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        String locate= String.valueOf(lat+","+lng);
-                        //String name=inName.getText().toString();
-                        String ilong=inLong.getText().toString();
-                        String pay=inPay.getText().toString();
-                        String tel=inTel.getText().toString();
-                        String require=inRequirement.getText().toString();
-                        String time=hourtext.getText().toString();
-                        dbKey(name,sex,grade,subjcet,week,time,ilong,pay,tel,require,a,locate);
-                        finish();
-                    }
-                });
+                locate= String.valueOf(lat+","+lng);
                 //将定位数据显示在地图上
                 showLocOnMap(lat,lng);
             }
