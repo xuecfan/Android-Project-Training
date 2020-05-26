@@ -304,11 +304,10 @@ public class SubmitOrder extends AppCompatActivity {
                             Log.i("poi",p.getName());
                             Log.i("poi",p.getAddress());
                         }
-                        loctext.setText(pois.get(0).getAddress()+pois.get(0).getName()+"附近");
+                        loctext.setText(pois.get(0).getAddress()+pois.get(0).getName());
                     }else{
-                        loctext.setText(address+"附近");
+                        loctext.setText(address);
                     }
-
                 }
             }
         };

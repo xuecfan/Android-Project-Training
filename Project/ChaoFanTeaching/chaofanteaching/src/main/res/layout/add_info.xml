@@ -381,19 +381,41 @@
                 app:layout_constraintTop_toBottomOf="@+id/require"
                 app:layout_constraintVertical_bias="0"/>
 
-            <com.baidu.mapapi.map.MapView
-                android:id="@+id/bmapView"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:clickable="true"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/require"
-                app:layout_constraintVertical_bias="0"/>
+                android:layout_height="250dp">
+                <com.baidu.mapapi.map.MapView
+                    android:id="@+id/bmapView"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:clickable="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp" />
+
+                <ImageButton
+                    android:id="@+id/btn2"
+                    android:layout_marginTop="150dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:src="@drawable/loc"
+                    android:background="@color/white"/>
+            </RelativeLayout>
+
+<!--            <com.baidu.mapapi.map.MapView-->
+<!--                android:id="@+id/bmapView"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="250dp"-->
+<!--                android:clickable="true"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:layout_marginLeft="10dp"-->
+<!--                android:layout_marginRight="10dp"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintLeft_toLeftOf="parent"-->
+<!--                app:layout_constraintRight_toRightOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/require"-->
+<!--                app:layout_constraintVertical_bias="0"/>-->
 
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"

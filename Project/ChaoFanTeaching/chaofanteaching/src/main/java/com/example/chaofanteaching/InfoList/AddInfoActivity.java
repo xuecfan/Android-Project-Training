@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -83,6 +84,7 @@ public class AddInfoActivity extends AppCompatActivity {
     private int mMin;
     protected EaseTitleBar titleBar;
     private Button add_finish;
+    private ImageButton btn2;
     private ScrollView scrollView;
 
     @Override
@@ -101,7 +103,12 @@ public class AddInfoActivity extends AppCompatActivity {
         showLocOnMap(Double.parseDouble(mylat),Double.parseDouble(mylng));
         inName.setText(name);
         inlocation.setText(address);
-
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                locationOption();
+            }
+        });
         hourtext=findViewById(R.id.hour_min);
         hourtext.setText("8:00");
         TimePickerDialog timePickerDialog=new TimePickerDialog(this,new TimePickerDialog.OnTimeSetListener() {
@@ -146,7 +153,6 @@ public class AddInfoActivity extends AppCompatActivity {
                 inlocation.setText(mapPoi.getName()+"附近");
             }
         });
-        //locationOption();//定位
         hidelogo();//隐藏logo
         zoomlevel();//改变比列尺
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -218,6 +224,7 @@ public class AddInfoActivity extends AppCompatActivity {
         add_finish=findViewById(R.id.add_finish);
         radioGroup=findViewById(R.id.myradio);
         mapView = findViewById(R.id.bmapView);
+        btn2=findViewById(R.id.btn2);
         titleBar=findViewById(R.id.title_bar);
         titleBar.setTitle("添加信息");
         titleBar.setLeftLayoutClickListener(new View.OnClickListener() {
@@ -298,7 +305,7 @@ public class AddInfoActivity extends AppCompatActivity {
         locationClient.registerLocationListener(new BDAbstractLocationListener() {
             @Override
             public void onReceiveLocation(BDLocation bdLocation) {
-                //inlocation.setText(bdLocation.getAddrStr());
+                inlocation.setText(bdLocation.getAddrStr());
                 //获取经纬度
                 double lat=bdLocation.getLatitude();
                 double lng=bdLocation.getLongitude();

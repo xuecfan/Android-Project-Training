@@ -87,6 +87,11 @@ public class MyData extends AppCompatActivity {
                             editor=pre.edit();
                             editor.putString("emailContent",r[4]);
                             editor.commit();}
+                        if(!r[5].isEmpty()){
+                            editor.putString("mylat",r[5]);
+                            editor.putString("mylng",r[6]);
+                            editor.commit();
+                        }
                         break;
                     }}
             }
@@ -154,7 +159,9 @@ public class MyData extends AppCompatActivity {
         final String address1=pre.getString("addressContent","");
         final String sex1=pre.getString("sexContent","");
         final String email1=pre.getString("emailContent","");
-        if(name1.equals("")||phone1.equals("")||sex1.equals("")||address1.equals("")||email1.equals("")){
+        final String lat=pre.getString("mylat","");
+        final String lng=pre.getString("mylng","");
+        if(name1.equals("")||phone1.equals("")||sex1.equals("")||address1.equals("")||email1.equals("")||lat.equals("")){
             look();
         }
         name.setOnClickListener(new View.OnClickListener() {
@@ -204,7 +211,9 @@ public class MyData extends AppCompatActivity {
                             String address1=pre.getString("addressContent","");
                             String sex1=pre.getString("sexContent","");
                             String email1=pre.getString("emailContent","");
-                            insert(name1,phone1,address1,sex1,email1);
+                            String lat=pre.getString("mylat","");
+                            String lng=pre.getString("mylng","");
+                            insert(name1,phone1,address1,sex1,email1,lat,lng);
                             android.os.Message msg= Message.obtain();
                             msg.what=1;
                             handler.sendMessage(msg);
@@ -213,10 +222,10 @@ public class MyData extends AppCompatActivity {
                     finish();}
         });
     }
-    private void insert(String name1,String phone1,String address1,String sex,String email){
+    private void insert(String name1,String phone1,String address1,String sex,String email,String lat,String lng){
         OkHttpClient okHttpClient=new OkHttpClient();
         Request request=new Request.Builder().
-                url("http://39.107.42.87:8080/ChaoFanTeaching/MyData?name="+user+"&nameContent="+name1+"&phoneContent="+phone1+"&addressContent="+address1+"&sexContent="+sex+"&index=insert&email="+email)
+                url("http://39.107.42.87:8080/ChaoFanTeaching/MyData?name="+user+"&nameContent="+name1+"&phoneContent="+phone1+"&addressContent="+address1+"&sexContent="+sex+"&index=insert&email="+email+"&locate="+lat+","+lng)
                 .build();
         Call call=okHttpClient.newCall(request);
         call.enqueue(new Callback() {

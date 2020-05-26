@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ZoomControls;
 
@@ -25,8 +26,10 @@ import com.baidu.mapapi.map.MapPoi;
 import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.MapViewLayoutParams;
 import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
+import com.baidu.mapapi.map.UiSettings;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.search.core.PoiInfo;
 import com.baidu.mapapi.search.core.SearchResult;
@@ -47,7 +50,7 @@ public class AddressDetail extends AppCompatActivity {
     private BaiduMap baiduMap;
     private MapView mapView;
     private Button btn1;
-    private Button btn2;
+    private ImageButton btn2;
     private EditText addresstext;
     private SharedPreferences sharedPreferences;
     private double mylat;
@@ -108,7 +111,6 @@ public class AddressDetail extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 locationOption();
-                //finish();
             }
         });
     }
@@ -130,6 +132,7 @@ public class AddressDetail extends AppCompatActivity {
         }
     }
     private void showLocOnMap(double lat, double lng) {
+        zoomlevel();
         //获取定位图标
         BitmapDescriptor icon = BitmapDescriptorFactory
                 .fromResource(R.mipmap.loc1);
