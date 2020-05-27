@@ -30,6 +30,7 @@ import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
 import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.InfoList.Info_Map;
 import com.example.chaofanteaching.R;
+import com.example.chaofanteaching.myself.AddressDetail;
 import com.example.chaofanteaching.utils.ToastUtils;
 import com.hyphenate.easeui.widget.EaseTitleBar;
 import java.net.HttpURLConnection;
@@ -90,11 +91,15 @@ public class SubmitOrder extends AppCompatActivity {
             info_title.setText("试讲老师：");
             objusername=request.getStringExtra("teacher");
             obj.setText(objusername);
-            String mylat= pre.getString("lat","");
-            String mylng= pre.getString("lng","");
             String address=pre1.getString("addressContent","");
             loctext.setText(address);
-            //geoCode(new LatLng(Double.parseDouble(mylat),Double.parseDouble(mylng)));
+            loctext.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(SubmitOrder.this, AddressDetail.class);
+                    startActivityForResult(intent,1);
+                }
+            });
         }else{//老师发起试讲
             objusername=request.getStringExtra("name");
             obj.setText(objusername);
@@ -222,6 +227,12 @@ public class SubmitOrder extends AppCompatActivity {
                 submitOrder(id,user,objusername,grade,subject,date,time,location,length,pay,tel,more);
             }
         });
+    }
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        if(requestCode==1){
+            String address=pre1.getString("addressContent","");
+            loctext.setText(address);
+        }
     }
     public void initView(){
         titleBar=findViewById(R.id.title_bar);

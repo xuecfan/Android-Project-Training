@@ -104,6 +104,8 @@ public class AddressDetail extends AppCompatActivity {
                 editor.putString("mylat",String.valueOf(mylat));
                 editor.putString("mylng",String.valueOf(mylng));
                 editor.apply();
+                Intent intent = new Intent();
+                setResult(1,intent);
                 finish();
             }
         });
@@ -135,7 +137,7 @@ public class AddressDetail extends AppCompatActivity {
         zoomlevel();
         //获取定位图标
         BitmapDescriptor icon = BitmapDescriptorFactory
-                .fromResource(R.mipmap.loc1);
+                .fromResource(R.mipmap.loc);
         //设置显示方式
         MyLocationConfiguration config=new MyLocationConfiguration(
                 MyLocationConfiguration.LocationMode.NORMAL,

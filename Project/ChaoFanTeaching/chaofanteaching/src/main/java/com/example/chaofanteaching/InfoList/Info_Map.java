@@ -1,11 +1,15 @@
 package com.example.chaofanteaching.InfoList;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ZoomControls;
 import com.baidu.location.BDAbstractLocationListener;
@@ -23,7 +27,6 @@ import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.model.LatLng;
-import com.baidu.mapapi.utils.DistanceUtil;
 import com.baidu.mapapi.utils.route.BaiduMapRoutePlan;
 import com.baidu.mapapi.utils.route.RouteParaOption;
 import com.example.chaofanteaching.R;
@@ -33,18 +36,20 @@ public class Info_Map extends AppCompatActivity {
     private LocationClientOption locationClientOption;
     private BaiduMap baiduMap;
     private MapView mapView;
-    private Button btnnavi;
-    private String lat;
-    private String lng;
+    private ImageButton btnnavi;
+    private double lat;
+    private double lng;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         SDKInitializer.initialize(getApplicationContext());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info_map);
+        makeStatusBarTransparent(Info_Map.this);
+        setAndroidNativeLightStatusBar(Info_Map.this,true);
         Intent request=getIntent();
-        lat=request.getStringExtra("lat");
-        lng=request.getStringExtra("lng");
+        lat=Double.parseDouble(request.getStringExtra("lat"));
+        lng=Double.parseDouble(request.getStringExtra("lng"));
         mapView = findViewById(R.id.bmapView);
         btnnavi=findViewById(R.id.btnnavi);
         baiduMap=mapView.getMap();
@@ -52,6 +57,7 @@ public class Info_Map extends AppCompatActivity {
         locationOption();
         hidelogo();//隐藏logo
         zoomlevel();//改变比列尺
+        showLocOnMap(lat,lng);
     }
     private void hidelogo(){
         View child=mapView.getChildAt(1);
@@ -59,10 +65,11 @@ public class Info_Map extends AppCompatActivity {
             child.setVisibility(View.INVISIBLE);
         }
     }
+
     private void showLocOnMap(double lat, double lng) {
         //获取定位图标
         BitmapDescriptor icon = BitmapDescriptorFactory
-                .fromResource(R.mipmap.loc1);
+                .fromResource(R.mipmap.loc);
         //设置显示方式
         MyLocationConfiguration config=new MyLocationConfiguration(
                 MyLocationConfiguration.LocationMode.NORMAL,
@@ -76,12 +83,12 @@ public class Info_Map extends AppCompatActivity {
         MapStatusUpdate msu= MapStatusUpdateFactory.newLatLng(new LatLng(lat,lng));
         baiduMap.animateMapStatus(msu);
     }
+
     private void locationOption(){
         //1.创建定位服务客户端类的对象
         locationClient=new LocationClient(getApplicationContext());
         //2.创建定位客户端选项类的对象，并设置参数
         locationClientOption=new LocationClientOption();
-        //设置定位参数
         //打开GPS
         locationClientOption.setOpenGps(true);
         //定位间隔时间
@@ -91,11 +98,11 @@ public class Info_Map extends AppCompatActivity {
         //设置定位模式
         locationClientOption.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);
         //需要定位地址数据
-        locationClientOption.setIsNeedAddress(true);
+        locationClientOption.setIsNeedAddress(false);
         //需要地址描述
-        locationClientOption.setIsNeedLocationDescribe(true);
+        locationClientOption.setIsNeedLocationDescribe(false);
         //需要周边POI信息
-        locationClientOption.setIsNeedLocationPoiList(true);
+        locationClientOption.setIsNeedLocationPoiList(false);
         //3.将定位选项参数应用给定位服务客户端类的对象
         locationClient.setLocOption(locationClientOption);
         //4.开始定位
@@ -106,26 +113,22 @@ public class Info_Map extends AppCompatActivity {
             public void onReceiveLocation(BDLocation bdLocation) {
                 double mylat=bdLocation.getLatitude();
                 double mylng=bdLocation.getLongitude();
-                showLocOnMap(Double.parseDouble(lat),Double.parseDouble(lng));
-                showDisdance(mylat,mylng,Double.parseDouble(lat),Double.parseDouble(lng));
                 btnnavi.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        baidu(mylat,mylng,Double.parseDouble(lat),Double.parseDouble(lng));
+                        baidu(mylat,mylng,lat,lng);
                     }
                 });
             }
         });
     }
+
     private void zoomlevel(){
         baiduMap.setMaxAndMinZoomLevel(19,13);
         MapStatusUpdate msu= MapStatusUpdateFactory.zoomTo(16);
         baiduMap.setMapStatus(msu);
     }
-    public void showDisdance(double mylat, double mylng,double lat, double lng){
-        int dis=(int)DistanceUtil. getDistance(new LatLng(mylat,mylng),new LatLng(lat,lng));
-        Log.e("dis","dis="+dis+"m");
-    }
+
     public void baidu(double mylat, double mylng,double lat, double lng){
         //定义起终点坐标
         LatLng startPoint = new LatLng(mylat, mylng);
@@ -144,5 +147,30 @@ public class Info_Map extends AppCompatActivity {
         }
         //调起结束时及时调用finish方法以释放相关资源
         BaiduMapRoutePlan.finish(this);
+    }
+
+    public static void makeStatusBarTransparent(Activity activity) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
+            return;
+        }
+        Window window = activity.getWindow();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            int option = window.getDecorView().getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN;
+            window.getDecorView().setSystemUiVisibility(option);
+            window.setStatusBarColor(Color.TRANSPARENT);
+        } else {
+            window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        }
+    }
+
+    private static void setAndroidNativeLightStatusBar(Activity activity, boolean dark) {
+        View decor = activity.getWindow().getDecorView();
+        if (dark) {
+            decor.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        } else {
+            decor.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+        }
     }
 }

@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -47,7 +46,6 @@ import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
 import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.R;
 import com.example.chaofanteaching.comments.UtilHelpers;
-import com.example.chaofanteaching.sign.LoginActivity;
 import com.example.chaofanteaching.utils.ToastUtils;
 import com.hyphenate.easeui.widget.EaseTitleBar;
 import java.net.HttpURLConnection;
@@ -292,6 +290,7 @@ public class AddInfoActivity extends AppCompatActivity {
         }
     }
     private void locationOption(){
+        zoomlevel();
         //1.创建定位服务客户端类的对象
         locationClient=new LocationClient(getApplicationContext());
         //2.创建定位客户端选项类的对象，并设置参数
@@ -332,7 +331,7 @@ public class AddInfoActivity extends AppCompatActivity {
     private void showLocOnMap(double lat, double lng) {
         //获取定位图标
         BitmapDescriptor icon = BitmapDescriptorFactory
-                .fromResource(R.mipmap.loc1);
+                .fromResource(R.mipmap.loc);
         //设置显示方式
         MyLocationConfiguration config=new MyLocationConfiguration(
                 MyLocationConfiguration.LocationMode.NORMAL,
