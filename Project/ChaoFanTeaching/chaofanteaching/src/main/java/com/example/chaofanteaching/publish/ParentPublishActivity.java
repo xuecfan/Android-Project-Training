@@ -1,4 +1,4 @@
-package com.example.chaofanteaching.MyPublish;
+package com.example.chaofanteaching.publish;
 
 import android.content.Context;
 import android.content.Intent;
@@ -21,7 +21,7 @@ import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyPublishActivity extends AppCompatActivity {
+public class ParentPublishActivity extends AppCompatActivity {
 
     protected EaseTitleBar titleBar;
     private ListView infolist;
@@ -35,7 +35,7 @@ public class MyPublishActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.my_publish);
+        setContentView(R.layout.activity_parent_publish);
         pre=getSharedPreferences("login", Context.MODE_PRIVATE);
         a = pre.getString("userName", "");
         String role=pre.getString("role","");
@@ -61,7 +61,7 @@ public class MyPublishActivity extends AppCompatActivity {
                 Intent intent = new Intent();
                 intent.putExtra("name", infos.get(position));
                 intent.putExtra("id", ids.get(position));
-                intent.setClass(MyPublishActivity.this, MPInfoActivity.class);
+                intent.setClass(ParentPublishActivity.this, TeacherPublishActivity.class);
                 startActivity(intent);
             }
         });

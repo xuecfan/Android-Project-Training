@@ -8,8 +8,6 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -28,35 +26,31 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
-import com.example.chaofanteaching.All;
 import com.example.chaofanteaching.BottomPopupOption;
 import com.example.chaofanteaching.HttpConnectionUtils;
-import com.example.chaofanteaching.InfoList.InfoDetailActivity;
+import com.example.chaofanteaching.InfoList.AddInfoActivity;
+import com.example.chaofanteaching.InfoList.AddStuInfoActivity;
 import com.example.chaofanteaching.MyListView;
-import com.example.chaofanteaching.MyPublish.MyPublishActivity;
+import com.example.chaofanteaching.publish.ParentPublishActivity;
+import com.example.chaofanteaching.publish.TeacherPublishActivity;
 import com.example.chaofanteaching.R;
 import com.example.chaofanteaching.StreamChangeStrUtils;
 import com.example.chaofanteaching.UpLoadFile;
-import com.example.chaofanteaching.about.About;
 import com.example.chaofanteaching.about.Student_Authentication;
-import com.example.chaofanteaching.comments.CommentingActivity;
 import com.example.chaofanteaching.comments.MyCommentsActivity;
 import com.example.chaofanteaching.myself.AboutUs;
 import com.example.chaofanteaching.myself.MyData;
 import com.example.chaofanteaching.myself.RenZheng;
 import com.example.chaofanteaching.myself.Setting;
-import com.example.chaofanteaching.order.OrderInfo;
 import com.example.chaofanteaching.order.OrderList;
 import com.example.chaofanteaching.robot.Chatrobot;
 import com.example.chaofanteaching.sign.LoginActivity;
-import com.hyphenate.easeui.widget.EaseTitleBar;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -73,8 +67,6 @@ import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-
-import static com.example.chaofanteaching.InfoList.InfoDetailActivity.makeStatusBarTransparent;
 
 
 public class My extends Fragment {
@@ -128,6 +120,26 @@ public class My extends Fragment {
                         renzheng.setText("已认证");
                         img.setImageDrawable(getResources().getDrawable(R.drawable.v1));
                     }
+                    break;
+                case 4:
+                    //string为1表示已发布，0表示未发布
+                    String string = msg.obj.toString();
+                    Intent intent;
+                    if (string.equals("1")){
+                        if (pre.getString("role","").equals("11")){//11是老师,10是家长
+                            intent=new Intent(getContext(), TeacherPublishActivity.class);
+                        }else {
+                            intent=new Intent(getContext(), ParentPublishActivity.class);
+                        }
+                    }else {
+                        if (pre.getString("role","").equals("11")){//11是老师,10是家长
+                            intent=new Intent(getContext(), AddStuInfoActivity.class);
+                        }else {
+                            intent=new Intent(getContext(), AddInfoActivity.class);
+                        }
+                        Toast.makeText(getContext(), "您还未发布信息，请发布", Toast.LENGTH_SHORT).show();
+                    }
+                    startActivity(intent);
                     break;
             }
         }
@@ -266,8 +278,7 @@ public class My extends Fragment {
                             startActivity(intent0);
                             break;
                         case 2:
-                            Intent intent=new Intent(getContext(), MyPublishActivity.class);
-                            startActivity(intent);
+                            ifPublish();
                             break;
                         case 3:
                             Intent intent3=new Intent(getContext(), Chatrobot.class);
@@ -536,6 +547,34 @@ public class My extends Fragment {
             }
         }.start();
     }
+
+    /**
+     * 查询是否发布过信息
+     * 发布过分别进入修改页面，否则分别进入发布信息页
+     */
+    private void ifPublish(){
+        new Thread() {
+            HttpURLConnection connection = null;
+            @Override
+            public void run() {
+                try {
+                    connection = HttpConnectionUtils.getConnection("MyData?index=ifPublish&name="+a+"&role="+pre.getString("role","null"));
+                    int code = connection.getResponseCode();
+                    if (code == 200) {
+                        InputStream inputStream = connection.getInputStream();
+                        String str = StreamChangeStrUtils.toChange(inputStream);
+                        android.os.Message message = Message.obtain();
+                        message.obj = str;
+                        message.what = 4;
+                        handler.sendMessage(message);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+    }
+
     private void saveid(String id){
         OkHttpClient okHttpClient=new OkHttpClient();
         Request request=new Request.Builder().
@@ -550,7 +589,6 @@ public class My extends Fragment {
         });
 
     }
-
     //状态栏透明
     public static void makeStatusBarTransparent(Activity activity) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {

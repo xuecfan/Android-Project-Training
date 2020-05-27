@@ -3,4 +3,6 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="teacher_publish_cue_marginStart">10dp</dimen>
+    <dimen name="teacher_publish_content_marginStart">20dp</dimen>
 </resources>

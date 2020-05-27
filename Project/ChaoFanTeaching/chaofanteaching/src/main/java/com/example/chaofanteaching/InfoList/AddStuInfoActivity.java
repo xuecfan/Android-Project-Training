@@ -21,15 +21,17 @@ import com.example.chaofanteaching.comments.UtilHelpers;
 import com.example.chaofanteaching.utils.ToastUtils;
 import com.hyphenate.easeui.widget.EaseTitleBar;
 
+import org.w3c.dom.Text;
+
 import java.net.HttpURLConnection;
 
 public class AddStuInfoActivity extends AppCompatActivity {
     private SharedPreferences pre;
     private String a="";
-    private EditText inName;
+    private TextView inName;
     private EditText inMajor;
     private EditText inPay;
-    private EditText inTel;
+//    private EditText inTel;
     private EditText ipintroduce;
     private RadioGroup radioGroup;
     private String sex;
@@ -55,6 +57,8 @@ public class AddStuInfoActivity extends AppCompatActivity {
         setContentView(R.layout.add_stu_info);
         pre= getSharedPreferences("login", Context.MODE_PRIVATE);
         a = pre.getString("userName", "");
+        inName=findViewById(R.id.name);
+        inName.setText(a);
         titleBar=findViewById(R.id.title_bar);
         titleBar.setTitle("添加信息");
         titleBar.setLeftLayoutClickListener(new View.OnClickListener() {
@@ -77,17 +81,16 @@ public class AddStuInfoActivity extends AppCompatActivity {
         add_finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                inName=findViewById(R.id.name);
                 inMajor=findViewById(R.id.major);
                 inPay=findViewById(R.id.pay);
-                inTel=findViewById(R.id.tel);
+//                inTel=findViewById(R.id.tel);
                 ipintroduce=findViewById(R.id.require);
                 String name=inName.getText().toString();
                 String major=inMajor.getText().toString();
                 String pay=inPay.getText().toString();
-                String tel=inTel.getText().toString();
+//                String tel=inTel.getText().toString();
                 String introduce=ipintroduce.getText().toString();
-                dbKey(name,sex,grade,subjcet,week,time,university,pay,tel,introduce,college,major,a,exp);
+                dbKey(name,sex,grade,subjcet,week,time,university,pay,introduce,college,major,a,exp);
                 finish();
             }
         });
@@ -188,13 +191,13 @@ public class AddStuInfoActivity extends AppCompatActivity {
             }
         });
     }
-    private void dbKey(final String name, final String sex, final String grade, final String subject, final String week, final String time, final String university, final String pay, final String tel, final String introduce,final String college,final String major,final String user,final String exp) {
+    private void dbKey(final String name, final String sex, final String grade, final String subject, final String week, final String time, final String university, final String pay, final String introduce,final String college,final String major,final String user,final String exp) {
         new Thread() {
             HttpURLConnection connection = null;
             @Override
             public void run() {
                 try {
-                    connection = HttpConnectionUtils.getConnection("AddInfoServlet?id=1&name="+name+"&sex="+sex+"&grade="+grade+"&subject="+subject+"&week="+week+"&time="+time+"&university="+university+"&pay="+pay+"&tel="+tel+"&require="+introduce+"&college="+college+"&major="+major+"&user="+user+"&exp="+exp);
+                    connection = HttpConnectionUtils.getConnection("AddInfoServlet?id=1&name="+name+"&sex="+sex+"&grade="+grade+"&subject="+subject+"&week="+week+"&time="+time+"&university="+university+"&pay="+pay+"&require="+introduce+"&college="+college+"&major="+major+"&user="+user+"&exp="+exp);
                     int code = connection.getResponseCode();
                     if (code == 200) {
                         ToastUtils.showLong("添加成功");
