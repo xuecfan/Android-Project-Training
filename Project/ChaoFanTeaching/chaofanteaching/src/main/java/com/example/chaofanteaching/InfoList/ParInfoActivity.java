@@ -56,7 +56,7 @@ public class ParInfoActivity extends AppCompatActivity {
     private String lat;
     private String lng;
     private TextView nametext;
-    private TextView sextext;
+    private TextView loctext;
     private TextView gradetext;
     private TextView subjecttext;
     private TextView timetext;
@@ -82,7 +82,16 @@ public class ParInfoActivity extends AppCompatActivity {
                     String str = msg.obj.toString();
                     String[] s = str.split(",");
                     name = s[0];
-                    sextext.setText(s[1]);
+                    if(s[1].equals("男")){
+                        Drawable man=getResources().getDrawable(R.drawable.man);
+                        man.setBounds(0,0,60,60);
+                        nametext.setCompoundDrawables(null,null,man,null);
+                    }else{
+                        Drawable woman=getResources().getDrawable(R.drawable.woman);
+                        woman.setBounds(0,0,60,60);
+                        nametext.setCompoundDrawables(null,null,woman,null);
+                    }
+                    //sextext.setText(s[1]);
                     gradetext.setText(s[2]);
                     subjecttext.setText(s[3]);
                     timetext.setText(s[4]);
@@ -186,12 +195,18 @@ public class ParInfoActivity extends AppCompatActivity {
         });
         nametext=findViewById(R.id.name);
         nametext.setText(name);
-        sextext=findViewById(R.id.sex);
+        loctext=findViewById(R.id.locate);
+        Drawable place=getResources().getDrawable(R.drawable.place);
+        place.setBounds(0,0,60,60);
+        loctext.setCompoundDrawables(null,null,place,null);
         gradetext=findViewById(R.id.grade);
         subjecttext=findViewById(R.id.subject);
         timetext=findViewById(R.id.freetime);
         pricetext=findViewById(R.id.price);
         teltext=findViewById(R.id.tel);
+        Drawable tel=getResources().getDrawable(R.drawable.tel0);
+        tel.setBounds(0,0,60,60);
+        teltext.setCompoundDrawables(null,null,tel,null);
         requiretext=findViewById(R.id.require);
         ConstraintLayout map123=findViewById(R.id.map123);
         map123.setOnClickListener(new View.OnClickListener() {

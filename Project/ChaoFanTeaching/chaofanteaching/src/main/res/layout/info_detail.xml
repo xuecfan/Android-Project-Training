@@ -25,7 +25,7 @@
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
-                android:background="@drawable/timg">
+                android:background="@drawable/mybackground2">
 
                 <ImageView
                     android:id="@+id/infopar_back"
@@ -49,7 +49,35 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.3"/>
+
+                <ImageView
+                    android:layout_marginTop="30dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/point3"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_bias="1"
+                    app:layout_constraintLeft_toRightOf="@+id/img"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0" />
+
+                <TextView
+                    app:layout_constraintVertical_bias="0.2"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/img"
+                    android:textColor="#000"
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:textSize="20sp"
+                    android:text="姓名" />
+
 
                 <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"
@@ -59,6 +87,7 @@
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="1" >
+
                     <android.support.constraint.Guideline
                         android:id="@+id/guideline2"
                         android:layout_width="wrap_content"
@@ -95,7 +124,6 @@
                             android:layout_marginLeft="5dp"
                             android:gravity="center"
                             android:text="收藏"
-                            android:textColor="@color/white"
                             android:textSize="20sp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintHorizontal_bias="0"
@@ -143,7 +171,6 @@
                             android:layout_marginLeft="5dp"
                             android:gravity="center"
                             android:text="分享"
-                            android:textColor="@color/white"
                             android:textSize="20sp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintHorizontal_bias="0"
@@ -151,170 +178,9 @@
                             app:layout_constraintRight_toRightOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
                     </android.support.constraint.ConstraintLayout>
+
                 </android.support.constraint.ConstraintLayout>
 
-                <!--                <android.support.constraint.ConstraintLayout-->
-                <!--                    android:id="@+id/commentLayout"-->
-                <!--                    android:layout_width="wrap_content"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-                <!--                    app:layout_constraintLeft_toLeftOf="@+id/starLayout"-->
-                <!--                    app:layout_constraintRight_toRightOf="@+id/starLayout"-->
-                <!--                    app:layout_constraintTop_toBottomOf="@+id/starLayout">-->
-
-                <!--                    <ImageView-->
-                <!--                        android:id="@+id/comment_img"-->
-                <!--                        android:layout_width="25dp"-->
-                <!--                        android:layout_height="25dp"-->
-                <!--                        android:src="@drawable/comment"-->
-                <!--                        app:layout_constraintBottom_toBottomOf="parent"-->
-                <!--                        app:layout_constraintHorizontal_bias="0"-->
-                <!--                        app:layout_constraintLeft_toLeftOf="parent"-->
-                <!--                        app:layout_constraintRight_toRightOf="parent"-->
-                <!--                        app:layout_constraintTop_toTopOf="parent" />-->
-
-                <!--                    <TextView-->
-                <!--                        android:layout_width="wrap_content"-->
-                <!--                        android:layout_height="25dp"-->
-                <!--                        android:layout_marginLeft="5dp"-->
-                <!--                        android:gravity="center"-->
-                <!--                        android:text="评论"-->
-                <!--                        android:textSize="18sp"-->
-                <!--                        app:layout_constraintBottom_toBottomOf="parent"-->
-                <!--                        app:layout_constraintHorizontal_bias="0"-->
-                <!--                        app:layout_constraintLeft_toRightOf="@+id/comment_img"-->
-                <!--                        app:layout_constraintRight_toRightOf="parent"-->
-                <!--                        app:layout_constraintTop_toTopOf="parent" />-->
-                <!--                </android.support.constraint.ConstraintLayout>-->
-            </android.support.constraint.ConstraintLayout>
-
-            <android.support.constraint.ConstraintLayout
-                android:id="@+id/name1"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/add_info_background_selector"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/img"
-                app:layout_constraintVertical_bias="0"
-                app:layout_constraintHorizontal_bias="0">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:gravity="center"
-                    android:text="姓名："
-                    android:textSize="18dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintHorizontal_bias="0"/>
-
-                <TextView
-                    android:id="@+id/name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:gravity="center"
-                    android:ellipsize="end"
-                    android:maxEms="15"
-                    android:singleLine="true"
-                    android:text="张三"
-                    android:textSize="18dp"
-                    android:textColor="#000"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintHorizontal_bias="1"
-                    />
-            </android.support.constraint.ConstraintLayout>
-            <android.support.constraint.ConstraintLayout
-                android:id="@+id/sex1"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/add_info_background_selector"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/name1"
-                app:layout_constraintVertical_bias="0"
-                app:layout_constraintHorizontal_bias="0">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:gravity="center"
-                    android:text="性别："
-                    android:textSize="18dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintHorizontal_bias="0"/>
-                <TextView
-                    android:id="@+id/sex"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:gravity="center"
-                    android:text="男"
-                    android:textSize="18dp"
-                    android:textColor="#000"
-                    android:maxEms="15"
-                    android:ellipsize="end"
-                    android:singleLine="true"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintHorizontal_bias="1"/>
-            </android.support.constraint.ConstraintLayout>
-            <android.support.constraint.ConstraintLayout
-                android:id="@+id/grade1"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/add_info_background_selector"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/sex1"
-                app:layout_constraintVertical_bias="0"
-                app:layout_constraintHorizontal_bias="0">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:gravity="center"
-                    android:text="年级："
-                    android:textSize="18dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintHorizontal_bias="0"/>
-                <TextView
-                    android:id="@+id/grade"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:gravity="center"
-                    android:text="大一"
-                    android:textSize="18dp"
-                    android:textColor="#000"
-                    android:maxEms="15"
-                    android:ellipsize="end"
-                    android:singleLine="true"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintHorizontal_bias="1"/>
             </android.support.constraint.ConstraintLayout>
 
             <android.support.constraint.ConstraintLayout
@@ -324,7 +190,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/add_info_background_selector"
+                android:background="@drawable/edit_underline0"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -335,7 +201,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:text="学校："
-                    android:textSize="18dp"
+                    android:textColor="#000"
+                    android:textSize="18sp"
                     android:gravity="center"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
@@ -346,9 +213,8 @@
                     android:id="@+id/university"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
-                    android:text="河北师范大学"
-                    android:textSize="18dp"
-                    android:textColor="#000"
+                    android:text="学校"
+                    android:textSize="18sp"
                     android:gravity="center"
                     android:maxEms="15"
                     android:ellipsize="end"
@@ -365,7 +231,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/add_info_background_selector"
+                android:background="@drawable/edit_underline0"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -376,7 +242,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:text="学院："
-                    android:textSize="18dp"
+                    android:textColor="#000"
+                    android:textSize="18sp"
                     android:gravity="center"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
@@ -391,9 +258,8 @@
                     android:ellipsize="end"
                     android:maxEms="15"
                     android:singleLine="true"
-                    android:text="软件学院"
-                    android:textSize="18dp"
-                    android:textColor="#000"
+                    android:text="学院"
+                    android:textSize="18sp"
                     android:gravity="center"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
@@ -408,7 +274,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/add_info_background_selector"
+                android:background="@drawable/edit_underline0"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -419,7 +285,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:text="专业："
-                    android:textSize="18dp"
+                    android:textColor="#000"
+                    android:textSize="18sp"
                     android:gravity="center"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
@@ -430,9 +297,8 @@
                     android:id="@+id/major"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
-                    android:text="软件工程"
-                    android:textSize="18dp"
-                    android:textColor="#000"
+                    android:text="专业"
+                    android:textSize="18sp"
                     android:gravity="center"
                     android:maxEms="15"
                     android:ellipsize="end"
@@ -443,6 +309,50 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintHorizontal_bias="1"/>
             </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/grade1"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/edit_underline0"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/sex1"
+                app:layout_constraintVertical_bias="0"
+                app:layout_constraintHorizontal_bias="0">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:gravity="center"
+                    android:text="年级："
+                    android:textSize="18sp"
+                    android:textColor="#000"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintHorizontal_bias="0"/>
+                <TextView
+                    android:id="@+id/grade"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:gravity="center"
+                    android:text="年级"
+                    android:textSize="18sp"
+                    android:maxEms="15"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintHorizontal_bias="1"/>
+            </android.support.constraint.ConstraintLayout>
+
             <android.support.constraint.ConstraintLayout
                 android:id="@+id/subject1"
                 android:layout_width="match_parent"
@@ -450,7 +360,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/add_info_background_selector"
+                android:background="@drawable/edit_underline0"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -460,8 +370,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
-                    android:text="擅长学科："
-                    android:textSize="18dp"
+                    android:text="教授科目："
+                    android:textColor="#000"
+                    android:textSize="18sp"
                     android:gravity="center"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
@@ -472,9 +383,8 @@
                     android:id="@+id/subject"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
-                    android:text="语文、数学、英语"
-                    android:textSize="18dp"
-                    android:textColor="#000"
+                    android:text="科目"
+                    android:textSize="18sp"
                     android:gravity="center"
                     android:maxEms="15"
                     android:ellipsize="end"
@@ -492,7 +402,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/add_info_background_selector"
+                android:background="@drawable/edit_underline0"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -503,7 +413,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:text="空闲时间："
-                    android:textSize="18dp"
+                    android:textColor="#000"
+                    android:textSize="18sp"
                     android:gravity="center"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
@@ -519,8 +430,7 @@
                     android:maxEms="15"
                     android:singleLine="true"
                     android:text="星期六-上午"
-                    android:textSize="18dp"
-                    android:textColor="#000"
+                    android:textSize="18sp"
                     android:gravity="center"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintHorizontal_bias="1"
@@ -530,13 +440,12 @@
             </android.support.constraint.ConstraintLayout>
 
             <android.support.constraint.ConstraintLayout
-                android:id="@+id/price1"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/add_info_background_selector"
+                android:background="@drawable/edit_underline0"
                 app:layout_goneMarginTop="2dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -547,8 +456,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
-                    android:text="家教酬劳："
-                    android:textSize="18dp"
+                    android:text="家教经验："
+                    android:textColor="#000"
+                    android:textSize="18sp"
                     android:gravity="center"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
@@ -556,12 +466,11 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintHorizontal_bias="0"/>
                 <TextView
-                    android:id="@+id/price"
+                    android:id="@+id/exp"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
-                    android:text="50元/小时"
-                    android:textSize="18dp"
-                    android:textColor="#000"
+                    android:text="无经验"
+                    android:textSize="18sp"
                     android:gravity="center"
                     android:maxEms="15"
                     android:ellipsize="end"
@@ -573,6 +482,49 @@
                     app:layout_constraintHorizontal_bias="1"/>
             </android.support.constraint.ConstraintLayout>
 
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/price1"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/edit_underline0"
+                app:layout_goneMarginTop="2dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/freetime1"
+                app:layout_constraintVertical_bias="0"
+                app:layout_constraintHorizontal_bias="0">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:text="家教酬劳："
+                    android:textColor="#000"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintHorizontal_bias="0"/>
+                <TextView
+                    android:id="@+id/price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:text="50元/小时"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    android:maxEms="15"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintHorizontal_bias="1"/>
+            </android.support.constraint.ConstraintLayout>
 
             <android.support.constraint.ConstraintLayout
                 android:orientation="horizontal"
@@ -595,7 +547,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="自我介绍："
-                    android:textSize="18dp"
+                    android:textColor="#000"
+                    android:textSize="18sp"
                     android:gravity="center"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
@@ -608,8 +561,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="这个人话很少，什么都没有留下"
-                    android:textSize="18dp"
-                    android:textColor="#000"
+                    android:textSize="18sp"
                     android:maxEms="15"
                     android:ellipsize="end"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -630,7 +582,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:text="全部评价"
-                    android:textSize="18dp"
+                    android:textSize="18sp"
                     android:textColor="#000"
                     android:textStyle="bold"
                     android:gravity="center_vertical"
@@ -672,7 +624,7 @@
                     android:gravity="center"
                     android:text="试讲"
                     android:textColor="#ffffff"
-                    android:textSize="18dp"
+                    android:textSize="18sp"
                     android:textStyle="bold"
                     android:layout_marginRight="20dp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -690,7 +642,7 @@
                     android:gravity="center"
                     android:text="发送信息"
                     android:textColor="#ffffff"
-                    android:textSize="18dp"
+                    android:textSize="18sp"
                     android:textStyle="bold"
                     android:layout_marginRight="20dp"
                     android:layout_marginLeft="20dp"

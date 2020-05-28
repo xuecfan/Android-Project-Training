@@ -271,7 +271,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:maxEms="12"
-                    android:text="位置信息"
+                    android:text="获取位置"
                     android:textSize="18dp"
                     android:textColor="#000"
                     app:layout_constraintBottom_toBottomOf="parent"

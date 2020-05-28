@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -42,13 +43,13 @@ public class InfoDetailActivity extends AppCompatActivity {
 
     private String user;
     private TextView nametext;
-    private TextView sextext;
     private TextView universitytext;
     private TextView collegetext;
     private TextView majortext;
     private TextView gradetext;
     private TextView subjecttext;
     private TextView timetext;
+    private TextView exptext;
     private TextView pricetext;
     private TextView introducetext;
     private TextView starName;
@@ -74,16 +75,30 @@ public class InfoDetailActivity extends AppCompatActivity {
                 case 1:
                     String str = msg.obj.toString();
                     String[] s = str.split(",");
-                    sextext.setText(s[1]);
+                    if(s[1].equals("男")){
+                        Drawable man=getResources().getDrawable(R.drawable.man);
+                        man.setBounds(0,0,60,60);
+                        nametext.setCompoundDrawables(null,null,man,null);
+                    }else{
+                        Drawable woman=getResources().getDrawable(R.drawable.woman);
+                        woman.setBounds(0,0,60,60);
+                        nametext.setCompoundDrawables(null,null,woman,null);
+                    }
                     universitytext.setText(s[2]);
                     collegetext.setText(s[3]);
                     majortext.setText(s[4]);
                     gradetext.setText(s[5]);
                     subjecttext.setText(s[6]);
                     timetext.setText(s[7]);
-                    pricetext.setText(s[8]);
+                    pricetext.setText(s[8]+"元/小时");
                     introducetext.setText(s[10]);
                     user=s[11];
+                    if(s[12].equals("1")){
+                        Drawable authorized=getResources().getDrawable(R.drawable.authorized);
+                        authorized.setBounds(0,5,128,128);
+                        universitytext.setCompoundDrawables(null,null,authorized,null);
+                    }
+                    exptext.setText(s[13]);
                     break;
                 case 2:
                     String string2 = msg.obj.toString();
@@ -180,30 +195,21 @@ public class InfoDetailActivity extends AppCompatActivity {
         Intent request=getIntent();
         name=request.getStringExtra("name");
         String user=request.getStringExtra("user");
-//        Bitmap bt = BitmapFactory.decodeFile(path +user+".png");//从Sd中找头像，转换成Bitmap
-//        if(bt!=null){
-//            @SuppressWarnings("deprecation")
-//            Drawable drawable = new BitmapDrawable(bt);//转换成drawable
-//            img.setImageDrawable(drawable);
-//        }else{
-//            img.setImageDrawable(getResources().getDrawable(R.drawable.tea));
-//        }
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.error(R.drawable.tea).diskCacheStrategy(DiskCacheStrategy.NONE);
         Glide.with(getApplicationContext()).load("http://39.107.42.87:8080/ChaoFanTeaching/img/"+user+".png").apply(requestOptions).into(img);
         nametext=findViewById(R.id.name);
-        sextext=findViewById(R.id.sex);
         universitytext=findViewById(R.id.university);
         collegetext=findViewById(R.id.college);
         majortext=findViewById(R.id.major);
         gradetext=findViewById(R.id.grade);
         subjecttext=findViewById(R.id.subject);
         timetext=findViewById(R.id.freetime);
+        exptext=findViewById(R.id.exp);
         pricetext=findViewById(R.id.price);
         introducetext=findViewById(R.id.introduce);
         nametext.setText(name);
         dbKey(name);
-
         //判断是否收藏
         judgeStar(me,user,name);
         //收藏

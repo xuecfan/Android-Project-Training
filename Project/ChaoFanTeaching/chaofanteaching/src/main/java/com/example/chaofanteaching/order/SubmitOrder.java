@@ -92,7 +92,11 @@ public class SubmitOrder extends AppCompatActivity {
             objusername=request.getStringExtra("teacher");
             obj.setText(objusername);
             String address=pre1.getString("addressContent","");
-            loctext.setText(address);
+            if(address.isEmpty()){
+                loctext.setText("点此获取位置");
+            }else {
+                loctext.setText(address);
+            }
             loctext.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -231,7 +235,11 @@ public class SubmitOrder extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         if(requestCode==1){
             String address=pre1.getString("addressContent","");
-            loctext.setText(address);
+            if(address.isEmpty()){
+                loctext.setText("点此获取位置");
+            }else {
+                loctext.setText(address);
+            }
         }
     }
     public void initView(){
@@ -244,6 +252,9 @@ public class SubmitOrder extends AppCompatActivity {
         datetext=findViewById(R.id.date);
         obj=findViewById(R.id.object);
         loctext=findViewById(R.id.textloc);
+        Drawable place=getResources().getDrawable(R.drawable.place);
+        place.setBounds(0,0,60,60);
+        loctext.setCompoundDrawables(null,null,place,null);
         title_pay=findViewById(R.id.titile_pay);
         paytext=findViewById(R.id.pay);
         title_tel=findViewById(R.id.titile_tel);
@@ -254,7 +265,7 @@ public class SubmitOrder extends AppCompatActivity {
         setTitie();
     }
     public void setTitie(){
-        titleBar.setTitle("试讲信息");
+        titleBar.setTitle("填写试讲信息");
         titleBar.setLeftLayoutClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
