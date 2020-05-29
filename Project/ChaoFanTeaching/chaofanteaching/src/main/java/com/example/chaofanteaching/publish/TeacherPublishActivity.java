@@ -29,36 +29,13 @@ import java.net.HttpURLConnection;
 public class TeacherPublishActivity extends AppCompatActivity {
     protected EaseTitleBar titleBar;
 
-    private SharedPreferences pre;
     private String userName;
     private String role;
 
-    private TextView nameCue;
-    private TextView sexCue;
-    private TextView universityCue;
-    private TextView collegeCue;
-    private TextView majorCue;
-    private TextView gradeCue;
-    private TextView courseCue;
-    private TextView freeCue;
-    private TextView experienceCue;
-    private TextView feeCue;
-    private TextView introductionCue;
     private TextView[] cues;
 
-    private LinearLayout nameLayout;
-    private LinearLayout sexLayout;
-    private LinearLayout universityLayout;
-    private LinearLayout collegeLayout;
-    private LinearLayout majorLayout;
-    private LinearLayout gradeLayout;
-    private LinearLayout courseLayout;
-    private LinearLayout freeWeekLayout;
-    private LinearLayout freeTimeLayout;
-    private LinearLayout experienceLayout;
     private LinearLayout[] layouts;
 
-    private TextView nameTxt;
     private TextView sexTxt;
     private TextView universityTxt;
     private TextView collegeTxt;
@@ -229,26 +206,26 @@ public class TeacherPublishActivity extends AppCompatActivity {
      */
     private void initView() {
         //获取sharedPreferences
-        pre=getSharedPreferences("login", Context.MODE_PRIVATE);
-        userName=pre.getString("userName","null");
-        role=pre.getString("role","null");
+        SharedPreferences pre = getSharedPreferences("login", Context.MODE_PRIVATE);
+        userName= pre.getString("userName","null");
+        role= pre.getString("role","null");
         //findViewById
         titleBar = findViewById(R.id.title_bar);
 
-        nameCue = findViewById(R.id.teacher_publish_name_cue);
-        sexCue = findViewById(R.id.teacher_publish_sex_cue);
-        universityCue = findViewById(R.id.teacher_publish_university_cue);
-        collegeCue = findViewById(R.id.teacher_publish_college_cue);
-        majorCue = findViewById(R.id.teacher_publish_major_cue);
-        gradeCue = findViewById(R.id.teacher_publish_grade_cue);
-        courseCue = findViewById(R.id.teacher_publish_course_cue);
-        freeCue = findViewById(R.id.teacher_publish_free_cue);
-        experienceCue = findViewById(R.id.teacher_publish_experience_cue);
-        feeCue = findViewById(R.id.teacher_publish_fee_cue);
-        introductionCue = findViewById(R.id.teacher_publish_introduction_cue);
-        cues = new TextView[]{nameCue,sexCue,universityCue,collegeCue,majorCue,gradeCue,courseCue,experienceCue,freeCue};//9个元素
+        TextView nameCue = findViewById(R.id.teacher_publish_name_cue);
+        TextView sexCue = findViewById(R.id.teacher_publish_sex_cue);
+        TextView universityCue = findViewById(R.id.teacher_publish_university_cue);
+        TextView collegeCue = findViewById(R.id.teacher_publish_college_cue);
+        TextView majorCue = findViewById(R.id.teacher_publish_major_cue);
+        TextView gradeCue = findViewById(R.id.teacher_publish_grade_cue);
+        TextView courseCue = findViewById(R.id.teacher_publish_course_cue);
+        TextView freeCue = findViewById(R.id.teacher_publish_free_cue);
+        TextView experienceCue = findViewById(R.id.teacher_publish_experience_cue);
+        TextView feeCue = findViewById(R.id.teacher_publish_fee_cue);
+        TextView introductionCue = findViewById(R.id.teacher_publish_introduction_cue);
+        cues = new TextView[]{nameCue, sexCue, universityCue, collegeCue, majorCue, gradeCue, courseCue, experienceCue, freeCue};//9个元素
 
-        nameTxt = findViewById(R.id.teacher_publish_name);
+        TextView nameTxt = findViewById(R.id.teacher_publish_name);
         sexTxt = findViewById(R.id.teacher_publish_sex);
         universityTxt = findViewById(R.id.teacher_publish_university);
         collegeTxt = findViewById(R.id.teacher_publish_college);
@@ -260,17 +237,17 @@ public class TeacherPublishActivity extends AppCompatActivity {
         experienceTxt = findViewById(R.id.teacher_publish_experience);
         textViews = new TextView[]{nameTxt,sexTxt,universityTxt,collegeTxt,majorTxt,gradeTxt,courseTxt,experienceTxt,freeWeekTxt,freeTimeTxt};//10个元素
 
-        nameLayout = findViewById(R.id.teacher_publish_name_layout);
-        sexLayout = findViewById(R.id.teacher_publish_sex_layout);
-        universityLayout = findViewById(R.id.teacher_publish_university_layout);
-        collegeLayout = findViewById(R.id.teacher_publish_college_layout);
-        majorLayout = findViewById(R.id.teacher_publish_major_layout);
-        gradeLayout = findViewById(R.id.teacher_publish_grade_layout);
-        courseLayout = findViewById(R.id.teacher_publish_course_layout);
-        freeWeekLayout = findViewById(R.id.teacher_publish_free_week_layout);
-        freeTimeLayout = findViewById(R.id.teacher_publish_free_time_layout);
-        experienceLayout = findViewById(R.id.teacher_publish_experience_layout);
-        layouts = new LinearLayout[]{nameLayout,sexLayout,universityLayout,collegeLayout,majorLayout,gradeLayout,courseLayout,experienceLayout,freeWeekLayout,freeTimeLayout};//10个元素
+        LinearLayout nameLayout = findViewById(R.id.teacher_publish_name_layout);
+        LinearLayout sexLayout = findViewById(R.id.teacher_publish_sex_layout);
+        LinearLayout universityLayout = findViewById(R.id.teacher_publish_university_layout);
+        LinearLayout collegeLayout = findViewById(R.id.teacher_publish_college_layout);
+        LinearLayout majorLayout = findViewById(R.id.teacher_publish_major_layout);
+        LinearLayout gradeLayout = findViewById(R.id.teacher_publish_grade_layout);
+        LinearLayout courseLayout = findViewById(R.id.teacher_publish_course_layout);
+        LinearLayout freeWeekLayout = findViewById(R.id.teacher_publish_free_week_layout);
+        LinearLayout freeTimeLayout = findViewById(R.id.teacher_publish_free_time_layout);
+        LinearLayout experienceLayout = findViewById(R.id.teacher_publish_experience_layout);
+        layouts = new LinearLayout[]{nameLayout, sexLayout, universityLayout, collegeLayout, majorLayout, gradeLayout, courseLayout, experienceLayout, freeWeekLayout, freeTimeLayout};//10个元素
 
         feeEdit = findViewById(R.id.teacher_publish_fee_edit);
 //        phoneEdit = findViewById(R.id.teacher_publish_phone_edit);
