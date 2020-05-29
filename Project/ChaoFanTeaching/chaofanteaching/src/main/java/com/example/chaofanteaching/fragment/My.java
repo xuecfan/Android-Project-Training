@@ -203,11 +203,10 @@ public class My extends Fragment {
                     Intent i=new Intent(getContext(), LoginActivity.class);
                     startActivity(i);
                 }else{
-                    Intent i=new Intent(getContext(),Student_Authentication.class);
-                    editor=pre.edit();
-                    editor.putString("grade","1");
-                    editor.commit();
+                    Intent i=new Intent();
+                    i.setClass(getContext(), MyData.class);
                     startActivity(i);
+
                 }
             }
         });
@@ -227,15 +226,20 @@ public class My extends Fragment {
 
 
         dataSource.clear();
-        Map<String,String> map=new HashMap<>();
+        if(pre.getString("role","").equals("11")){
+            Map<String,String> map=new HashMap<>();
+            map.put("text","我的成绩");
+            map.put("img","ji");
+            dataSource.add(map);
+        }
+
         Map<String,String> map1=new HashMap<>();
         Map<String,String> map2=new HashMap<>();
         Map<String,String> map3=new HashMap<>();
         Map<String,String> map4=new HashMap<>();
         Map<String,String> map6=new HashMap<>();
         Map<String,String>map7=new HashMap<>();
-        map.put("text","个人资料");
-        map.put("img","person_data");
+
         map1.put("text","我的试讲");
         map1.put("img","order");
         map2.put("text","我发布的");
@@ -248,7 +252,7 @@ public class My extends Fragment {
         map6.put("img","plug");
         map7.put("text","设置");
         map7.put("img","setting");
-        dataSource.add(map);
+
         dataSource.add(map1);
         dataSource.add(map2);
         dataSource.add(map3);
@@ -267,35 +271,63 @@ public class My extends Fragment {
                     Intent i=new Intent(getContext(), LoginActivity.class);
                     startActivity(i);
                 }else{
-                    switch (position){
-                        case 0:
-                            Intent i=new Intent();
-                            i.setClass(getContext(), MyData.class);
-                            startActivity(i);
-                            break;
-                        case 1:
-                            Intent intent0=new Intent(getContext(), OrderList.class);
-                            startActivity(intent0);
-                            break;
-                        case 2:
-                            ifPublish();
-                            break;
-                        case 3:
-                            Intent intent3=new Intent(getContext(), Chatrobot.class);
-                            startActivity(intent3);
-                            break;
-                        case 4:
-                            Intent intent4=new Intent(getContext(), AboutUs.class);
-                            startActivity(intent4);
-                            break;
-                        case 5:
-                            Toast.makeText(getContext(),"暂未开放，敬请期待", Toast.LENGTH_SHORT).show();
-                            break;
-                        case 6:
-                            Intent intent2=new Intent(getContext(), Setting.class);
-                            startActivity(intent2);
-                            break;
+                    if(pre.getString("role","").equals("11")){
+                        switch (position){
+                            case 0:
+                                Intent i=new Intent(getContext(),Student_Authentication.class);
+                                editor=pre.edit();
+                                editor.putString("grade","1");
+                                editor.commit();
+                                startActivity(i);
+                                break;
+                            case 1:
+                                Intent intent0=new Intent(getContext(), OrderList.class);
+                                startActivity(intent0);
+                                break;
+                            case 2:
+                                ifPublish();
+                                break;
+                            case 3:
+                                Intent intent3=new Intent(getContext(), Chatrobot.class);
+                                startActivity(intent3);
+                                break;
+                            case 4:
+                                Intent intent4=new Intent(getContext(), AboutUs.class);
+                                startActivity(intent4);
+                                break;
+                            case 5:
+                                Toast.makeText(getContext(),"暂未开放，敬请期待", Toast.LENGTH_SHORT).show();
+                                break;
+                            case 6:
+                                Intent intent2=new Intent(getContext(), Setting.class);
+                                startActivity(intent2);
+                                break;
+                        }
+                    }else if(pre.getString("role","").equals("10")){
+                        switch (position){
+                            case 0:
+                                Intent intent0=new Intent(getContext(), OrderList.class);
+                                startActivity(intent0);
+                                break;
+                            case 1:
+                                ifPublish();
+                                break;
+                            case 2:
+                                Intent intent3=new Intent(getContext(), Chatrobot.class);
+                                startActivity(intent3);
+                            case 3:
+                                Intent intent4=new Intent(getContext(), AboutUs.class);
+                                startActivity(intent4);
+                            case 4:
+                                Toast.makeText(getContext(),"暂未开放，敬请期待", Toast.LENGTH_SHORT).show();
+                                break;
+                            case 5:
+                                Intent intent2=new Intent(getContext(), Setting.class);
+                                startActivity(intent2);
+                                break;
+                        }
                     }
+
                 }
             }
         });

@@ -142,9 +142,9 @@
 
                         <ImageView
                             android:id="@+id/img3"
-                            android:layout_width="40dp"
+                            android:layout_width="35dp"
                             android:layout_height="40dp"
-                            android:src="@drawable/ji"
+                            android:src="@drawable/person_data"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintHorizontal_bias="0.62"
                             app:layout_constraintLeft_toLeftOf="parent"
@@ -198,7 +198,7 @@
                         <TextView
                             android:layout_width="40dp"
                             android:layout_height="wrap_content"
-                            android:text="成绩"
+                            android:text="资料"
                             android:textSize="18sp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintHorizontal_bias="0.62"
