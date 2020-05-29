@@ -30,8 +30,8 @@ public class OrderList extends AppCompatActivity {
         //创建List集合
         fragments = new ArrayList<>();
         //添加到fragments集合里
-        fragments.add(new SentOrder());
         fragments.add(new ReceivedOrder());
+        fragments.add(new SentOrder());
         //创建适配器
         MyAdapter adapter = new MyAdapter(getSupportFragmentManager());
         //把fragment添加到adapter
@@ -46,8 +46,8 @@ public class OrderList extends AppCompatActivity {
         //使tabLayout和viewPager  关联同步一下
         tabLayout.setupWithViewPager(viewPager);
         //设置创建的名字  万物从0开始
-        tabLayout.getTabAt(0).setText("我发出的");
-        tabLayout.getTabAt(1).setText("我收到的");
+        tabLayout.getTabAt(0).setText("我收到的");
+        tabLayout.getTabAt(1).setText("我发出的");
     }
 
     public void initView(){

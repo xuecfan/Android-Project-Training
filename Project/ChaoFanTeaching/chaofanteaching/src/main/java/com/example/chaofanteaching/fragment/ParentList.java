@@ -43,14 +43,8 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
-import java.sql.Time;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 //展示家长列表
 public class ParentList extends Fragment {
@@ -299,17 +293,7 @@ public class ParentList extends Fragment {
                             String[] s = str.split(";");
                             for (int i = 0; i < s.length; i++) {
                                 String[] r = s[i].split(",");
-//                                String distance=showDisdance(lat,lng,Double.parseDouble(r[5]),Double.parseDouble(r[6]));
-//                                map.put("distance",distance);
-//                                List<HashMap<String,Object>> list = infoList.get("")
-//                                Collections.sort(list, new Comparator<Map<String, Object>>(){
-//                                    public int compare(Map<String, Object> o1, Map<String, Object> o2) {
-//                                        String distance1 =(String)o1.get("distance");
-//                                        String distance2= (String)o2.get("distance");
-//                                        return distance2.compareTo(distance1);
-//                                    }
-//                                });
-                                scanInfo = new Info(r[0], r[1], r[2], r[3]+"元/小时",r[4],showDisdance(lat,lng,Double.parseDouble(r[5]),Double.parseDouble(r[6])),r[7]);
+                                scanInfo = new Info(r[0], r[1]+"生", r[2], r[3]+"元/小时",r[4],showDisdance(lat,lng,Double.parseDouble(r[5]),Double.parseDouble(r[6])),r[7]);
                                 infoList.add(scanInfo);
                                 parInfoAdapter.notifyDataSetChanged();
 

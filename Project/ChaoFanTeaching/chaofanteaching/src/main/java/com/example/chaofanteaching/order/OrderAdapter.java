@@ -19,7 +19,6 @@ import com.example.chaofanteaching.comments.CommentingActivity;
 import com.example.chaofanteaching.utils.ToastUtils;
 import java.net.HttpURLConnection;
 import java.util.List;
-
 import static android.content.Context.MODE_PRIVATE;
 
 public class OrderAdapter extends BaseAdapter {
@@ -118,7 +117,6 @@ public class OrderAdapter extends BaseAdapter {
                         intent.putExtra("id",orderList.get(position).getId());
                         intent.putExtra("user",arr);
                         context.startActivity(intent);
-                        ToastUtils.showLong("去评价");
                         break;
                     case "已完成":
                         DbOrder(orderList.get(position).getId());

@@ -91,7 +91,6 @@ public class ParInfoActivity extends AppCompatActivity {
                         woman.setBounds(0,0,60,60);
                         nametext.setCompoundDrawables(null,null,woman,null);
                     }
-                    //sextext.setText(s[1]);
                     gradetext.setText(s[2]);
                     subjecttext.setText(s[3]);
                     timetext.setText(s[4]);

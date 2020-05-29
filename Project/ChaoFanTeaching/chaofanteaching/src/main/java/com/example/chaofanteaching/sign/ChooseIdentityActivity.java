@@ -30,6 +30,7 @@ public class ChooseIdentityActivity extends Activity implements View.OnTouchList
                 Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_COARSE_LOCATION,
                 Manifest.permission.RECORD_AUDIO,
+                Manifest.permission.CALL_PHONE
         };
         permissionHelper=new PermissionHelper(this);
         permissionHelper.check(PermissionString).onDenied(new Runnable() {

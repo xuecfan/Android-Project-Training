@@ -13,12 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.R;
 import com.example.chaofanteaching.StreamChangeStrUtils;
-import com.example.chaofanteaching.utils.ToastUtils;
-
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
@@ -44,13 +41,6 @@ public class ReceivedOrder extends Fragment {
         jumpToDetail();
         return view;
     }
-
-//    public void setUserVisibleHint(boolean isVisibleToUser) {
-//        super.setUserVisibleHint(isVisibleToUser);
-//        if (isVisibleToUser) {
-//            ToastUtils.showShort("收到");
-//        }
-//    }
 
     public void loadInfo(){
         orderList.clear();
