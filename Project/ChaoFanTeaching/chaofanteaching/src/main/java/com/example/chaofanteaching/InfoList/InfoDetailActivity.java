@@ -20,6 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.bumptech.glide.Glide;
@@ -53,6 +54,8 @@ public class InfoDetailActivity extends AppCompatActivity {
     private TextView pricetext;
     private TextView introducetext;
     private TextView starName;
+    private TextView on_time;
+    private TextView qualitytext;
     private ImageView img;
     private ImageView star;
     private Button sendbtn;
@@ -67,6 +70,8 @@ public class InfoDetailActivity extends AppCompatActivity {
             "老师教课后，孩子成绩有很大提高"};
     private ListView comment_listView;
     private ImageView infopar_back;
+    private RatingBar onTime;
+    private RatingBar quality;
 
     private Handler handler = new Handler() {
         @Override
@@ -119,15 +124,23 @@ public class InfoDetailActivity extends AppCompatActivity {
                         case "3":
                             Toast.makeText(getApplication(),"取消收藏失败",Toast.LENGTH_SHORT).show();
                             break;
-
                     }
-
                     break;
                 case 3:
                     String string3 = msg.obj.toString();
                     if (string3.equals("1")){//显示已收藏
                         star.setColorFilter(Color.RED);
                         starName.setText("已收藏");
+                    }
+                    break;
+                case 4:
+                    String string4 = msg.obj.toString();
+                    String[] c = string4.split(",");
+                    if(!c[1].equals("n")){
+                        onTime.setRating(Float.parseFloat(c[0]));
+                        on_time.setText(c[0]);
+                        quality.setRating(Float.parseFloat(c[1]));
+                        qualitytext.setText(c[1]);
                     }
                     break;
             }
@@ -167,12 +180,17 @@ public class InfoDetailActivity extends AppCompatActivity {
         });
 
         //评论
-        comment_listView = findViewById(R.id.comment_listView);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                this,
-                android.R.layout.simple_list_item_1,
-                data);
-        comment_listView.setAdapter(adapter);
+        onTime=findViewById(R.id.on_time_ratingBar);
+        quality=findViewById(R.id.quality_ratingBar);
+        on_time=findViewById(R.id.on_time_value);
+        qualitytext=findViewById(R.id.alue);
+        //onTime.setRating();
+//        comment_listView = findViewById(R.id.comment_listView);
+//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+//                this,
+//                android.R.layout.simple_list_item_1,
+//                data);
+//        comment_listView.setAdapter(adapter);
 
         //返回
         infopar_back = findViewById(R.id.infopar_back);
@@ -194,7 +212,7 @@ public class InfoDetailActivity extends AppCompatActivity {
         img=findViewById(R.id.img);
         Intent request=getIntent();
         name=request.getStringExtra("name");
-        String user=request.getStringExtra("user");
+        user=request.getStringExtra("user");
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.error(R.drawable.tea).diskCacheStrategy(DiskCacheStrategy.NONE);
         Glide.with(getApplicationContext()).load("http://39.107.42.87:8080/ChaoFanTeaching/img/"+user+".png").apply(requestOptions).into(img);
@@ -210,6 +228,7 @@ public class InfoDetailActivity extends AppCompatActivity {
         introducetext=findViewById(R.id.introduce);
         nametext.setText(name);
         dbKey(name);
+        dbComment(user);
         //判断是否收藏
         judgeStar(me,user,name);
         //收藏
@@ -255,6 +274,28 @@ public class InfoDetailActivity extends AppCompatActivity {
                         android.os.Message message = Message.obtain();
                         message.obj = str;
                         message.what = 1;
+                        handler.sendMessage(message);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+    }
+    private void dbComment(String user) {
+        new Thread() {
+            HttpURLConnection connection = null;
+            @Override
+            public void run() {
+                try {
+                    connection = HttpConnectionUtils.getConnection("avgComment?objuser="+user);
+                    int code = connection.getResponseCode();
+                    if (code == 200) {
+                        InputStream inputStream = connection.getInputStream();
+                        String str = StreamChangeStrUtils.toChange(inputStream);
+                        android.os.Message message = Message.obtain();
+                        message.obj = str;
+                        message.what = 4;
                         handler.sendMessage(message);
                     }
                 } catch (Exception e) {

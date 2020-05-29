@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingBottom="30dp">
+            android:paddingBottom="15dp">
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
@@ -598,7 +598,6 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/add_info_background_selector"
                 app:layout_goneMarginTop="2dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -639,13 +638,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/add_info_background_selector">
+                android:layout_marginRight="10dp">
                 <TextView
                     android:id="@+id/comment_area"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:text="全部评价"
+                    android:text="评价"
                     android:textSize="15sp"
                     android:textColor="#000"
                     android:textStyle="bold"
@@ -655,18 +653,112 @@
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0"/>
-                <ListView
-                    android:id="@+id/comment_listView"
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp"
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/commenting_content"
+                app:layout_constraintVertical_bias="0">
+                <TextView
+                    android:id="@+id/on_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="准时程度："
+                    android:textSize="18sp"
+                    android:layout_marginLeft="10dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/comment_area"
-                    app:layout_constraintVertical_bias="0">
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintHorizontal_bias="0"/>
 
+                <RatingBar
+                    android:id="@+id/on_time_ratingBar"
+                    style="?ratingBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:numStars="5"
+                    android:rating="0"
+                    android:stepSize="0.1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toRightOf="@+id/on_time"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintHorizontal_bias="0.2"/>
 
-                </ListView>
+                <TextView
+                    android:id="@+id/on_time_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="暂无评价"
+                    android:textStyle="bold"
+                    android:textColor="@color/holo_red_light"
+                    android:textSize="16sp"
+                    android:layout_marginRight="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toRightOf="@+id/on_time_ratingBar"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintHorizontal_bias="0.6"
+                    />
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/commenting_content"
+                app:layout_constraintVertical_bias="0">
+                <TextView
+                    android:id="@+id/quality"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="教学质量："
+                    android:textSize="18sp"
+                    android:layout_marginLeft="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintHorizontal_bias="0"/>
+
+                <RatingBar
+                    android:id="@+id/quality_ratingBar"
+                    style="?ratingBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:numStars="5"
+                    android:rating="0"
+                    android:stepSize="0.1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toRightOf="@+id/quality"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintHorizontal_bias="0.2"/>
+
+                <TextView
+                    android:id="@+id/alue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="暂无评价"
+                    android:textStyle="bold"
+                    android:textColor="@color/holo_red_light"
+                    android:textSize="16sp"
+                    android:layout_marginRight="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toRightOf="@+id/quality_ratingBar"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintHorizontal_bias="0.6"
+                    />
             </android.support.constraint.ConstraintLayout>
 
             <android.support.constraint.ConstraintLayout
