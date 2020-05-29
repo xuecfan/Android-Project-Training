@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.R;
@@ -79,9 +80,9 @@ public class TeacherPublishActivity extends AppCompatActivity {
     private Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
+            String string = msg.obj.toString();
             switch(msg.what){
                 case 0:
-                    String string = msg.obj.toString();
                     Log.e("xcf_teacherPublish",string);
                     //strings数组有12个元素，顺序：薛老师,男,河北师范大学,软件学院,软件工程,大三,英语,有经验,星期四,下午,70,我是可爱的学炒饭，请大家叫我爸爸，哈哈哈，嘿嘿和
                     String[] strings = string.split(",");
@@ -95,6 +96,22 @@ public class TeacherPublishActivity extends AppCompatActivity {
                     introductionEdit.setText(strings[11]);
                     setAlert(layouts, textViews, cues, strings);//初始化点击layout弹窗
                     break;
+                case 1:
+                    if (string.equals("1")){
+                        Toast.makeText(TeacherPublishActivity.this, "删除信息成功", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }else {
+                        Toast.makeText(TeacherPublishActivity.this, "删除失败，请稍后重试", Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+                case 2:
+                    if (string.equals("1")){
+                        Toast.makeText(TeacherPublishActivity.this, "修改信息成功", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }else {
+                        Toast.makeText(TeacherPublishActivity.this, "修改失败，请稍后重试", Toast.LENGTH_SHORT).show();
+                    }
+                    break;
             }
         }
     };
@@ -107,12 +124,30 @@ public class TeacherPublishActivity extends AppCompatActivity {
         initView();//初始化view
         connectDB("MyData?index=init&name="+userName+"&role="+role, 0);//初始化数据
 
-//        deleteBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//            }
-//        });
+        deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                connectDB("MyData?index=delete&name="+userName+"&role="+role, 1);//删除信息
+            }
+        });
+        saveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                connectDB("MyData?index=save&name=" +userName
+                        +"&role="+role
+                        +"&sex="+sexTxt.getText()
+                        +"&university="+universityTxt.getText()
+                        +"&college="+collegeTxt.getText()
+                        +"&major="+majorTxt.getText()
+                        +"&grade="+gradeTxt.getText()
+                        +"&course="+courseTxt.getText()
+                        +"&freeWeek="+freeWeekTxt.getText()
+                        +"&freeTime="+freeTimeTxt.getText()
+                        +"&experience="+experienceTxt.getText()
+                        +"&fee="+feeEdit.getText()
+                        +"&introduction="+introductionEdit.getText(), 2);//保存信息
+            }
+        });
     }
 
     /**
