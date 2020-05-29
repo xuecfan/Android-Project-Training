@@ -7,7 +7,7 @@
     android:layout_height="fill_parent">
     <TextView android:text="关于我们"
         android:id="@+id/au_title"
-        android:background="@color/buju"
+        android:background="@color/colorTheme"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_width="fill_parent"
         android:textColor="#ffffff"

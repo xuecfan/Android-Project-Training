@@ -30,6 +30,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintVertical_bias="0">
         <LinearLayout
+            android:background="@color/colorGray"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -42,8 +43,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="@drawable/bottom_border">
+                android:background="@drawable/publish_layout_selector">
                 <TextView
+                    android:id="@+id/teacher_publish_name_cue"
                     android:layout_marginTop="10dp"
                     android:layout_marginStart="@dimen/teacher_publish_cue_marginStart"
                     android:textColor="@color/black_deep"
@@ -65,13 +67,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:background="@drawable/bottom_border">
+                android:background="@drawable/publish_layout_selector">
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="9"
                     android:orientation="vertical">
                     <TextView
+                        android:id="@+id/teacher_publish_sex_cue"
                         android:layout_marginTop="10dp"
                         android:layout_marginStart="@dimen/teacher_publish_cue_marginStart"
                         android:textColor="@color/black_deep"
@@ -113,17 +116,19 @@
             </LinearLayout>
 
             <LinearLayout
+                android:layout_marginTop="10dp"
                 android:id="@+id/teacher_publish_university_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:background="@drawable/bottom_border">
+                android:background="@drawable/publish_layout_selector">
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="9"
                     android:orientation="vertical">
                     <TextView
+                        android:id="@+id/teacher_publish_university_cue"
                         android:layout_marginTop="10dp"
                         android:layout_marginStart="@dimen/teacher_publish_cue_marginStart"
                         android:textColor="@color/black_deep"
@@ -152,13 +157,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:background="@drawable/bottom_border">
+                android:background="@drawable/publish_layout_selector">
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="9"
                     android:orientation="vertical">
                     <TextView
+                        android:id="@+id/teacher_publish_college_cue"
                         android:layout_marginTop="10dp"
                         android:layout_marginStart="@dimen/teacher_publish_cue_marginStart"
                         android:textColor="@color/black_deep"
@@ -187,13 +193,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:background="@drawable/bottom_border">
+                android:background="@drawable/publish_layout_selector">
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="9"
                     android:orientation="vertical">
                     <TextView
+                        android:id="@+id/teacher_publish_major_cue"
                         android:layout_marginTop="10dp"
                         android:layout_marginStart="@dimen/teacher_publish_cue_marginStart"
                         android:textColor="@color/black_deep"
@@ -221,13 +228,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:background="@drawable/bottom_border">
+                android:background="@drawable/publish_layout_selector">
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="9"
                     android:orientation="vertical">
                     <TextView
+                        android:id="@+id/teacher_publish_grade_cue"
                         android:layout_marginTop="10dp"
                         android:layout_marginStart="@dimen/teacher_publish_cue_marginStart"
                         android:textColor="@color/black_deep"
@@ -251,17 +259,19 @@
                     android:src="@drawable/bottom_arrow"/>
             </LinearLayout>
             <LinearLayout
+                android:layout_marginTop="10dp"
                 android:id="@+id/teacher_publish_course_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:background="@drawable/bottom_border">
+                android:background="@drawable/publish_layout_selector">
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="9"
                     android:orientation="vertical">
                     <TextView
+                        android:id="@+id/teacher_publish_course_cue"
                         android:layout_marginTop="10dp"
                         android:layout_marginStart="@dimen/teacher_publish_cue_marginStart"
                         android:textColor="@color/black_deep"
@@ -288,8 +298,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="@drawable/bottom_border">
+                android:background="@drawable/publish_layout_selector">
                 <TextView
+                    android:id="@+id/teacher_publish_free_cue"
                     android:layout_marginTop="10dp"
                     android:layout_marginStart="@dimen/teacher_publish_cue_marginStart"
                     android:textColor="@color/black_deep"
@@ -300,7 +311,8 @@
                     android:id="@+id/teacher_publish_free_week_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:background="@drawable/publish_free_time_selector">
                     <TextView
                         android:id="@+id/teacher_publish_free_week"
                         android:layout_width="match_parent"
@@ -322,7 +334,8 @@
                     android:id="@+id/teacher_publish_free_time_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:background="@drawable/publish_free_time_selector">
                     <TextView
                         android:id="@+id/teacher_publish_free_time"
                         android:layout_width="match_parent"
@@ -347,13 +360,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:background="@drawable/bottom_border">
+                android:background="@drawable/publish_layout_selector">
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="9"
                     android:orientation="vertical">
                     <TextView
+                        android:id="@+id/teacher_publish_experience_cue"
                         android:layout_marginTop="10dp"
                         android:layout_marginStart="@dimen/teacher_publish_cue_marginStart"
                         android:textColor="@color/black_deep"
@@ -380,8 +394,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="@drawable/bottom_border">
+                android:background="@drawable/publish_layout_selector">
                 <TextView
+                    android:id="@+id/teacher_publish_fee_cue"
                     android:layout_marginTop="10dp"
                     android:layout_marginStart="@dimen/teacher_publish_cue_marginStart"
                     android:textColor="@color/black_deep"
@@ -396,7 +411,7 @@
                     android:inputType="number"
                     android:hint="请输入数字"
                     android:textSize="18sp"
-                    android:background="@null"
+                    android:background="@drawable/publish_layout_selector"
                     android:layout_marginTop="10dp"
                     android:layout_marginStart="@dimen/teacher_publish_content_marginStart"/>
             </LinearLayout>
@@ -404,7 +419,7 @@
 <!--                android:layout_width="match_parent"-->
 <!--                android:layout_height="wrap_content"-->
 <!--                android:orientation="vertical"-->
-<!--                android:background="@drawable/bottom_border">-->
+<!--                android:background="@drawable/bottom_border_unpressed">-->
 <!--                <TextView-->
 <!--                    android:layout_marginTop="10dp"-->
 <!--                    android:layout_marginStart="@dimen/teacher_publish_cue_marginStart"-->
@@ -425,11 +440,13 @@
 <!--                    android:layout_marginStart="@dimen/teacher_publish_content_marginStart"/>-->
 <!--            </LinearLayout>-->
             <LinearLayout
+                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="@drawable/bottom_border">
+                android:background="@drawable/publish_layout_selector">
                 <TextView
+                    android:id="@+id/teacher_publish_introduction_cue"
                     android:layout_marginTop="10dp"
                     android:layout_marginStart="@dimen/teacher_publish_cue_marginStart"
                     android:textColor="@color/black_deep"
@@ -445,329 +462,11 @@
                     android:minHeight="40dp"
                     android:hint="请输入"
                     android:textSize="18sp"
-                    android:background="@null"
+                    android:background="@drawable/publish_layout_selector"
                     android:layout_marginTop="10dp"
                     android:layout_marginStart="@dimen/teacher_publish_content_marginStart"/>
             </LinearLayout>
 
-
-
-            <!--            <android.support.constraint.ConstraintLayout-->
-<!--                android:id="@+id/schoolLayout"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="40dp"-->
-<!--                android:layout_marginTop="10dp"-->
-<!--                android:layout_marginLeft="10dp"-->
-<!--                android:layout_marginRight="10dp"-->
-<!--                android:background="@drawable/add_info_background_selector"-->
-<!--                app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                app:layout_constraintLeft_toLeftOf="parent"-->
-<!--                app:layout_constraintRight_toRightOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/sex"-->
-<!--                app:layout_constraintVertical_bias="0">-->
-<!--                <TextView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="40dp"-->
-<!--                    android:text="学校："-->
-<!--                    android:gravity="center"-->
-<!--                    android:textSize="18sp"-->
-<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                    app:layout_constraintLeft_toLeftOf="parent"-->
-<!--                    app:layout_constraintRight_toRightOf="parent"-->
-<!--                    app:layout_constraintTop_toTopOf="parent"-->
-<!--                    app:layout_constraintHorizontal_bias="0"/>-->
-<!--                <Spinner-->
-<!--                    android:id="@+id/schoolspinner"-->
-<!--                    android:layout_width="200dp"-->
-<!--                    android:layout_height="40dp"-->
-<!--                    android:entries="@array/university"-->
-<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                    app:layout_constraintLeft_toLeftOf="parent"-->
-<!--                    app:layout_constraintRight_toRightOf="parent"-->
-<!--                    app:layout_constraintTop_toTopOf="parent"-->
-<!--                    app:layout_constraintHorizontal_bias="1"></Spinner>-->
-<!--            </android.support.constraint.ConstraintLayout>-->
-
-<!--            <android.support.constraint.ConstraintLayout-->
-<!--                android:id="@+id/classLayout"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="40dp"-->
-<!--                android:layout_marginTop="10dp"-->
-<!--                android:layout_marginLeft="10dp"-->
-<!--                android:layout_marginRight="10dp"-->
-<!--                android:background="@drawable/add_info_background_selector"-->
-<!--                app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                app:layout_constraintLeft_toLeftOf="parent"-->
-<!--                app:layout_constraintRight_toRightOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/schoolLayout"-->
-<!--                app:layout_constraintVertical_bias="0">-->
-<!--                <TextView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="40dp"-->
-<!--                    android:text="学院："-->
-<!--                    android:gravity="center"-->
-<!--                    android:textSize="18sp"-->
-<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                    app:layout_constraintLeft_toLeftOf="parent"-->
-<!--                    app:layout_constraintRight_toRightOf="parent"-->
-<!--                    app:layout_constraintTop_toTopOf="parent"-->
-<!--                    app:layout_constraintHorizontal_bias="0"/>-->
-<!--                <Spinner-->
-<!--                    android:id="@+id/collegespinner"-->
-<!--                    android:layout_width="200dp"-->
-<!--                    android:layout_height="40dp"-->
-<!--                    android:entries="@array/college"-->
-<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                    app:layout_constraintLeft_toLeftOf="parent"-->
-<!--                    app:layout_constraintRight_toRightOf="parent"-->
-<!--                    app:layout_constraintTop_toTopOf="parent"-->
-<!--                    app:layout_constraintHorizontal_bias="1"></Spinner>-->
-<!--            </android.support.constraint.ConstraintLayout>-->
-
-<!--            <TextView-->
-<!--                android:layout_marginTop="10dp"-->
-<!--                android:layout_marginLeft="10dp"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="*专业"/>-->
-
-<!--            <EditText-->
-<!--                android:id="@+id/major"-->
-<!--                android:hint="专业"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="40dp"-->
-<!--                android:layout_marginTop="10dp"-->
-<!--                android:layout_marginLeft="10dp"-->
-<!--                android:layout_marginRight="10dp"-->
-<!--                android:background="@drawable/add_info_background_selector"-->
-<!--                app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                app:layout_constraintLeft_toLeftOf="parent"-->
-<!--                app:layout_constraintRight_toRightOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/classLayout"-->
-<!--                app:layout_constraintVertical_bias="0"/>-->
-
-<!--            <android.support.constraint.ConstraintLayout-->
-<!--                android:id="@+id/gradeLayout"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="40dp"-->
-<!--                android:layout_marginTop="10dp"-->
-<!--                android:layout_marginLeft="10dp"-->
-<!--                android:layout_marginRight="10dp"-->
-<!--                android:background="@drawable/add_info_background_selector"-->
-<!--                app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                app:layout_constraintLeft_toLeftOf="parent"-->
-<!--                app:layout_constraintRight_toRightOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/major"-->
-<!--                app:layout_constraintVertical_bias="0">-->
-<!--                <TextView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="40dp"-->
-<!--                    android:text="年级："-->
-<!--                    android:gravity="center"-->
-<!--                    android:textSize="18sp"-->
-<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                    app:layout_constraintLeft_toLeftOf="parent"-->
-<!--                    app:layout_constraintRight_toRightOf="parent"-->
-<!--                    app:layout_constraintTop_toTopOf="parent"-->
-<!--                    app:layout_constraintHorizontal_bias="0"/>-->
-<!--                <Spinner-->
-<!--                    android:id="@+id/gradespinner"-->
-<!--                    android:layout_width="100dp"-->
-<!--                    android:layout_height="40dp"-->
-<!--                    android:entries="@array/stugrade"-->
-<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                    app:layout_constraintLeft_toLeftOf="parent"-->
-<!--                    app:layout_constraintRight_toRightOf="parent"-->
-<!--                    app:layout_constraintTop_toTopOf="parent"-->
-<!--                    app:layout_constraintHorizontal_bias="1"></Spinner>-->
-<!--            </android.support.constraint.ConstraintLayout>-->
-
-<!--            <android.support.constraint.ConstraintLayout-->
-<!--                android:id="@+id/subjectLayout"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="40dp"-->
-<!--                android:layout_marginTop="10dp"-->
-<!--                android:layout_marginLeft="10dp"-->
-<!--                android:layout_marginRight="10dp"-->
-<!--                android:background="@drawable/add_info_background_selector"-->
-<!--                app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                app:layout_constraintLeft_toLeftOf="parent"-->
-<!--                app:layout_constraintRight_toRightOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/gradeLayout"-->
-<!--                app:layout_constraintVertical_bias="0">-->
-<!--                <TextView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="40dp"-->
-<!--                    android:text="擅长学科："-->
-<!--                    android:gravity="center"-->
-<!--                    android:textSize="18sp"-->
-<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                    app:layout_constraintLeft_toLeftOf="parent"-->
-<!--                    app:layout_constraintRight_toRightOf="parent"-->
-<!--                    app:layout_constraintTop_toTopOf="parent"-->
-<!--                    app:layout_constraintHorizontal_bias="0"/>-->
-<!--                <Spinner-->
-<!--                    android:id="@+id/subjectspinner"-->
-<!--                    android:layout_width="100dp"-->
-<!--                    android:layout_height="40dp"-->
-<!--                    android:entries="@array/subject"-->
-<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                    app:layout_constraintLeft_toLeftOf="parent"-->
-<!--                    app:layout_constraintRight_toRightOf="parent"-->
-<!--                    app:layout_constraintTop_toTopOf="parent"-->
-<!--                    app:layout_constraintHorizontal_bias="1"></Spinner>-->
-<!--            </android.support.constraint.ConstraintLayout>-->
-
-<!--            <android.support.constraint.ConstraintLayout-->
-<!--                android:id="@+id/freetimeLayout"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="40dp"-->
-<!--                android:layout_marginTop="10dp"-->
-<!--                android:layout_marginLeft="10dp"-->
-<!--                android:layout_marginRight="10dp"-->
-<!--                android:background="@drawable/add_info_background_selector"-->
-<!--                app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                app:layout_constraintLeft_toLeftOf="parent"-->
-<!--                app:layout_constraintRight_toRightOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/subjectLayout"-->
-<!--                app:layout_constraintVertical_bias="0">-->
-<!--                <TextView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="40dp"-->
-<!--                    android:text="空余时间："-->
-<!--                    android:gravity="center"-->
-<!--                    android:textSize="18sp"-->
-<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                    app:layout_constraintLeft_toLeftOf="parent"-->
-<!--                    app:layout_constraintRight_toRightOf="parent"-->
-<!--                    app:layout_constraintTop_toTopOf="parent"-->
-<!--                    app:layout_constraintHorizontal_bias="0"/>-->
-<!--                <Spinner-->
-<!--                    android:id="@+id/weekspinner"-->
-<!--                    android:layout_width="120dp"-->
-<!--                    android:layout_height="40dp"-->
-<!--                    android:entries="@array/week"-->
-<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                    app:layout_constraintLeft_toLeftOf="parent"-->
-<!--                    app:layout_constraintRight_toLeftOf="@+id/timespinner"-->
-<!--                    app:layout_constraintTop_toTopOf="parent"-->
-<!--                    app:layout_constraintHorizontal_bias="1"></Spinner>-->
-<!--                <Spinner-->
-<!--                    android:id="@+id/timespinner"-->
-<!--                    android:layout_width="100dp"-->
-<!--                    android:layout_height="40dp"-->
-<!--                    android:entries="@array/freetime"-->
-<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                    app:layout_constraintLeft_toLeftOf="parent"-->
-<!--                    app:layout_constraintRight_toRightOf="parent"-->
-<!--                    app:layout_constraintTop_toTopOf="parent"-->
-<!--                    app:layout_constraintHorizontal_bias="1"></Spinner>-->
-<!--            </android.support.constraint.ConstraintLayout>-->
-
-<!--            <android.support.constraint.ConstraintLayout-->
-<!--                android:id="@+id/expLayout"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="40dp"-->
-<!--                android:layout_marginTop="10dp"-->
-<!--                android:layout_marginLeft="10dp"-->
-<!--                android:layout_marginRight="10dp"-->
-<!--                android:background="@drawable/add_info_background_selector"-->
-<!--                app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                app:layout_constraintLeft_toLeftOf="parent"-->
-<!--                app:layout_constraintRight_toRightOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/sex"-->
-<!--                app:layout_constraintVertical_bias="0">-->
-<!--                <TextView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="40dp"-->
-<!--                    android:text="家教经验："-->
-<!--                    android:gravity="center"-->
-<!--                    android:textSize="18sp"-->
-<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                    app:layout_constraintLeft_toLeftOf="parent"-->
-<!--                    app:layout_constraintRight_toRightOf="parent"-->
-<!--                    app:layout_constraintTop_toTopOf="parent"-->
-<!--                    app:layout_constraintHorizontal_bias="0"/>-->
-<!--                <Spinner-->
-<!--                    android:id="@+id/expspinner"-->
-<!--                    android:layout_width="200dp"-->
-<!--                    android:layout_height="40dp"-->
-<!--                    android:entries="@array/exp"-->
-<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                    app:layout_constraintLeft_toLeftOf="parent"-->
-<!--                    app:layout_constraintRight_toRightOf="parent"-->
-<!--                    app:layout_constraintTop_toTopOf="parent"-->
-<!--                    app:layout_constraintHorizontal_bias="1"></Spinner>-->
-<!--            </android.support.constraint.ConstraintLayout>-->
-
-<!--            <TextView-->
-<!--                android:layout_marginTop="10dp"-->
-<!--                android:layout_marginLeft="10dp"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="*家教费用（元/小时）"/>-->
-
-<!--            <EditText-->
-<!--                android:id="@+id/pay"-->
-<!--                android:hint="家教费用"-->
-<!--                android:inputType="number"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="40dp"-->
-<!--                android:layout_marginTop="10dp"-->
-<!--                android:layout_marginLeft="10dp"-->
-<!--                android:layout_marginRight="10dp"-->
-<!--                android:background="@drawable/add_info_background_selector"-->
-<!--                app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                app:layout_constraintLeft_toLeftOf="parent"-->
-<!--                app:layout_constraintRight_toRightOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/freetimeLayout"-->
-<!--                app:layout_constraintVertical_bias="0"/>-->
-
-<!--            <TextView-->
-<!--                android:layout_marginTop="10dp"-->
-<!--                android:layout_marginLeft="10dp"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="*联系电话"/>-->
-
-<!--            <EditText-->
-<!--                android:id="@+id/tel"-->
-<!--                android:hint="联系电话"-->
-<!--                android:inputType="number"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="40dp"-->
-<!--                android:layout_marginTop="10dp"-->
-<!--                android:layout_marginLeft="10dp"-->
-<!--                android:layout_marginRight="10dp"-->
-<!--                android:background="@drawable/add_info_background_selector"-->
-<!--                app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                app:layout_constraintLeft_toLeftOf="parent"-->
-<!--                app:layout_constraintRight_toRightOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/pay"-->
-<!--                app:layout_constraintVertical_bias="0"/>-->
-
-<!--            <TextView-->
-<!--                android:layout_marginTop="10dp"-->
-<!--                android:layout_marginLeft="10dp"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="*自我介绍"/>-->
-
-<!--            <EditText-->
-<!--                android:id="@+id/require"-->
-<!--                android:hint="自我介绍"-->
-<!--                android:minLines="@string/add_info_minLines"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="10dp"-->
-<!--                android:layout_marginLeft="10dp"-->
-<!--                android:layout_marginRight="10dp"-->
-<!--                android:background="@drawable/add_info_background_selector"-->
-<!--                app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                app:layout_constraintLeft_toLeftOf="parent"-->
-<!--                app:layout_constraintRight_toRightOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/tel"-->
-<!--                app:layout_constraintVertical_bias="0"/>-->
 <!--            底部按钮-->
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"

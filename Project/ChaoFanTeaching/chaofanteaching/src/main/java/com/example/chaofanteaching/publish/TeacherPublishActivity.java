@@ -32,6 +32,20 @@ public class TeacherPublishActivity extends AppCompatActivity {
     private String userName;
     private String role;
 
+    private TextView nameCue;
+    private TextView sexCue;
+    private TextView universityCue;
+    private TextView collegeCue;
+    private TextView majorCue;
+    private TextView gradeCue;
+    private TextView courseCue;
+    private TextView freeCue;
+    private TextView experienceCue;
+    private TextView feeCue;
+    private TextView introductionCue;
+    private TextView[] cues;
+
+    private LinearLayout nameLayout;
     private LinearLayout sexLayout;
     private LinearLayout universityLayout;
     private LinearLayout collegeLayout;
@@ -69,26 +83,17 @@ public class TeacherPublishActivity extends AppCompatActivity {
                 case 0:
                     String string = msg.obj.toString();
                     Log.e("xcf_teacherPublish",string);
-                    String[] strings;
-                    strings = string.split(",");
+                    //strings数组有12个元素，顺序：薛老师,男,河北师范大学,软件学院,软件工程,大三,英语,有经验,星期四,下午,70,我是可爱的学炒饭，请大家叫我爸爸，哈哈哈，嘿嘿和
+                    String[] strings = string.split(",");
                     //设初值
-
-                    for (int i=0;i<textViews.length;i++){
+                    setTitleBar(strings[0]);//标题栏
+                    for (int i=0;i<textViews.length;i++){//设置strings0-7号元素
                         textViews[i].setText(strings[i]);
                     }
-//                    nameTxt.setText(strings[0]);
-//                    sexTxt.setText(strings[1]);
-//                    universityTxt.setText(strings[2]);
-//                    collegeTxt.setText(strings[3]);
-//                    majorTxt.setText(strings[4]);
-//                    gradeTxt.setText(strings[5]);
-//                    courseTxt.setText(strings[6]);
-//                    freeWeekTxt.setText(strings[7]);
-//                    freeTimeTxt.setText(strings[8]);
-//                    experienceTxt.setText(strings[9]);
-
+                    //设置strings第10-11号元素
                     feeEdit.setText(strings[10]);
                     introductionEdit.setText(strings[11]);
+                    setAlert(layouts, textViews, cues, strings);//初始化点击layout弹窗
                     break;
             }
         }
@@ -100,31 +105,38 @@ public class TeacherPublishActivity extends AppCompatActivity {
         setContentView(R.layout.activity_teacher_publish);
 
         initView();//初始化view
-        setTitleBar();//标题栏
-        connectDB("MyData?index=init&name="+userName+"&role="+role);//初始化数据
-        //点击layout弹窗
-        String[] item0 = new String[]{"男","女"};
-        String[] item1 = new String[]{"河北师范大学","河北科技大学","河北经贸大学","石家庄铁道大学"};
-        String[] item2 = new String[]{"软件学院","马克思主义学院","生命科学学院","音乐学院"};
-        String[] item3 = new String[]{"软件工程","计算机科学与技术","网络工程","信息安全"};
-        String[] item4 = new String[]{"大一","大二","大三","大四"};
-        String[] item5 = new String[]{"语文","数学","英语","物理","化学","生物","历史","政治","地理","音乐","美术","其它"};
-        String[] item6 = new String[]{"周日","周一","周二","周三","周四","周五","周六"};
-        String[] item7 = new String[]{"上午","下午"};
-        String[] item8 = new String[]{"有经验","无经验"};
-        String[][] items = new String[][]{item0,item1,item2,item3,item4,item5,item6,item7,item8};
+        connectDB("MyData?index=init&name="+userName+"&role="+role, 0);//初始化数据
 
-        setAlert(layouts,items,textViews);//初始化点击layout弹窗
+//        deleteBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//            }
+//        });
     }
 
     /**
      * 初始化点击layout弹窗
      * @param layouts
-     * @param items
      * @param textViews
+     * @param cues
+     * @param strings
      */
-    private void setAlert(LinearLayout[] layouts,String[][] items,TextView[] textViews) {
-        for (int j = 0; j < layouts.length; j++){
+    private void setAlert(LinearLayout[] layouts, TextView[] textViews, TextView[] cues, String[] strings) {
+
+//        Log.e("xcf-userNameFromStrings",""+userNameFromStrings);
+        String[] item0 = new String[]{strings[0]};
+        String[] item1 = new String[]{"男","女"};
+        String[] item2 = new String[]{"河北师范大学","河北科技大学","河北经贸大学","石家庄铁道大学"};
+        String[] item3 = new String[]{"软件学院","马克思主义学院","生命科学学院","音乐学院"};
+        String[] item4 = new String[]{"软件工程","计算机科学与技术","网络工程","信息安全"};
+        String[] item5 = new String[]{"大一","大二","大三","大四"};
+        String[] item6 = new String[]{"语文","数学","英语","物理","化学","生物","历史","政治","地理","音乐","美术","其它"};
+        String[] item7 = new String[]{"有经验","无经验"};
+        String[] item8 = new String[]{"星期日","星期一","星期二","星期三","星期四","星期五","星期六"};
+        String[] item9 = new String[]{"上午","下午"};
+        String[][] items = new String[][]{item0,item1,item2,item3,item4,item5,item6,item7,item8,item9};
+        for (int j = 0; j < layouts.length; j++){//j∈(0,9)
             int finalJ = j;
             layouts[j].setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -133,7 +145,15 @@ public class TeacherPublishActivity extends AppCompatActivity {
                             .setItems(items[finalJ], new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                    textViews[finalJ+1].setText(items[finalJ][i]);
+//                                    Log.e("xcf-alert","layouts="+layouts[finalJ]+"textViews="+textViews[finalJ]+"items="+items[finalJ][i]+"strings="+strings[finalJ]+"cues="+cues[finalJ]);
+                                    if(finalJ<8){
+                                        if (!items[finalJ][i].equals(strings[finalJ])){ cues[finalJ].setTextColor(getResources().getColor(R.color.colorTheme)); }
+                                        else { cues[finalJ].setTextColor(getResources().getColor(R.color.black_deep)); }
+                                    } else {
+                                        if (!items[finalJ][i].equals(strings[finalJ])){ cues[8].setTextColor(getResources().getColor(R.color.colorTheme)); }
+                                        else { cues[8].setTextColor(getResources().getColor(R.color.black_deep)); }
+                                    }
+                                    textViews[finalJ].setText(items[finalJ][i]);
                                 }
                             })
                             .create();
@@ -141,13 +161,12 @@ public class TeacherPublishActivity extends AppCompatActivity {
                 }
             });
         }
-
     }
 
     /**
      * 连接数据库
      */
-    private void connectDB(String path) {
+    private void connectDB(String path, int what) {
         new Thread() {
             HttpURLConnection connection = null;
             @Override
@@ -160,7 +179,7 @@ public class TeacherPublishActivity extends AppCompatActivity {
                         String str = StreamChangeStrUtils.toChange(inputStream);
                         android.os.Message message = Message.obtain();
                         message.obj = str;
-                        message.what = 0;
+                        message.what = what;
                         handler.sendMessage(message);
                     }
                 } catch (Exception e) {
@@ -181,6 +200,19 @@ public class TeacherPublishActivity extends AppCompatActivity {
         //findViewById
         titleBar = findViewById(R.id.title_bar);
 
+        nameCue = findViewById(R.id.teacher_publish_name_cue);
+        sexCue = findViewById(R.id.teacher_publish_sex_cue);
+        universityCue = findViewById(R.id.teacher_publish_university_cue);
+        collegeCue = findViewById(R.id.teacher_publish_college_cue);
+        majorCue = findViewById(R.id.teacher_publish_major_cue);
+        gradeCue = findViewById(R.id.teacher_publish_grade_cue);
+        courseCue = findViewById(R.id.teacher_publish_course_cue);
+        freeCue = findViewById(R.id.teacher_publish_free_cue);
+        experienceCue = findViewById(R.id.teacher_publish_experience_cue);
+        feeCue = findViewById(R.id.teacher_publish_fee_cue);
+        introductionCue = findViewById(R.id.teacher_publish_introduction_cue);
+        cues = new TextView[]{nameCue,sexCue,universityCue,collegeCue,majorCue,gradeCue,courseCue,experienceCue,freeCue};//9个元素
+
         nameTxt = findViewById(R.id.teacher_publish_name);
         sexTxt = findViewById(R.id.teacher_publish_sex);
         universityTxt = findViewById(R.id.teacher_publish_university);
@@ -191,8 +223,9 @@ public class TeacherPublishActivity extends AppCompatActivity {
         freeWeekTxt = findViewById(R.id.teacher_publish_free_week);
         freeTimeTxt = findViewById(R.id.teacher_publish_free_time);
         experienceTxt = findViewById(R.id.teacher_publish_experience);
-        textViews = new TextView[]{nameTxt,sexTxt,universityTxt,collegeTxt,majorTxt,gradeTxt,courseTxt,freeWeekTxt,freeTimeTxt,experienceTxt};
+        textViews = new TextView[]{nameTxt,sexTxt,universityTxt,collegeTxt,majorTxt,gradeTxt,courseTxt,experienceTxt,freeWeekTxt,freeTimeTxt};//10个元素
 
+        nameLayout = findViewById(R.id.teacher_publish_name_layout);
         sexLayout = findViewById(R.id.teacher_publish_sex_layout);
         universityLayout = findViewById(R.id.teacher_publish_university_layout);
         collegeLayout = findViewById(R.id.teacher_publish_college_layout);
@@ -202,7 +235,7 @@ public class TeacherPublishActivity extends AppCompatActivity {
         freeWeekLayout = findViewById(R.id.teacher_publish_free_week_layout);
         freeTimeLayout = findViewById(R.id.teacher_publish_free_time_layout);
         experienceLayout = findViewById(R.id.teacher_publish_experience_layout);
-        layouts = new LinearLayout[]{sexLayout,universityLayout,collegeLayout,majorLayout,gradeLayout,courseLayout,freeWeekLayout,freeTimeLayout,experienceLayout};
+        layouts = new LinearLayout[]{nameLayout,sexLayout,universityLayout,collegeLayout,majorLayout,gradeLayout,courseLayout,experienceLayout,freeWeekLayout,freeTimeLayout};//10个元素
 
         feeEdit = findViewById(R.id.teacher_publish_fee_edit);
 //        phoneEdit = findViewById(R.id.teacher_publish_phone_edit);
@@ -210,15 +243,13 @@ public class TeacherPublishActivity extends AppCompatActivity {
 
         deleteBtn = findViewById(R.id.teacher_publish_delete_btn);
         saveBtn = findViewById(R.id.teacher_publish_save_btn);
-
-
     }
 
     /**
      * 标题栏
      */
-    public void setTitleBar(){
-        titleBar.setTitle(userName+"发布的信息");
+    public void setTitleBar(String s){
+        titleBar.setTitle(s+"发布的信息");
         titleBar.setLeftLayoutClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {

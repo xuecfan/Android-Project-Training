@@ -22,11 +22,6 @@ import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.baidu.location.BDAbstractLocationListener;
-import com.baidu.location.BDLocation;
-import com.baidu.location.LocationClient;
-import com.baidu.location.LocationClientOption;
-import com.baidu.mapapi.CoordType;
 import com.baidu.mapapi.SDKInitializer;
 import com.example.chaofanteaching.InfoList.AddInfoActivity;
 import com.example.chaofanteaching.InfoList.AddStuInfoActivity;
@@ -36,7 +31,6 @@ import com.example.chaofanteaching.fragment.ParentList;
 import com.example.chaofanteaching.fragment.Message;
 import com.example.chaofanteaching.fragment.My;
 import com.example.chaofanteaching.fragment.White;
-import com.example.chaofanteaching.sign.ChooseIdentityActivity;
 import com.example.chaofanteaching.sign.LoginActivity;
 import java.util.HashMap;
 import java.util.Map;
@@ -140,7 +134,7 @@ public class All extends AppCompatActivity {
 
         fragmentTabHost.setCurrentTab(0);
         imageViewMap.get("tag1").setImageResource(R.drawable.list1);
-        textViewMap.get("tag1").setTextColor(getResources().getColor(R.color.buju));
+        textViewMap.get("tag1").setTextColor(getResources().getColor(R.color.colorTheme));
         fragmentTabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
             @Override
             public void onTabChanged(String tabId) {
