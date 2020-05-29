@@ -90,8 +90,17 @@ public class AddStuInfoActivity extends AppCompatActivity {
                 String pay=inPay.getText().toString();
 //                String tel=inTel.getText().toString();
                 String introduce=ipintroduce.getText().toString();
-                dbKey(name,sex,grade,subjcet,week,time,university,pay,introduce,college,major,a,exp);
-                finish();
+                if(!(pay.isEmpty())&&!(introduce.isEmpty())){
+                    dbKey(name,sex,grade,subjcet,week,time,university,pay,introduce,college,major,a,exp);
+                    finish();
+                }else if((pay.isEmpty())&&!(introduce.isEmpty())){
+                    Toast.makeText(getApplicationContext(),"您提交的费用为空,请重新提交",Toast.LENGTH_SHORT).show();
+                }else if(!(pay.isEmpty())&&introduce.isEmpty()){
+                    Toast.makeText(getApplicationContext(),"您提交的介绍为空,请重新提交",Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(getApplicationContext(),"您提交的内容有空值,请重新提交",Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
     }

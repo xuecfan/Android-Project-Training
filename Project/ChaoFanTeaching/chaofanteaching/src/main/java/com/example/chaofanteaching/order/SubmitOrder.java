@@ -228,7 +228,17 @@ public class SubmitOrder extends AppCompatActivity {
                 String pay=paytext.getText().toString();
                 String tel=teltext.getText().toString();
                 String more=moretext.getText().toString();
-                submitOrder(id,user,objusername,grade,subject,date,time,location,length,pay,tel,more);
+                if(!pay.isEmpty()&&!tel.isEmpty()){
+                    submitOrder(id,user,objusername,grade,subject,date,time,location,length,pay,tel,more);
+                }
+                else if(pay.isEmpty()&&!tel.isEmpty()){
+                    Toast.makeText(getApplicationContext(),"您提交的费用为空,请重新提交",Toast.LENGTH_SHORT).show();
+                }else if(!pay.isEmpty()&&tel.isEmpty()){
+                    Toast.makeText(getApplicationContext(),"您提交的电话为空,请重新提交",Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(getApplicationContext(),"您提交的内容有空值,请重新提交",Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
     }

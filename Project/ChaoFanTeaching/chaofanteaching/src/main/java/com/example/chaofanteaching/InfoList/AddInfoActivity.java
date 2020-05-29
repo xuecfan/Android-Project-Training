@@ -171,8 +171,20 @@ public class AddInfoActivity extends AppCompatActivity {
                 String tel=inTel.getText().toString();
                 String require=inRequirement.getText().toString();
                 String time=hourtext.getText().toString();
-                dbKey(name,sex,grade,subjcet,week,time,ilong,pay,tel,require,a,locate);
-                finish();
+                if(!ilong.isEmpty()&&!pay.isEmpty()&&!tel.isEmpty()&&!locate.isEmpty()){
+                    dbKey(name,sex,grade,subjcet,week,time,ilong,pay,tel,require,a,locate);
+                    finish();
+                }else if(ilong.isEmpty()&&!pay.isEmpty()&&!tel.isEmpty()&&!locate.isEmpty()){
+                    Toast.makeText(getApplicationContext(),"您提交的补课时长为空,请重新提交",Toast.LENGTH_SHORT).show();
+                }else if(!ilong.isEmpty()&&pay.isEmpty()&&!tel.isEmpty()&&!locate.isEmpty()){
+                    Toast.makeText(getApplicationContext(),"您提交的课时费用为空,请重新提交",Toast.LENGTH_SHORT).show();
+                }else if(!ilong.isEmpty()&&!pay.isEmpty()&&tel.isEmpty()&&!locate.isEmpty()){
+                    Toast.makeText(getApplicationContext(),"您提交的联系电话为空,请重新提交",Toast.LENGTH_SHORT).show();
+                }else if(!ilong.isEmpty()&&!pay.isEmpty()&&!tel.isEmpty()&&locate.isEmpty()){
+                    Toast.makeText(getApplicationContext(),"您提交的位置为空,请重新提交",Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(getApplicationContext(),"您提交的内容有空值,请重新提交",Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
