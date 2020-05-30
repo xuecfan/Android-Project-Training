@@ -315,9 +315,11 @@ public class My extends Fragment {
                             case 2:
                                 Intent intent3=new Intent(getContext(), Chatrobot.class);
                                 startActivity(intent3);
+                                break;
                             case 3:
                                 Intent intent4=new Intent(getContext(), AboutUs.class);
                                 startActivity(intent4);
+                                break;
                             case 4:
                                 Toast.makeText(getContext(),"暂未开放，敬请期待", Toast.LENGTH_SHORT).show();
                                 break;
