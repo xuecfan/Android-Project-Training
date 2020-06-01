@@ -4,6 +4,8 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -45,9 +47,12 @@ import com.baidu.mapapi.search.geocode.ReverseGeoCodeOption;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
 import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.R;
+import com.example.chaofanteaching.StreamChangeStrUtils;
 import com.example.chaofanteaching.comments.UtilHelpers;
 import com.example.chaofanteaching.utils.ToastUtils;
 import com.hyphenate.easeui.widget.EaseTitleBar;
+
+import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.util.List;
 
@@ -73,7 +78,7 @@ public class AddInfoActivity extends AppCompatActivity {
     private String name;
     private String sex;
     private String grade;
-    private String subjcet;
+    private String subject;
     private String week;
     private String address;
     private String mylat;
@@ -85,6 +90,18 @@ public class AddInfoActivity extends AppCompatActivity {
     private Button add_finish;
     private ImageButton btn2;
     private ScrollView scrollView;
+
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            String string = msg.obj.toString();
+            switch(msg.what){
+                case 0:
+
+                    break;
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -172,7 +189,19 @@ public class AddInfoActivity extends AppCompatActivity {
                 String require=inRequirement.getText().toString();
                 String time=hourtext.getText().toString();
                 if(!ilong.isEmpty()&&!pay.isEmpty()&&!tel.isEmpty()&&!locate.isEmpty()){
-                    dbKey(name,sex,grade,subjcet,week,time,ilong,pay,tel,require,a,locate);
+                    connectDB("AddInfoServlet?id=0&name="+name
+                            +"&sex="+sex
+                            +"&grade="+grade
+                            +"&subject="+subject
+                            +"&week="+week
+                            +"&hour="+time
+                            +"&len="+ilong
+                            +"&pay="+pay
+                            +"&tel="+tel
+                            +"&require=" +require
+                            +"&user="+a
+                            +"&locate="+locate,0);
+//                    dbKey(name,sex,grade, subject,week,time,ilong,pay,tel,require,a,locate);
                     finish();
                 }else if(ilong.isEmpty()&&!pay.isEmpty()&&!tel.isEmpty()&&!locate.isEmpty()){
                     Toast.makeText(getApplicationContext(),"您提交的补课时长为空,请重新提交",Toast.LENGTH_SHORT).show();
@@ -276,7 +305,7 @@ public class AddInfoActivity extends AppCompatActivity {
         myspinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                subjcet=parent.getItemAtPosition(position).toString();
+                subject =parent.getItemAtPosition(position).toString();
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -361,6 +390,31 @@ public class AddInfoActivity extends AppCompatActivity {
         baiduMap.setMaxAndMinZoomLevel(19,13);
         MapStatusUpdate msu= MapStatusUpdateFactory.zoomTo(16);
         baiduMap.setMapStatus(msu);
+    }
+    /**
+     * 连接数据库
+     */
+    private void connectDB(String path, int what) {
+        new Thread() {
+            HttpURLConnection connection = null;
+            @Override
+            public void run() {
+                try {
+                    connection = HttpConnectionUtils.getConnection(path);
+                    int code = connection.getResponseCode();
+                    if (code == 200) {
+                        InputStream inputStream = connection.getInputStream();
+                        String str = StreamChangeStrUtils.toChange(inputStream);
+                        android.os.Message message = Message.obtain();
+                        message.obj = str;
+                        message.what = what;
+                        handler.sendMessage(message);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
     }
     private void dbKey(final String name, final String sex, final String grade, final String subject, final String week, final String hour, final String ilong, final String pay, final String tel, final String require,final String user,final String locate) {
         new Thread() {

@@ -36,6 +36,7 @@ public class TeacherPublishActivity extends AppCompatActivity {
 
     private LinearLayout[] layouts;
 
+    private TextView nameTxt;
     private TextView sexTxt;
     private TextView universityTxt;
     private TextView collegeTxt;
@@ -104,14 +105,14 @@ public class TeacherPublishActivity extends AppCompatActivity {
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                connectDB("MyData?index=delete&name="+userName+"&role="+role, 1);//删除信息
+                connectDB("MyPublish?op=delete&user="+userName+"&role="+role, 1);//删除信息
             }
         });
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                connectDB("MyData?index=save&name=" +userName
-                        +"&role="+role
+                connectDB("MyPublish?op=editTeacher&user="+userName
+                        +"&name="+nameTxt.getText()
                         +"&sex="+sexTxt.getText()
                         +"&university="+universityTxt.getText()
                         +"&college="+collegeTxt.getText()
@@ -145,7 +146,7 @@ public class TeacherPublishActivity extends AppCompatActivity {
         String[] item5 = new String[]{"大一","大二","大三","大四"};
         String[] item6 = new String[]{"语文","数学","英语","物理","化学","生物","历史","政治","地理","音乐","美术","其它"};
         String[] item7 = new String[]{"有经验","无经验"};
-        String[] item8 = new String[]{"星期日","星期一","星期二","星期三","星期四","星期五","星期六"};
+        String[] item8 = new String[]{"周日","周一","周二","周三","周四","周五","周六"};
         String[] item9 = new String[]{"上午","下午"};
         String[][] items = new String[][]{item0,item1,item2,item3,item4,item5,item6,item7,item8,item9};
         for (int j = 0; j < layouts.length; j++){//j∈(0,9)
@@ -225,7 +226,7 @@ public class TeacherPublishActivity extends AppCompatActivity {
         TextView introductionCue = findViewById(R.id.teacher_publish_introduction_cue);
         cues = new TextView[]{nameCue, sexCue, universityCue, collegeCue, majorCue, gradeCue, courseCue, experienceCue, freeCue};//9个元素
 
-        TextView nameTxt = findViewById(R.id.teacher_publish_name);
+        nameTxt = findViewById(R.id.teacher_publish_name);
         sexTxt = findViewById(R.id.teacher_publish_sex);
         universityTxt = findViewById(R.id.teacher_publish_university);
         collegeTxt = findViewById(R.id.teacher_publish_college);
