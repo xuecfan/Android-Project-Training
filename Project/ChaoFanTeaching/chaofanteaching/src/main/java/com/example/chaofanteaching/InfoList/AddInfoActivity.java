@@ -49,6 +49,7 @@ import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.R;
 import com.example.chaofanteaching.StreamChangeStrUtils;
 import com.example.chaofanteaching.comments.UtilHelpers;
+import com.example.chaofanteaching.publish.ParentPublishActivity;
 import com.example.chaofanteaching.utils.ToastUtils;
 import com.hyphenate.easeui.widget.EaseTitleBar;
 
@@ -97,7 +98,12 @@ public class AddInfoActivity extends AppCompatActivity {
             String string = msg.obj.toString();
             switch(msg.what){
                 case 0:
-
+                    if (string.equals("1")){
+                        Toast.makeText(AddInfoActivity.this, "发布信息成功", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }else {
+                        Toast.makeText(AddInfoActivity.this, "发布失败，请稍后重试", Toast.LENGTH_SHORT).show();
+                    }
                     break;
             }
         }

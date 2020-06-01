@@ -84,7 +84,7 @@ public class ParentPublishActivity extends AppCompatActivity {
     private EditText feeEdit;
     private EditText phoneEdit;
     private EditText requirementEdit;
-    private EditText locationEdit;
+//    private EditText locationEdit;
     private EditText[] edits;
 
     private Button deleteBtn;
@@ -117,6 +117,11 @@ public class ParentPublishActivity extends AppCompatActivity {
                     for (int i=0;i<edits.length;i++){//设置strings7-9号元素
                         edits[i].setText(strings[i+7]);
                     }
+                    double lat=Double.parseDouble(strings[10]);
+                    double lng=Double.parseDouble(strings[11]);
+                    geoCode(new LatLng(lat,lng));//初始化位置编辑框内地址
+                    locate=strings[10] + "," + strings[11];//设置locate初始值，避免保存报空
+                    showLocOnMap(lat,lng);//设置地图控件初始值
                     setAlert(layouts, textViews, cues, strings);//初始化点击layout弹窗
                     break;
                 case 1:
@@ -147,12 +152,12 @@ public class ParentPublishActivity extends AppCompatActivity {
         initView();//初始化view
         connectDB("MyData?index=init&name="+userName+"&role="+role, 0);//初始化数据
         //地图
-        SharedPreferences pre1= getSharedPreferences("data", Context.MODE_PRIVATE);
-        String mylat=pre1.getString("mylat","114.53952");
-        String mylng=pre1.getString("mylng","38.03647");
-        locate=mylat+","+mylng;
-        showLocOnMap(Double.parseDouble(mylat),Double.parseDouble(mylng));
-        inlocation.setText(pre1.getString("addressContent",""));
+//        SharedPreferences pre1= getSharedPreferences("data", Context.MODE_PRIVATE);
+//        String mylat=pre1.getString("mylat","114.53952");
+//        String mylng=pre1.getString("mylng","38.03647");
+//        locate=mylat+","+mylng;
+//        showLocOnMap(Double.parseDouble(mylat),Double.parseDouble(mylng));
+//        inlocation.setText(pre1.getString("addressContent",""));
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -185,7 +190,7 @@ public class ParentPublishActivity extends AppCompatActivity {
         hidelogo();//隐藏logo
         zoomlevel();//改变比列尺
 
-
+        //两个按钮
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -232,10 +237,11 @@ public class ParentPublishActivity extends AppCompatActivity {
     }
 
     /**
-     * 地图
+     * 通过经纬度获取详细地址
      * @param latLng
      */
     public void geoCode(LatLng latLng){
+        Log.e("xcf-handler","666");
         GeoCoder mCoder = GeoCoder.newInstance();
         OnGetGeoCoderResultListener listener = new OnGetGeoCoderResultListener() {
             @Override
@@ -245,6 +251,7 @@ public class ParentPublishActivity extends AppCompatActivity {
             @Override
             public void onGetReverseGeoCodeResult(ReverseGeoCodeResult reverseGeoCodeResult) {
                 if (reverseGeoCodeResult == null || reverseGeoCodeResult.error != SearchResult.ERRORNO.NO_ERROR) {
+                    Toast.makeText(ParentPublishActivity.this, "请点击定位按钮定位", Toast.LENGTH_SHORT).show();
                     //没有找到检索结果
                     return;
                 } else {
@@ -450,7 +457,7 @@ public class ParentPublishActivity extends AppCompatActivity {
         feeEdit = findViewById(R.id.parent_publish_fee_edit);
         phoneEdit = findViewById(R.id.parent_publish_phone_edit);
         requirementEdit = findViewById(R.id.parent_publish_requirement_edit);
-        locationEdit = findViewById(R.id.addmylocation);
+//        locationEdit = findViewById(R.id.addmylocation);
         edits = new EditText[]{feeEdit, phoneEdit, requirementEdit};//3个元素
 
         //地图
