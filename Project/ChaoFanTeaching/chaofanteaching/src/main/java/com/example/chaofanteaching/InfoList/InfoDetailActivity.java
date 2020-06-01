@@ -64,11 +64,6 @@ public class InfoDetailActivity extends AppCompatActivity {
     private ConstraintLayout starLaylout;
     private String name;
     private String me;
-    private String data[] = {"老师教的很好，支持。",
-            "讲的孩子都听不懂",
-            "老师教的不错，大家可以请他哦",
-            "老师教课后，孩子成绩有很大提高"};
-    private ListView comment_listView;
     private ImageView infopar_back;
     private RatingBar onTime;
     private RatingBar quality;
@@ -184,13 +179,6 @@ public class InfoDetailActivity extends AppCompatActivity {
         quality=findViewById(R.id.quality_ratingBar);
         on_time=findViewById(R.id.on_time_value);
         qualitytext=findViewById(R.id.alue);
-        //onTime.setRating();
-//        comment_listView = findViewById(R.id.comment_listView);
-//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-//                this,
-//                android.R.layout.simple_list_item_1,
-//                data);
-//        comment_listView.setAdapter(adapter);
 
         //返回
         infopar_back = findViewById(R.id.infopar_back);
@@ -200,7 +188,6 @@ public class InfoDetailActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
-
 
         sendbtn=findViewById(R.id.send);
         sendbtn.setOnClickListener(new View.OnClickListener() {
@@ -244,7 +231,6 @@ public class InfoDetailActivity extends AppCompatActivity {
     }
     //发起聊天
     public void chatIn() {
-        String name = user;
         String myName = EMClient.getInstance().getCurrentUser();
         if (!TextUtils.isEmpty(name)) {
             if (name.equals(myName)) {
@@ -252,7 +238,7 @@ public class InfoDetailActivity extends AppCompatActivity {
                 return;
             }
             Intent chat = new Intent(this, ChatActivity.class);
-            chat.putExtra(EaseConstant.EXTRA_USER_ID, name);  //对方账号
+            chat.putExtra(EaseConstant.EXTRA_USER_ID, user);  //对方账号
             chat.putExtra(EaseConstant.EXTRA_CHAT_TYPE, EMMessage.ChatType.Chat); //单聊模式
             startActivity(chat);
 

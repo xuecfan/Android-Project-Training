@@ -235,7 +235,6 @@ public class ParInfoActivity extends AppCompatActivity {
 
     //发起聊天
     public void chatIn() {
-        //String name = user;
         String myName = EMClient.getInstance().getCurrentUser();
         if (!TextUtils.isEmpty(name)) {
             if (name.equals(myName)) {
@@ -243,7 +242,7 @@ public class ParInfoActivity extends AppCompatActivity {
                 return;
             }
             Intent chat = new Intent(this, ChatActivity.class);
-            chat.putExtra(EaseConstant.EXTRA_USER_ID, name);  //对方账号
+            chat.putExtra(EaseConstant.EXTRA_USER_ID, user);  //对方账号
             chat.putExtra(EaseConstant.EXTRA_CHAT_TYPE, EMMessage.ChatType.Chat); //单聊模式
             startActivity(chat);
 

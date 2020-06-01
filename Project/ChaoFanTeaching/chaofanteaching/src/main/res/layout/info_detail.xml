@@ -778,7 +778,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/round_yellow"
                     android:gravity="center"
-                    android:text="试讲"
+                    android:text="预约试讲"
                     android:textColor="#ffffff"
                     android:textSize="16sp"
                     android:textStyle="bold"

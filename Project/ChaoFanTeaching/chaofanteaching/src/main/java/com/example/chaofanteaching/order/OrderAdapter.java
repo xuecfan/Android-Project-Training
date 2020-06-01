@@ -1,6 +1,8 @@
 package com.example.chaofanteaching.order;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.LayoutInflater;
@@ -119,12 +121,48 @@ public class OrderAdapter extends BaseAdapter {
                         context.startActivity(intent);
                         break;
                     case "已完成":
-                        DbOrder(orderList.get(position).getId());
-                        notifyDataSetChanged();
+                        new AlertDialog.Builder(context)
+                                .setTitle("提示")
+                                .setMessage("确认要删除此订单吗?")
+                                .setNegativeButton(R.string.cancel,
+                                        new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+
+                                            }
+                                        })
+                                .setPositiveButton("确定",
+                                        new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                DbOrder(orderList.get(position).getId());
+                                                notifyDataSetChanged();
+                                            }
+                                        })
+                                .setCancelable(false)
+                                .show();
                         break;
                     default:
-                        DbOrder(orderList.get(position).getId());
-                        notifyDataSetChanged();
+                        new AlertDialog.Builder(context)
+                                .setTitle("提示")
+                                .setMessage("确认要取消此次试讲吗?")
+                                .setNegativeButton(R.string.cancel,
+                                        new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+
+                                            }
+                                        })
+                                .setPositiveButton("确定",
+                                        new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                DbOrder(orderList.get(position).getId());
+                                                notifyDataSetChanged();
+                                            }
+                                        })
+                                .setCancelable(false)
+                                .show();
                         break;
                 }
             }
