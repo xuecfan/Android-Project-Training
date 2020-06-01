@@ -3,8 +3,9 @@ package com.example.chaofanteaching.InfoList;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,12 +18,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.R;
+import com.example.chaofanteaching.StreamChangeStrUtils;
 import com.example.chaofanteaching.comments.UtilHelpers;
 import com.example.chaofanteaching.utils.ToastUtils;
 import com.hyphenate.easeui.widget.EaseTitleBar;
 
-import org.w3c.dom.Text;
-
+import java.io.InputStream;
 import java.net.HttpURLConnection;
 
 public class AddStuInfoActivity extends AppCompatActivity {
@@ -36,7 +37,7 @@ public class AddStuInfoActivity extends AppCompatActivity {
     private RadioGroup radioGroup;
     private String sex;
     private String university;
-    private String subjcet;
+    private String subject;
     private String college;
     private String grade;
     private String time;
@@ -51,6 +52,27 @@ public class AddStuInfoActivity extends AppCompatActivity {
     private Spinner myspinner6;
     protected EaseTitleBar titleBar;
 
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            String string = msg.obj.toString();
+            switch (msg.what){
+                case 0:
+                    if (string.equals("1")){
+                        Toast.makeText(AddStuInfoActivity.this, "发布信息成功", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }else {
+                        Toast.makeText(AddStuInfoActivity.this, "发布失败，请稍后重试", Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+                case 1:
+                    String[] strings = string.split(",");
+                    inName.setText(strings[0]);//设置用户名
+                    break;
+            }
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,7 +80,8 @@ public class AddStuInfoActivity extends AppCompatActivity {
         pre= getSharedPreferences("login", Context.MODE_PRIVATE);
         a = pre.getString("userName", "");
         inName=findViewById(R.id.name);
-        inName.setText(a);
+        connectDB("MyData?index=rname&name="+a,1);//获取用户名
+//        inName.setText(a);
         titleBar=findViewById(R.id.title_bar);
         titleBar.setTitle("添加信息");
         titleBar.setLeftLayoutClickListener(new View.OnClickListener() {
@@ -91,7 +114,20 @@ public class AddStuInfoActivity extends AppCompatActivity {
 //                String tel=inTel.getText().toString();
                 String introduce=ipintroduce.getText().toString();
                 if(!(pay.isEmpty())&&!(introduce.isEmpty())){
-                    dbKey(name,sex,grade,subjcet,week,time,university,pay,introduce,college,major,a,exp);
+                    connectDB("AddInfoServlet?id=1&name="+name
+                            +"&sex="+sex
+                            +"&grade="+grade
+                            +"&subject="+subject
+                            +"&week="+week
+                            +"&time="+time
+                            +"&university="+university
+                            +"&pay="+pay
+                            +"&require="+introduce
+                            +"&college="+college
+                            +"&major="+major
+                            +"&user="+a
+                            +"&exp="+exp,0);//链接数据库，若所有输入项均不空，提交信息
+//                    dbKey(name,sex,grade, subject,week,time,university,pay,introduce,college,major,a,exp);
                     finish();
                 }else if((pay.isEmpty())&&!(introduce.isEmpty())){
                     Toast.makeText(getApplicationContext(),"您提交的费用为空,请重新提交",Toast.LENGTH_SHORT).show();
@@ -159,7 +195,7 @@ public class AddStuInfoActivity extends AppCompatActivity {
         myspinner3.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                subjcet=parent.getItemAtPosition(position).toString();
+                subject =parent.getItemAtPosition(position).toString();
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -200,6 +236,33 @@ public class AddStuInfoActivity extends AppCompatActivity {
             }
         });
     }
+
+    /**
+     * 连接数据库
+     */
+    private void connectDB(String path, int what) {
+        new Thread() {
+            HttpURLConnection connection = null;
+            @Override
+            public void run() {
+                try {
+                    connection = HttpConnectionUtils.getConnection(path);
+                    int code = connection.getResponseCode();
+                    if (code == 200) {
+                        InputStream inputStream = connection.getInputStream();
+                        String str = StreamChangeStrUtils.toChange(inputStream);
+                        android.os.Message message = Message.obtain();
+                        message.obj = str;
+                        message.what = what;
+                        handler.sendMessage(message);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+    }
+
     private void dbKey(final String name, final String sex, final String grade, final String subject, final String week, final String time, final String university, final String pay, final String introduce,final String college,final String major,final String user,final String exp) {
         new Thread() {
             HttpURLConnection connection = null;

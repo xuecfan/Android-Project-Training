@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -105,6 +106,13 @@ public class AddInfoActivity extends AppCompatActivity {
                         Toast.makeText(AddInfoActivity.this, "发布失败，请稍后重试", Toast.LENGTH_SHORT).show();
                     }
                     break;
+                case 1:
+                    Log.e("xcf-handler-case1",string);
+                    String[] strings = string.split(",");
+                    inName.setText(strings[0]);//设置用户名
+                    showLocOnMap(Double.parseDouble(strings[1]),Double.parseDouble(strings[2]));//初始化地图控件
+                    geoCode(new LatLng(Double.parseDouble(strings[1]),Double.parseDouble(strings[2])));//初始化位置输入框内容
+                    break;
             }
         }
     };
@@ -114,17 +122,20 @@ public class AddInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         SDKInitializer.initialize(getApplicationContext());
         setContentView(R.layout.add_info);
+
         initView();
         pre= getSharedPreferences("login", Context.MODE_PRIVATE);
         pre1= getSharedPreferences("data", Context.MODE_PRIVATE);
         a = pre.getString("userName", "");
-        name=pre1.getString("nameContent","");
+        connectDB("MyData?index=rname&name="+a,1);//获取用户名
+//        name=pre1.getString("nameContent","");
+        name = inName.getText().toString();//获取用户名
         address=pre1.getString("addressContent","");
         mylat=pre1.getString("mylat","114.53952");
         mylng=pre1.getString("mylng","38.03647");
         locate=mylat+","+mylng;
         showLocOnMap(Double.parseDouble(mylat),Double.parseDouble(mylng));
-        inName.setText(name);
+//        inName.setText(name);
         inlocation.setText(address);
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -250,6 +261,7 @@ public class AddInfoActivity extends AppCompatActivity {
             @Override
             public void onGetReverseGeoCodeResult(ReverseGeoCodeResult reverseGeoCodeResult) {
                 if (reverseGeoCodeResult == null || reverseGeoCodeResult.error != SearchResult.ERRORNO.NO_ERROR) {
+                    Toast.makeText(AddInfoActivity.this, "请点击定位按钮定位", Toast.LENGTH_SHORT).show();
                     //没有找到检索结果
                     return;
                 } else {
@@ -397,6 +409,7 @@ public class AddInfoActivity extends AppCompatActivity {
         MapStatusUpdate msu= MapStatusUpdateFactory.zoomTo(16);
         baiduMap.setMapStatus(msu);
     }
+
     /**
      * 连接数据库
      */
@@ -422,6 +435,7 @@ public class AddInfoActivity extends AppCompatActivity {
             }
         }.start();
     }
+
     private void dbKey(final String name, final String sex, final String grade, final String subject, final String week, final String hour, final String ilong, final String pay, final String tel, final String require,final String user,final String locate) {
         new Thread() {
             HttpURLConnection connection = null;

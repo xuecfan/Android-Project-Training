@@ -26,13 +26,13 @@
         <item>其它</item>
     </string-array>
     <string-array name="week">
-        <item>每周日</item>
-        <item>每周一</item>
-        <item>每周二</item>
-        <item>每周三</item>
-        <item>每周四</item>
-        <item>每周五</item>
-        <item>每周六</item>
+        <item>周日</item>
+        <item>周一</item>
+        <item>周二</item>
+        <item>周三</item>
+        <item>周四</item>
+        <item>周五</item>
+        <item>周六</item>
     </string-array>
     <string-array name="minute">
         <item>00分</item>
