@@ -136,6 +136,7 @@ public class OrderAdapter extends BaseAdapter {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
                                                 DbOrder(orderList.get(position).getId());
+                                                orderList.remove(position);
                                                 notifyDataSetChanged();
                                             }
                                         })
@@ -158,6 +159,7 @@ public class OrderAdapter extends BaseAdapter {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
                                                 DbOrder(orderList.get(position).getId());
+                                                orderList.remove(position);
                                                 notifyDataSetChanged();
                                             }
                                         })
