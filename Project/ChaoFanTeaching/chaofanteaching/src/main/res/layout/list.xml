@@ -1,96 +1,220 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <!-- 内容区 -->
     <LinearLayout
-        android:background="#D8900A"
         android:layout_width="match_parent"
-        android:layout_height="46dp"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:gravity="center">
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
 
-        <EditText
-            android:singleLine="true"
-            android:imeOptions="actionSearch"
-            android:background="@drawable/edittext_normal"
-            android:id="@+id/input"
-            android:textSize="16sp"
-            android:layout_width="300dp"
-            android:layout_height="30dp"
-            android:hint="河北师范大学"/>
-
-        <Button
-            android:id="@+id/add"
-            android:layout_marginLeft="5dp"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:background="@drawable/scerrn"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:visibility="gone"
-        android:id="@+id/sort"
-        android:gravity="right"
-        android:background="#ffffff"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:layout_marginRight="20dp"
-            android:textColor="#DC143C"
-            android:id="@+id/def"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:text="默认"/>
-        <TextView
-            android:layout_marginRight="20dp"
-            android:id="@+id/dis"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:text="距离"/>
-        <TextView
-            android:layout_marginRight="20dp"
-            android:id="@+id/pri"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:text="价格"/>
-        <TextView
-            android:layout_marginRight="30dp"
-            android:id="@+id/exp"
-            android:textSize="16sp"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:text="经验"/>
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/sort"/>
-
-    </LinearLayout>
-
-    <com.scwang.smartrefresh.layout.SmartRefreshLayout
-        android:id="@+id/srl"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <pl.droidsonroids.gif.GifImageButton
-            android:background="#fcfbfb"
+        <LinearLayout
+            android:background="#D8900A"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/refresh"/>
-    <ListView
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="1dp"
-        android:id="@+id/infolist"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </ListView>
-    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+            android:layout_height="46dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:gravity="center">
 
-</LinearLayout>
+            <EditText
+                android:singleLine="true"
+                android:imeOptions="actionSearch"
+                android:background="@drawable/edittext_normal"
+                android:id="@+id/input"
+                android:textSize="17sp"
+                android:layout_width="300dp"
+                android:layout_height="30dp"
+                android:hint="河北师范大学"/>
+
+            <Button
+                android:id="@+id/add"
+                android:layout_marginLeft="5dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/scerrn"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/sort"
+            android:background="#ffffff"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/sort"/>
+        </LinearLayout>
+
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/srl"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <pl.droidsonroids.gif.GifImageButton
+                android:background="#fcfbfb"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/refresh"/>
+            <ListView
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="1dp"
+                android:id="@+id/infolist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </ListView>
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+    </LinearLayout>
+
+
+    <!-- 右边菜单 -->
+    <LinearLayout
+        android:layout_width="150dp"
+        android:layout_height="match_parent"
+        android:layout_marginTop="46dp"
+        android:layout_gravity="right"
+        android:background="@color/white"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/def"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:text="默认"
+            android:textSize="18sp"
+            android:textColor="#DC143C"
+            />
+        <TextView
+            android:id="@+id/dis"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:text="只看男生"
+            android:textSize="18sp"
+            />
+        <TextView
+            android:id="@+id/pri"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:text="价格升序"
+            android:textSize="18sp"
+            />
+
+        <TextView
+            android:id="@+id/exp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:text="经验优先"
+            android:textSize="18sp"
+            />
+        <ImageView
+            android:layout_marginTop="250dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/pig"/>
+
+    </LinearLayout>
+
+</android.support.v4.widget.DrawerLayout>
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    android:orientation="vertical">-->
+
+<!--    <LinearLayout-->
+<!--        android:background="#D8900A"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="46dp"-->
+<!--        android:focusable="true"-->
+<!--        android:focusableInTouchMode="true"-->
+<!--        android:gravity="center">-->
+
+<!--        <EditText-->
+<!--            android:singleLine="true"-->
+<!--            android:imeOptions="actionSearch"-->
+<!--            android:background="@drawable/edittext_normal"-->
+<!--            android:id="@+id/input"-->
+<!--            android:textSize="17sp"-->
+<!--            android:layout_width="300dp"-->
+<!--            android:layout_height="30dp"-->
+<!--            android:hint="河北师范大学"/>-->
+
+<!--        <Button-->
+<!--            android:id="@+id/add"-->
+<!--            android:layout_marginLeft="5dp"-->
+<!--            android:layout_width="25dp"-->
+<!--            android:layout_height="25dp"-->
+<!--            android:background="@drawable/scerrn"/>-->
+
+<!--    </LinearLayout>-->
+
+<!--    <LinearLayout-->
+<!--        android:visibility="gone"-->
+<!--        android:id="@+id/sort"-->
+<!--        android:background="#ffffff"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content">-->
+<!--        <TextView-->
+<!--            android:layout_marginLeft="20dp"-->
+<!--            android:textColor="#DC143C"-->
+<!--            android:id="@+id/def"-->
+<!--            android:layout_width="50dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:textSize="17sp"-->
+<!--            android:text="默认"/>-->
+<!--        <TextView-->
+<!--            android:id="@+id/dis"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:textSize="17sp"-->
+<!--            android:text="只看男生"/>-->
+<!--        <TextView-->
+<!--            android:id="@+id/pri"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:textSize="17sp"-->
+<!--            android:text="价格升序"/>-->
+<!--        <TextView-->
+<!--            android:id="@+id/exp"-->
+<!--            android:textSize="17sp"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="经验优先"/>-->
+<!--        <ImageView-->
+<!--            android:layout_width="20dp"-->
+<!--            android:layout_height="20dp"-->
+<!--            android:src="@drawable/sort"/>-->
+<!--    </LinearLayout>-->
+
+<!--    <com.scwang.smartrefresh.layout.SmartRefreshLayout-->
+<!--        android:id="@+id/srl"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent">-->
+<!--        <pl.droidsonroids.gif.GifImageButton-->
+<!--            android:background="#fcfbfb"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:src="@mipmap/refresh"/>-->
+<!--    <ListView-->
+<!--        android:layout_marginLeft="15dp"-->
+<!--        android:layout_marginTop="1dp"-->
+<!--        android:id="@+id/infolist"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content">-->
+<!--    </ListView>-->
+<!--    </com.scwang.smartrefresh.layout.SmartRefreshLayout>-->
+
+<!--</LinearLayout>-->

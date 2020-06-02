@@ -11,7 +11,9 @@ import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -178,6 +180,8 @@ public class ParentList extends Fragment {
     }//刷新
 
     public void sort() {
+        DrawerLayout drawerLayout=view.findViewById(R.id.drawer_layout);
+        drawerLayout.setScrimColor(Color.TRANSPARENT);
         sign=0;
         sign1=0;
         sign2=0;
@@ -256,14 +260,15 @@ public class ParentList extends Fragment {
         btnadd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LinearLayout sort=view.findViewById(R.id.sort);
-                if(sign2==0){
-                    sign2+=1;
-                    sort.setVisibility(View.VISIBLE);
-                }else{
-                    sign2-=1;
-                    sort.setVisibility(View.GONE);
-                }
+                drawerLayout.openDrawer(Gravity.RIGHT);
+//                LinearLayout sort=view.findViewById(R.id.sort);
+//                if(sign2==0){
+//                    sign2+=1;
+//                    sort.setVisibility(View.VISIBLE);
+//                }else{
+//                    sign2-=1;
+//                    sort.setVisibility(View.GONE);
+//                }
             }
         });
     }//排序

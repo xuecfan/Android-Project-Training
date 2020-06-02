@@ -11,6 +11,8 @@ import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.DrawerLayout;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +28,7 @@ import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.InfoList.Info;
 import com.example.chaofanteaching.InfoList.InfoAdapter;
 import com.example.chaofanteaching.InfoList.InfoDetailActivity;
+
 import com.example.chaofanteaching.R;
 import com.example.chaofanteaching.StreamChangeStrUtils;
 import com.example.chaofanteaching.sign.LoginActivity;
@@ -94,18 +97,21 @@ public class TeacherList extends Fragment {
         sign=0;
         sign1=0;
         sign2=0;
+        DrawerLayout drawerLayout=view.findViewById(R.id.drawer_layout);
+        drawerLayout.setScrimColor(Color.TRANSPARENT);
         Button btnadd = view.findViewById(R.id.add);
         btnadd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LinearLayout sort=view.findViewById(R.id.sort);
-                if(sign2==0){
-                    sign2+=1;
-                    sort.setVisibility(View.VISIBLE);
-                }else{
-                    sign2-=1;
-                    sort.setVisibility(View.GONE);
-                }
+                drawerLayout.openDrawer(Gravity.RIGHT);
+//                LinearLayout sort=view.findViewById(R.id.sort);
+//                if(sign2==0){
+//                    sign2+=1;
+//                    sort.setVisibility(View.VISIBLE);
+//                }else{
+//                    sign2-=1;
+//                    sort.setVisibility(View.GONE);
+//                }
             }
         });
         def=view.findViewById(R.id.def);
@@ -137,9 +143,11 @@ public class TeacherList extends Fragment {
                 exp.setTextColor(Color.parseColor("#000000"));
                 dis.setTextColor(Color.parseColor("#FF0000"));
                 if(sign==0){
+                    dis.setText("只看男生");
                     sign+=1;
                     dis.setCompoundDrawables(null,null,up,null);
                 }else{
+                    dis.setText("只看女生");
                     sign-=1;
                     dis.setCompoundDrawables(null,null,down,null);
                 }
@@ -156,10 +164,12 @@ public class TeacherList extends Fragment {
                 infoList.clear();
                 if(sign1==0){
                     sign1+=1;
+                    pri.setText("价格升序");
                     pri.setCompoundDrawables(null,null,up,null);
                     dbKey("upprice","");
                 }else{
                     sign1-=1;
+                    pri.setText("价格降序");
                     pri.setCompoundDrawables(null,null,down,null);
                     dbKey("downprice","");
                 }
