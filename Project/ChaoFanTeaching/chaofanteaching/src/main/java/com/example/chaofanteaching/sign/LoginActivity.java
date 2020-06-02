@@ -36,9 +36,44 @@ import java.net.HttpURLConnection;
 public class LoginActivity extends AppCompatActivity {
     private EditText myId;
     private EditText myPW;
-    private Handler handler;
+
     private String myid;
     ProgressDialog mDialog;
+    private Handler handler = new Handler(){
+        public void handleMessage(android.os.Message message){
+            switch (message.what){
+                case 0:
+                    String string = message.obj.toString();
+                    System.out.println("从服务器传来的servlet页面数字："+string);
+                    if (string.equals("10") || string.equals("11")){
+                        SharedPreferences sharedPreferences = getSharedPreferences("login", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("role", string);
+                        editor.apply();
+
+                        //保存用户名
+                        SharedPreferences.Editor editor1 = sharedPreferences.edit();
+                        editor1.putString("userName",myid);
+                        editor1.apply();
+
+                        login();
+                        //Toast.makeText(getApplication(),"登陆成功",Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent();
+                        intent.setClass( LoginActivity.this, All.class);
+                        intent.setAction("true");
+                        startActivity(intent);
+
+                        ActivityCollector.finishAll();
+                    }else if(string.equals("0")){
+                        Toast.makeText(getApplication(),"用户名或密码错误",Toast.LENGTH_LONG).show();
+                        myPW.setText("");
+                    }else if (string.equals("900")){
+                        Toast.makeText(getApplication(),"此账号登陆中，请检查",Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+            }
+        }
+    };;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -59,20 +94,6 @@ public class LoginActivity extends AppCompatActivity {
         TextView findMyPW = findViewById(R.id.findMyPW);
         TextView serviceAgreement = findViewById(R.id.serviceAgreement);
 
-
-//        //editView设置弹出英文键盘
-//        myId.setKeyListener(new DigitsKeyListener(){
-//            @Override
-//            public int getInputType(){
-//                return InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD;
-//            }
-//
-//            @Override
-//            protected char[] getAcceptedChars() {
-//                char[] ac = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
-//                return ac;
-//            }
-//        });
         //登陆按钮
         loginBtn.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -211,42 +232,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void testUser(final String a, final String b){
-        handler = new Handler(){
-            public void handleMessage(android.os.Message message){
-                switch (message.what){
-                    case 1:
-                        String string = message.obj.toString();
-                        System.out.println("从服务器传来的servlet页面数字："+string);
-                        if (string.equals("10") || string.equals("11")){
-                            SharedPreferences sharedPreferences = getSharedPreferences("login", Context.MODE_PRIVATE);
-                            SharedPreferences.Editor editor = sharedPreferences.edit();
-                            editor.putString("role", string);
-                            editor.apply();
 
-                            //保存用户名
-                            SharedPreferences.Editor editor1 = sharedPreferences.edit();
-                            editor1.putString("userName",myid);
-                            editor1.apply();
-
-                            login();
-                            //Toast.makeText(getApplication(),"登陆成功",Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent();
-                            intent.setClass( LoginActivity.this, All.class);
-                            intent.setAction("true");
-                            startActivity(intent);
-//                            finish();
-                            ActivityCollector.finishAll();
-
-                        }else if(string.equals("0")){
-                            Toast.makeText(getApplication(),"用户名或密码错误",Toast.LENGTH_LONG).show();
-                            myPW.setText("");
-                        }else if (string.equals("900")){
-                            Toast.makeText(getApplication(),"此账号登陆中，请检查",Toast.LENGTH_SHORT).show();
-                        }
-                        break;
-                }
-            }
-        };
         new Thread(){
             HttpURLConnection connection = null;
             @Override
@@ -261,7 +247,7 @@ public class LoginActivity extends AppCompatActivity {
                         String str = StreamChangeStrUtils.toChange(inputStream);
                         android.os.Message message = Message.obtain();
                         message.obj = str;
-                        message.what = 1;
+                        message.what = 0;
                         handler.sendMessage(message);
                     }
                 }catch (Exception e) {

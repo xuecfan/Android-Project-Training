@@ -19,7 +19,7 @@
         android:layout_height="70dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:hint="请输入修改后的电话"
+        android:hint="请输入电话号码"
         android:gravity="center"
         android:textStyle="bold"
         android:textColor="#888888"

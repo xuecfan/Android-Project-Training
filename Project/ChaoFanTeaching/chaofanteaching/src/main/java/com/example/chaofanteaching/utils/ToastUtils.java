@@ -21,6 +21,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.chaofanteaching.R;
+
 /**
  * <pre>
  *     author: Blankj
@@ -31,7 +33,8 @@ import android.widget.Toast;
  */
 public final class ToastUtils {
 
-    private static final int     COLOR_DEFAULT = 0xFEFFFFFF;
+    private static final int     COLOR_DEFAULT = R.color.white;
+    private static final int     COLOR_DEFAULT_MSG = R.color.black_deep;
     private static final Handler HANDLER       = new Handler(Looper.getMainLooper());
 
     private static Toast sToast;
@@ -40,7 +43,7 @@ public final class ToastUtils {
     private static int yOffset    = (int) (64 * Utils.getApp().getResources().getDisplayMetrics().density + 0.5);
     private static int bgColor    = COLOR_DEFAULT;
     private static int bgResource = -1;
-    private static int msgColor   = COLOR_DEFAULT;
+    private static int msgColor   = COLOR_DEFAULT_MSG;
 
     private ToastUtils() {
         throw new UnsupportedOperationException("u can't instantiate me...");

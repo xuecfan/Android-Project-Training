@@ -23,7 +23,7 @@ public class PhoneDetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phone_detail);
         titleBar=findViewById(R.id.title_bar);
-        titleBar.setTitle("修改电话");
+        titleBar.setTitle("电话");
         titleBar.setLeftLayoutClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

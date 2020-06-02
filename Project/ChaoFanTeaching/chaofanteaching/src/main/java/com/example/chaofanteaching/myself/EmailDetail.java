@@ -21,7 +21,7 @@ public class EmailDetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_email_detail);
         titleBar=findViewById(R.id.title_bar);
-        titleBar.setTitle("修改邮箱");
+        titleBar.setTitle("邮箱");
         titleBar.setLeftLayoutClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

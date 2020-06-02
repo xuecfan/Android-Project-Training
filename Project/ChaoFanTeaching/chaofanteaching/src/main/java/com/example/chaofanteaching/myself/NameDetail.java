@@ -23,7 +23,7 @@ public class NameDetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_name_detail);
         titleBar=findViewById(R.id.title_bar);
-        titleBar.setTitle("修改昵称");
+        titleBar.setTitle("昵称");
         titleBar.setLeftLayoutClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

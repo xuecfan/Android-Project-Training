@@ -4,6 +4,7 @@ package com.example.chaofanteaching.myself;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.chaofanteaching.All;
 import com.example.chaofanteaching.BottomPopupOption;
 import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.R;
@@ -52,9 +55,13 @@ public class MyData extends AppCompatActivity {
             switch (msg.what){
                 case  1:
                     Toast.makeText(getApplicationContext(),"信息保存成功",Toast.LENGTH_SHORT).show();
+                    finish();
+                    Intent intent = new Intent(MyData.this, All.class);
+                    startActivity(intent);
                     break;
                 case 2:
                     String str = msg.obj.toString();
+                    Log.e("xcf-mydata-handler",str);
                     String[] s = str.split(";");
                     for (int i = 0; i < s.length; i++) {
                         String[] r = s[i].split(",");
@@ -161,9 +168,14 @@ public class MyData extends AppCompatActivity {
         final String email1=pre.getString("emailContent","");
         final String lat=pre.getString("mylat","");
         final String lng=pre.getString("mylng","");
-        if(name1.equals("")||phone1.equals("")||sex1.equals("")||address1.equals("")||email1.equals("")||lat.equals("")){
-            look();
+        Intent request = getIntent();
+        int firstTimeToMyData = request.getIntExtra("firstTimeToMyData",0);
+        if (firstTimeToMyData == 0){
+            if(name1.equals("")||phone1.equals("")||sex1.equals("")||address1.equals("")||email1.equals("")||lat.equals("")){
+                look();
+            }
         }
+
         name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -205,21 +217,37 @@ public class MyData extends AppCompatActivity {
                 new Thread(){
                     @Override
                     public void run() {
-                            pre=getSharedPreferences("data",MODE_PRIVATE);
-                            String name1=pre.getString("nameContent","");
-                            String phone1=pre.getString("phoneContent","");
-                            String address1=pre.getString("addressContent","");
-                            String sex1=pre.getString("sexContent","");
-                            String email1=pre.getString("emailContent","");
-                            String lat=pre.getString("mylat","");
-                            String lng=pre.getString("mylng","");
+                        pre=getSharedPreferences("data",MODE_PRIVATE);
+                        String name1=pre.getString("nameContent","");
+                        String phone1=pre.getString("phoneContent","");
+                        String address1=pre.getString("addressContent","");
+                        String sex1=pre.getString("sexContent","");
+                        String email1=pre.getString("emailContent","");
+                        String lat=pre.getString("mylat","");
+                        String lng=pre.getString("mylng","");
+                        String[] strings = new String[]{name1, phone1, address1, sex1, email1, lat, lng};
+                        int numForNotEmpty = 0;
+                        for (String string : strings) {
+                            if (! string.isEmpty()){
+                                numForNotEmpty++;
+                            }
+                        }
+                        if (numForNotEmpty == 7){
                             insert(name1,phone1,address1,sex1,email1,lat,lng);
-                            android.os.Message msg= Message.obtain();
+                            Message msg= Message.obtain();
                             msg.what=1;
                             handler.sendMessage(msg);
+                        }else {
+                            //子线程中没有默认开启Looper，需要手动开启
+                            Looper.prepare();
+                            Toast.makeText(MyData.this, "有未填项，请检查", Toast.LENGTH_SHORT).show();
+                            Looper.loop();
+                        }
+
                     }
                 }.start();
-                    finish();}
+//                finish();
+            }
         });
     }
     private void insert(String name1,String phone1,String address1,String sex,String email,String lat,String lng){

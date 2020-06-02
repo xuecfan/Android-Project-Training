@@ -17,7 +17,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:hint="请输入修改后的邮箱"
+        android:hint="请输入邮箱账号"
         android:minLines="3"
         android:gravity="center"
         android:textStyle="bold"

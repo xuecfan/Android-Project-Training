@@ -1,7 +1,9 @@
 package com.example.chaofanteaching.sign;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Handler;
@@ -16,11 +18,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.example.chaofanteaching.ActivityCollector;
+import com.example.chaofanteaching.All;
 import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.R;
 import com.example.chaofanteaching.StreamChangeStrUtils;
 import com.example.chaofanteaching.comments.UtilHelpers;
+import com.example.chaofanteaching.myself.MyData;
 import com.example.chaofanteaching.utils.ToastUtils;
+import com.hyphenate.EMCallBack;
 import com.hyphenate.EMError;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.exceptions.HyphenateException;
@@ -29,21 +34,59 @@ import java.net.HttpURLConnection;
 
 public class LogonActivity extends AppCompatActivity {
     ProgressDialog mDialog;
-    private int status = 2;//表示身份是家长还是老师，0为家长，1为老师，2为初值表示status还未修改过
-    private int landingStatus = 0;//表示登录状态，刚注册时默认为0，登录中为，未登录为0
+    private String role = "2";//表示身份是家长还是老师，0为家长，1为老师，2为初值表示status还未修改过
+    private int landingStatus = 0;//表示登录状态，刚注册时默认为1（直接进入登录状态并跳转到个人资料页），已登录为1，未登录为0
     private EditText myId;
     private EditText myPW;
     private EditText myPWAgain;
-    private Handler handler;
+    private Handler handler = new Handler(){
+        public void handleMessage(android.os.Message message){
+            String string = message.obj.toString();
+            switch (message.what){
+                case 0:
+                    if (string.equals("1")){
+                        Toast.makeText(getApplication(),"注册成功",Toast.LENGTH_SHORT).show();
+                        ActivityCollector.finishAll();
+                        Toast.makeText(LogonActivity.this, "请完善个人资料", Toast.LENGTH_LONG).show();
+                    }else if (string.equals("0")){
+                        Toast.makeText(getApplication(),"注册失败，此账号已存在",Toast.LENGTH_SHORT).show();
+                    }
+                case 1:
+                    System.out.println("从服务器传来的servlet页面数字："+string);
+                    if (string.equals("10") || string.equals("11")){
+                        //保存全局变量（role和userName）
+                        SharedPreferences sharedPreferences = getSharedPreferences("login", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("role", string);
+                        editor.apply();
+                        SharedPreferences.Editor editor1 = sharedPreferences.edit();
+                        editor1.putString("userName",myId.getText().toString());
+                        editor1.apply();
+
+                        login();//登录聊天
+
+                        Intent intent = new Intent(LogonActivity.this, MyData.class);
+                        intent.putExtra("firstTimeToMyData",1);
+                        startActivity(intent);
+
+                        ActivityCollector.finishAll();
+                    }else if(string.equals("0")){
+                        Toast.makeText(getApplication(),"用户名或密码错误",Toast.LENGTH_SHORT).show();
+                    }else if (string.equals("900")){
+                        Toast.makeText(getApplication(),"此账号登陆中，请检查",Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+            }
+        }
+    };;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        getSupportActionBar().hide();//隐藏标题栏
         setStatusBar();//设置状态栏
         setContentView(R.layout.activity_logon);
 
-
+        //加入销毁队列
         ActivityCollector.addActivity(this);
 
         //获取id
@@ -60,9 +103,6 @@ public class LogonActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
-//                Intent intent = new Intent();
-//                intent.setClass(LogonActivity.this,LoginActivity.class);
-//                startActivity(intent);
             }
         });
 
@@ -77,9 +117,7 @@ public class LogonActivity extends AppCompatActivity {
                 imParent.setTextColor(Color.parseColor("#ffffff"));
                 imTeacher.setTextColor(Color.parseColor("#888888"));
 
-//                imParent.setBackgroundColor(Color.parseColor("#D8900A"));
-//                imTeacher.setBackgroundColor(Color.parseColor("#F2F3F6"));
-                status = 0;
+                role = "0";
             }
         });
         imTeacher.setOnClickListener(new View.OnClickListener(){
@@ -92,9 +130,7 @@ public class LogonActivity extends AppCompatActivity {
                 imParent.setTextColor(Color.parseColor("#888888"));
                 imTeacher.setTextColor(Color.parseColor("#ffffff"));
 
-//                imTeacher.setBackgroundColor(Color.parseColor("#D8900A"));
-//                imParent.setBackgroundColor(Color.parseColor("#F2F3F6"));
-                status = 1;
+                role = "1";
             }
         });
 
@@ -102,10 +138,6 @@ public class LogonActivity extends AppCompatActivity {
         logonBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-//                SharedPreferences sharedPreferences = getSharedPreferences("login", Context.MODE_PRIVATE);
-//                String loginOrNot = sharedPreferences.getString("loginOrNot", null);//(key,若无数据需要赋的值)
-//                //Log.e("xcf",loginOrNot);
-
                 String user=myId.getText().toString();
                 String pasd=myPW.getText().toString();
                 String pasdAgain = myPWAgain.getText().toString();
@@ -113,16 +145,112 @@ public class LogonActivity extends AppCompatActivity {
                     Toast.makeText(getApplication(),R.string.IdAndPWIsEmpty,Toast.LENGTH_SHORT).show();
                 }else if (!pasd.equals(pasdAgain)){
                     Toast.makeText(getApplication(),R.string.PWDiffer,Toast.LENGTH_SHORT).show();
-                }else if (status == 2){
+                }else if (role.equals("2")){
                     Toast.makeText(getApplication(),R.string.status,Toast.LENGTH_SHORT).show();
-
                 }else{
-                    addUser(user,pasd,status,landingStatus);
-                    register();
+                    //注册账号
+                    addUser("AccountServlet?name="+user+"&pasd="+pasd+"&role="+ role +"&landingStatus="+landingStatus,0);
+                    register();//注册聊天服务器
+                    testUser(user,pasd);//登录账号
                 }
-
             }
         });
+    }
+
+    //登陆聊天服务器
+    public void login() {
+        mDialog = new ProgressDialog(this);
+        mDialog.setMessage("正在登陆请稍后......");
+        mDialog.show();
+        EMClient.getInstance().login(myId.getText().toString(), myPW.getText().toString(), new EMCallBack() {
+            @Override
+            public void onSuccess() {
+                if (!LogonActivity.this.isFinishing()) {
+                    mDialog.dismiss();
+                }
+                // 加载所有群组到内存，如果使用了群组的话
+//                EMClient.getInstance().groupManager().loadAllGroups();
+                // 加载所有会话到内存
+                EMClient.getInstance().chatManager().loadAllConversations();
+                finish();
+            }
+
+            @Override
+            public void onError(final int i, final String s) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mDialog.dismiss();
+                        ToastUtils.showLong("登录失败 code: " + i + ",message: " + s);
+                        switch (i) {
+                            case EMError.NETWORK_ERROR:
+                                ToastUtils.showLong("网络异常，请检查网络！ code: " + i + "，message: " + s);
+                                break;
+                            case EMError.INVALID_USER_NAME:
+                                ToastUtils.showLong("无效用户名！ code: " + i + "，message: " + s);
+                                break;
+                            case EMError.INVALID_PASSWORD:
+//                                ToastUtils.showLong("用户密码不正确！ code: " + i + "，message: " + s);
+                                break;
+                            case EMError.USER_AUTHENTICATION_FAILED:
+//                                ToastUtils.showLong("用户名或密码不正确！ code: " + i + "，message: " + s);
+                                break;
+                            case EMError.USER_NOT_FOUND:
+                                ToastUtils.showLong("用户不存在！ code: " + i + "，message: " + s);
+                                break;
+                            case EMError.SERVER_NOT_REACHABLE:
+                                ToastUtils.showLong("无法连接到服务器！ code: " + i + "，message: " + s);
+                                break;
+                            case EMError.SERVER_BUSY:
+                                ToastUtils.showLong("服务器繁忙，请稍后.... code: " + i + "，message: " + s);
+                                break;
+                            case EMError.SERVER_TIMEOUT:
+                                ToastUtils.showLong("等待服务器响应超时！ code: " + i + "，message: " + s);
+                                break;
+                            case EMError.SERVER_UNKNOWN_ERROR:
+                                ToastUtils.showLong("未知服务器错误！ code: " + i + "，message: " + s);
+                                break;
+                            case EMError.USER_ALREADY_LOGIN:
+                                ToastUtils.showLong("用户已登录！ code: " + i + "，message: " + s);
+                                break;
+                        }
+                    }
+                });
+            }
+            @Override
+            public void onProgress(int i, String s) {
+            }
+        });
+    }
+
+    /**
+     * 登录操作
+     * @param a
+     * @param b
+     */
+    private void testUser(final String a, final String b){
+        new Thread(){
+            HttpURLConnection connection = null;
+            @Override
+            public void run() {
+                try {
+                    connection = HttpConnectionUtils.getConnection("LoginServlet?myid="+a+"&mypw="+b);
+                    int code = connection.getResponseCode();
+                    if(code!=200){
+                        Log.e("error","网络连接失败");
+                    }else{
+                        InputStream inputStream = connection.getInputStream();
+                        String str = StreamChangeStrUtils.toChange(inputStream);
+                        android.os.Message message = Message.obtain();
+                        message.obj = str;
+                        message.what = 1;
+                        handler.sendMessage(message);
+                    }
+                }catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
     }
 
     /**
@@ -211,34 +339,13 @@ public class LogonActivity extends AppCompatActivity {
     }
 
     //在数据库里添加用户，判断是否注册成功
-    private void addUser(final String a, final String b, final int c,final int d){
-        handler = new Handler(){
-            public void handleMessage(android.os.Message message){
-                switch (message.what){
-                    case 1:
-                        String string = message.obj.toString();
-                        String para = String.valueOf(1);
-                        if (string.equals(para)){
-                            Toast.makeText(getApplication(),"注册成功，请登录",Toast.LENGTH_LONG).show();
-//                            finish();
-
-                            ActivityCollector.finishAll();
-                            Intent intent = new Intent();
-                            intent.setClass(LogonActivity.this,LoginActivity.class);
-                            startActivity(intent);
-                        }else if (string.equals("0")){
-                            Toast.makeText(getApplication(),"注册失败，此账号已存在",Toast.LENGTH_SHORT).show();
-
-                        }
-                }
-            }
-        };
+    private void addUser(String path, int what){
         new Thread(){
             HttpURLConnection connection = null;
             @Override
             public void run() {
                 try {
-                    connection = HttpConnectionUtils.getConnection("AccountServlet?name="+a+"&pasd="+b+"&role="+c+"&landingStatus="+d);
+                    connection = HttpConnectionUtils.getConnection(path);
                     int code = connection.getResponseCode();
                     if(code!=200){
                         Log.e("error","网络连接失败");
@@ -247,7 +354,7 @@ public class LogonActivity extends AppCompatActivity {
                         String string = StreamChangeStrUtils.toChange(inputStream);
                         android.os.Message message = Message.obtain();
                         message.obj = string;
-                        message.what = 1;
+                        message.what = what;
                         handler.sendMessage(message);
                     }
                 }catch (Exception e) {
