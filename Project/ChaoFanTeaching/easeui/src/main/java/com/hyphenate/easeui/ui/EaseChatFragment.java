@@ -64,7 +64,11 @@ import com.hyphenate.exceptions.HyphenateException;
 import com.hyphenate.util.EMLog;
 import com.hyphenate.util.PathUtil;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -352,6 +356,56 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
         if (forward_msg_id != null) {
             forwardMessage(forward_msg_id);
         }
+
+        final Handler handler = new Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                String string = msg.obj.toString();
+                switch (msg.what){
+                    case 0:
+                        Log.e("xcf-handler-case1",string);
+                        String[] strings = string.split(",");
+                        titleBar.setTitle(strings[0]);
+//                        textView.setText(strings[0]);//设置用户名
+                        break;
+                }
+            }
+        };
+        new Thread() {
+            //            HttpURLConnection connection = null;
+            @Override
+            public void run() {
+                try {
+                    //获取互联网连接
+                    URL url = new URL("http://39.107.42.87:8080/ChaoFanTeaching/"+"MyData?index=rname&name="+toChatUsername);
+                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                    connection.setRequestMethod("POST");//设置post请求
+                    connection.setDoOutput(true);//允许输出
+                    connection.setDoInput(true);//允许输入
+//                    connection = HttpConnectionUtils.getConnection(path);
+                    int code = connection.getResponseCode();
+                    if (code == 200) {
+                        InputStream inputStream = connection.getInputStream();
+                        //流转换为字符串
+                        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                        byte[] b = new byte[1024];
+                        int len = -1;
+                        while((len=inputStream.read(b))!=-1){
+                            bos.write(b,0,len);
+                        }
+                        inputStream.close();
+                        String str = new String(bos.toByteArray());
+//                        String str = StreamChangeStrUtils.toChange(inputStream);
+                        android.os.Message message = Message.obtain();
+                        message.obj = str;
+                        message.what = 0;
+                        handler.sendMessage(message);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
     }
     
     /**

@@ -1,7 +1,10 @@
 package com.hyphenate.easeui.adapter;
 
 import android.content.Context;
+import android.os.Handler;
+import android.os.Message;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +16,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TextView.BufferType;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.hyphenate.chat.EMChatRoom;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMConversation;
@@ -31,6 +37,11 @@ import com.hyphenate.easeui.widget.EaseConversationList.EaseConversationListHelp
 import com.hyphenate.easeui.widget.EaseImageView;
 import com.hyphenate.util.DateUtils;
 
+
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -40,6 +51,8 @@ import java.util.List;
  *
  */
 public class EaseConversationAdapter extends ArrayAdapter<EMConversation> {
+    private Context mContext;
+
     private static final String TAG = "ChatAllHistoryAdapter";
     private List<EMConversation> conversationList;
     private List<EMConversation> copyConversationList;
@@ -124,6 +137,15 @@ public class EaseConversationAdapter extends ArrayAdapter<EMConversation> {
             EaseUserUtils.setUserAvatar(getContext(), username, holder.avatar);
             EaseUserUtils.setUserNick(username, holder.name);
             holder.motioned.setVisibility(View.GONE);
+            //设置会话列表头像
+            RequestOptions requestOptions = new RequestOptions();
+            requestOptions.error(R.drawable.boy).diskCacheStrategy(DiskCacheStrategy.NONE);
+            Glide.with(getContext()).load(
+                    "http://39.107.42.87:8080/ChaoFanTeaching/img/"
+                            +holder.name.getText().toString()
+                            +".png")
+                    .apply(requestOptions).into(holder.avatar);//头像
+//            Log.e("xcf-holder.name",holder.name.getText().toString());
         }
 
         EaseAvatarOptions avatarOptions = EaseUI.getInstance().getAvatarOptions();

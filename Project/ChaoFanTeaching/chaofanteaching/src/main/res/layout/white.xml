@@ -36,47 +36,43 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mBanner1"
-        app:layout_constraintVertical_bias="0.3">
+        app:layout_constraintVertical_bias="0.2">
         <ImageView
             android:id="@+id/img1"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="@dimen/white_img_width_and_height"
+            android:layout_height="@dimen/white_img_width_and_height"
             android:src="@drawable/math"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintVertical_bias="0.05"
-            app:layout_constraintHorizontal_bias="0.15"/>
+            app:layout_constraintRight_toLeftOf="@+id/img2"
+            app:layout_constraintTop_toTopOf="parent"/>
         <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="@dimen/white_img_width_and_height"
+            android:layout_height="@dimen/white_img_width_and_height"
             android:id="@+id/img2"
             android:src="@drawable/chinese"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintVertical_bias="0.05"
-            app:layout_constraintHorizontal_bias="0.38"/>
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/img1"
+            app:layout_constraintRight_toLeftOf="@+id/img3"/>
         <ImageView
             android:id="@+id/img3"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="@dimen/white_img_width_and_height"
+            android:layout_height="@dimen/white_img_width_and_height"
             android:src="@drawable/english"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintVertical_bias="0.05"
-            app:layout_constraintHorizontal_bias="0.62"/>
+            app:layout_constraintLeft_toRightOf="@id/img2"
+            app:layout_constraintRight_toLeftOf="@+id/img4"/>
         <ImageView
             android:id="@+id/img4"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="@dimen/white_img_width_and_height"
+            android:layout_height="@dimen/white_img_width_and_height"
             android:src="@drawable/wu"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintVertical_bias="0.05"
-            app:layout_constraintHorizontal_bias="0.85"/>
+            app:layout_constraintLeft_toRightOf="@+id/img3"
+            app:layout_constraintRight_toRightOf="parent"/>
     </android.support.constraint.ConstraintLayout>
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -88,41 +84,45 @@
         app:layout_constraintTop_toBottomOf="@+id/daohang"
         app:layout_constraintVertical_bias="0">
         <TextView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:id="@+id/math_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/white_textView_textSize"
             android:text="数学"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintVertical_bias="0.05"
-            app:layout_constraintHorizontal_bias="0.15"/>
+            app:layout_constraintRight_toLeftOf="@+id/chinese_textView"
+            app:layout_constraintTop_toTopOf="parent"/>
         <TextView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:id="@+id/chinese_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/white_textView_textSize"
             android:text="语文"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintVertical_bias="0.05"
-            app:layout_constraintHorizontal_bias="0.38"/>
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/math_textView"
+            app:layout_constraintRight_toLeftOf="@+id/english_textView"/>
         <TextView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:id="@+id/english_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/white_textView_textSize"
             android:text="英语"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintVertical_bias="0.05"
-            app:layout_constraintHorizontal_bias="0.62"/>
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/chinese_textView"
+            app:layout_constraintRight_toLeftOf="@+id/physics_textView"/>
         <TextView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:id="@+id/physics_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/white_textView_textSize"
             android:text="物理"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintVertical_bias="0.05"
-            app:layout_constraintHorizontal_bias="0.85"/>
+            app:layout_constraintLeft_toRightOf="@+id/english_textView"
+            app:layout_constraintRight_toRightOf="parent"/>
     </android.support.constraint.ConstraintLayout>
 
 
@@ -133,48 +133,44 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/daohang"
-        app:layout_constraintVertical_bias="0.3">
+        app:layout_constraintTop_toBottomOf="@+id/daohangt"
+        app:layout_constraintVertical_bias="0">
         <ImageView
             android:id="@+id/img5"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="@dimen/white_img_width_and_height"
+            android:layout_height="@dimen/white_img_width_and_height"
             android:src="@drawable/hua"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintVertical_bias="0.05"
-            app:layout_constraintHorizontal_bias="0.15"/>
+            app:layout_constraintRight_toLeftOf="@+id/img6"/>
         <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="@dimen/white_img_width_and_height"
+            android:layout_height="@dimen/white_img_width_and_height"
             android:id="@+id/img6"
             android:src="@drawable/zheng"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintVertical_bias="0.05"
-            app:layout_constraintHorizontal_bias="0.38"/>
+            app:layout_constraintLeft_toRightOf="@+id/img5"
+            app:layout_constraintRight_toLeftOf="@+id/img7"/>
         <ImageView
             android:id="@+id/img7"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="@dimen/white_img_width_and_height"
+            android:layout_height="@dimen/white_img_width_and_height"
             android:src="@drawable/sheng"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintVertical_bias="0.05"
-            app:layout_constraintHorizontal_bias="0.62"/>
+            app:layout_constraintLeft_toRightOf="@+id/img6"
+            app:layout_constraintRight_toLeftOf="@+id/img8"/>
         <ImageView
             android:id="@+id/img8"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="@dimen/white_img_width_and_height"
+            android:layout_height="@dimen/white_img_width_and_height"
             android:src="@drawable/history"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintVertical_bias="0.05"
-            app:layout_constraintHorizontal_bias="0.85"/>
+            app:layout_constraintLeft_toRightOf="@+id/img7"
+            app:layout_constraintRight_toRightOf="parent"/>
     </android.support.constraint.ConstraintLayout>
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -185,41 +181,45 @@
         app:layout_constraintTop_toBottomOf="@+id/daohang1"
         app:layout_constraintVertical_bias="0">
         <TextView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:id="@+id/chemistry_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/white_textView_textSize"
             android:text="化学"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintVertical_bias="0.05"
-            app:layout_constraintHorizontal_bias="0.15"/>
+            app:layout_constraintRight_toLeftOf="@+id/politics_textView"
+            app:layout_constraintTop_toTopOf="parent"/>
         <TextView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:id="@+id/politics_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/white_textView_textSize"
             android:text="政治"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintVertical_bias="0.05"
-            app:layout_constraintHorizontal_bias="0.38"/>
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/chemistry_textView"
+            app:layout_constraintRight_toLeftOf="@+id/biology_textView"/>
         <TextView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:id="@+id/biology_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/white_textView_textSize"
             android:text="生物"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintVertical_bias="0.05"
-            app:layout_constraintHorizontal_bias="0.62"/>
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/politics_textView"
+            app:layout_constraintRight_toLeftOf="@+id/history_textView"/>
         <TextView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:id="@+id/history_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/white_textView_textSize"
             android:text="历史"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintVertical_bias="0.05"
-            app:layout_constraintHorizontal_bias="0.85"/>
+            app:layout_constraintLeft_toRightOf="@+id/biology_textView"
+            app:layout_constraintRight_toRightOf="parent"/>
     </android.support.constraint.ConstraintLayout>
 
 </android.support.constraint.ConstraintLayout>
