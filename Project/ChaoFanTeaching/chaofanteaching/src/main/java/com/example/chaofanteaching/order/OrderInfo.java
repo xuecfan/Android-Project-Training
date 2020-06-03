@@ -22,6 +22,7 @@ import com.example.chaofanteaching.InfoList.Info_Map;
 import com.example.chaofanteaching.R;
 import com.example.chaofanteaching.StreamChangeStrUtils;
 import com.example.chaofanteaching.comments.CommentingActivity;
+import com.example.chaofanteaching.utils.ToastUtils;
 import com.hyphenate.easeui.widget.EaseTitleBar;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -60,7 +61,9 @@ public class OrderInfo extends AppCompatActivity {
                             @Override
                             public void onClick(View v) {
                                 getInfo("editOrder","id="+id);
-                                onCreate(null);
+                                ToastUtils.showShort("确认成功");
+                                btn_commit.setVisibility(View.GONE);
+                                statustext.setText("进行中");
                             }
                         });
                     }else {
@@ -71,7 +74,9 @@ public class OrderInfo extends AppCompatActivity {
                             @Override
                             public void onClick(View v) {
                                 getInfo("edit1Order","id="+id);
-                                onCreate(null);
+                                ToastUtils.showShort("试讲已完成");
+                                btn_finish.setVisibility(View.GONE);
+                                statustext.setText("待评价");
                             }
                         });
                     }else{
@@ -178,7 +183,7 @@ public class OrderInfo extends AppCompatActivity {
                     connection = HttpConnectionUtils
                             .getConnection(op+"?&"+parameter);
                     int code = connection.getResponseCode();
-                    if (code == 200){
+                    if (code == 200 && op.equals("LookOrder")){
                         InputStream inputStream = connection.getInputStream();
                         String string = StreamChangeStrUtils.toChange(inputStream);
                         android.os.Message message = Message.obtain();
