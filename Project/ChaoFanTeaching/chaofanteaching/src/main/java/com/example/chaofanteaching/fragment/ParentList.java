@@ -144,6 +144,7 @@ public class ParentList extends Fragment {
 
     public void serach(){
         editText=view.findViewById(R.id.input);
+        editText.setHint("点击搜索");
         Drawable drawable=getResources().getDrawable(R.drawable.find);
         drawable.setBounds(0,0,60,60);//第一0是距左边距离，第二0是距上边距离
         editText.setCompoundDrawables(drawable,null,null,null);//只放左边
@@ -193,6 +194,7 @@ public class ParentList extends Fragment {
         pri=view.findViewById(R.id.pri);
         pri1=view.findViewById(R.id.pri1);
         exp=view.findViewById(R.id.exp);
+        exp.setVisibility(View.GONE);
         Drawable defimg=getResources().getDrawable(R.drawable.defimg);
         Drawable boy=getResources().getDrawable(R.drawable.sex1);
         Drawable girl=getResources().getDrawable(R.drawable.sex0);
@@ -210,7 +212,7 @@ public class ParentList extends Fragment {
         dis1.setCompoundDrawables(null,null,girl,null);
         pri.setCompoundDrawables(null,null,up,null);
         pri1.setCompoundDrawables(null,null,down,null);
-        exp.setCompoundDrawables(null,null,expimg,null);
+        //exp.setCompoundDrawables(null,null,expimg,null);
         def.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -221,7 +223,7 @@ public class ParentList extends Fragment {
                 pri1.setTextColor(0x8A000000);
                 exp.setTextColor(0x8A000000);
                 infoList.clear();
-                dbKey("serach","");
+                dbKey("serach1","");
             }
         });
         dis.setOnClickListener(new View.OnClickListener() {
@@ -276,19 +278,19 @@ public class ParentList extends Fragment {
                 dbKey("downprice1","");
             }
         });
-        exp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                def.setTextColor(0x8A000000);
-                dis1.setTextColor(0x8A000000);
-                dis.setTextColor(0x8A000000);
-                pri1.setTextColor(0x8A000000);
-                pri.setTextColor(0x8A000000);
-                exp.setTextColor(Color.parseColor("#ff9d4d"));
-                infoList.clear();
-                dbKey("sortexp","");
-            }
-        });
+//        exp.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                def.setTextColor(0x8A000000);
+//                dis1.setTextColor(0x8A000000);
+//                dis.setTextColor(0x8A000000);
+//                pri1.setTextColor(0x8A000000);
+//                pri.setTextColor(0x8A000000);
+//                exp.setTextColor(Color.parseColor("#ff9d4d"));
+//                infoList.clear();
+//                dbKey("sortexp","");
+//            }
+//        });
     }//排序
 
     public String showDisdance(double mylat, double mylng, double lat, double lng){

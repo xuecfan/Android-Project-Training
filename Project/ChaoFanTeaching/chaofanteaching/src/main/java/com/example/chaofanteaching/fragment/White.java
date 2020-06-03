@@ -69,7 +69,7 @@ public class White extends Fragment {
         int[] imageResourceID = new int[]{R.drawable.z1, R.drawable.z2, R.drawable.z3, R.drawable.z4,R.drawable.z5};
         java.util.List<Integer> imgeList = new ArrayList<>();
         //轮播标题
-        String[] mtitle = new String[]{"图片1", "图片2", "图片3", "图片4","图片5"};
+        String[] mtitle = new String[]{"超凡家教", "超凡家教", "超凡家教", "超凡家教","超凡家教"};
         List<String> titleList = new ArrayList<>();
 
         for (int i = 0; i < imageResourceID.length; i++) {

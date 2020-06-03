@@ -145,7 +145,7 @@ public class VideoMath extends AppCompatActivity {
                 return true;
             }
         });
-        wv11.loadUrl("https://haokan.baidu.com/v?vid=7877854140465089869&pd=bjh&fr=bjhauthor&type=video");
+        wv11.loadUrl("https:haokan.baidu.com/v?vid=7649246158102970750&pd=bjh&fr=bjhauthor&type=video");
 
         wv2 = (WebView) findViewById(R.id.wv2);
         wv2.getSettings().setJavaScriptEnabled(true);
