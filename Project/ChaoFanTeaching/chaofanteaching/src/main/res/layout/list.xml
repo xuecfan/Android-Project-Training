@@ -38,19 +38,6 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:visibility="gone"
-            android:id="@+id/sort"
-            android:background="#ffffff"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/sort"/>
-        </LinearLayout>
-
         <com.scwang.smartrefresh.layout.SmartRefreshLayout
             android:id="@+id/srl"
             android:layout_width="match_parent"
@@ -89,24 +76,36 @@
             android:padding="20dp"
             android:text="默认"
             android:textSize="18sp"
-            android:textColor="#DC143C"
-            />
+            android:textColor="#ff9d4d" />
         <TextView
             android:id="@+id/dis"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="20dp"
             android:text="只看男生"
-            android:textSize="18sp"
-            />
+            android:textSize="18sp" />
+        <TextView
+            android:id="@+id/dis1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:text="只看女生"
+            android:textSize="18sp" />
         <TextView
             android:id="@+id/pri"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="20dp"
             android:text="价格升序"
-            android:textSize="18sp"
-            />
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/pri1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:text="价格降序"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/exp"
@@ -114,10 +113,10 @@
             android:layout_height="wrap_content"
             android:padding="20dp"
             android:text="经验优先"
-            android:textSize="18sp"
-            />
+            android:textSize="18sp" />
+
         <ImageView
-            android:layout_marginTop="250dp"
+            android:layout_marginTop="50dp"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:src="@drawable/pig"/>
@@ -125,96 +124,3 @@
     </LinearLayout>
 
 </android.support.v4.widget.DrawerLayout>
-<!--<?xml version="1.0" encoding="utf-8"?>-->
-<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="match_parent"-->
-<!--    android:orientation="vertical">-->
-
-<!--    <LinearLayout-->
-<!--        android:background="#D8900A"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="46dp"-->
-<!--        android:focusable="true"-->
-<!--        android:focusableInTouchMode="true"-->
-<!--        android:gravity="center">-->
-
-<!--        <EditText-->
-<!--            android:singleLine="true"-->
-<!--            android:imeOptions="actionSearch"-->
-<!--            android:background="@drawable/edittext_normal"-->
-<!--            android:id="@+id/input"-->
-<!--            android:textSize="17sp"-->
-<!--            android:layout_width="300dp"-->
-<!--            android:layout_height="30dp"-->
-<!--            android:hint="河北师范大学"/>-->
-
-<!--        <Button-->
-<!--            android:id="@+id/add"-->
-<!--            android:layout_marginLeft="5dp"-->
-<!--            android:layout_width="25dp"-->
-<!--            android:layout_height="25dp"-->
-<!--            android:background="@drawable/scerrn"/>-->
-
-<!--    </LinearLayout>-->
-
-<!--    <LinearLayout-->
-<!--        android:visibility="gone"-->
-<!--        android:id="@+id/sort"-->
-<!--        android:background="#ffffff"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content">-->
-<!--        <TextView-->
-<!--            android:layout_marginLeft="20dp"-->
-<!--            android:textColor="#DC143C"-->
-<!--            android:id="@+id/def"-->
-<!--            android:layout_width="50dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:textSize="17sp"-->
-<!--            android:text="默认"/>-->
-<!--        <TextView-->
-<!--            android:id="@+id/dis"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_weight="1"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:textSize="17sp"-->
-<!--            android:text="只看男生"/>-->
-<!--        <TextView-->
-<!--            android:id="@+id/pri"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_weight="1"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:textSize="17sp"-->
-<!--            android:text="价格升序"/>-->
-<!--        <TextView-->
-<!--            android:id="@+id/exp"-->
-<!--            android:textSize="17sp"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_weight="1"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="经验优先"/>-->
-<!--        <ImageView-->
-<!--            android:layout_width="20dp"-->
-<!--            android:layout_height="20dp"-->
-<!--            android:src="@drawable/sort"/>-->
-<!--    </LinearLayout>-->
-
-<!--    <com.scwang.smartrefresh.layout.SmartRefreshLayout-->
-<!--        android:id="@+id/srl"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent">-->
-<!--        <pl.droidsonroids.gif.GifImageButton-->
-<!--            android:background="#fcfbfb"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:src="@mipmap/refresh"/>-->
-<!--    <ListView-->
-<!--        android:layout_marginLeft="15dp"-->
-<!--        android:layout_marginTop="1dp"-->
-<!--        android:id="@+id/infolist"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content">-->
-<!--    </ListView>-->
-<!--    </com.scwang.smartrefresh.layout.SmartRefreshLayout>-->
-
-<!--</LinearLayout>-->

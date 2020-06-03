@@ -20,7 +20,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,7 +27,6 @@ import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.InfoList.Info;
 import com.example.chaofanteaching.InfoList.InfoAdapter;
 import com.example.chaofanteaching.InfoList.InfoDetailActivity;
-
 import com.example.chaofanteaching.R;
 import com.example.chaofanteaching.StreamChangeStrUtils;
 import com.example.chaofanteaching.sign.LoginActivity;
@@ -54,11 +52,10 @@ public class TeacherList extends Fragment {
     private SmartRefreshLayout srl;
     private TextView def;
     private TextView dis;
+    private TextView dis1;
     private TextView pri;
+    private TextView pri1;
     private TextView exp;
-    private int sign;
-    private int sign1;
-    private int sign2;
 
     @Nullable
     @Override
@@ -94,9 +91,6 @@ public class TeacherList extends Fragment {
     }//搜索
 
     public void sort(){
-        sign=0;
-        sign1=0;
-        sign2=0;
         DrawerLayout drawerLayout=view.findViewById(R.id.drawer_layout);
         drawerLayout.setScrimColor(Color.TRANSPARENT);
         Button btnadd = view.findViewById(R.id.add);
@@ -104,87 +98,106 @@ public class TeacherList extends Fragment {
             @Override
             public void onClick(View v) {
                 drawerLayout.openDrawer(Gravity.RIGHT);
-//                LinearLayout sort=view.findViewById(R.id.sort);
-//                if(sign2==0){
-//                    sign2+=1;
-//                    sort.setVisibility(View.VISIBLE);
-//                }else{
-//                    sign2-=1;
-//                    sort.setVisibility(View.GONE);
-//                }
             }
         });
         def=view.findViewById(R.id.def);
         dis=view.findViewById(R.id.dis);
+        dis1=view.findViewById(R.id.dis1);
+        pri1=view.findViewById(R.id.pri1);
         pri=view.findViewById(R.id.pri);
         exp=view.findViewById(R.id.exp);
+        Drawable defimg=getResources().getDrawable(R.drawable.defimg);
+        Drawable boy=getResources().getDrawable(R.drawable.sex1);
+        Drawable girl=getResources().getDrawable(R.drawable.sex0);
         Drawable up=getResources().getDrawable(R.drawable.up);
         Drawable down=getResources().getDrawable(R.drawable.down);
+        Drawable expimg=getResources().getDrawable(R.drawable.exp1);
+        defimg.setBounds(0,0,60,60);
+        boy.setBounds(0,0,60,60);
+        girl.setBounds(0,0,60,60);
         up.setBounds(0,0,50,50);
         down.setBounds(0,0,50,50);
+        expimg.setBounds(0,0,50,50);
+        def.setCompoundDrawables(null,null,defimg,null);
+        dis.setCompoundDrawables(null,null,boy,null);
+        dis1.setCompoundDrawables(null,null,girl,null);
+        pri.setCompoundDrawables(null,null,up,null);
+        pri1.setCompoundDrawables(null,null,down,null);
+        exp.setCompoundDrawables(null,null,expimg,null);
         def.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                def.setTextColor(Color.parseColor("#ff9d4d"));
+                dis.setTextColor(0x8A000000);
+                dis1.setTextColor(0x8A000000);
+                pri.setTextColor(0x8A000000);
+                pri1.setTextColor(0x8A000000);
+                exp.setTextColor(0x8A000000);
                 infoList.clear();
                 dbKey("serach","");
-                def.setTextColor(Color.parseColor("#FF0000"));
-                pri.setTextColor(Color.parseColor("#000000"));
-                exp.setTextColor(Color.parseColor("#000000"));
-                dis.setTextColor(Color.parseColor("#000000"));
-                dis.setCompoundDrawables(null,null,null,null);
-                pri.setCompoundDrawables(null,null,null,null);
             }
         });
         dis.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                def.setTextColor(Color.parseColor("#000000"));
-                pri.setTextColor(Color.parseColor("#000000"));
-                exp.setTextColor(Color.parseColor("#000000"));
-                dis.setTextColor(Color.parseColor("#FF0000"));
-                if(sign==0){
-                    dis.setText("只看男生");
-                    sign+=1;
-                    dis.setCompoundDrawables(null,null,up,null);
-                }else{
-                    dis.setText("只看女生");
-                    sign-=1;
-                    dis.setCompoundDrawables(null,null,down,null);
-                }
-                pri.setCompoundDrawables(null,null,null,null);
+                def.setTextColor(0x8A000000);
+                dis.setTextColor(Color.parseColor("#ff9d4d"));
+                dis1.setTextColor(0x8A000000);
+                pri.setTextColor(0x8A000000);
+                pri1.setTextColor(0x8A000000);
+                exp.setTextColor(0x8A000000);
+                infoList.clear();
+                dbKey("sex","男");
+            }
+        });
+        dis1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                def.setTextColor(0x8A000000);
+                dis1.setTextColor(Color.parseColor("#ff9d4d"));
+                dis.setTextColor(0x8A000000);
+                pri.setTextColor(0x8A000000);
+                pri1.setTextColor(0x8A000000);
+                exp.setTextColor(0x8A000000);
+                infoList.clear();
+                dbKey("sex","女");
             }
         });
         pri.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                def.setTextColor(Color.parseColor("#000000"));
-                pri.setTextColor(Color.parseColor("#FF0000"));
-                exp.setTextColor(Color.parseColor("#000000"));
-                dis.setTextColor(Color.parseColor("#000000"));
+                def.setTextColor(0x8A000000);
+                dis1.setTextColor(0x8A000000);
+                dis.setTextColor(0x8A000000);
+                pri.setTextColor(Color.parseColor("#ff9d4d"));
+                pri1.setTextColor(0x8A000000);
+                exp.setTextColor(0x8A000000);
                 infoList.clear();
-                if(sign1==0){
-                    sign1+=1;
-                    pri.setText("价格升序");
-                    pri.setCompoundDrawables(null,null,up,null);
-                    dbKey("upprice","");
-                }else{
-                    sign1-=1;
-                    pri.setText("价格降序");
-                    pri.setCompoundDrawables(null,null,down,null);
-                    dbKey("downprice","");
-                }
-                dis.setCompoundDrawables(null,null,null,null);
+                dbKey("upprice","");
+            }
+        });
+        pri1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                def.setTextColor(0x8A000000);
+                dis1.setTextColor(0x8A000000);
+                dis.setTextColor(0x8A000000);
+                pri1.setTextColor(Color.parseColor("#ff9d4d"));
+                pri.setTextColor(0x8A000000);
+                exp.setTextColor(0x8A000000);
+                infoList.clear();
+                dbKey("downprice","");
             }
         });
         exp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                def.setTextColor(Color.parseColor("#000000"));
-                pri.setTextColor(Color.parseColor("#000000"));
-                exp.setTextColor(Color.parseColor("#FF0000"));
-                dis.setTextColor(Color.parseColor("#000000"));
-                dis.setCompoundDrawables(null,null,null,null);
-                pri.setCompoundDrawables(null,null,null,null);
+                def.setTextColor(0x8A000000);
+                dis1.setTextColor(0x8A000000);
+                dis.setTextColor(0x8A000000);
+                pri1.setTextColor(0x8A000000);
+                pri.setTextColor(0x8A000000);
+                exp.setTextColor(Color.parseColor("#ff9d4d"));
                 infoList.clear();
                 dbKey("sortexp","");
             }
