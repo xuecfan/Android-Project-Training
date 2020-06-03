@@ -129,7 +129,7 @@ public class AddInfoActivity extends AppCompatActivity {
         a = pre.getString("userName", "");
         connectDB("MyData?index=rname&name="+a,1);//获取用户名
 //        name=pre1.getString("nameContent","");
-        name = inName.getText().toString();//获取用户名
+//        name = inName.getText().toString();//获取用户名
         address=pre1.getString("addressContent","");
         mylat=pre1.getString("mylat","114.53952");
         mylng=pre1.getString("mylng","38.03647");
@@ -200,6 +200,8 @@ public class AddInfoActivity extends AppCompatActivity {
         add_finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                name = inName.getText().toString();//获取用户名
+
                 String ilong=inLong.getText().toString();
                 String pay=inPay.getText().toString();
                 String tel=inTel.getText().toString();
