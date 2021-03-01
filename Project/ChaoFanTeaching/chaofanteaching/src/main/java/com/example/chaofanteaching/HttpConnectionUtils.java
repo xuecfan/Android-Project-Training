@@ -7,7 +7,7 @@ import java.net.URL;
 * */
 public class HttpConnectionUtils {
     public static HttpURLConnection getConnection(String path) throws Exception{
-        URL url = new URL("http://39.107.42.87:8080/ChaoFanTeaching/"+path);
+        URL url = new URL("http://8.131.122.37:8080/ChaoFanTeaching/"+path);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("POST");//设置post请求
         connection.setDoOutput(true);//允许输出

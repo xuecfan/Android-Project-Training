@@ -253,7 +253,7 @@ public class MyData extends AppCompatActivity {
     private void insert(String name1,String phone1,String address1,String sex,String email,String lat,String lng){
         OkHttpClient okHttpClient=new OkHttpClient();
         Request request=new Request.Builder().
-                url("http://39.107.42.87:8080/ChaoFanTeaching/MyData?name="+user+"&nameContent="+name1+"&phoneContent="+phone1+"&addressContent="+address1+"&sexContent="+sex+"&index=insert&email="+email+"&locate="+lat+","+lng)
+                url("http://8.131.122.37:8080/ChaoFanTeaching/MyData?name="+user+"&nameContent="+name1+"&phoneContent="+phone1+"&addressContent="+address1+"&sexContent="+sex+"&index=insert&email="+email+"&locate="+lat+","+lng)
                 .build();
         Call call=okHttpClient.newCall(request);
         call.enqueue(new Callback() {

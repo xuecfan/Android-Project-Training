@@ -429,7 +429,7 @@ public class My extends Fragment {
     private void initView() {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.error(R.drawable.boy).diskCacheStrategy(DiskCacheStrategy.NONE);
-        Glide.with(getActivity()).load("http://39.107.42.87:8080/ChaoFanTeaching/img/"+a+".png").apply(requestOptions).into(image);
+        Glide.with(getActivity()).load("http://47.93.234.48:8080/ChaoFanTeaching/img/"+a+".png").apply(requestOptions).into(image);
     }
 
     /*
@@ -520,7 +520,7 @@ public class My extends Fragment {
         //创建上传异步任务类的对象
         UpLoadFile task=new UpLoadFile(getContext(),filepath);
         //开始执行异步任务
-        task.execute("http://39.107.42.87:8080/ChaoFanTeaching/PhotoInsert?index=photo&name="+a);
+        task.execute("http://47.93.234.48:8080/ChaoFanTeaching/PhotoInsert?index=photo&name="+a);
     }
 
     @Override
