@@ -1,15 +1,11 @@
 package com.example.chaofanteaching.fragment;
 
-
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -22,16 +18,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.RequestOptions;
 import com.example.chaofanteaching.BottomPopupOption;
 import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.InfoList.AddInfoActivity;
@@ -51,7 +41,6 @@ import com.example.chaofanteaching.myself.Setting;
 import com.example.chaofanteaching.order.OrderList;
 import com.example.chaofanteaching.robot.Chatrobot;
 import com.example.chaofanteaching.sign.LoginActivity;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -68,13 +57,11 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-
 public class My extends Fragment {
     private List<Map<String, String>> dataSource = new ArrayList<>();
     private MyAdapter adapter;
-    private OkHttpClient okHttpClient;
     private static final int PHOTO_REQUEST_CUT =3 ;
-    private static String path = "/storage/emulated/0/";// sd路径
+    private static String path = "/storage/emulated/0/chaofanteaching/";// sd路径
     protected static Uri uritempFile;
     private BottomPopupOption bottomPopupOption;
     private TextView name;
@@ -148,7 +135,6 @@ public class My extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view=inflater.inflate(R.layout.my,container,false);
-        okHttpClient=new OkHttpClient();
         pre= getContext().getSharedPreferences("login", Context.MODE_PRIVATE);
         a = pre.getString("userName", "");
         name=view.findViewById(R.id.name);
@@ -160,9 +146,6 @@ public class My extends Fragment {
         img4=view.findViewById(R.id.img4);
         img4Text = view.findViewById(R.id.img4Text);
         renzheng=view.findViewById(R.id.renzheng);
-
-        //状态栏透明
-//        makeStatusBarTransparent(this.getActivity());
 
         img1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -334,10 +317,7 @@ public class My extends Fragment {
             }
         });
 
-        if(a.equals("")){
-            image.setImageDrawable(getContext().getResources().getDrawable(R.drawable.boy));
-        }else{initView();}
-
+        initView();
         pre1=getContext().getSharedPreferences("data",Context.MODE_PRIVATE);
         String name1=pre1.getString("nameContent","");
         if(pre1.getString("renzheng","").equals("")){
@@ -392,44 +372,14 @@ public class My extends Fragment {
         return view;
     }
 
-//    private void asyncdownop() {
-//        new Thread(){
-//            @Override
-//            public void run() {
-//                try {
-//                    downimg();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//                android.os.Message msg= Message.obtain();
-//                msg.what=1;
-//                handler.sendMessage(msg);
-//            }
-//        }.start();
-//    }
-//
-//    private void downimg() throws IOException {
-//        String fileName = path + a+".png";// 图片名字
-//        Request request=new Request.Builder().url("http://39.107.42.87:8080/ChaoFanTeaching/DownImg?name="+a).build();
-//        Call call=okHttpClient.newCall(request);
-//        Response response=call.execute();
-//        Log.i("photo", String.valueOf(response.body().byteStream()));
-//        InputStream in=response.body().byteStream();
-//        FileOutputStream out=new FileOutputStream(fileName);
-//        byte[] bytes=new byte[1024];
-//        int n=-1;
-//        while ((n=in.read(bytes))!=-1){
-//            out.write(bytes,0,n);
-//            out.flush();
-//        }
-//        in.close();
-//        out.close();
-//    }
 
     private void initView() {
-        RequestOptions requestOptions = new RequestOptions();
-        requestOptions.error(R.drawable.boy).diskCacheStrategy(DiskCacheStrategy.NONE);
-        Glide.with(getActivity()).load("http://47.93.234.48:8080/ChaoFanTeaching/img/"+a+".png").apply(requestOptions).into(image);
+        Bitmap bitmap = BitmapFactory.decodeFile("/storage/emulated/0/chaofanteaching/"+a+".png");
+        if(bitmap==null){
+            image.setImageDrawable(getResources().getDrawable(R.drawable.boy));
+        }else{
+            image.setImageBitmap(bitmap);
+        }
     }
 
     /*
@@ -476,7 +426,7 @@ public class My extends Fragment {
             } else if (requestCode == PHOTO_REQUEST_CUT) {
                 // 从剪切图片返回的数据
                 if (data != null) {
-                    Bitmap bitmap = null;
+                    //Bitmap bitmap = null;
                     try {
                         bitmap = BitmapFactory.decodeStream(getActivity().getContentResolver().openInputStream(uritempFile));
                     image.setImageBitmap(bitmap);
@@ -515,12 +465,13 @@ public class My extends Fragment {
             }
         }
     }
+
     private void asyncupop() {
         String filepath=path + a+".png";
         //创建上传异步任务类的对象
         UpLoadFile task=new UpLoadFile(getContext(),filepath);
         //开始执行异步任务
-        task.execute("http://47.93.234.48:8080/ChaoFanTeaching/PhotoInsert?index=photo&name="+a);
+        task.execute("http://8.131.122.37:8080/ChaoFanTeaching/PhotoInsert?index=photo&name="+a);
     }
 
     @Override
@@ -612,7 +563,7 @@ public class My extends Fragment {
     private void saveid(String id){
         OkHttpClient okHttpClient=new OkHttpClient();
         Request request=new Request.Builder().
-                url("http://39.107.42.87:8080/ChaoFanTeaching/MyData?name="+a+"&index=id&id="+id)
+                url("http://8.131.122.37:8080/ChaoFanTeaching/MyData?name="+a+"&index=id&id="+id)
                 .build();
         Call call=okHttpClient.newCall(request);
         call.enqueue(new Callback() {
@@ -622,21 +573,5 @@ public class My extends Fragment {
             public void onResponse(Call call, Response response) throws IOException {Log.i("aaa","存入id");}
         });
 
-    }
-    //状态栏透明
-    public static void makeStatusBarTransparent(Activity activity) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
-            return;
-        }
-        Window window = activity.getWindow();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            int option = window.getDecorView().getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN;
-            window.getDecorView().setSystemUiVisibility(option);
-            window.setStatusBarColor(Color.TRANSPARENT);
-        } else {
-            window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        }
     }
 }

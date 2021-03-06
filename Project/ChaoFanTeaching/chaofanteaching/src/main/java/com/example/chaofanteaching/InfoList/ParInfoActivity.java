@@ -4,10 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Handler;
@@ -16,7 +13,6 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -24,13 +20,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.baidu.location.BDAbstractLocationListener;
-import com.baidu.location.BDLocation;
-import com.baidu.location.LocationClient;
-import com.baidu.location.LocationClientOption;
-import com.baidu.mapapi.CoordType;
-import com.baidu.mapapi.SDKInitializer;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
@@ -43,7 +32,6 @@ import com.example.chaofanteaching.utils.ToastUtils;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.easeui.EaseConstant;
-
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import gdut.bsx.share2.Share2;
@@ -183,7 +171,7 @@ public class ParInfoActivity extends AppCompatActivity {
         String user=request.getStringExtra("user");
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.error(R.drawable.boy1).diskCacheStrategy(DiskCacheStrategy.NONE);
-        Glide.with(getApplicationContext()).load("http://39.107.42.87:8080/ChaoFanTeaching/img/"+user+".png").apply(requestOptions).into(img);
+        Glide.with(getApplicationContext()).load("http://8.131.122.37:8080/ChaoFanTeaching/img/"+user+".png").apply(requestOptions).into(img);
         //返回
         infopar_back = findViewById(R.id.infopar_back);
         infopar_back.setOnClickListener(new View.OnClickListener() {
@@ -276,9 +264,6 @@ public class ParInfoActivity extends AppCompatActivity {
         }.start();
     }
 
-    private void initView() {
-        //初始化控件
-    }
 
     //判断是否收藏
     private void judgeStar(String collector, String collection,String collectionName){

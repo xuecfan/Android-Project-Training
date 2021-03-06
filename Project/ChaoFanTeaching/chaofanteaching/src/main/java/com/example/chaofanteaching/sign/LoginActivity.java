@@ -9,12 +9,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
-import android.text.InputType;
-import android.text.method.DigitsKeyListener;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -22,7 +19,6 @@ import android.widget.Toast;
 import com.example.chaofanteaching.ActivityCollector;
 import com.example.chaofanteaching.All;
 import com.example.chaofanteaching.HttpConnectionUtils;
-import com.example.chaofanteaching.InfoList.Info_Map;
 import com.example.chaofanteaching.R;
 import com.example.chaofanteaching.StreamChangeStrUtils;
 import com.example.chaofanteaching.comments.UtilHelpers;
@@ -57,7 +53,6 @@ public class LoginActivity extends AppCompatActivity {
                         editor1.apply();
 
                         login();
-                        //Toast.makeText(getApplication(),"登陆成功",Toast.LENGTH_LONG).show();
                         Intent intent = new Intent();
                         intent.setClass( LoginActivity.this, All.class);
                         intent.setAction("true");
@@ -78,14 +73,10 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-//        getSupportActionBar().hide();//隐藏标题栏
         setStatusBar();//设置状态栏
-
         setContentView(R.layout.activity_login);
-
         //将此页添加到Activity控制器列表中
         ActivityCollector.addActivity(this);
-
         //获取id
         myId = findViewById(R.id.myId);
         myPW = findViewById(R.id.myPW);
@@ -93,7 +84,6 @@ public class LoginActivity extends AppCompatActivity {
         TextView toLogonBtn=findViewById(R.id.toLogonBtn);
         TextView findMyPW = findViewById(R.id.findMyPW);
         TextView serviceAgreement = findViewById(R.id.serviceAgreement);
-
         //登陆按钮
         loginBtn.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -106,7 +96,6 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(getApplication(),"邮箱和密码不能为空",Toast.LENGTH_LONG).show();
                 } else{
                     testUser(myid,mypw);
-                    //login();
                 }
 
             }

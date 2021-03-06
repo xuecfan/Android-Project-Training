@@ -1,57 +1,26 @@
 package com.example.chaofanteaching.InfoList;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.os.Handler;
-import android.os.Message;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
-import com.example.chaofanteaching.HttpConnectionUtils;
 import com.example.chaofanteaching.R;
-
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.List;
-
-import okhttp3.Call;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-
 
 public class InfoAdapter extends BaseAdapter{
 
-    private static String path = "/storage/emulated/0/";// sd路径
     private int pos;
     private List<Info> infoList;
     private int itemLayoutId;
     private Context context;
     private ImageView header;
-    private Handler handler=new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what){
-                case  1:
-                    Log.i("file","..");
-                    break;
-            }
-        }
-    };
 
     public InfoAdapter(Context context, List<Info> infoList, int itemLayoutId){
         this.context = context;
@@ -125,6 +94,6 @@ public class InfoAdapter extends BaseAdapter{
     private void initView() {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.error(R.drawable.tea).diskCacheStrategy(DiskCacheStrategy.NONE);
-        Glide.with(context.getApplicationContext()).load("http://39.107.42.87:8080/ChaoFanTeaching/img/"+infoList.get(pos).getUser()+".png").apply(requestOptions).into(header);
+        Glide.with(context.getApplicationContext()).load("http://8.131.122.37:8080/ChaoFanTeaching/img/"+infoList.get(pos).getUser()+".png").apply(requestOptions).into(header);
     }
 }
