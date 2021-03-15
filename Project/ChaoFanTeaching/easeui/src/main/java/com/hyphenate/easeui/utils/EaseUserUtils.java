@@ -78,7 +78,7 @@ public class EaseUserUtils {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.error(R.drawable.boy).diskCacheStrategy(DiskCacheStrategy.NONE);
         Glide.with(context).load(
-                "http://39.107.42.87:8080/ChaoFanTeaching/img/"
+                "http://8.131.122.37:8080/ChaoFanTeaching/img/"
                         +username
                         +".png")
                 .apply(requestOptions).into(imageView);//头像
@@ -118,7 +118,7 @@ public class EaseUserUtils {
             public void run() {
                 try {
                     //获取互联网连接
-                    URL url = new URL("http://39.107.42.87:8080/ChaoFanTeaching/"+"MyData?index=rname&name="+username);
+                    URL url = new URL("http://8.131.122.37:8080/ChaoFanTeaching/"+"MyData?index=rname&name="+username);
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                     connection.setRequestMethod("POST");//设置post请求
                     connection.setDoOutput(true);//允许输出

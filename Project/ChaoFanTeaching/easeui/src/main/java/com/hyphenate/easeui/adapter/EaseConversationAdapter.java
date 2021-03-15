@@ -141,7 +141,7 @@ public class EaseConversationAdapter extends ArrayAdapter<EMConversation> {
             RequestOptions requestOptions = new RequestOptions();
             requestOptions.error(R.drawable.boy).diskCacheStrategy(DiskCacheStrategy.NONE);
             Glide.with(getContext()).load(
-                    "http://39.107.42.87:8080/ChaoFanTeaching/img/"
+                    "http://8.131.122.37:8080/ChaoFanTeaching/img/"
                             +holder.name.getText().toString()
                             +".png")
                     .apply(requestOptions).into(holder.avatar);//头像
