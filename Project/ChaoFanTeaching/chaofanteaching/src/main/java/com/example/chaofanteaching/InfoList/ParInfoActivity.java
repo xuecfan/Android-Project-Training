@@ -171,7 +171,7 @@ public class ParInfoActivity extends AppCompatActivity {
         String user=request.getStringExtra("user");
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.error(R.drawable.boy1).diskCacheStrategy(DiskCacheStrategy.NONE);
-        Glide.with(getApplicationContext()).load("http://8.131.122.37:8080/ChaoFanTeaching/img/"+user+".png").apply(requestOptions).into(img);
+        Glide.with(getApplicationContext()).load("http://81.70.134.107:8080/ChaoFanTeaching/img/"+user+".png").apply(requestOptions).into(img);
         //返回
         infopar_back = findViewById(R.id.infopar_back);
         infopar_back.setOnClickListener(new View.OnClickListener() {

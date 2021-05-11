@@ -198,13 +198,13 @@ public class Student_Authentication extends AppCompatActivity {
         //创建上传异步任务类的对象
         UpLoadFile task=new UpLoadFile(this,filepath);
         //开始执行异步任务
-        task.execute("http://8.131.122.37:8080/ChaoFanTeaching/PhotoInsert?index=student0&name="+a);
+        task.execute("http://81.70.134.107:8080/ChaoFanTeaching/PhotoInsert?index=student0&name="+a);
     }
     private void asyncupop1() {
         String filepath=path + a+"1.png";
         //创建上传异步任务类的对象
         UpLoadFile task=new UpLoadFile(this,filepath);
         //开始执行异步任务
-        task.execute("http://8.131.122.37:8080/ChaoFanTeaching/PhotoInsert?index=student1&name="+a);
+        task.execute("http://81.70.134.107:8080/ChaoFanTeaching/PhotoInsert?index=student1&name="+a);
     }
 }

@@ -200,7 +200,7 @@ public class InfoDetailActivity extends AppCompatActivity {
         user=request.getStringExtra("user");
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.error(R.drawable.tea).diskCacheStrategy(DiskCacheStrategy.NONE);
-        Glide.with(getApplicationContext()).load("http://8.131.122.37:8080/ChaoFanTeaching/img/"+user+".png").apply(requestOptions).into(img);
+        Glide.with(getApplicationContext()).load("http://81.70.134.107:8080/ChaoFanTeaching/img/"+user+".png").apply(requestOptions).into(img);
         nametext=findViewById(R.id.name);
         universitytext=findViewById(R.id.university);
         collegetext=findViewById(R.id.college);

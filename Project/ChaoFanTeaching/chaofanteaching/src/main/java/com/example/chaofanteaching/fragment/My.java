@@ -471,7 +471,7 @@ public class My extends Fragment {
         //创建上传异步任务类的对象
         UpLoadFile task=new UpLoadFile(getContext(),filepath);
         //开始执行异步任务
-        task.execute("http://8.131.122.37:8080/ChaoFanTeaching/PhotoInsert?index=photo&name="+a);
+        task.execute("http://81.70.134.107:8080/ChaoFanTeaching/PhotoInsert?index=photo&name="+a);
     }
 
     @Override
@@ -563,7 +563,7 @@ public class My extends Fragment {
     private void saveid(String id){
         OkHttpClient okHttpClient=new OkHttpClient();
         Request request=new Request.Builder().
-                url("http://8.131.122.37:8080/ChaoFanTeaching/MyData?name="+a+"&index=id&id="+id)
+                url("http://81.70.134.107:8080/ChaoFanTeaching/MyData?name="+a+"&index=id&id="+id)
                 .build();
         Call call=okHttpClient.newCall(request);
         call.enqueue(new Callback() {

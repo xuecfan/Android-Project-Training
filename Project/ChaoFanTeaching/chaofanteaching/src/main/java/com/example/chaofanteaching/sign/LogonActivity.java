@@ -272,7 +272,7 @@ public class LogonActivity extends AppCompatActivity {
     public void register() {
         mDialog = new ProgressDialog(this);
         mDialog.setMessage("注册中，请稍后......");
-        mDialog.show();
+        //mDialog.show();
 
         new Thread(new Runnable() {
             @Override

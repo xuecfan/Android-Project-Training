@@ -80,6 +80,6 @@ public class ParInfoAdapter extends BaseAdapter{
     private void initView() {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.error(R.drawable.boy1).diskCacheStrategy(DiskCacheStrategy.NONE);
-        Glide.with(context.getApplicationContext()).load("http://8.131.122.37:8080/ChaoFanTeaching/img/"+infoList.get(pos).getUser()+".png").apply(requestOptions).into(header);
+        Glide.with(context.getApplicationContext()).load("http:/81.70.134.107:8080/ChaoFanTeaching/img/"+infoList.get(pos).getUser()+".png").apply(requestOptions).into(header);
     }
 }

@@ -75,7 +75,7 @@ public class FindMyPWActivity extends AppCompatActivity {
                     int num = random.nextInt(max)%(max-min+1) + min;
                     sNum = num+"";
 
-                    Log.e("2",userEmail);
+                    Log.e("email",userEmail);
                     testUserCode(sNum,userEmail);
                 }else{
                     Toast.makeText(getApplication(),"请输入正确邮箱格式",Toast.LENGTH_SHORT).show();
@@ -161,7 +161,7 @@ public class FindMyPWActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    Log.e("1",a+b);
+                    Log.e("code",a);
                     connection = HttpConnectionUtils.getConnection("FindPW?op=sendcode&num="+a+"&email="+b);
                     int code = connection.getResponseCode();
                     if(code!=200){
